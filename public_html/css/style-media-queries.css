@@ -1,0 +1,16 @@
+@media only screen and (max-width: 990px){
+    #separator{
+        display: none;}
+    .nav-sm-center{ text-align: center;}
+}
+@media only screen and (max-width: 768px){
+    #welcome-message{
+      display: none;
+    }
+    #h-c{
+      padding-top: 1rem;
+    }
+}
+@media only screen and (max-width: 480px){
+
+}

@@ -1,0 +1,23 @@
+CREATE DATABASE gotoevent;
+USE gotoevent;
+
+CREATE TABLE usuarios(
+    id_usuario int AUTO_INCREMENT,
+    email varchar(40) not null,
+    password varchar(20) not null,
+    CONSTRAINT pk_id_usuario PRIMARY KEY (id_usuario),
+   	CONSTRAINT unq_email_usuario UNIQUE (email)
+);
+
+CREATE TABLE clientes(
+	id_cliente int AUTO_INCREMENT,
+  	nombre varchar(15) not null,
+    apellido varchar(20) not null,
+    dni varchar(9) not null,
+    id_usuario int not null,
+
+    CONSTRAINT pk_id_cliente PRIMARY KEY (id_cliente),
+    CONSTRAINT fk_id_cliente_x_id_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
+    CONSTRAINT unq_dni_cliente UNIQUE (dni)
+
+);
