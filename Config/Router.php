@@ -20,7 +20,9 @@ class Router{
 
 	static function ejecutar($controlador, $metodo, $parametros){
 		if(!isset($parametros)){
-			call_user_func(array($controlador, $metodo));
+		    if(is_callable(array($controlador, $metodo))) {
+                call_user_func(array($controlador, $metodo));
+            }
 		}else{
 			call_user_func_array(array($controlador,$metodo), $parametros);
 		}

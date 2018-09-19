@@ -11,7 +11,12 @@ namespace Controladora;
 
 class PaginaControladora
 {
-    function inicio(){
+
+    public  function index(){
+        header('location: /');
+    }
+
+    public function inicio(){
         if(!empty($_GET)){
             header('location: /');
         }

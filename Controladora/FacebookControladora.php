@@ -12,6 +12,9 @@ use Facebook;
 
 class FacebookControladora
 {
+    function index(){
+        header('location: /');
+    }
     function login(){
         if($_SERVER['REQUEST_METHOD'] === "POST"){
             try {

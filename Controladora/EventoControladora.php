@@ -11,6 +11,9 @@ namespace Controladora;
 
 class EventoControladora extends PaginaControladora
 {
+    function index(){
+        header('location: /');
+    }
     function crear(){
         $this->page('crearEvento','Crear Evento',2);
     }

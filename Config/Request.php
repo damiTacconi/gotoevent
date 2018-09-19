@@ -17,15 +17,19 @@ class Request {
 			$this->setMetodo("inicio");
 		}else{
 			$this->setControlador(ucwords(array_shift($array)));
-			$this->setMetodo(array_shift($array));
+            if(!empty($array)){
+                $this->setMetodo(array_shift($array));
+
+                if($http == "GET"){
+                    if(!empty($array))$this->setParametros($array);
+
+                }else if($http == "POST"){
+                    if(!empty($_POST))$this->setParametros($_POST);
+                }
+
+            }else $this->setMetodo('index');
 		}
 
-		if($http == "GET"){
-            if(!empty($array))$this->setParametros($array);
-
-		}else if($http == "POST"){
-			if(!empty($_POST))$this->setParametros($_POST);
-		}
 	}
 
 

@@ -17,6 +17,9 @@ class CuentaControladora extends PaginaControladora {
         $this->clienteBdDao = ClienteBdDao::getInstancia();
     }
 
+    function index(){
+        header('location: /');
+    }
     function logout(){
         if(!empty($_SESSION)){
             if (ini_get("session.use_cookies") == true) {

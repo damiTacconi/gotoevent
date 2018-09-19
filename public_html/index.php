@@ -6,9 +6,9 @@ if(empty($_SESSION)){
 require_once("../Config/Config.php");
 require_once("../Config/Autoload.php");
 
-\Config\Autoload::autoload();
-
+use \Config\Autoload as Autoload;
 use Config\Router;
 use Config\Request;
 
+Autoload::autoload();
 Router::direccionar(new Request());
