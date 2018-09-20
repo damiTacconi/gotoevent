@@ -1,7 +1,7 @@
-<?php include "navbar.php" ?>
-<!--- HEADER --------------->
+
+<!-- HEADER -->
 <?php include "header-inicio.php" ?>
-<!---FIN HEADER------------->
+<!-- FIN HEADER -->
     <div class="container">
         <div class="row">
             <div class="col">

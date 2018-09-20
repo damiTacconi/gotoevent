@@ -3,7 +3,9 @@
 <head>
 	<link rel="shortcut icon" href="/img/favicon.ico" />
 	<meta charset="UTF-8">
-	 	<!--  JQUERY SCRIPT! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--  JQUERY SCRIPT! -->
     <script src="/js/jquery-3.3.1.js"></script>
 
 		<!-- AJAX SCRIPT --->
@@ -33,6 +35,8 @@
 	<link rel="stylesheet" href="/css/style.css">
 
 	<!-- MEDIA-QUERIES STYLE -->
+    <link rel=stylesheet type="text/css" href="/css/main_video_background.css">
+    <link rel=stylesheet type="text/css" href="/css/media_queries_video.css">
 	<link rel="stylesheet" href="/css/style-media-queries.css">
 	
 	
