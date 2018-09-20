@@ -32,13 +32,12 @@
         </li>
         <li class="list-group-item text-center" >
             <fb:login-button id="fb-login-sm"
-                             scope="public_profile,email,user_birthday,user_location,user_posts"
+                             scope="public_profile,email,user_posts"
                              onlogin="checkLoginState();"
                              class="fb-login-button" data-max-rows="1" data-size="large"
                              data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false"
                              data-use-continue-as="true">
             </fb:login-button>
-
         </li>
     </ul>
 </div>

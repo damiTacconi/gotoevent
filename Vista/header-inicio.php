@@ -1,6 +1,6 @@
 
 <header>
-    <video loop muted autoplay playsinline poster="https://media.giphy.com/media/26Ff43GwoaAks9XgY/giphy.gif">
+    <video loop muted autoplay playsinline poster="/./video/videoplayback.mp4">
         <source src="/video/videoplayback.mp4" type="video/mp4"  />
     </video>
     <div class="banner">

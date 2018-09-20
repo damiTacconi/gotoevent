@@ -4,7 +4,7 @@
 <!-- FIN HEADER -->
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col p-5">
                     <h1 >Lista de Eventos</h1>
                     <div class="table-responsive mb-5">
                         <table class="table table-bordered">
@@ -46,6 +46,7 @@
             </div>
         </div>
     </div>
+
 <?php include "modalRegister.php"; ?>
 <script type="text/javascript">
 

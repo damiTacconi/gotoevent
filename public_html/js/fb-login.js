@@ -20,6 +20,7 @@ function checkLoginState() {
 }(document, 'script', 'facebook-jssdk'));
 
 function statusChangeCallback(response){
+
     if(response.status === 'connected'){
         ajaxURL('/facebook/login' , data => {
             let result = $.trim(data);
