@@ -5,19 +5,31 @@ namespace Dao;
 use Modelo\Cliente;
 use Modelo\Usuario;
 
-class UsuarioBdDao
+class UsuarioBdDao extends SingletonDao implements IDao
 {
     protected $tabla = "usuarios";
-    protected $listado;
-    private static $instancia;
+    protected $listado = [];
 
-    public static function getInstancia()
+    public function save($data)
     {
-        if (!self::$instancia instanceof self) {
-            self::$instancia = new self();
-        }
-        return self::$instancia;
+        // TODO: Implement save() method.
     }
+
+    public function update($data)
+    {
+        // TODO: Implement update() method.
+    }
+
+    public function delete($data)
+    {
+        // TODO: Implement delete() method.
+    }
+
+    public function retrieve($id)
+    {
+        // TODO: Implement retrieve() method.
+    }
+
 
     public function verificarUsuario($email,$password){
         try {

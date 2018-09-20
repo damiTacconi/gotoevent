@@ -3,9 +3,9 @@
         <i class="fas fa-address-book"></i> LOGIN
     </div>
     <ul id="lista" class="list-group list-group-flush" >
-        <?php if(isset($params['mensaje'])){ ?>
+        <?php if(isset($param['mensaje'])){ ?>
             <li id="loginError" class="list-group-item list-group-item-danger text-center">
-                <?= $params['mensaje'] ?>
+                <?= $param['mensaje'] ?>
                 <span onclick="closeLoginError(this)" class="login-error-close float-right"> x </span>
             </li>
         <?php } ?>

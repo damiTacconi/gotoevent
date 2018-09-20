@@ -26,7 +26,7 @@ class PaginaControladora
             $this->page();
         }
     }
-    private function showPage($page , $title , $params ,$array){
+    private function showPage($page , $title , $param ,$array){
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin'){
             $ruta   = URL_VISTA . 'admin/';
             $header = $ruta . 'header-admin.php';

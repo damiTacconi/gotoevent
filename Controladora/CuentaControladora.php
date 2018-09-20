@@ -13,8 +13,8 @@ class CuentaControladora extends PaginaControladora {
 
     function __construct()
     {
-        $this->usuarioBdDao = UsuarioBdDao::getInstancia();
-        $this->clienteBdDao = ClienteBdDao::getInstancia();
+        $this->usuarioBdDao = UsuarioBdDao::getInstance();
+        $this->clienteBdDao = ClienteBdDao::getInstance();
     }
 
     function index(){

@@ -2,23 +2,14 @@
 
 namespace Dao;
 
+use Controladora\SingletonDao;
 use Modelo\Cliente;
 use Modelo\Usuario;
 
-class ClienteBdDao
+class ClienteBdDao extends SingletonDao implements IDao
 {
     protected $tabla = "clientes";
     protected $listado = [];
-    private static $instancia;
-
-    public static function getInstancia()
-    {
-        if (!self::$instancia instanceof self) {
-            self::$instancia = new self();
-        }
-        return self::$instancia;
-    }
-
 
     public function verificarDni($dni){
         try {
@@ -35,7 +26,7 @@ class ClienteBdDao
             die();
         }
     }
-    public function agregar(Cliente $cliente)
+    public function save($cliente)
     {
         $sql = <<<TAG
 INSERT INTO $this->tabla (nombre, apellido, dni, id_usuario) VALUES (:nombre, :apellido, :dni, :id_usuario)
@@ -179,5 +170,20 @@ TAG;
                 return $cliente;
             }, $dataSet);
         }
+    }
+
+    public function update($data)
+    {
+        // TODO: Implement update() method.
+    }
+
+    public function delete($data)
+    {
+        // TODO: Implement delete() method.
+    }
+
+    public function retrieve($id)
+    {
+        // TODO: Implement retrieve() method.
     }
 }

@@ -10,11 +10,14 @@
                 </li>
                 <li class="breadcrumb-item active">Crear</li>
             </ol>
-            <form>
+            <?php if(isset($param['mensaje'])) {
+                    echo $param['mensaje'];
+            }?>
+            <form action="/categoria/save" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputCategoria">Descripcion</label>
-                        <input type="text" class="form-control" id="inputCategoria" placeholder="Ej: 'Obra de Teatro' ">
+                        <input type="text" class="form-control" name="categoria" id="inputCategoria" placeholder="Ej: 'Obra de Teatro' ">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Agregar</button>
