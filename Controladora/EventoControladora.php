@@ -13,7 +13,7 @@ class EventoControladora extends PaginaControladora
     private $eventoDao;
     function __construct()
     {
-        $this->eventoDao = EventoBdDao::getInstance();
+        //$this->eventoDao = EventoBdDao::getInstance();
     }
 
     function index(){

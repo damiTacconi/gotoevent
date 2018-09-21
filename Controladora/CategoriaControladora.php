@@ -31,52 +31,36 @@ class CategoriaControladora extends PaginaControladora
             }else{
                 $mensaje = new Mensaje('No se encontro la categoria en la Base de Datos', 'danger');
             }
-            $categorias = $this->categoriaDao->getAll();
-            $array = array('mensaje' => $mensaje->getAlert());
-
-            if($categorias)
-                $array['categorias'] = $categorias;
-
-            $this->page('listadoCategorias', 'Categorias - Listado', 2, $array);
+            $params = array('mensaje' => $mensaje->getAlert());
+            $this->paginaListado($params);
         }else header('location: /');
+    }
+
+    private function paginaListado($array = []){
+        $categorias = $this->categoriaDao->getAll();
+          if ($categorias)
+            $array['categorias'] = $categorias;
+        $this->page('listadoCategorias' , 'Categorias - Listado', 2, $array);
     }
 
     function listado(){
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin'){
-            $categorias = $this->categoriaDao->getAll();
-            if($categorias){
-                $this->page('listadoCategorias' , 'Categorias - Listado', 2, array(
-                    'categorias' => $categorias
-                ));
-            }else{
-                $mensaje = new Mensaje('No Hay categorias cargadas' , 'warning');
-                $this->page('listadoCategorias' , 'Categorias - Listado', 2, array(
-                    'mensaje' => $mensaje->getAlert()
-                ));
-            }
-
+            $this->paginaListado();
         }else header('location: /');
     }
     function save($descripcion){
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
             $descripcion = trim($descripcion);
             if(!empty($descripcion)) {
-                if (!$this->categoriaDao->DescripcionExists($descripcion)) {
+                if (!$this->categoriaDao->descripcionExists($descripcion)) {
                     $categoria = new Categoria($descripcion);
                     $this->categoriaDao->save($categoria);
                     $mensaje = new Mensaje("La categoria se agrego con exito!", 'success');
-                } else {
-                    $mensaje = new Mensaje('Ya existe una categoria con esa descripcion', 'danger');
-                }
-                $this->page('crearCategoria', 'Crear Categoria', 2, array(
-                    'mensaje' => $mensaje->getAlert()
-                ));
-            }else{
-                $mensaje = new Mensaje('Se debe ingresar una descripcion valida' , 'danger');
-                $this->page('crearCategoria', 'Crear Categoria', 2, array(
-                    'mensaje' => $mensaje->getAlert()
-                ));
-            }
+                }else $mensaje = new Mensaje('Ya existe una categoria con esa descripcion', 'danger');
+            }else $mensaje = new Mensaje('Se debe ingresar una descripcion valida' , 'danger');
+            $this->page('crearCategoria', 'Crear Categoria', 2, array(
+                'mensaje' => $mensaje->getAlert()
+            ));
         }else header('location: /');
     }
 }

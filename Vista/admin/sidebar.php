@@ -48,8 +48,8 @@
             <span>Artistas</span>
         </a>
         <div class="dropdown-menu bg-dark" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item text-white" href="admin/login.html"><i class="fas fa-list-ul"></i> Listado</a>
-            <a class="dropdown-item text-white" href="admin/register.html"><i class="fas fa-plus-square"></i> Agregar</a>
+            <a class="dropdown-item text-white" href="/artista/listado"><i class="fas fa-list-ul"></i> Listado</a>
+            <a class="dropdown-item text-white" href="/artista/crear"><i class="fas fa-plus-square"></i> Agregar</a>
         </div>
     </li>
     <li class="nav-item dropdown">

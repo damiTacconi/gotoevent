@@ -2,7 +2,6 @@
 
 namespace Dao;
 
-use Controladora\SingletonDao;
 use Modelo\Cliente;
 use Modelo\Usuario;
 

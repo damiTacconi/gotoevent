@@ -2,37 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: dami_
- * Date: 20/9/2018
- * Time: 15:54
+ * Date: 21/9/2018
+ * Time: 08:49
  */
 
 namespace Dao;
-use Modelo\Categoria;
+use Modelo\Artista;
 
-class CategoriaBdDao extends SingletonDao implements IDao
+class ArtistaBdDao extends SingletonDao implements IDao
 {
+    private $tabla = "artistas";
     private $listado = [];
-    private $tabla = "categorias";
 
-    public function save($data)
-    {
+    public function artistExists($nombre){
         try{
-            $sql = "INSERT INTO  $this->tabla (descripcion) VALUES (:descripcion)";
-            $conexion = Conexion::conectar();
-            $sentencia = $conexion->prepare($sql);
-            $descripcion = $data->getDescripcion();
-            $sentencia->bindParam(":descripcion",$descripcion);
-            $sentencia->execute();
-            return $conexion->lastInsertId();
-        }catch (\PDOException $e){
-            echo "EXCEPCION_CATEGORIASBD_SAVE: {$e->getMessage()}";
-            die();
-        }
-    }
-
-    public function descripcionExists($descripcion){
-        try{
-            $sql = "SELECT descripcion FROM $this->tabla WHERE descripcion= \"$descripcion\" LIMIT 1 ";
+            $sql = "SELECT nombre FROM $this->tabla WHERE nombre= \"$nombre\" LIMIT 1 ";
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $sentencia->execute();
@@ -46,7 +30,7 @@ class CategoriaBdDao extends SingletonDao implements IDao
         }
     }
 
-    public function getAll(){
+    public  function getAll(){
         try{
             $sql = "SELECT * FROM $this->tabla";
             $conexion = Conexion::conectar();
@@ -63,6 +47,22 @@ class CategoriaBdDao extends SingletonDao implements IDao
             die();
         }
     }
+    public function save($data)
+    {
+        try{
+            $sql = "INSERT INTO  $this->tabla (nombre) VALUES (:nombre)";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $nombre = $data->getNombre();
+            $sentencia->bindParam(":nombre",$nombre);
+            $sentencia->execute();
+            return $conexion->lastInsertId();
+        }catch (\PDOException $e){
+            echo "EXCEPCION_ARTISTASBD_SAVE: {$e->getMessage()}";
+            die();
+        }
+    }
+
     public function update($data)
     {
         // TODO: Implement update() method.
@@ -73,7 +73,7 @@ class CategoriaBdDao extends SingletonDao implements IDao
         try{
             $id = $data->getId();
 
-            $sql = "DELETE FROM $this->tabla WHERE id_categoria=\"$id\" ";
+            $sql = "DELETE FROM $this->tabla WHERE id_artista=\"$id\" ";
 
             $conexion = Conexion::conectar();
 
@@ -90,7 +90,7 @@ class CategoriaBdDao extends SingletonDao implements IDao
     public function retrieve($id)
     {
         try{
-            $sql = "SELECT * FROM $this->tabla WHERE id_categoria=$id";
+            $sql = "SELECT * FROM $this->tabla WHERE id_artista=$id";
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $sentencia->execute();
@@ -109,11 +109,12 @@ class CategoriaBdDao extends SingletonDao implements IDao
     private function mapear($dataSet){
         $dataSet = is_array($dataSet) ? $dataSet : [];
         //if($dataSet[0]) {
-            $this->listado = array_map(function ($p) {
-                $categoria = new Categoria($p['descripcion']);
-                $categoria->setId($p['id_categoria']);
-                return $categoria;
-            }, $dataSet);
+        $this->listado = array_map(function ($p) {
+            $artista = new Artista($p['nombre']);
+            $artista->setId($p['id_artista']);
+            return $artista;
+        }, $dataSet);
         //}
     }
+
 }
