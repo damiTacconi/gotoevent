@@ -40,9 +40,14 @@ function ajax(id,url,callback,type){
     })
 }
 
-function ajaxURL(url,callback){
+function ajaxURL(url,callback,method='POST'){
+    method = $.trim(method);
+    if(method === "GET"){
+        method='GET';
+    }else method = "POST";
+
     $.ajax({
-        type: 'POST',
+        type: method,
         url: url,
         success: function (data) {
             if(callback.length === 1)

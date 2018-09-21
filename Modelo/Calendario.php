@@ -14,12 +14,31 @@ class Calendario
     private $id;
     private $fecha;
     private $evento;
+    private $artista;
 
-    function __construct($fecha , $evento)
+    function __construct($fecha , $evento, $artista)
     {
+        $this->artista = $artista;
         $this->evento = $evento;
         $this->fecha = $fecha;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getArtista()
+    {
+        return $this->artista;
+    }
+
+    /**
+     * @param mixed $artista
+     */
+    public function setArtista($artista): void
+    {
+        $this->artista = $artista;
+    }
+
 
     /**
      * @return mixed

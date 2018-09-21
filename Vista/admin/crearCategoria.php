@@ -17,7 +17,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputCategoria">Descripcion</label>
-                        <input type="text" class="form-control" name="categoria" id="inputCategoria" placeholder="Ej: 'Obra de Teatro' ">
+                        <input required type="text" class="form-control" name="categoria" id="inputCategoria" placeholder="Ej: 'Obra de Teatro' ">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Agregar</button>

@@ -29,7 +29,6 @@ class Request {
 
             }else $this->setMetodo('index');
 		}
-
 	}
 
 
