@@ -16,6 +16,7 @@ class Evento
     private $fecha_desde;
     private $fecha_hasta;
     private $categoria;
+    private $calendarios = [];
 
     function __construct($titulo,$fecha_desde,$fecha_hasta,$categoria)
     {
@@ -104,6 +105,23 @@ class Evento
     {
         $this->categoria = $categoria;
     }
+
+    /**
+     * @return array
+     */
+    public function getCalendarios(): array
+    {
+        return $this->calendarios;
+    }
+
+    /**
+     * @param array $calendarios
+     */
+    public function setCalendarios(array $calendarios): void
+    {
+        $this->calendarios = $calendarios;
+    }
+
 
 
 }

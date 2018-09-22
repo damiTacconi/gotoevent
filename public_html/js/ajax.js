@@ -40,7 +40,7 @@ function ajax(id,url,callback,type){
     })
 }
 
-function ajaxURL(url,callback,method='POST'){
+function ajaxURL(url,callback,method='POST',object){
     method = $.trim(method);
     if(method === "GET"){
         method='GET';
@@ -49,6 +49,7 @@ function ajaxURL(url,callback,method='POST'){
     $.ajax({
         type: method,
         url: url,
+        data: object,
         success: function (data) {
             if(callback.length === 1)
                 callback(data);

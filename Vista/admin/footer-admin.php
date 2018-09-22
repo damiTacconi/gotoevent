@@ -3,12 +3,7 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
-<!-- Bootstrap core JavaScript-->
-<script src="/./admin/vendor/jquery/jquery.min.js"></script>
-<script src="/./admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="/./admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Page level plugin JavaScript-->
 <script src="/./admin/vendor/chart.js/Chart.min.js"></script>
@@ -23,5 +18,63 @@
 <script src="/./admin/js/demo/chart-area-demo.js"></script>
 <script src="/./js/ajax.js"></script>
 </body>
+<script type="text/javascript">
+    $(function () {
+        $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+            icons: {
+                time: 'far fa-clock',
+                date: 'fas fa-calendar-alt',
+                up: 'fas fa-arrow-circle-up',
+                down: 'fas fa-arrow-circle-down ',
+                previous: 'fas fa-chevron-circle-left',
+                next: 'fas fa-chevron-circle-right',
+                today: 'far fa-calendar-check-o',
+                clear: 'far fa-trash',
+                close: 'far fa-times'
+            } });
 
+        /************/
+        $('#datetimepicker1').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+        $('#datetimepicker2').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+        $('#fechapicker').datetimepicker({
+            format: "YYYY-MM-DD"
+        });
+        $('#desdepicker').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+        $('#hastapicker').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+        $('#hora_desde_picker').datetimepicker({
+            format: 'LT'
+        });
+        $('#hora_hasta_picker').datetimepicker({
+            format: 'LT',
+            useCurrent: false
+        });
+
+        /************/
+        $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker2').datetimepicker({
+            useCurrent: false
+        });
+        $("#datetimepicker1").on("change.datetimepicker", function (e) {
+            $('#datetimepicker2').datetimepicker('minDate', e.date);
+        });
+        $("#datetimepicker2").on("change.datetimepicker", function (e) {
+            $('#datetimepicker1').datetimepicker('maxDate', e.date);
+        });
+
+        $("#hora_desde_picker").on("change.datetimepicker", function (e) {
+            $('#hora_hasta_picker').datetimepicker('minDate', e.date);
+        });
+        $("#hora_hasta_picker").on("change.datetimepicker", function (e) {
+            $('#hora_desde_picker').datetimepicker('maxDate', e.date);
+        });
+    });
+</script>
 </html>

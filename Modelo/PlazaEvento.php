@@ -16,6 +16,7 @@ class PlazaEvento
     private $remanente;
     private $sede;
     private $tipoPlaza;
+    private $id_calendario;
 
     /**
      * PlazaEvento constructor.

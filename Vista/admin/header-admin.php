@@ -8,8 +8,21 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title> <?= $title ?> </title>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/./admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/./admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="/./admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/./js/moment.js"></script>
+    <script src="/./js/es-do.js"></script>
+    <script src="/./js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/./js/locales/bootstrap-datetimepicker.es.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+
+
+
+    <title> <?= $title ?> </title>
     <!-- Bootstrap core CSS-->
     <link href="/./admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,8 +34,11 @@
 
     <!-- Custom styles for this template-->
     <link href="/./admin/css/sb-admin.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="/./css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
     <link rel="stylesheet" href="/./css/style.css">
+
+
 </head>
 
 <body id="page-top">

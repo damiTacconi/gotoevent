@@ -13,8 +13,7 @@ class Sede
 {
     private $id;
     private $nombre;
-    private $capacidad;
-
+    private $tipoPlaza = [];
     /**
      * Sede constructor.
      * @param $nombre
@@ -23,6 +22,26 @@ class Sede
     {
         $this->nombre = $nombre;
     }
+
+    public function addTipoPlaza(TipoPlaza $tipoPlaza){
+        $this->tipoPlaza[] = $tipoPlaza;
+    }
+    /**
+     * @return array
+     */
+    public function getTipoPlaza(): array
+    {
+        return $this->tipoPlaza;
+    }
+
+    /**
+     * @param array $tipoPlaza
+     */
+    public function setTipoPlaza(array $tipoPlaza): void
+    {
+        $this->tipoPlaza = $tipoPlaza;
+    }
+
 
     /**
      * @return mixed
@@ -54,22 +73,6 @@ class Sede
     public function setNombre($nombre): void
     {
         $this->nombre = $nombre;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCapacidad()
-    {
-        return $this->capacidad;
-    }
-
-    /**
-     * @param mixed $capacidad
-     */
-    public function setCapacidad($capacidad): void
-    {
-        $this->capacidad = $capacidad;
     }
 
 

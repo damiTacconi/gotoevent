@@ -11,7 +11,6 @@ class Request {
         $http = $_SERVER['REQUEST_METHOD'];
 		$url = $_SERVER['REQUEST_URI'];
 		$array = array_filter(explode("/", $url));
-
 		if(empty($array)){
 			$this->setControlador("Pagina");
 			$this->setMetodo("inicio");
@@ -29,7 +28,8 @@ class Request {
 
             }else $this->setMetodo('index');
 		}
-	}
+
+    }
 
 
 

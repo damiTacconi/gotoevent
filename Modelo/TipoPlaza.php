@@ -13,17 +13,15 @@ class TipoPlaza
 {
     private $id;
     private $descripcion;
-    private $sede;
+    private $id_sede;
 
     /**
      * TipoPlaza constructor.
      * @param $descripcion
-     * @param $sede
      */
-    public function __construct($descripcion, $sede)
+    public function __construct($descripcion)
     {
         $this->descripcion = $descripcion;
-        $this->sede = $sede;
     }
 
     /**
@@ -61,17 +59,17 @@ class TipoPlaza
     /**
      * @return mixed
      */
-    public function getSede()
+    public function getIdSede()
     {
-        return $this->sede;
+        return $this->id_sede;
     }
 
     /**
-     * @param mixed $sede
+     * @param mixed $id_sede
      */
-    public function setSede($sede): void
+    public function setIdSede($id_sede): void
     {
-        $this->sede = $sede;
+        $this->id_sede = $id_sede;
     }
 
 

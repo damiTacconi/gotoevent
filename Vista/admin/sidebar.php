@@ -45,6 +45,16 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-folder"></i>
+            <span>Sedes</span>
+        </a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item text-white" href="/sede/listado"><i class="fas fa-list-ul"></i> Listado</a>
+            <a class="dropdown-item text-white" href="/sede/crear"><i class="fas fa-plus-square"></i> Agregar</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
             <span>Artistas</span>
         </a>
         <div class="dropdown-menu bg-dark" aria-labelledby="pagesDropdown">

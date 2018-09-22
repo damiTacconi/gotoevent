@@ -13,49 +13,12 @@ class Calendario
 {
     private $id;
     private $fecha;
-    private $evento;
-    private $artista;
+    private $id_evento;
 
-    function __construct($fecha , $evento, $artista)
+    function __construct($fecha)
     {
-        $this->artista = $artista;
-        $this->evento = $evento;
         $this->fecha = $fecha;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getArtista()
-    {
-        return $this->artista;
-    }
-
-    /**
-     * @param mixed $artista
-     */
-    public function setArtista($artista): void
-    {
-        $this->artista = $artista;
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getEvento()
-    {
-        return $this->evento;
-    }
-
-    /**
-     * @param mixed $evento
-     */
-    public function setEvento($evento): void
-    {
-        $this->evento = $evento;
-    }
-
 
     /**
      * @return mixed
@@ -88,6 +51,23 @@ class Calendario
     {
         $this->fecha = $fecha;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdEvento()
+    {
+        return $this->id_evento;
+    }
+
+    /**
+     * @param mixed $id_evento
+     */
+    public function setIdEvento($id_evento): void
+    {
+        $this->id_evento = $id_evento;
+    }
+
 
 
 }
