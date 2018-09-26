@@ -48,17 +48,21 @@ class ShowBdDao extends SingletonDao implements IDao
     }
 
     public function traerPorIdCalendario($id_calendario){
-        $sql = ("SELECT hs.* FROM $this->tabla hs INNER JOIN calendarios ca 
+        try {
+            $sql = ("SELECT hs.* FROM $this->tabla hs INNER JOIN calendarios ca 
                 ON ca.id_calendario=hs.id_calendario WHERE ca.id_calendario=$id_calendario");
-        $conexion = Conexion::conectar();
-        $sentencia = $conexion->prepare($sql);
-        $sentencia->execute();
-        $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
-        $this->mapear($dataSet);
-        if(!empty($this->listado)){
-            return $this->listado;
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return null;
+        }catch (\PDOException $e){
+            echo "ERROR-SHOWBASEDEDATOS: {$e->getMessage()}";
         }
-        return null;
     }
     public function update($data)
     {

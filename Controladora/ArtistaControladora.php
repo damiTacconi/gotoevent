@@ -38,7 +38,7 @@ class ArtistaControladora extends PaginaControladora
         $artistas = $this->artistaDao->getAll();
         if ($artistas)
             $array['artistas'] = $artistas;
-        $this->page('listadoArtistas' , 'Artistas - Listado', 2, $array);
+        $this->page('listado/listadoArtistas' , 'Artistas - Listado', 2, $array);
     }
 
     function listado(){

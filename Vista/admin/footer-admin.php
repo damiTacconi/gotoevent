@@ -16,8 +16,8 @@
 <!-- Demo scripts for this page-->
 <script src="/./admin/js/demo/datatables-demo.js"></script>
 <script src="/./admin/js/demo/chart-area-demo.js"></script>
+
 <script src="/./js/ajax.js"></script>
-</body>
 <script type="text/javascript">
     $(function () {
         $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
@@ -77,4 +77,6 @@
         });
     });
 </script>
+</body>
+
 </html>

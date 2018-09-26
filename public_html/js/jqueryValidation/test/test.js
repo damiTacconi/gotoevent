@@ -264,7 +264,7 @@ QUnit.test( "form(): radio buttons: required", function( assert ) {
 	assert.equal( $( "#testForm10Radio2" ).attr( "class" ), "valid" );
 } );
 
-QUnit.test( "form(): selects: min/required", function( assert ) {
+QUnit.test( "form(): altas: min/required", function( assert ) {
 	assert.expect( 3 );
 	var form = $( "#testForm7" )[ 0 ],
 		v = $( form ).validate();

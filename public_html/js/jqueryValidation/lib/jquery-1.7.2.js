@@ -1458,7 +1458,7 @@ jQuery.support = (function() {
 	input.checked = true;
 	support.noCloneChecked = input.cloneNode( true ).checked;
 
-	// Make sure that the options inside disabled selects aren't marked as disabled
+	// Make sure that the options inside disabled altas aren't marked as disabled
 	// (WebKit marks them as disabled)
 	select.disabled = true;
 	support.optDisabled = !opt.disabled;
@@ -2464,7 +2464,7 @@ jQuery.extend({
 						// Get the specific value for the option
 						value = jQuery( option ).val();
 
-						// We don't need an array for one selects
+						// We don't need an array for one altas
 						if ( one ) {
 							return value;
 						}

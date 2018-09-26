@@ -4,6 +4,7 @@
 	<link rel="shortcut icon" href="/img/favicon.ico" />
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/js/alertify.min.js"></script>
 
     <!--  JQUERY SCRIPT! -->
     <script src="/js/jquery-3.3.1.js"></script>

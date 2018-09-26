@@ -40,7 +40,7 @@ class SedeControladora extends PaginaControladora
         $sedes = $this->sedeDao->getAll();
         if ($sedes)
             $array['sedes'] = $sedes;
-        $this->page('listadoSede' , 'Sede - Listado', 2, $array);
+        $this->page('listado/listadoSede' , 'Sede - Listado', 2, $array);
     }
 
     function listado(){
@@ -84,24 +84,47 @@ class SedeControladora extends PaginaControladora
             $sede = $this->sedeDao->traerPorId($id);
             $params = [];
             if($sede){
-                $tipoPlazas = $this->tipoPlazaDao->traerPorIdSede($sede->getId());
+                $tipoPlazas = $this->tipoPlazaDao->traerPorIdSede($id);
                 $params['sede'] = $sede;
                 $params['tipo_plazas'] = $tipoPlazas;
             }else {
                 $mensaje = new Mensaje('No se encontro la sede', 'danger');
                 $params['mensaje'] = $mensaje->getAlert();
             }
-            $this->page('listadoTipoPlaza',  $sede->getNombre(),2,$params);
+            $this->page('listado/listadoTipoPlaza',  $sede->getNombre(),2,$params);
         }
     }
-    function saveTipoPlaza($descripcion , $nombreSede){
+    function verificarDescripcionExistente($desc , $plazas){
+        $flag = false;
+        if(is_array($plazas)) {
+            foreach ($plazas as $plaza) {
+                if ($plaza->getDescripcion() === $desc) {
+                    $flag = true;
+                    break;
+                }
+            }
+        }
+        return  $flag;
+    }
+    function getPlazasAjax($id_sede){
         if(!empty($_SESSION) && $_SESSION['rol']=='admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
-            $id_sede = $this->sedeDao->traerIdPorNombre($nombreSede);
-            if($id_sede){
-                $descripcion = trim($descripcion);
-                if(!$this->tipoPlazaDao->descripcionExists($descripcion)){
-                    $tipoPlaza = new TipoPlaza($descripcion);
-                    $tipoPlaza->setIdSede($id_sede);
+            $plazas = $this->tipoPlazaDao->traerPorIdSede($id_sede);
+            $params =[];
+            if($plazas){
+                $params = array_map(function($plaza){
+                    return $plaza->jsonSerialize();
+                },$plazas);
+            }
+            echo json_encode($params);
+        }else header('location: /');
+    }
+    function saveTipoPlaza($descripcion , $id_sede){
+        if(!empty($_SESSION) && $_SESSION['rol']=='admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
+            $sede = $this->sedeDao->retrieve($id_sede);
+            if($sede){
+                $plazas = $this->tipoPlazaDao->traerPorIdSede($id_sede);
+                if(!$this->verificarDescripcionExistente($descripcion,$plazas)){
+                    $tipoPlaza = new TipoPlaza($descripcion ,$sede);
                     $this->tipoPlazaDao->save($tipoPlaza);
                     $mensaje = new Mensaje('El tipo de plaza se agrego con exito!','success');
                 }else $mensaje = new Mensaje('Ya existe ese tipo de plaza en la sede','danger');

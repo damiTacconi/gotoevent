@@ -1080,7 +1080,7 @@ $.fn.enable = function(b) {
 
 /**
  * Checks/unchecks any matching checkboxes or radio buttons and
- * selects/deselects and matching option elements.
+ * altas/deselects and matching option elements.
  */
 $.fn.selected = function(select) {
     if (select === undefined) {

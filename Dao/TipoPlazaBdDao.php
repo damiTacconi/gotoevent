@@ -12,6 +12,7 @@ namespace Dao;
 use Dao\IDao;
 use Dao\SingletonDao;
 use Modelo\TipoPlaza;
+use Dao\SedeBdDao;
 
 class TipoPlazaBdDao extends SingletonDao implements IDao
 {
@@ -40,7 +41,8 @@ class TipoPlazaBdDao extends SingletonDao implements IDao
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $descripcion = $data->getDescripcion();
-            $id = $data->getIdSede();
+            $sede = $data->getSede();
+            $id = $sede->getId();
             $sentencia->bindParam(":descripcion",$descripcion);
             $sentencia->bindParam(":id_sede",$id);
             $sentencia->execute();
@@ -82,15 +84,31 @@ class TipoPlazaBdDao extends SingletonDao implements IDao
 
     public function retrieve($id)
     {
-        // TODO: Implement retrieve() method.
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE id_tipo_plaza=$id";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado[0];
+            }
+            return false;
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
     }
     private function mapear($dataSet){
         $dataSet = is_array($dataSet) ? $dataSet : [];
         //if($dataSet[0]) {
         $this->listado = array_map(function ($p) {
-            $tipoPlaza = new TipoPlaza($p['descripcion']);
+
+            $sedeDao = SedeBdDao::getInstance();
+            $sede = $sedeDao->retrieve($p['id_sede']);
+            $tipoPlaza = new TipoPlaza($p['descripcion'],$sede);
             $tipoPlaza->setId($p['id_tipo_plaza']);
-            $tipoPlaza->setIdSede($p['id_sede']);
             return $tipoPlaza;
         }, $dataSet);
         //}

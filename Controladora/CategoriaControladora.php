@@ -40,7 +40,7 @@ class CategoriaControladora extends PaginaControladora
         $categorias = $this->categoriaDao->getAll();
           if ($categorias)
             $array['categorias'] = $categorias;
-        $this->page('listadoCategorias' , 'Categorias - Listado', 2, $array);
+        $this->page('listado/listadoCategorias' , 'Categorias - Listado', 2, $array);
     }
 
     function listado(){

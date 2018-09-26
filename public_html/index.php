@@ -1,4 +1,11 @@
 <?php
+// Establecer la zona horaria predeterminada a usar. Disponible desde PHP 5.1
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+
+//setlocale(LC_TIME, 'es_ES.UTF-8');         // ---UNIX
+setlocale(LC_TIME, 'spanish'); // ---Windows
+
+//si la session esta vacia, la inicio
 if(empty($_SESSION)){
     session_start();
 }
@@ -12,3 +19,4 @@ use Config\Request;
 
 Autoload::autoload();
 Router::direccionar(new Request());
+

@@ -8,14 +8,17 @@
 
 namespace Modelo;
 
+use JsonSerializable;
 
-class Evento
+class Evento implements JsonSerializable
 {
     private $id;
     private $titulo;
     private $fecha_desde;
     private $fecha_hasta;
     private $categoria;
+    private $eventoImagen = null;
+
     private $calendarios = [];
 
     function __construct($titulo,$fecha_desde,$fecha_hasta,$categoria)
@@ -25,6 +28,40 @@ class Evento
         $this->fecha_hasta = $fecha_hasta;
         $this->titulo = $titulo;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEventoImagen()
+    {
+        return $this->eventoImagen;
+    }
+
+    /**
+     * @param mixed $eventoImagen
+     */
+    public function setEventoImagen($eventoImagen): void
+    {
+        $this->eventoImagen = $eventoImagen;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getCalendarios(): array
+    {
+        return $this->calendarios;
+    }
+
+    /**
+     * @param array $calendarios
+     */
+    public function setCalendarios(array $calendarios): void
+    {
+        $this->calendarios = $calendarios;
+    }
+
 
     /**
      * @return mixed
@@ -106,22 +143,20 @@ class Evento
         $this->categoria = $categoria;
     }
 
-    /**
-     * @return array
-     */
-    public function getCalendarios(): array
-    {
-        return $this->calendarios;
+    private function calendariosToArray(){
+        $calendarios = array_map(function($ca) {
+            return $ca->jsonSerialize();
+        }, $this->calendarios);
+        return $calendarios;
     }
-
-    /**
-     * @param array $calendarios
-     */
-    public function setCalendarios(array $calendarios): void
-    {
-        $this->calendarios = $calendarios;
+    public function jsonSerialize() {
+        return [
+            'id_evento' => $this->id,
+            'titulo' => $this->titulo,
+            'fecha_desde' => $this->fecha_desde,
+            'fecha_hasta' => $this->fecha_hasta,
+            'categoria' => $this->categoria->jsonSerialize(),
+            'calendarios' => $this->calendariosToArray()
+        ];
     }
-
-
-
 }

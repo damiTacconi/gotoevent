@@ -7290,7 +7290,7 @@ jQuery.extend( {
 						// Get the specific value for the option
 						value = jQuery( option ).val();
 
-						// We don't need an array for one selects
+						// We don't need an array for one altas
 						if ( one ) {
 							return value;
 						}

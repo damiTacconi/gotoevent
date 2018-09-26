@@ -1,6 +1,6 @@
-<?php include "adminNav.php" ?>
+<?php include $ruta . "adminNav.php" ?>
 <div id="wrapper">
-    <?php include 'sidebar.php' ?>
+    <?php include $ruta . 'sidebar.php' ?>
     <div id="content-wrapper">
         <div class="container-fluid">
             <!-- Breadcrumbs-->

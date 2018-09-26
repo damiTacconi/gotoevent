@@ -10,6 +10,7 @@ namespace Dao;
 use Dao\CategoriaBdDao;
 use Modelo\Categoria;
 use Modelo\Evento;
+use Modelo\EventoImagen;
 
 class EventoBdDao extends SingletonDao implements IDao
 {
@@ -68,8 +69,8 @@ class EventoBdDao extends SingletonDao implements IDao
     public function save($data)
     {
         try{
-            $sql = ("INSERT INTO  $this->tabla (titulo,fecha_desde,fecha_hasta,id_categoria) 
-                    VALUES (:titulo,:fecha_desde,:fecha_hasta,:id_categoria)");
+            $sql = ("INSERT INTO  $this->tabla (titulo,fecha_desde,fecha_hasta,id_categoria, id_imagen) 
+                    VALUES (:titulo,:fecha_desde,:fecha_hasta,:id_categoria, :id_imagen)");
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $titulo = $data->getTitulo();
@@ -77,10 +78,15 @@ class EventoBdDao extends SingletonDao implements IDao
             $fecha_hasta = $data->getFechaHasta();
             $categoria = $data->getCategoria();
             $id_categoria = $categoria->getId();
+            $imagen = $data->getEventoImagen();
+            if($imagen){
+                $id_imagen = $imagen->getId();
+            }else $id_imagen = null;
             $sentencia->bindParam(":titulo",$titulo);
             $sentencia->bindParam(":fecha_desde",$fecha_desde);
             $sentencia->bindParam(":fecha_hasta",$fecha_hasta);
             $sentencia->bindParam(":id_categoria",$id_categoria);
+            $sentencia->bindParam(":id_imagen", $id_imagen);
             $sentencia->execute();
             return $conexion->lastInsertId();
         }catch (\PDOException $e){
@@ -96,7 +102,21 @@ class EventoBdDao extends SingletonDao implements IDao
 
     public function delete($data)
     {
-        // TODO: Implement delete() method.
+        try{
+            $id = $data->getId();
+
+            $sql = "DELETE FROM $this->tabla WHERE id_evento=\"$id\" ";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
     }
 
     public function retrieve($id)
@@ -107,8 +127,10 @@ class EventoBdDao extends SingletonDao implements IDao
             $sentencia = $conexion->prepare($sql);
             $sentencia->execute();
             $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
-            $this->mapear($dataSet);
-            if (!empty($this->listado)) {
+            if($dataSet[0]) {
+                $this->mapear($dataSet);
+            }
+            if (!empty($this->listado[0])) {
                 return $this->listado[0];
             }
             return false;
@@ -125,6 +147,11 @@ class EventoBdDao extends SingletonDao implements IDao
             $categoria = $categoriaDao->retrieve($p['id_categoria']);
             $evento = new Evento($p['titulo'],$p['fecha_desde'],$p['fecha_hasta'],$categoria);
             $evento->setId($p['id_evento']);
+            if($p['id_imagen']){
+                $imagenDao = EventoImagenBdDao::getInstance();
+                $imagen = $imagenDao->retrieve($p['id_imagen']);
+                $evento->setEventoImagen($imagen);
+            }
             return $evento;
         }, $dataSet);
     }

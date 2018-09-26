@@ -10,6 +10,7 @@ namespace Dao;
 
 use DateTime;
 use Modelo\Calendario;
+use Modelo\Show;
 
 class CalendarioBdDao extends SingletonDao implements IDao
 {
@@ -17,6 +18,23 @@ class CalendarioBdDao extends SingletonDao implements IDao
     private $tabla = "calendarios";
 
 
+    public function getAll(){
+        try{
+            $sql = "SELECT * FROM $this->tabla";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return false;
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
+    }
     public function fechaExists($fecha){
         try{
             $sql = "SELECT fecha FROM $this->tabla WHERE fecha= \"$fecha\" LIMIT 1 ";
@@ -53,7 +71,8 @@ class CalendarioBdDao extends SingletonDao implements IDao
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $fecha = $data->getFecha();
-            $id_evento = $data->getIdEvento();
+            $evento = $data->getEvento();
+            $id_evento = $evento->getId();
             $sentencia->bindParam(":fecha",$fecha);
             $sentencia->bindParam(":id_evento",$id_evento);
             $sentencia->execute();
@@ -96,8 +115,10 @@ class CalendarioBdDao extends SingletonDao implements IDao
     private function mapear($dataSet){
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
-            $calendario = new Calendario($p['fecha']);
-            $calendario->setIdEvento($p['id_evento']);
+            $eventoDao = EventoBdDao::getInstance();
+            $evento = $eventoDao->retrieve($p['id_evento']);
+            $calendario = new Calendario($p['fecha'],$evento);
+
             $calendario->setId($p['id_calendario']);
             return $calendario;
         }, $dataSet);

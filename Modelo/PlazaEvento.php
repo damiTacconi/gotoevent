@@ -15,23 +15,63 @@ class PlazaEvento
     private $capacidad;
     private $remanente;
     private $sede;
-    private $tipoPlaza;
-    private $id_calendario;
+    private $plaza;
+    private $calendario;
+    private $precio;
 
     /**
      * PlazaEvento constructor.
      * @param $capacidad
      * @param $remanente
      * @param $sede
-     * @param $tipoPlaza
+     * @param $plaza
+     * @param $calendario
+     * @param $precio
      */
-    public function __construct($capacidad, $remanente, $sede, $tipoPlaza)
+    public function __construct($capacidad, $remanente, $sede, $plaza, $calendario,$precio)
     {
         $this->capacidad = $capacidad;
         $this->remanente = $remanente;
         $this->sede = $sede;
-        $this->tipoPlaza = $tipoPlaza;
+        $this->plaza = $plaza;
+        $this->calendario = $calendario;
+        $this->precio = $precio;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCalendario()
+    {
+        return $this->calendario;
+    }
+
+    /**
+     * @param mixed $calendario
+     */
+    public function setCalendario($calendario): void
+    {
+        $this->calendario = $calendario;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getPrecio()
+    {
+        return $this->precio;
+    }
+
+    /**
+     * @param mixed $precio
+     */
+    public function setPrecio($precio): void
+    {
+        $this->precio = $precio;
+    }
+
 
     /**
      * @return mixed
@@ -100,17 +140,17 @@ class PlazaEvento
     /**
      * @return mixed
      */
-    public function getTipoPlaza()
+    public function getPlaza()
     {
-        return $this->tipoPlaza;
+        return $this->plaza;
     }
 
     /**
-     * @param mixed $tipoPlaza
+     * @param mixed $plaza
      */
-    public function setTipoPlaza($tipoPlaza): void
+    public function setPlaza($plaza): void
     {
-        $this->tipoPlaza = $tipoPlaza;
+        $this->plaza = $plaza;
     }
 
 

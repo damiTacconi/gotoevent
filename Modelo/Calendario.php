@@ -8,17 +8,82 @@
 
 namespace Modelo;
 
+use JsonSerializable;
 
-class Calendario
+class Calendario implements JsonSerializable
 {
     private $id;
     private $fecha;
-    private $id_evento;
+    private $evento;
 
-    function __construct($fecha)
+    private $plazaEventos = [];
+    private $shows = [];
+
+    public function jsonSerialize()
+    {
+       return [
+         'id_calendario' => $this->id,
+         'fecha' => $this->fecha
+       ];
+    }
+
+
+    function __construct($fecha ,$evento)
     {
         $this->fecha = $fecha;
+        $this->evento = $evento;
     }
+
+    /**
+     * @return array
+     */
+    public function getPlazaEventos(): array
+    {
+        return $this->plazaEventos;
+    }
+
+    /**
+     * @param array $plazaEventos
+     */
+    public function setPlazaEventos(array $plazaEventos): void
+    {
+        $this->plazaEventos = $plazaEventos;
+    }
+
+    /**
+     * @return array
+     */
+    public function getShows(): array
+    {
+        return $this->shows;
+    }
+
+    /**
+     * @param array $shows
+     */
+    public function setShows(array $shows): void
+    {
+        $this->shows = $shows;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getEvento()
+    {
+        return $this->evento;
+    }
+
+    /**
+     * @param mixed $evento
+     */
+    public function setEvento($evento): void
+    {
+        $this->evento = $evento;
+    }
+
 
     /**
      * @return mixed
@@ -51,23 +116,6 @@ class Calendario
     {
         $this->fecha = $fecha;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getIdEvento()
-    {
-        return $this->id_evento;
-    }
-
-    /**
-     * @param mixed $id_evento
-     */
-    public function setIdEvento($id_evento): void
-    {
-        $this->id_evento = $id_evento;
-    }
-
 
 
 }

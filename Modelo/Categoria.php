@@ -8,11 +8,21 @@
 
 namespace Modelo;
 
+use JsonSerializable;
 
-class Categoria
+class Categoria implements JsonSerializable
 {
     protected $id;
     protected $descripcion;
+
+    public function jsonSerialize()
+    {
+       return[
+         'id_categoria' => $this->id,
+         'descripcion' => $this->descripcion
+       ];
+    }
+
 
     /**
      * @param $descripcion

@@ -35,7 +35,7 @@
                             <option value="" selected disabled>Elegir Sede...</option>
                             <?php if(!empty($param['sedes'])) { ?>
                                 <?php foreach ($param['sedes'] as $sede) { ?>
-                                    <option value='<?= $sede->getNombre() ?>'><?= $sede->getNombre() ?> </option>
+                                    <option value='<?= $sede->getId() ?>'><?= $sede->getNombre() ?> </option>
                                 <?php } ?>
                             <?php } ?>
                         </select>

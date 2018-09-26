@@ -8,12 +8,47 @@
 
 namespace Modelo;
 
+use JsonSerializable;
 
-class Sede
+class Sede implements JsonSerializable
 {
     private $id;
     private $nombre;
-    private $tipoPlaza = [];
+    private $plazas = [];
+
+    public function jsonSerialize()
+    {
+        return [
+          'id_sede' => $this->id,
+          'nombre' => $this->nombre,
+          'plazas' => $this->plazasToArray()
+        ];
+    }
+
+    private function plazasToArray(){
+        $plazas = array_map(function($plaza){
+            return $plaza->jsonSerialize();
+        } , $this->plazas);
+        return $plazas;
+    }
+    /**
+     * @return array
+     */
+    public function getPlazas(): array
+    {
+        return $this->plazas;
+    }
+
+    /**
+     * @param array $plazas
+     */
+    public function setPlazas(array $plazas): void
+    {
+        $this->plazas = $plazas;
+    }
+
+
+
     /**
      * Sede constructor.
      * @param $nombre
@@ -22,26 +57,6 @@ class Sede
     {
         $this->nombre = $nombre;
     }
-
-    public function addTipoPlaza(TipoPlaza $tipoPlaza){
-        $this->tipoPlaza[] = $tipoPlaza;
-    }
-    /**
-     * @return array
-     */
-    public function getTipoPlaza(): array
-    {
-        return $this->tipoPlaza;
-    }
-
-    /**
-     * @param array $tipoPlaza
-     */
-    public function setTipoPlaza(array $tipoPlaza): void
-    {
-        $this->tipoPlaza = $tipoPlaza;
-    }
-
 
     /**
      * @return mixed

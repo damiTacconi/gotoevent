@@ -154,10 +154,7 @@ class SedeBdDao extends SingletonDao implements IDao
         $dataSet = is_array($dataSet) ? $dataSet : [];
         //if($dataSet[0]) {
         $this->listado = array_map(function ($p) {
-            $tipoPlazaDao = TipoPlazaBdDao::getInstance();
-            $tipoPlaza = $tipoPlazaDao->traerPorIdSede($p['id_sede']);
             $sede = new Sede($p['descripcion']);
-            $sede->setTipoPlaza($tipoPlaza);
             $sede->setId($p['id_sede']);
             return $sede;
         }, $dataSet);

@@ -8,21 +8,33 @@
 
 namespace Modelo;
 
-
-class TipoPlaza
+use JsonSerializable;
+class TipoPlaza implements JsonSerializable
 {
     private $id;
     private $descripcion;
-    private $id_sede;
+    private $sede;
+
 
     /**
      * TipoPlaza constructor.
      * @param $descripcion
+     * @param $sede
      */
-    public function __construct($descripcion)
+    public function __construct($descripcion , $sede)
     {
         $this->descripcion = $descripcion;
+        $this->sede = $sede;
     }
+
+    public function jsonSerialize()
+    {
+        return[
+            'id_tipo_plaza' => $this->id,
+            'descripcion' => $this->descripcion
+        ];
+    }
+
 
     /**
      * @return mixed
@@ -59,17 +71,17 @@ class TipoPlaza
     /**
      * @return mixed
      */
-    public function getIdSede()
+    public function getSede()
     {
-        return $this->id_sede;
+        return $this->sede;
     }
 
     /**
-     * @param mixed $id_sede
+     * @param mixed $sede
      */
-    public function setIdSede($id_sede): void
+    public function setSede($sede): void
     {
-        $this->id_sede = $id_sede;
+        $this->sede = $sede;
     }
 
 

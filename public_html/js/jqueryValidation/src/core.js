@@ -311,7 +311,7 @@ $.extend( $.validator, {
 		},
 		onclick: function( element ) {
 
-			// Click on selects, radiobuttons and checkboxes
+			// Click on altas, radiobuttons and checkboxes
 			if ( element.name in this.submitted ) {
 				this.element( element );
 
