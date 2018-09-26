@@ -1,96 +1,114 @@
-<?php
+<?php namespace Config;
 
-namespace Config;
 
-class Request {
-	private $controlador;
+
+class Request
+{
+	/*atributos para almacenar todos los valores que vengan por url*/
+	private $controladora;
 	private $metodo;
 	private $parametros;
 
-	function __construct(){
-        $http = $_SERVER['REQUEST_METHOD'];
-		$url = $_SERVER['REQUEST_URI'];
-		$array = array_filter(explode("/", $url));
-		if(empty($array)){
-			$this->setControlador("Evento");
-			$this->setMetodo("index");
-		}else{
-			$this->setControlador(ucwords(array_shift($array)));
-            if(!empty($array)){
-                $this->setMetodo(array_shift($array));
+	 function __construct()
+	{
+		 /*  En el archivo htaccess se define una regla de reescritura para poder tomar la url tanto para todo metodo de petición.*/
+            $url = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL);
 
-                if($http == "GET"){
-                    if(!empty($array))$this->setParametros($array);
+            /*
+              Convierto la url en un array tomando como separador la "/".
+             */
+            $urlToArray = explode("/", $url);
+            /*
+  				Filtro el arreglo para eliminar datos vacios en caso de haberlos.
+             */
+            $ArregloUrl = array_filter($urlToArray);
+             /*
+              Defino un controlador por defecto en el caso de que el arreglo llegue vacío
+            	 Si el arreglo tiene datos, tomo como controlador el primer elemento.
+             */
+            if(empty($ArregloUrl)) {
+                $this->controladora = 'evento';
+            } else {
+                $this->controladora = array_shift($ArregloUrl);
+            }
 
-                }else if($http == "POST"){
-                    if(!empty($_POST))$this->setParametros($_POST);
+
+            /*
+             Defino un método por defecto en el caso de que el arreglo llegue vacío
+             Si el arreglo tiene datos, tomo como método el primero elemento.
+             */
+            if(empty($ArregloUrl)) {
+                $this->metodo = 'index';
+            } else {
+                $this->metodo = array_shift($ArregloUrl);
+            }
+            /**
+             * Capturo el metodo de petición y lo guardo en una variable
+             */
+            $metodoRequest = $this->getMetodoRequest();
+           /**
+             * Si el método es GET, en caso de que el arreglo llegue con datos,
+             * lo guardo entero en el campo "parametros" de la  clase.
+             *
+             * Si el método es POST, guardo todos los datos que llegaron por POST
+             * en el campo "parametros"
+             */
+
+            if($metodoRequest == 'GET') {
+                if(!empty($ArregloUrl)) {
+                    $this->parametros = $ArregloUrl;
                 }
+            } else {
+                $this->parametros = $_POST;
+            }
+           /* echo '<pre>';
+            var_dump($this);
+            echo '</pre>';*/
+        }
 
-            }else $this->setMetodo('index');
-		}
+        /**
+         *
+         */
+        public static function getInstance()
+        {
+            static $inst = null;
+            if ($inst === null) {
+                $inst = new Request();
+            }
 
-    }
+            return $inst;
+        }
+        /**
+        * Devuelve el método HTTP
+        * con el que se hizo el
+        * Request
+        * @return String
+        */
+        public static function getMetodoRequest()
+        {
+            return $_SERVER['REQUEST_METHOD'];
+        }
+        /**
+        * Devuelve el controlador
+        * @return String
+        */
+        public function getControladora() {
+            return $this->controladora;
+        }
+        /**
+        * Devuelve el método
+        * @return String
+        */
+        public function getMetodo() {
+            return $this->metodo;
+        }
+        /**
+        * Devuelve los atributos
+        * @return Array
+        */
+        public function getParametros() {
+            return $this->parametros;
+        }
 
-
-
-
-    /**
-     * @return mixed
-     */
-    public function getControlador()
-    {
-        return $this->controlador;
-    }
-
-    /**
-     * @param mixed $controlador
-     *
-     * @return self
-     */
-    public function setControlador($controlador)
-    {
-        $this->controlador = $controlador;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMetodo()
-    {
-        return $this->metodo;
-    }
-
-    /**
-     * @param mixed $metodo
-     *
-     * @return self
-     */
-    public function setMetodo($metodo)
-    {
-        $this->metodo = $metodo;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getParametros()
-    {
-        return $this->parametros;
-    }
-
-    /**
-     * @param mixed $parametros
-     *
-     * @return self
-     */
-    public function setParametros($parametros)
-    {
-        $this->parametros = $parametros;
-
-        return $this;
-    }
-}
+	}
+ ?>

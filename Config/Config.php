@@ -10,7 +10,7 @@ define("DB_NAME", "gotoevent");
 
 #config constante admins
 define("ADMIN_EMAIL" , serialize(array(
-    1 => 'emailChiaradia@hotmail.com',
+    1 => 'dami_tano_95@hotmail.com',
     2 => 'admin@admin.com'
 )));
 

@@ -31,6 +31,7 @@
                                 <th>Categoria</th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -41,6 +42,7 @@
                                 <th>Fecha Desde</th>
                                 <th>Fecha Hasta</th>
                                 <th>Categoria</th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -62,6 +64,7 @@
                                     <td><?= $evento->getFechaDesde() ?></td>
                                     <td><?= $evento->getFechaHasta() ?></td>
                                     <td><?= $evento->getCategoria()->getDescripcion() ?> </td>
+                                    <td><a href="/evento/calendarios/<?= $evento->getId()?>" class="btn btn-info"><i class="far fa-calendar-alt"></i></a></td>
                                     <td style="width:30px;"><button data-toggle="modal"
                                      onclick='actualizar(<?= json_encode($array_evento) ?>)'
                                                       class="btn btn-primary"><i class="fas fa-edit"></i></button></td>

@@ -243,4 +243,16 @@ class EventoControladora extends PaginaControladora
             $array['categorias'] = $categorias;
         $this->page('listado/listadoEventos' , 'Eventos - Listado', 2, $array);
     }
+
+    function calendarios($id_evento){
+        $evento = $this->eventoDao->retrieve($id_evento);
+
+        if($evento){
+          $calendarios= $this->calendarioDao->traerPorIdEvento($id_evento);
+          $params['calendarios'] = $calendarios;
+          $params['evento'] = $evento;
+          $this->page("listado/listadoCalendariosDeEventos" , "Calendarios de {$evento->getTitulo()}",2,$params);
+        }
+
+    }
 }

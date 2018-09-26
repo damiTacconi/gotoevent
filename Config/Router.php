@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 namespace Config;
 
 class Router{
 
 	public static function direccionar(Request $request){
-		$controlador = $request->getControlador();
+		$controlador = $request->getControladora();
 		$metodo = $request->getMetodo();
 		$parametros = $request->getParametros();
 
@@ -20,9 +20,7 @@ class Router{
 
 	static function ejecutar($controlador, $metodo, $parametros){
 		if(!isset($parametros)){
-		    if(is_callable(array($controlador, $metodo))) {
-                call_user_func(array($controlador, $metodo));
-            }
+        call_user_func(array($controlador, $metodo));
 		}else{
 			call_user_func_array(array($controlador,$metodo), $parametros);
 		}
