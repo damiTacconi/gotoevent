@@ -97,7 +97,35 @@ class EventoBdDao extends SingletonDao implements IDao
 
     public function update($data)
     {
-        // TODO: Implement update() method.
+        try {
+            $sql = "UPDATE $this->tabla 
+                SET titulo = :titulo, fecha_desde = :fecha_desde, fecha_hasta = :fecha_hasta,
+                 id_categoria = :id_categoria, id_imagen = :id_imagen WHERE id_evento = :id";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $titulo = $data->getTitulo();
+            $fecha_desde = $data->getFechaDesde();
+            $fecha_hasta = $data->getFechaHasta();
+            $categoria = $data->getCategoria();
+            $id_categoria = $categoria->getId();
+            $eventoImagen = $data->getEventoImagen();
+            $id_imagen = $eventoImagen->getId();
+            $id_evento = $data->getId();
+
+            $sentencia->bindParam(":titulo", $titulo);
+            $sentencia->bindParam(":fecha_desde", $fecha_desde);
+            $sentencia->bindParam(":fecha_hasta", $fecha_hasta);
+            $sentencia->bindParam(":id_categoria", $id_categoria);
+            $sentencia->bindParam("id_imagen",$id_imagen);
+            $sentencia->bindParam(":id",$id_evento);
+
+            $sentencia->execute();
+        }catch (\PDOException $e){
+            echo "ERROR_UPDATE_EVENTO: {$e->getMessage()}";die();
+        }
     }
 
     public function delete($data)

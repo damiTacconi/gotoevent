@@ -64,7 +64,26 @@ class EventoImagenBdDao extends SingletonDao implements IDao
 
     public function update($data)
     {
-        // TODO: Implement update() method.
+        try {
+            $sql = "UPDATE $this->tabla 
+                SET nombre = :nombre, imagen = :imagen WHERE id_imagen = :id";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $nombre = $data->getNombre();
+            $imagen = $data->getImagen();
+            $id = $data->getId();
+
+            $sentencia->bindParam(":nombre", $nombre);
+            $sentencia->bindParam(":imagen", $imagen);
+            $sentencia->bindParam(":id", $id);
+
+            $sentencia->execute();
+        }catch (\PDOException $e){
+            echo "ERROR_UPDATE_EVENTOIMAGEN: {$e->getMessage()}";die();
+        }
     }
 
     public function delete($data)

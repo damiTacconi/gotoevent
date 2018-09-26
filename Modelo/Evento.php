@@ -156,6 +156,7 @@ class Evento implements JsonSerializable
             'fecha_desde' => $this->fecha_desde,
             'fecha_hasta' => $this->fecha_hasta,
             'categoria' => $this->categoria->jsonSerialize(),
+            'evento_imagen' => $this->eventoImagen->jsonSerialize(),
             'calendarios' => $this->calendariosToArray()
         ];
     }

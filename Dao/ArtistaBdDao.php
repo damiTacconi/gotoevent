@@ -65,7 +65,7 @@ class ArtistaBdDao extends SingletonDao implements IDao
 
     public function update($data)
     {
-        // TODO: Implement update() method.
+
     }
 
     public function delete($data)

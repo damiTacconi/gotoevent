@@ -105,7 +105,7 @@
 <div id="updateModal" class="modal fade bd-example-modal-lg" tabindex="-1"
      role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <form class="modal-content">
+        <form class="modal-content" method="post" action="/evento/update" enctype="multipart/form-data">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -113,25 +113,56 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group col-md-4">
-                    <label for="inputTitulo">Titulo</label>
-                    <input type="text" name="titulo" class="form-control" id="inputTitulo">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputCategoria">Categoria</label>
-                    <select required name="selectCategoria" id="inputCategoria" class="form-control">
-                        <option disabled selected>Elige una categoria...</option>
-                        <?php foreach ($param['categorias'] as $categoria){ ?>
-                            <option value="<?= $categoria->getId() ?>">
-                                <?= $categoria->getDescripcion() ?>
-                            </option>
-                        <?php } ?>
-                    </select>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="updateTitulo">Titulo</label>
+                        <input type="text" name="titulo" class="form-control" id="updateTitulo">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="updateCategoria">Categoria</label>
+                        <select required name="selectCategoria" id="updateCategoria" class="form-control">
+                            <?php foreach ($param['categorias'] as $categoria){ ?>
+                                <option value="<?= $categoria->getId() ?>">
+                                    <?= $categoria->getDescripcion() ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputImagen">Subir Imagen</label>
+                        <input type="file" name="imagen" class="form-control-file" id="inputImagen" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="form-text text-muted">Suba una imagen del evento.</small>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="updateFechaDesde">Fecha Desde</label>
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input  required type="text" id="updateFechaDesde" class="form-control datetimepicker-input"
+                                    data-target="#datetimepicker1" name="fecha_desde"/>
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="updateFechaHasta">Fecha Hasta</label>
+                        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                            <input required type="text" id="updateFechaHasta" class="form-control datetimepicker-input"
+                                   data-target="#datetimepicker2" name="fecha_hasta"/>
+                            <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="updateIdImagen">Id Evento</label>
+                        <input readonly type="number" name="id" class="form-control" id="updateId">
+                    </div>
+                    <input readonly type="hidden" name="id_imagen" class="form-control" id="updateIdImagen">
                 </div>
             </div>
             <div class="modal-footer text-white">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a id="btnActualizar" class="btn btn-success">Actualizar</a>
+                <button id="btnActualizar" type="submit" class="btn btn-success">Actualizar</button>
             </div>
         </form>
     </div>
@@ -178,7 +209,15 @@
         $("#btnEliminar").attr("href", "/evento/eliminar/"+id);
     }
     function actualizar(evento){
-        console.log(evento);
+        $('#updateTitulo').val(evento['titulo']);
+        //console.log(evento);
+        let id_categoria = evento['categoria']['id_categoria'];
+        console.log(id_categoria);
+        $('#updateCategoria option[value='+id_categoria+']').prop('selected',true);
+        $('#updateFechaDesde').val(evento['fecha_desde']);
+        $('#updateFechaHasta').val(evento['fecha_hasta']);
+        $('#updateId').val(evento['id_evento']);
+        $('#updateIdImagen').val(evento['evento_imagen']['id_imagen']);
         $('#updateModal').modal('toggle');
     }
 </script>

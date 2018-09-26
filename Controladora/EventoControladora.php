@@ -130,8 +130,45 @@ class EventoControladora extends PaginaControladora
         $params['sedes'] = $sedes;
         return $params;
     }
-    function update($titulo, $id_categoria, $fecha_desde , $fecha_hasta){
 
+    private function existe($titulo){
+        return $this->eventoDao->titleExists($titulo);
+    }
+    function update($titulo, $id_categoria, $fecha_desde , $fecha_hasta , $id_evento, $id_imagen){
+        if(!empty($_SESSION) && $_SESSION['rol'] === 'admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
+            $titulo = trim($titulo);
+            if(!empty($titulo)) {
+                $evento = $this->eventoDao->retrieve($id_evento);
+                $existeTitulo = FALSE;
+                if($evento->getTitulo() !== $titulo){
+                    $existeTitulo = $this->existe($titulo);
+                }
+                if (!$existeTitulo) {
+                    $categoria = $this->categoriaDao->retrieve($id_categoria);
+                    $evento->setTitulo($titulo);
+                    $evento->setFechaDesde($fecha_desde);
+                    $evento->setFechaHasta($fecha_hasta);
+                    $evento->setCategoria($categoria);
+                    if(!empty($_FILES['imagen']['tmp_name'])){
+                        $imagen = addslashes($_FILES['imagen']['tmp_name']);
+                        $nombre = addslashes($_FILES['imagen']['name']);
+                        $imagen = file_get_contents($imagen);
+                        $imagen = base64_encode($imagen);
+                        $eventoImagen = new EventoImagen($nombre,$imagen);
+                        $eventoImagen->setId($id_imagen);
+                        $this->eventoImagenDao->update($eventoImagen);
+                        $evento->setEventoImagen($eventoImagen);
+                    }
+                    $evento->setId($id_evento);
+                    $this->eventoDao->update($evento);
+                    $mensaje = new Mensaje("EL evento se actualizo con exito!", 'success');
+                }else $mensaje = new Mensaje('Ya existe un evento con ese titulo', 'danger');
+            }else $mensaje = new Mensaje('Se debe ingresar una descripcion valida' , 'danger');
+
+            $params = $this->traerTodos();
+            $params['mensaje'] = $mensaje->getAlert();
+            $this->paginaListado($params);
+        }else header('location: /');
     }
     function eliminar($id){
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin'){

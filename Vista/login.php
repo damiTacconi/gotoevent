@@ -20,7 +20,7 @@
                 </div>
                 <div class="md-form input-password">
                     <i class="fas fa-lock prefix"></i>
-                    <input name="password" type="text" class="form-control" id="inputPassword"
+                    <input name="password" type="password" class="form-control" id="inputPassword"
                            aria-label="Recipient's username" aria-describedby="basic-addon2" required>
                     <label for="inputPassword">Contraseña</label>
                 </div>
