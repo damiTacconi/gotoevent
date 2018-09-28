@@ -12,56 +12,18 @@ namespace Modelo;
 class Show
 {
     private $id;
-    private $hora_inicio;
-    private $hora_fin;
     private $artista;
     private $calendario;
 
     /**
      * Show constructor.
-     * @param $hora_inicio
-     * @param $hora_fin
      * @param $artista
      * @param $calendario
      */
-    public function __construct($hora_inicio, $hora_fin, $artista, $calendario)
+    public function __construct($artista, $calendario)
     {
-        $this->hora_inicio = $hora_inicio;
-        $this->hora_fin = $hora_fin;
         $this->artista = $artista;
         $this->calendario = $calendario;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getHoraInicio()
-    {
-        return $this->hora_inicio;
-    }
-
-    /**
-     * @param mixed $hora_inicio
-     */
-    public function setHoraInicio($hora_inicio): void
-    {
-        $this->hora_inicio = $hora_inicio;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getHoraFin()
-    {
-        return $this->hora_fin;
-    }
-
-    /**
-     * @param mixed $hora_fin
-     */
-    public function setHoraFin($hora_fin): void
-    {
-        $this->hora_fin = $hora_fin;
     }
 
     /**

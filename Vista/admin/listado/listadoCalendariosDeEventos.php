@@ -16,6 +16,8 @@
             <?php if(isset($param['mensaje'])) {
                 echo $param['mensaje'];
             } ?>
+            <div id="mensajeAjax"></div>
+
             <?php if(isset($param['calendarios'])) { ?>
             <div class="card mb-3">
                 <div class="card-header">
@@ -44,12 +46,12 @@
                             </tfoot>
                             <tbody>
                             <?php foreach ($param['calendarios'] as $calendario){ ?>
-                                <tr>
+                                <tr id="<?= $calendario->getId() ?>">
                                     <td> <?= $calendario->getId() ?></td>
                                     <td> <?= $calendario->getFecha() ?></td>
                                     <td style="width:30px;"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></td>
                                     <td style="width:30px;">
-                                        <a data-toggle="modal" onclick="eliminar(<?= $calendario->getId() ?>,'<?= $calendario->getFecha() ?>')"
+                                        <a data-toggle="modal" onclick="modal(<?= $calendario->getId() ?>,'<?= $calendario->getFecha() ?>')"
                                            class="btn btn-danger"><i class="fas fa-trash-alt wsmoke"></i></a>
                                     </td>
                                 </tr>
@@ -111,17 +113,27 @@
             </div>
             <div class="modal-footer text-white">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                <a id="btnEliminar" class="btn btn-danger">Eliminar</a>
+                <a id="btnEliminar" onclick="eliminar()" class="btn btn-danger">Eliminar</a>
             </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    function eliminar(id, desc){
+    function modal(id, desc){
         $('#deleteModal').modal('toggle');
         $('#deleteModal #descripcion').html(desc);
         $('#deleteModal #id').html(id);
-        $("#btnEliminar").attr("href", "/calendario/eliminar/"+id);
+    }
+
+    function eliminar(){
+        let id = $('#deleteModal #id').text();
+        ajaxURL('/calendario/eliminarAjax', data => {
+            let result = JSON.parse(data);
+            $('#deleteModal').modal('toggle');
+            let id = $('#deleteModal #id').text();
+            $('#'+id).remove();
+            $('#mensajeAjax').html(result['mensaje']);
+        }, "POST" , {id:id})
     }
 </script>

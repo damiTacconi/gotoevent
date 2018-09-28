@@ -67,7 +67,7 @@ INSERT INTO `artistas` (`id_artista`, `nombre`) VALUES
 
 DROP TABLE IF EXISTS `calendarios`;
 CREATE TABLE IF NOT EXISTS `calendarios` (
-  `id_calendario` int(11) NOT NULL AUTO_INCREMENT,
+  `id_calendario` int(11) AUTO_INCREMENT,
   `fecha` date NOT NULL,
   `id_evento` int(11) NOT NULL,
   PRIMARY KEY (`id_calendario`),

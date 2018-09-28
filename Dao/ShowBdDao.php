@@ -14,28 +14,33 @@ use DateTime;
 class ShowBdDao extends SingletonDao implements IDao
 {
     private $listado = [];
-    private $tabla = "hora_shows";
+    private $tabla = "shows";
 
+    public function existsShow($id_artista, $id_calendario){
+        try{
+            $sql = "SELECT 1 FROM $this->tabla WHERE id_calendario= \"$id_calendario\" AND id_artista= $id_artista ";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+            if (!empty($dataSet[0])) {
+                return true;
+            }
+            return false;
+        }catch (\PDOException $e){
+            return true;
+        }
+    }
     public function save($data)
     {
         try{
-            $sql = ("INSERT INTO  $this->tabla (horario_inicio,horario_fin,id_calendario,id_artista) 
-                    VALUES (:hora_inicio,:hora_fin,:id_calendario,:id_artista)");
+            $sql = ("INSERT INTO  $this->tabla (id_calendario,id_artista) VALUES (:id_calendario,:id_artista)");
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
-            $hora_inicio = $data->getHoraInicio();
-            $hora_fin = $data->getHoraFin();
-            $date_inicio = DateTime::createFromFormat( 'H:i A', $hora_inicio);
-            $formatted_inicio = $date_inicio->format( 'H:i:s');
-            $date_fin = DateTime::createFromFormat('H:i A', $hora_fin);
-            $formatted_fin = $date_fin->format( 'H:i:s');
             $calendario = $data->getCalendario();
             $id_calendario = $calendario->getId();
             $artista = $data->getArtista();
             $id_artista = $artista->getId();
-
-            $sentencia->bindParam(":hora_inicio",$formatted_inicio);
-            $sentencia->bindParam(":hora_fin",$formatted_fin);
             $sentencia->bindParam(":id_calendario",$id_calendario);
             $sentencia->bindParam(":id_artista",$id_artista);
 
@@ -100,8 +105,8 @@ class ShowBdDao extends SingletonDao implements IDao
             $artistaDao = ArtistaBdDao::getInstance();
             $calendario = $calendarioDao->retrieve($p['id_calendario']);
             $artista = $artistaDao->retrieve($p['id_artista']);
-            $show = new Show($p['horario_inicio'],$p['horario_fin'],$artista,$calendario);
-            $show->setId($p['id_hora_show']);
+            $show = new Show($artista,$calendario);
+            $show->setId($p['id_show']);
             return $show;
         }, $dataSet);
     }

@@ -5,10 +5,9 @@
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="/">Artista</a>
+                <li class="breadcrumb-item active">
+                    <a href="/">Artistas</a>
                 </li>
-                <li class="breadcrumb-item active">Listado</li>
             </ol>
             <?php if(isset($param['mensaje'])) {
                 echo $param['mensaje'];

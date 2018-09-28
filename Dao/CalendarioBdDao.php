@@ -35,9 +35,9 @@ class CalendarioBdDao extends SingletonDao implements IDao
             die();
         }
     }
-    public function fechaExists($fecha){
+    public function fechaExists($id_evento, $fecha){
         try{
-            $sql = "SELECT fecha FROM $this->tabla WHERE fecha= \"$fecha\" LIMIT 1 ";
+            $sql = "SELECT fecha FROM $this->tabla WHERE (fecha= \"$fecha\" AND id_evento= \"$id_evento\" ) LIMIT 1 ";
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $sentencia->execute();
@@ -90,7 +90,39 @@ class CalendarioBdDao extends SingletonDao implements IDao
 
     public function delete($data)
     {
-        // TODO: Implement delete() method.
+        try{
+            $id = $data->getId();
+
+            $sql = "DELETE FROM $this->tabla WHERE id_calendario=\"$id\" ";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
+    }
+
+    public function traerPorFecha($fecha){
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE fecha=:fecha";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->bindParam(":fecha",$fecha);
+            $sentencia->execute();
+            $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado[0];
+            }
+            return null;
+        }catch (\PDOException $e){
+            echo "ERROR_TRAERPORFECHA: {$e->getMessage()}";
+        }
     }
 
     public function retrieve($id)

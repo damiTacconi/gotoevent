@@ -190,12 +190,34 @@
         }
     }
 
-</style>
+    .grid{
+        display: grid;
+        grid-template-columns: repeat(2,auto);
 
+    }
+
+</style>
+<?php ?>
+    <div class="grid pt-4">
+        <?php foreach($param['eventos'] as $evento) {
+            $fecha = $evento->getFechaDesde();
+            $fecha_hasta = $evento->getFechaHasta();
+            $imagen = $evento->getEventoImagen()->getImagen();
+            $calendarios = $evento->getCalendarios();
+            $categoria = $evento->getCategoria();
+            $url = "data:image;base64,{$imagen}";
+            ?>
+            <div style="justify-self: center">
+                <?php include "card-event.php" ?>
+            </div>
+        <?php } ?>
+    </div>
+
+<!--
 <div class="p-4">
     <div class="container-fluid">
         <div class="row">
-            <?php foreach($param['eventos'] as $evento) {
+            <?php /*foreach($param['eventos'] as $evento) {
                 $fecha = $evento->getFechaDesde();
                 $fecha_hasta = $evento->getFechaHasta();
                 $imagen = $evento->getEventoImagen()->getImagen();
@@ -227,8 +249,8 @@
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            <?php } */?>
         </div>
     </div>
 </div>
-
+-->

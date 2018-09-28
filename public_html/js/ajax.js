@@ -20,7 +20,7 @@ function ajaxForm(id_form, url , callback){
 /*
  * AJAX: UNICAMENTE AGREGA LA URL DE LA CONTROLADORA Y METODO CORRESPONDIENTE.
  */
-function ajax(id,url,callback,type){
+function ajax(id,url,callback,type="POST",object){
     type = $.trim(type);
     if(type === "GET"){
         type='GET';
@@ -30,6 +30,7 @@ function ajax(id,url,callback,type){
         $.ajax({
             type: type,
             url: url,
+            data:object,
             success: function (data) {
                 if(callback.length === 1)
                     callback(data);
