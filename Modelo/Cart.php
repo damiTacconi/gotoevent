@@ -13,16 +13,25 @@ class Cart implements JsonSerializable
 {
     private $plazaEvento;
     private $cantidad;
+    private $categoria;
 
     /**
      * Cart constructor.
      * @param $plazaEvento
      * @param $cantidad
      */
-    public function __construct($plazaEvento, $cantidad)
+    public function __construct($plazaEvento, $cantidad, $categoria)
     {
         $this->plazaEvento = $plazaEvento;
         $this->cantidad = $cantidad;
+        $this->categoria = $categoria;
+    }
+
+    public function setCategoria($categoria){
+      $this->categoria = $categoria;
+    }
+    public function getCategoria(){
+      return $this->categoria;
     }
 
     /**
@@ -62,7 +71,8 @@ class Cart implements JsonSerializable
     {
         return[
             "plazaEvento" => $this->plazaEvento->jsonSerialize(),
-            "cantidad" => $this->cantidad
+            "cantidad" => $this->cantidad,
+            "categoria" => $this->categoria
         ];
     }
 

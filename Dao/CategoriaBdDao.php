@@ -65,7 +65,21 @@ class CategoriaBdDao extends SingletonDao implements IDao
     }
     public function update($data)
     {
-        // TODO: Implement update() method.
+      try {
+          $sql = "UPDATE $this->tabla SET descripcion=:descripcion WHERE id_categoria = :id_categoria";
+          $conexion = Conexion::conectar();
+
+          $sentencia = $conexion->prepare($sql);
+
+          $descripcion = $data->getDescripcion();
+          $id = $data->getId();
+
+          $sentencia->bindParam(":descripcion", $descripcion);
+          $sentencia->bindParam(":id_categoria",$id);
+          $sentencia->execute();
+      }catch (\PDOException $e){
+          die("OCURRIO UN ERROR EN BASE DE DATOS");
+      }
     }
 
     public function delete($data)

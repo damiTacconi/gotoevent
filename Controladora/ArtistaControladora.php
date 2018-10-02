@@ -66,6 +66,18 @@ class ArtistaControladora extends PaginaControladora
             ));
         }else header('location: /');
     }
+    function update($nombre, $id_artista){
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+          $artista = $this->artistaDao->retrieve($id_artista);
+          if($artista){
+            $artista->setNombre($nombre);
+            $this->artistaDao->update($artista);
+            $mensaje = new Mensaje("EL ARTISTA SE ACTUALIZO CON EXITO!","success");
+          }else $mensaje = new Mensaje("NO SE ENCONTRO EL ARTISTA", "danger");
+          $params['mensaje'] = $mensaje->getAlert();
+          $this->paginaListado($params);
+        }
+    }
 
     function crear(){
         $this->page('crearArtista','Artista - Crear',2);

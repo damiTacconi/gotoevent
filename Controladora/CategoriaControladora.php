@@ -63,4 +63,17 @@ class CategoriaControladora extends PaginaControladora
             ));
         }else header('location: /');
     }
+
+    function update($descripcion, $id_categoria){
+      if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $categoria = $this->categoriaDao->retrieve($id_categoria);
+        if($categoria){
+          $categoria->setDescripcion($descripcion);
+          $this->categoriaDao->update($categoria);
+          $mensaje = new Mensaje("LA CATEGORIA SE ACTUALIZO CON EXITO!","success");
+        }else $mensaje = new Mensaje("NO SE ENCONTRO EL ARTISTA", "danger");
+        $params['mensaje'] = $mensaje->getAlert();
+        $this->paginaListado($params);
+      }
+    }
 }

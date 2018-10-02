@@ -41,7 +41,11 @@
                                 <tr>
                                     <td> <?= $artista->getId() ?></td>
                                     <td> <?= $artista->getNombre() ?></td>
-                                    <td style="width:30px;"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></td>
+                                    <td style="width:30px;">
+                                      <button class="btn btn-primary" onclick="actualizar(<?= $artista->getId() ?> , '<?= $artista->getNombre() ?>')">
+                                        <i class="fas fa-edit"></i>
+                                      </button>
+                                    </td>
                                     <td style="width:30px;">
                                         <a data-toggle="modal" onclick="eliminar(<?= $artista->getId() ?>,'<?= $artista->getNombre() ?>')"
                                            class="btn btn-danger"><i class="fas fa-trash-alt wsmoke"></i></a>
@@ -76,6 +80,38 @@
 
 </div>
 <!-- /#wrapper -->
+
+<!-- UPDATE MODAL-->
+<!-- Large modal -->
+<div id="updateModal" class="modal fade bd-example-modal-lg" tabindex="-1"
+     role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <form class="modal-content" method="post" action="/artista/update" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputNombre">Artistas</label>
+                        <input type="text" class="form-control" id="inputNombre" name="nombre" value="">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Id Artista</label>
+                        <input readonly type="number" name="id" class="form-control" id="updateId">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-white">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button id="btnActualizar" type="submit" class="btn btn-success">Actualizar</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <!-- Logout Modal-->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -117,5 +153,13 @@
         $('#deleteModal #descripcion').html(desc);
         $('#deleteModal #id').html(id);
         $("#btnEliminar").attr("href", "/artista/eliminar/"+id);
+    }
+
+    function actualizar(id, nombre){
+      console.log(id);
+      console.log(nombre);
+      $('#inputNombre').val(nombre);
+      $('#updateId').val(id);
+      $('#updateModal').modal('toggle');
     }
 </script>

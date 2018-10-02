@@ -167,8 +167,8 @@
         $('#deleteModal #descripcion').html(desc);
         $('#deleteModal #id').html(id);
     }
-    function actualizar($id){
-        let id_calendario = $id;
+    function actualizar(id){
+        let id_calendario = id;
         $('#updateCalendario option[value='+id_calendario+']').prop('selected',true);
         $('#updateId').val($id);
         $('#updateModal').modal('toggle');

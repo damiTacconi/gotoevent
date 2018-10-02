@@ -52,7 +52,7 @@ class CalendarioBdDao extends SingletonDao implements IDao
     }
 
     public function traerPorIdEvento($id_evento){
-        $sql = ("SELECT ca.* FROM $this->tabla ca INNER JOIN eventos ev 
+        $sql = ("SELECT ca.* FROM $this->tabla ca INNER JOIN eventos ev
                 ON ev.id_evento=ca.id_evento WHERE ev.id_evento = $id_evento");
         $conexion = Conexion::conectar();
         $sentencia = $conexion->prepare($sql);
@@ -86,7 +86,7 @@ class CalendarioBdDao extends SingletonDao implements IDao
     public function update($data)
     {
         try {
-            $sql = ("UPDATE $this->tabla SET fecha=:fecha , id_evento=:id_evento 
+            $sql = ("UPDATE $this->tabla SET fecha=:fecha , id_evento=:id_evento
                     WHERE id_calendario = :id_calendario");
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
@@ -123,7 +123,7 @@ class CalendarioBdDao extends SingletonDao implements IDao
 
     public function traerPorIdEventoYFecha($id_evento, $fecha){
         try {
-            $sql = "SELECT cal.* FROM calendarios cal INNER JOIN eventos ev 
+            $sql = "SELECT cal.* FROM calendarios cal INNER JOIN eventos ev
                 ON ev.id_evento = cal.id_evento WHERE cal.fecha=\" $fecha \" AND ev.id_evento=$id_evento";
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);

@@ -11,5 +11,13 @@ namespace Modelo;
 
 class Linea
 {
+  private $plazaEvento;
+  private $subtotal;
+  private $cantidad;
 
+  function __construct($plazaEvento, $cantidad , $subtotal){
+
+  }
+
+  
 }

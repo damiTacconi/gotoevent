@@ -38,10 +38,7 @@ $evento = $param['evento'];
                     <div class="card-body">
                         <h2 class="card-title">PACK PROMO $<?= $precioPromo ?></h2>
                         <p class="card-text">No te pierdas esta promo.</p>
-                        <form action="/compra/promo" method="post">
-                            <input type="hidden" name="id_evento" value="<?= $evento->getId() ?>">
-                            <button type="submit" class="btn btn-success">COMPRAR</button>
-                        </form>
+                          <button type="button" class="btn btn-success">COMPRAR</button>
                     </div>
                     <div class="card-footer text-muted success-color white-text">
                         <p class="mb-0">Compra los <?= count($param['calendarios']) ?> Dias</p>
@@ -92,4 +89,3 @@ $evento = $param['evento'];
     </div>
 
 </div>
-

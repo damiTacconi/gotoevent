@@ -42,7 +42,11 @@
                                     <tr>
                                         <td> <?= $categoria->getId() ?></td>
                                         <td> <?= $categoria->getDescripcion() ?></td>
-                                        <td style="width:30px;"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></td>
+                                        <td style="width:30px;">
+                                          <button onclick="actualizar(<?= $categoria->getId() ?>, '<?= $categoria->getDescripcion() ?>')" class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                          </button>
+                                        </td>
                                         <td style="width:30px;">
                                             <a data-toggle="modal" onclick="eliminar(<?= $categoria->getId() ?>,'<?= $categoria->getDescripcion() ?>')"
                                                class="btn btn-danger"><i class="fas fa-trash-alt wsmoke"></i></a>
@@ -78,7 +82,39 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- Logout Modal-->
+<!-- UPDATE MODAL-->
+<!-- Large modal -->
+<div id="updateModal" class="modal fade bd-example-modal-lg" tabindex="-1"
+     role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <form class="modal-content" method="post" action="/categoria/update" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputDescripcion">Descripcion</label>
+                        <input type="text" class="form-control" id="inputDescripcion" name="nombre" value="">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Id Categoria</label>
+                        <input readonly type="number" name="id" class="form-control" id="updateId">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-white">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button id="btnActualizar" type="submit" class="btn btn-success">Actualizar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- delete Modal-->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -118,5 +154,11 @@
         $('#deleteModal #descripcion').html(desc);
         $('#deleteModal #id').html(id);
         $("#btnEliminar").attr("href", "/categoria/eliminar/"+id);
+    }
+
+    function actualizar(id, desc){
+      $('#inputDescripcion').val(desc);
+      $('#updateId').val(id);
+      $('#updateModal').modal('toggle');
     }
 </script>

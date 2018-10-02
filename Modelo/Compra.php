@@ -11,5 +11,13 @@ namespace Modelo;
 
 class Compra
 {
+   private $total;
+   private $lineas = [];
+
+
+   function __construct($total){
+     $this->total = $total;
+   }
+
 
 }

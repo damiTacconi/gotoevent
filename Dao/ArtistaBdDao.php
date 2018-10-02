@@ -65,6 +65,21 @@ class ArtistaBdDao extends SingletonDao implements IDao
 
     public function update($data)
     {
+      try {
+          $sql = "UPDATE $this->tabla SET nombre=:nombre WHERE id_artista = :id_artista";
+          $conexion = Conexion::conectar();
+
+          $sentencia = $conexion->prepare($sql);
+
+          $nombre = $data->getNombre();
+          $id = $data->getId();
+
+          $sentencia->bindParam(":nombre", $nombre);
+          $sentencia->bindParam(":id_artista",$id);
+          $sentencia->execute();
+      }catch (\PDOException $e){
+          die("OCURRIO UN ERROR EN BASE DE DATOS");
+      }
 
     }
 

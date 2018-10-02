@@ -16,9 +16,36 @@ class PlazaEventoBdDao extends SingletonDao implements IDao
     private $listado = [];
     private $tabla = "plaza_eventos";
 
+    public function traerPorIdEventoYPlaza($id_evento,$plaza ){
+      try{
+      
+        $sql = ("select pe.* from plaza_eventos pe inner join tipo_plazas tp inner join eventos ev
+        inner join calendarios ca on pe.id_tipo_plaza=tp.id_tipo_plaza
+        and ev.id_evento=ca.id_evento and ca.id_calendario= pe.id_calendario
+        WHERE ev.id_evento=\" $id_evento \" AND tp.descripcion=\" $plaza \" ");
+
+        $conexion = Conexion::conectar();
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->execute();
+        $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+        $this->mapear($dataSet);
+        if (!empty($this->listado)) {
+            return $this->listado;
+        }
+        return null;
+
+      }catch(PDOException $e){
+        echo "ERROR-PLAZAEVENTOBASEDEDATOS: {$e->getMessage()}";die();
+
+      }
+
+
+
+    }
+
     public function traerPorIdCalendario($id){
         try {
-            $sql = ("SELECT pe.* FROM $this->tabla pe INNER JOIN calendarios ca 
+            $sql = ("SELECT pe.* FROM $this->tabla pe INNER JOIN calendarios ca
                 ON ca.id_calendario=pe.id_calendario WHERE ca.id_calendario=$id");
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
@@ -53,8 +80,8 @@ class PlazaEventoBdDao extends SingletonDao implements IDao
     public function save($data)
     {
         try{
-            $sql = ("INSERT INTO $this->tabla 
-              (capacidad,remanente,id_tipo_plaza,id_calendario,id_sede,precio) 
+            $sql = ("INSERT INTO $this->tabla
+              (capacidad,remanente,id_tipo_plaza,id_calendario,id_sede,precio)
               VALUES (:capacidad, :remanente, :id_tipo_plaza, :id_calendario, :id_sede,:precio)");
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);

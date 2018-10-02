@@ -33,16 +33,12 @@ class CompraControladora extends PaginaControladora
         $this->sedeDao = SedeBdDao::getInstance();
     }
 
-    function promo($id_evento){
+    /*function promo($id_evento, $plazaDesc){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $calendarios = $this->calendarDao->traerPorIdEvento($id_evento);
+            $plazasEvento = $this->eventPlaceDao->traerPorIdEventoYPlaza($id_evento,$plazaDesc);
 
-            foreach ($calendarios as $calendario){
-                $plazaEventos = $this->eventPlaceDao->traerPorIdCalendario($calendario->getId());
-
-            }
         }else header("location: /");
-    }
+    }*/
 
     function terminar($id_plazas , $total){
 
@@ -80,7 +76,7 @@ class CompraControladora extends PaginaControladora
         if($plazaEvento){
             $respuesta = $this->verificarIdExistente($id);
             if(!$respuesta) {
-                $cart = new Cart($plazaEvento, $cantidad);
+                $cart = new Cart($plazaEvento, $cantidad, "comun");
                 $_SESSION['cart'][] = $cart->jsonSerialize();
             }
             $calendario = $plazaEvento->getCalendario();
