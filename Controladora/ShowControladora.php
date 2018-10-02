@@ -31,6 +31,17 @@ class ShowControladora extends PaginaControladora
         $this->eventoDao  = EventoBdDao::getInstance();
     }
 
+    function delete($id_show){
+        if($_SESSION['rol'] === 'admin'){
+            $show = $this->showDao->retrieve($id_show);
+            if($show){
+                $this->showDao->delete($show);
+                $mensaje = new Mensaje("EL SHOW SE ELIMINO CON EXITO!", "success");
+            }else $mensaje = new Mensaje("NO SE ENCONTRO EL SHOW" , "danger");
+            $params['mensaje'] = $mensaje->getAlert();
+            $this->crear($params);
+        }
+    }
     function save($id_calendario, $id_artista){
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
             $calendario = $this->calendarioDao->retrieve($id_calendario);
@@ -49,11 +60,52 @@ class ShowControladora extends PaginaControladora
         }else header('location: /');
     }
 
+    function showsEvento($id_calendario){
+        $calendario = $this->calendarioDao->retrieve($id_calendario);
+        $params = [];
+        if($calendario){
+            $evento = $calendario->getEvento();
+            $params['evento'] = $evento;
+            $calendarios = $this->calendarioDao->traerPorIdEvento($evento->getId());
+            $params['calendarios'] = $calendarios;
+            $shows = $this->showDao->traerPorIdCalendario($id_calendario);
+            $params['shows'] = $shows;
+        }else {
+            $mensaje = new Mensaje("NO SE ENCONTRO EL CALENDARIO" , "danger");
+            $params['mensaje'] = $mensaje->getAlert();
+        }
+        $params['artistas'] = $this->artistaDao->getAll();
+        $this->page("listado/listadoShowsDeEventos","Shows - Listado",2,$params);
+    }
     function crear($params = []){
         $artistas = $this->artistaDao->getAll();
         $eventos = $this->eventoDao->getAll();
         $params['artistas'] = $artistas;
         $params['eventos'] = $eventos;
         $this->page("crearShow" , "Show - Crear" , 2, $params );
+    }
+
+    function update($id_calendario, $id_artista, $id_show){
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $calendario = $this->calendarioDao->retrieve($id_calendario);
+            $artista = $this->artistaDao->retrieve($id_artista);
+            $show = $this->showDao->retrieve($id_show);
+            $show->setArtista($artista);
+            $show->setCalendario($calendario);
+            $this->showDao->update($show);
+
+            $mensaje = new Mensaje("EL SHOW SE ACTUALIZO CORRECTAMENTE!","success");
+
+            $evento = $calendario->getEvento();
+            $shows = $this->showDao->traerPorIdCalendario($id_calendario);
+            $calendarios = $this->calendarioDao->traerPorIdEvento($evento->getId());
+
+            $params['mensaje'] = $mensaje->getAlert();
+            $params['artistas'] = $this->artistaDao->getAll();
+            $params['calendarios'] = $calendarios;
+            $params['shows'] = $shows;
+            $params['evento'] = $evento;
+            $this->page("listado/listadoShowsDeEventos","Shows - Listado",2,$params);
+        }else header("location: /");
     }
 }

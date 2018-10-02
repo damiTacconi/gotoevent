@@ -149,6 +149,17 @@ class Evento implements JsonSerializable
         }, $this->calendarios);
         return $calendarios;
     }
+
+    public function jsonSerializeSesion(){
+        return [
+            'id_evento' => $this->id,
+            'titulo' => $this->titulo,
+            'fecha_desde' => $this->fecha_desde,
+            'fecha_hasta' => $this->fecha_hasta,
+            'categoria' => $this->categoria->jsonSerialize(),
+            'evento_imagen' => $this->eventoImagen->jsonSerialize(),
+        ];
+    }
     public function jsonSerialize() {
         return [
             'id_evento' => $this->id,

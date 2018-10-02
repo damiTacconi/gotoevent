@@ -4,11 +4,11 @@
         <source src="/video/videoplayback.mp4" type="video/mp4"  />
     </video>
     <div class="banner">
-        <?php include "navbar.php" ?>
+        <?php $bgT=true; include "navbar.php" ?>
         <div class="header-content">
             <div class="container">
                 <div class="row justify-content-center">
-                    <?php if(empty($_SESSION)){ ?>
+                    <?php if($_SESSION['rol'] === 'invitado'){ ?>
                         <div class="col-md-7 d-none d-sm-block">
                             <div class="text-center mt-5">
                                 <div id="welcome-message">

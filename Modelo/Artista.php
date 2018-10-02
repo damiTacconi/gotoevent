@@ -8,11 +8,21 @@
 
 namespace Modelo;
 
+use JsonSerializable;
 
-class Artista
+class Artista implements JsonSerializable
 {
     private $nombre;
     private $id;
+
+    public function jsonSerialize()
+    {
+        return [
+          "nombre" => $this->nombre,
+          "id_artista" => $this->id
+        ];
+    }
+
     /**
      * Artista constructor.
      * @param $nombre

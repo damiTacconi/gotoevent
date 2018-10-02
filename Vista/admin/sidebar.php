@@ -42,7 +42,6 @@
             <span>Calendarios</span>
         </a>
         <div class="dropdown-menu bg-dark" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item text-white" href="/calendario/listado"><i class="fas fa-list-ul"></i> Listado</a>
             <a class="dropdown-item text-white" href="/calendario/crear"><i class="fas fa-plus-square"></i> Agregar</a>
         </div>
     </li>
@@ -52,7 +51,6 @@
             <span>Shows</span>
         </a>
         <div class="dropdown-menu bg-dark" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item text-white" href="/show/listado"><i class="fas fa-list-ul"></i> Listado</a>
             <a class="dropdown-item text-white" href="/show/crear"><i class="fas fa-plus-square"></i> Agregar</a>
         </div>
     </li>

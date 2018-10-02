@@ -8,8 +8,8 @@
 
 namespace Modelo;
 
-
-class PlazaEvento
+use JsonSerializable;
+class PlazaEvento implements JsonSerializable
 {
     private $id;
     private $capacidad;
@@ -18,6 +18,19 @@ class PlazaEvento
     private $plaza;
     private $calendario;
     private $precio;
+
+    public function jsonSerialize()
+    {
+       return [
+         "id_plazaEvento" => $this->id,
+         "capacidad" => $this->capacidad,
+         "remanente" => $this->remanente,
+         "sede" => $this->sede->jsonSerialize(),
+         "plaza" => $this->plaza->jsonSerialize(),
+         "calendario" => $this->calendario->jsonSerialize(),
+         "precio" => $this->precio
+       ];
+    }
 
     /**
      * PlazaEvento constructor.

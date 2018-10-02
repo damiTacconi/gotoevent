@@ -131,6 +131,24 @@ class CalendarioControladora extends PaginaControladora
         $params['eventos'] = $eventos;
         $this->page('crearCalendario' , 'Calendario - Crear' , 2, $params);
     }
-    function listado(){}
-    function actualizar($id){}
+
+    function update($id_calendario_elegido, $id_calendario_actual){
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $calendario_actual = $this->calendarioDao->retrieve($id_calendario_actual);
+            $calendario_elegido = $this->calendarioDao->retrieve($id_calendario_elegido);
+            $fecha_calendario_actual = $calendario_actual->getFecha();
+            $fecha_calendario_elegido = $calendario_elegido->getFecha();
+            $calendario_actual->setFecha($fecha_calendario_elegido);
+            $calendario_elegido->setFecha($fecha_calendario_actual);
+            $this->calendarioDao->update($calendario_actual);
+            $this->calendarioDao->update($calendario_elegido);
+            $evento = $calendario_actual->getEvento();
+            $id_evento = $evento->getId();
+            $mensaje = new Mensaje("ACTUALIZACION EJECUTADA CORRECTAMENTE!" , "success");
+            $params['mensaje'] = $mensaje->getAlert();
+            $params['evento'] = $evento;
+            $params['calendarios'] = $this->calendarioDao->traerPorIdEvento($id_evento);
+            $this->page("listado/listadoCalendariosDeEventos" , "Calendarios de {$evento->getTitulo()}",2,$params);
+        }else header("location: /");
+    }
 }

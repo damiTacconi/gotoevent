@@ -13,7 +13,7 @@
         <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati.</p>
         <p class="read-more">
             <?php  if(!empty($calendarios)){ ?>
-                <button class="btn btn-success">COMPRAR</button>
+                <a href="/compra/evento/<?= $evento->getId() ?>" class="btn btn-success">COMPRAR</a>
             <?php }else{ ?>
                 <button class="btn btn-amber" disabled>Proximamente</button>
             <?php }  ?>

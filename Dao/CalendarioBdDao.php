@@ -85,7 +85,21 @@ class CalendarioBdDao extends SingletonDao implements IDao
 
     public function update($data)
     {
-        // TODO: Implement update() method.
+        try {
+            $sql = ("UPDATE $this->tabla SET fecha=:fecha , id_evento=:id_evento 
+                    WHERE id_calendario = :id_calendario");
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $id_calendario = $data->getId();
+            $fecha = $data->getFecha();
+            $id_evento = $data->getEvento()->getId();
+            $sentencia->bindParam(":fecha", $fecha);
+            $sentencia->bindParam(":id_evento", $id_evento);
+            $sentencia->bindParam(":id_calendario", $id_calendario);
+            $sentencia->execute();
+        }catch (\PDOException $e){
+            die("OCURRIO UN ERROR EN BASE DE DATOS");
+        }
     }
 
     public function delete($data)
@@ -107,6 +121,28 @@ class CalendarioBdDao extends SingletonDao implements IDao
         }
     }
 
+    public function traerPorIdEventoYFecha($id_evento, $fecha){
+        try {
+            $sql = "SELECT cal.* FROM calendarios cal INNER JOIN eventos ev 
+                ON ev.id_evento = cal.id_evento WHERE cal.fecha=\" $fecha \" AND ev.id_evento=$id_evento";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+            if($dataSet[0]) {
+                $this->mapear($dataSet);
+            }
+            if (!empty($this->listado)) {
+                return $this->listado[0];
+            }
+            return null;
+
+        }catch (\PDOException $e){
+            echo "ERROR: {$e->getMessage()}";
+            die();
+        }
+
+    }
     public function traerPorFecha($fecha){
         try{
             $sql = "SELECT * FROM $this->tabla WHERE fecha=:fecha";
@@ -133,7 +169,9 @@ class CalendarioBdDao extends SingletonDao implements IDao
             $sentencia = $conexion->prepare($sql);
             $sentencia->execute();
             $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
-            $this->mapear($dataSet);
+            if($dataSet[0]) {
+                $this->mapear($dataSet);
+            }
             if (!empty($this->listado)) {
                 return $this->listado[0];
             }

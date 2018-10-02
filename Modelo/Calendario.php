@@ -23,7 +23,8 @@ class Calendario implements JsonSerializable
     {
        return [
          'id_calendario' => $this->id,
-         'fecha' => $this->fecha
+         'fecha' => $this->fecha,
+         'evento' => $this->evento->jsonSerializeSesion()
        ];
     }
 

@@ -16,6 +16,23 @@ class ShowBdDao extends SingletonDao implements IDao
     private $listado = [];
     private $tabla = "shows";
 
+    public function getAll(){
+        try{
+            $sql = "SELECT * FROM $this->tabla";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return false;
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
+    }
     public function existsShow($id_artista, $id_calendario){
         try{
             $sql = "SELECT 1 FROM $this->tabla WHERE id_calendario= \"$id_calendario\" AND id_artista= $id_artista ";
@@ -71,23 +88,50 @@ class ShowBdDao extends SingletonDao implements IDao
     }
     public function update($data)
     {
-        // TODO: Implement update() method.
+        try {
+            $sql = ("UPDATE $this->tabla SET id_calendario=:id_calendario , id_artista=:id_artista 
+                    WHERE id_show = :id_show");
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $calendario = $data->getCalendario();
+            $artista = $data->getArtista();
+            $id_calendario = $calendario->getId();
+            $id_artista = $artista->getId();
+            $id_show = $data->getId();
+            $sentencia->bindParam(":id_calendario", $id_calendario);
+            $sentencia->bindParam(":id_artista", $id_artista);
+            $sentencia->bindParam(":id_show", $id_show);
+            $sentencia->execute();
+        }catch (\PDOException $e){
+            die("OCURRIO UN ERROR EN BASE DE DATOS");
+        }
     }
 
     public function delete($data)
     {
-        // TODO: Implement delete() method.
+        try{
+            $id = $data->getId();
+            $sql = "DELETE FROM $this->tabla WHERE id_show=\"$id\" ";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
     }
 
     public function retrieve($id)
     {
         try{
-            $sql = "SELECT * FROM $this->tabla WHERE id_hora_show=$id";
+            $sql = "SELECT * FROM $this->tabla WHERE id_show=$id";
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $sentencia->execute();
             $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
-            $this->mapear($dataSet);
+            if($dataSet[0]) {
+                $this->mapear($dataSet);
+            }
             if (!empty($this->listado)) {
                 return $this->listado[0];
             }

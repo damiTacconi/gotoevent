@@ -6,9 +6,8 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="/">Evento</a>
+                    Eventos
                 </li>
-                <li class="breadcrumb-item active">Listado</li>
             </ol>
             <?php if(isset($param['mensaje'])) {
                 echo $param['mensaje'];

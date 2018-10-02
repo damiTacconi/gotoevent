@@ -1,13 +1,3 @@
-<?php
-/*
- * - SI LA SESION NO ESTA INICIADA, MUESTRO EL NAVBAR TRANSPARENTE.
- * - SI LA SESION ESTA INICIADA, MUESTRO EL NAVBAR CON ESTILO DARK.
- */
-if(!empty($_SESSION))
-  $bgT = false; // bgT = Background Transparente.
-else
-  $bgT = true;
-?>
 
 
 <!-- ************************************************************************************
@@ -25,7 +15,7 @@ else
            <a class="nav-link text-center" href="/"><i class="fas fa-user-alt"></i> Contactanos <span class="sr-only">(current)</span></a>
        </li>
    </ul>
-   <?php if(!empty($_SESSION)){?>
+   <?php if($_SESSION['rol'] === 'cliente'){?>
    <ul id="" class="navbar-nav ml-auto list-inline">
        <li class="list-inline-item nav-sm-center <?php if(isset($page)){echo ($page === 'perfil') ? 'active':''; } ?>">
          <div class="dropdown-divider"></div>
@@ -41,7 +31,7 @@ else
        <li class="list-inline-item nav-sm-center">
             <div class="dropdown-divider"></div>
             <a data-toggle="modal" data-target="#modalCart" class="nav-link">
-                <i class="fas fa-shopping-cart"></i> 
+                <i class="fas fa-shopping-cart"></i>
                 <span>Carrito</span>
             </a>
        </li>
@@ -81,10 +71,18 @@ else
            <li class="nav-item <?php if(isset($page)){echo ($page === 'contacto') ? 'active':''; } ?> ">
                <a class="nav-link" href="/"><i class="fas fa-user-alt"></i> Contactanos <span class="sr-only">(current)</span></a>
            </li>
-       </ul>
 
-       <?php if(!empty($_SESSION)){?>
+       </ul>
        <ul id="" class="navbar-nav ml-auto list-inline">
+           <li class="list-inline-item nav-sm-center">
+               <a data-toggle="modal" data-target="#modalCart" class="nav-link">
+                   <i class="fas fa-shopping-cart"></i>
+                   <?php if(isset($_SESSION['cart'])){ ?>
+                       <span class="badge indigo"><?= count($_SESSION['cart']) ?></span>
+                   <?php } ?>
+               </a>
+           </li>
+           <?php if($_SESSION['rol'] === 'cliente'){?>
            <li class="list-inline-item nav-item nav-sm-center <?php if(isset($page)){echo ($page === 'perfil') ? 'active':''; } ?>">
                <?php
                if(isset($_SESSION['fb_access_token'])){
@@ -95,12 +93,7 @@ else
                    </a>
                 <?php  } ?>
            </li>
-           <li class="list-inline-item nav-sm-center">
-           <a data-toggle="modal" data-target="#modalCart" class="nav-link">
-                <i class="fas fa-shopping-cart"></i> 
-                <span>Carrito</span>
-            </a>
-           </li>
+
            <li id="separator" class="list-inline-item"><span class="nav-link disabled"> |</span></li>
            <li class="list-inline-item nav-sm-center">
                    <a class="nav-link"
@@ -111,9 +104,9 @@ else
                        <?php } ?>
                    ><i class="fas fa-sign-out-alt"></i> Salir</a>
            </li>
-
+           <?php }?>
        </ul>
-       <?php }?>
+
      </div>
 
  </nav>

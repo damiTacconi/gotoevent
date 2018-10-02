@@ -82,7 +82,6 @@
             </div>
 
             <!-- Area Chart Example-->
-
             <!-- DataTables Example -->
             <div class="card mb-3">
                 <div class="card-header">

@@ -20,9 +20,7 @@
     .blog-card a {
         color: inherit;
     }
-    .blog-card a:hover {
-        color: #5ad67d;
-    }
+
     .blog-card:hover .photo {
         -webkit-transform: scale(1.3) rotate(3deg);
         transform: scale(1.3) rotate(3deg);
@@ -70,21 +68,7 @@
     .blog-card .details ul li {
         display: inline-block;
     }
-    .blog-card .details .author:before {
-        font-family: FontAwesome;
-        margin-right: 10px;
-        content: "\f007";
-    }
-    .blog-card .details .date:before {
-        font-family: FontAwesome;
-        margin-right: 10px;
-        content: "\f133";
-    }
-    .blog-card .details .tags ul:before {
-        font-family: FontAwesome;
-        content: "\f02b";
-        margin-right: 10px;
-    }
+
     .blog-card .details .tags li {
         margin-right: 2px;
     }
@@ -129,7 +113,7 @@
         vertical-align: middle;
         transition: margin .3s, opacity .3s;
     }
-    .blog-card .description .read-more a:hover:after {
+    .blog-card .description .read-more  {
         margin-left: 5px;
         opacity: 1;
     }

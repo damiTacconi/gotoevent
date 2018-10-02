@@ -1,7 +1,5 @@
-﻿<?php if(!empty($_SESSION)){ 
-    require('carrito.php');
-} ?>
-
+﻿
+<?php include "carrito.php" ?>
 <footer class="pt-2">
     <div class="container-fluid">
         <div class="row">

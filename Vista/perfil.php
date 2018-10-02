@@ -1,4 +1,4 @@
-<?php $page = "perfil"; ?>
+<?php $page = "perfil"; $bgT = false; ?>
 <?php include "navbar.php" ?>
 <div class="container">
     <div class="row">

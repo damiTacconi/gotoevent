@@ -18,10 +18,13 @@ class Request
               Convierto la url en un array tomando como separador la "/".
              */
             $urlToArray = explode("/", $url);
-            /*
-  				Filtro el arreglo para eliminar datos vacios en caso de haberlos.
-             */
-            $ArregloUrl = array_filter($urlToArray);
+        /*
+              Filtro el arreglo para eliminar datos vacios en caso de haberlos.
+         */
+
+            $ArregloUrl =  array_filter($urlToArray, function($value){
+                return ($value !== null && $value !== false && $value !== '');
+            });
              /*
               Defino un controlador por defecto en el caso de que el arreglo llegue vacío
             	 Si el arreglo tiene datos, tomo como controlador el primer elemento.
@@ -42,7 +45,8 @@ class Request
             } else {
                 $this->metodo = array_shift($ArregloUrl);
             }
-            /**
+
+        /**
              * Capturo el metodo de petición y lo guardo en una variable
              */
             $metodoRequest = $this->getMetodoRequest();

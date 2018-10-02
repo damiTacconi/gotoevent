@@ -8,12 +8,21 @@
 
 namespace Modelo;
 
-
-class Show
+use JsonSerializable;
+class Show implements JsonSerializable
 {
     private $id;
     private $artista;
     private $calendario;
+
+    function jsonSerialize()
+    {
+       return [
+           "id_show" => $this->id,
+         "artista" => $this->artista->jsonSerialize(),
+         "calendario" => $this->calendario->jsonSerialize()
+       ];
+    }
 
     /**
      * Show constructor.

@@ -156,7 +156,7 @@ TAG;
         $dataSet = is_array($dataSet) ? $dataSet : [];
         if($dataSet[0]) {
             $this->listado = array_map(function ($p) {
-                $usuario = UsuarioBdDao::getInstancia()->traerPorId($p['id_usuario']);
+                $usuario = UsuarioBdDao::getInstance()->traerPorId($p['id_usuario']);
                 $cliente = new Cliente(
                     $p['nombre'],
                     $p['apellido'],
