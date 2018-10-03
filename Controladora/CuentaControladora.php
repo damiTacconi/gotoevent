@@ -4,17 +4,18 @@ namespace Controladora;
 use Dao\ClienteBdDao;
 use Dao\UsuarioBdDao;
 use Modelo\Cliente;
+use Modelo\Mensaje;
 use Modelo\Usuario;
 use Modelo\Pagina;
 class CuentaControladora extends PaginaControladora {
 
-    private $clienteBdDao;
-    private $usuarioBdDao;
+    private $clienteDao;
+    private $usuarioDao;
 
     function __construct()
     {
-        $this->usuarioBdDao = UsuarioBdDao::getInstance();
-        $this->clienteBdDao = ClienteBdDao::getInstance();
+        $this->usuarioDao = UsuarioBdDao::getInstance();
+        $this->clienteDao = ClienteBdDao::getInstance();
     }
 
     function index(){
@@ -40,23 +41,17 @@ class CuentaControladora extends PaginaControladora {
     }
     function loguear($email , $password){
         try {
-            if ($this->usuarioBdDao->verificarUsuario($email, $password)) {
-                $cliente = $this->clienteBdDao->traerPorUsuario($email, $password);
-                if ($cliente != null) {
-                    $_SESSION['email'] = $cliente->getEmail();
-                    $_SESSION['name'] = $cliente->getNombre() . ' ' . $cliente->getApellido();
-                    $_SESSION['first_name'] = $cliente->getNombre();
-                    $_SESSION['rol'] = 'cliente';
-                } else {
-                    $usuario = $this->usuarioBdDao->traerPorMail($email);
-                    $_SESSION['email'] = $usuario->getEmail();
-                    $_SESSION['name'] = $usuario->getEmail();
-                    $_SESSION['first_name'] = $usuario->getEmail();
-                    if(in_array($_SESSION['email'], unserialize(ADMIN_EMAIL))) {
-                        $_SESSION['rol'] = 'admin';
-                    }else $_SESSION['rol'] = 'cliente';
-                }
+            if ($this->usuarioDao->verificarUsuario($email, $password)) {
+                $usuario = $this->usuarioDao->traerPorEmail($email);
+                $_SESSION['email'] = $usuario->getEmail();
+                $cliente = $this->clienteDao->traerPorIdUsuario($usuario->getId());
+                $_SESSION['name'] = $cliente->getNombre() . ' ' . $cliente->getApellido();
+                $_SESSION['first_name'] = $cliente->getNombre();
+                $_SESSION['last_name'] = $cliente->getApellido();
                 $_SESSION['picture_url'] = "";
+                if(in_array($_SESSION['email'], unserialize(ADMIN_EMAIL))) {
+                    $_SESSION['rol'] = 'admin';
+                }else $_SESSION['rol'] = 'cliente';
                 header('location: /');
             }else {
                 $mensaje = ("<span style='color:black;'>Email o contraseña incorrecto.</span>");
@@ -76,23 +71,25 @@ class CuentaControladora extends PaginaControladora {
 
     function registrarAjax($nombre,$apellido,$dni,$email,$pass){
         if(!empty($_POST)) {
-            if (!$this->clienteBdDao->verificarDni($dni)) {
-                if (!$this->usuarioBdDao->verificarEmail($email)) {
-                    $cliente = new Cliente($nombre, $apellido, $dni, $email, $pass);
-                    $id_usuario = $this->usuarioBdDao->agregar($cliente);
-                    $cliente->setIdUsuario($id_usuario);
-                    $id_cliente = $this->clienteBdDao->agregar($cliente);
-                    $cliente->setId($id_cliente);
+            if (!$this->clienteDao->verificarDni($dni)) {
+                if (!$this->usuarioDao->verificarEmail($email)) {
+                    $usuario = new Usuario($email,$pass);
+                    $id_usuario = $this->usuarioDao->save($usuario);
+                    $usuario->setId($id_usuario);
+                    $cliente = new Cliente($nombre, $apellido);
+                    $cliente->setDni($dni);
+                    $cliente->setUsuario($usuario);
+                    $this->clienteDao->save($cliente);
                     echo 'success';
                 } else echo "EL EMAIL INGRESADO YA SE ENCUENTRA REGISTRADO";
             } else echo "EL DNI INGRESADO YA SE ENCUENTRA REGISTRADO";
         }else header('location: /');
     }
 
-    function verificarSesion(){
+    function verificarSesionCliente(){
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             //sendMail();
-            if (!empty($_SESSION)) {
+            if ($_SESSION['rol'] === 'cliente') {
                 echo 'success';
             } else echo null;
         }else header('location: /');

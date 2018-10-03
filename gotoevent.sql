@@ -3,11 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 02-10-2018 a las 02:28:14
+-- Tiempo de generación: 03-10-2018 a las 02:08:13
 -- Versión del servidor: 5.7.19-log
 -- Versión de PHP: 7.2.4
-CREATE database gotoevent;
-USE gotoevent;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -122,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `nombre` varchar(30) NOT NULL,
   `apellido` varchar(40) NOT NULL,
   `dni` varchar(9) DEFAULT NULL,
-  `id_usuario` int(11) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_cliente`),
   KEY `fk_clientes_x_id_usuario` (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
@@ -262,6 +260,7 @@ DROP TABLE IF EXISTS `sedes`;
 CREATE TABLE IF NOT EXISTS `sedes` (
   `id_sede` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) NOT NULL,
+  `capacidad` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_sede`),
   UNIQUE KEY `unq_descripcion` (`descripcion`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
@@ -270,10 +269,10 @@ CREATE TABLE IF NOT EXISTS `sedes` (
 -- Volcado de datos para la tabla `sedes`
 --
 
-INSERT INTO `sedes` (`id_sede`, `descripcion`) VALUES
-(5, 'Estadio Monumental'),
-(3, 'Gran Rex'),
-(6, 'Hipódromo de San Isidro');
+INSERT INTO `sedes` (`id_sede`, `descripcion`, `capacidad`) VALUES
+(3, 'Gran Rex', 3262),
+(5, 'Estadio Monumental', 60000),
+(6, 'Hipódromo de San Isidro', 100000);
 
 -- --------------------------------------------------------
 

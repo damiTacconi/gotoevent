@@ -38,7 +38,10 @@ TAG;
         $nombre = $cliente->getNombre();
         $apellido = $cliente->getApellido();
         $dni = $cliente->getDni();
-        $id_usuario = $cliente->getIdUsuario();
+        $usuario = $cliente->getUsuario();
+        if($usuario){
+            $id_usuario = $usuario->getId();
+        }else $id_usuario = null;
 
         $sentencia->bindParam(":nombre", $nombre);
         $sentencia->bindParam(":apellido", $apellido);
@@ -113,9 +116,9 @@ TAG;
         }
         return null;
     }
-    public function traerPorUsuario($email,$password){
+    public function traerPorIdUsuario($id){
         try {
-            $sql = "CALL getcliente(\"$email\",\"$password\")"; // getcliente es un STORED PROCEDURE
+            $sql = "SELECT * FROM $this->tabla WHERE id_usuario=$id"; // getcliente es un STORED PROCEDURE
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $sentencia->execute();
@@ -156,15 +159,17 @@ TAG;
         $dataSet = is_array($dataSet) ? $dataSet : [];
         if($dataSet[0]) {
             $this->listado = array_map(function ($p) {
-                $usuario = UsuarioBdDao::getInstance()->traerPorId($p['id_usuario']);
                 $cliente = new Cliente(
                     $p['nombre'],
-                    $p['apellido'],
-                    $p['dni'],
-                    $usuario->getEmail(),
-                    $usuario->getPassword()
+                    $p['apellido']
                 );
-                $cliente->setIdUsuario($p['id_usuario']);
+                if($p['dni']){
+                    $cliente->setDni($p['dni']);
+                }
+                if($p['id_usuario']){
+                    $usuario = UsuarioBdDao::getInstance()->traerPorId($p['id_usuario']);
+                    $cliente->setUsuario($usuario);
+                }
                 $cliente->setId($p['id_cliente']);
                 return $cliente;
             }, $dataSet);

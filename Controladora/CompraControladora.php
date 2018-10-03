@@ -10,11 +10,14 @@ namespace Controladora;
 
 
 use Dao\CalendarioBdDao;
+use Dao\ClienteBdDao;
 use Dao\EventoBdDao;
 use Dao\PlazaEventoBdDao;
 use Dao\SedeBdDao;
 use Dao\TipoPlazaBdDao;
+use Dao\CompraBdDao;
 use Modelo\Cart;
+use Modelo\Compra;
 use Modelo\Sede;
 
 class CompraControladora extends PaginaControladora
@@ -24,8 +27,12 @@ class CompraControladora extends PaginaControladora
     private $eventPlaceDao;
     private $tipoPlazaDao;
     private $sedeDao;
+    private $clienteDao;
+    private $compraDao;
     function  __construct()
     {
+        $this->compraDao = CompraBdDao::getInstance();
+        $this->clienteDao = ClienteBdDao::getInstance();
         $this->calendarDao = CalendarioBdDao::getInstance();
         $this->eventDao = EventoBdDao::getInstance();
         $this->eventPlaceDao = PlazaEventoBdDao::getInstance();
@@ -33,15 +40,25 @@ class CompraControladora extends PaginaControladora
         $this->sedeDao = SedeBdDao::getInstance();
     }
 
-    /*function promo($id_evento, $plazaDesc){
+    private function traerPlazaEventos($id_plazaEventos){
+        $plazaEventos = array_map(function ($id){
+            $plazaEvento = $this->eventPlaceDao->retrieve($id);
+            return $plazaEvento;
+        } , $id_plazaEventos);
+        return $plazaEventos;
+    }
+    function terminar($precios, $cantidades, $subtotales, $id_plazaEventos , $total ){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $plazasEvento = $this->eventPlaceDao->traerPorIdEventoYPlaza($id_evento,$plazaDesc);
-
+            $plazaEventos = $this->traerPlazaEventos($id_plazaEventos);
+            if(isset($_SESSION['fb_access_token'])) {
+                $cliente = new Cliente($_SESSION['first_name'], $_SESSION['last_name']);
+                $id_cliente = $this->clienteDao->save($cliente);
+                $cliente->setId($id_cliente);
+                $compra = new Compra($cliente,$total);
+                //$id_compra =
+            }
+            //$compra = new Compra()
         }else header("location: /");
-    }*/
-
-    function terminar($id_plazas , $total){
-
     }
     function clear(){
         $_SESSION['cart'] = array();
@@ -59,11 +76,6 @@ class CompraControladora extends PaginaControladora
             $cart = $_SESSION['cart'];
             foreach ($cart as $key => $item){
                 if($item['plazaEvento']['id_plazaEvento'] === $id){
-                    $cantidad = (int) $item['cantidad'];
-                    if($cantidad < 5)
-                        $cantidad++;
-                    $item['cantidad'] = (String)$cantidad;
-                    $_SESSION['cart'][$key]['cantidad'] = $item['cantidad'];
                     $flag = TRUE;
                     break;
                 }
@@ -71,13 +83,29 @@ class CompraControladora extends PaginaControladora
         }
         return $flag;
     }
+
+    private function sumarCantidad($cantidad , $id){
+        $cart = $_SESSION['cart'];
+        foreach ($cart as $key => $item){
+            if($item['plazaEvento']['id_plazaEvento'] === $id){
+                $cantidad += (int) $item['cantidad'];
+                if($cantidad > 5)
+                    $cantidad = 5;
+                $item['cantidad'] = (String) $cantidad;
+                $_SESSION['cart'][$key]['cantidad'] = $item['cantidad'];
+                break;
+            }
+        }
+    }
     function addToCart($id, $cantidad){
         $plazaEvento = $this->eventPlaceDao->retrieve($id);
         if($plazaEvento){
-            $respuesta = $this->verificarIdExistente($id);
+            $respuesta = $this->verificarIdExistente($id,$cantidad);
             if(!$respuesta) {
-                $cart = new Cart($plazaEvento, $cantidad, "comun");
+                $cart = new Cart($plazaEvento, $cantidad);
                 $_SESSION['cart'][] = $cart->jsonSerialize();
+            }else{
+                $this->sumarCantidad($cantidad,$id);
             }
             $calendario = $plazaEvento->getCalendario();
             $evento = $calendario->getEvento();

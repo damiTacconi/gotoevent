@@ -10,11 +10,6 @@ class UsuarioBdDao extends SingletonDao implements IDao
     protected $tabla = "usuarios";
     protected $listado = [];
 
-    public function save($data)
-    {
-        // TODO: Implement save() method.
-    }
-
     public function update($data)
     {
         // TODO: Implement update() method.
@@ -62,7 +57,7 @@ class UsuarioBdDao extends SingletonDao implements IDao
             die();
         }
     }
-    public function agregar(Cliente $usuario)
+    public function save($usuario)
     {
         /** @noinspection SqlResolve */
         $sql = "INSERT INTO $this->tabla (email, password) VALUES (:email, :password)";
@@ -171,7 +166,7 @@ class UsuarioBdDao extends SingletonDao implements IDao
         return null;
     }
 
-    public function traerPorMail($mail)
+    public function traerPorEmail($mail)
     {
         /** @noinspection SqlResolve */
         $sql = "SELECT * FROM $this->tabla WHERE email =  \"$mail\" LIMIT 1";

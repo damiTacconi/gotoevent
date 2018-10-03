@@ -8,7 +8,7 @@ if(!empty($_SESSION['cart'])){
 <!-- Modal: modalCart -->
 <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <form action="/compra/terminar" class="form modal-content" id="formCart">
+        <form action="/compra/terminar" method="post" class="form modal-content" id="formCart">
             <!--Header-->
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Mi Carrito</h4>
@@ -24,6 +24,7 @@ if(!empty($_SESSION['cart'])){
                         <tr>
                             <th>Evento</th>
                             <th>Fecha</th>
+                            <th>Sede</th>
                             <th>Plaza</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
@@ -35,10 +36,12 @@ if(!empty($_SESSION['cart'])){
                     <?php if(isset($items)) {
                         foreach($items as $key => $item) {
                             $plaza = $item->plazaEvento;
+
                             ?>
                             <tr>
                                 <th scope="row"><?= $plaza->calendario->evento->titulo ?> </th>
                                 <td><?= $plaza->calendario->fecha ?></td>
+                                <td><?= $plaza->sede->nombre ?></td>
                                 <td><?= $plaza->plaza->descripcion ?></td>
                                 <td>
                                     <input type="number" name="precio[]" class="form-control"
@@ -52,6 +55,7 @@ if(!empty($_SESSION['cart'])){
                                 <td>
                                     <input type="text" class="form-control" name="subtotal[]"
                                            value="<?= $item->cantidad * $plaza->precio ?>" readonly>
+                                    <input type="hidden" name="id_plazaEvento[]" value="<?= $plaza->id_plazaEvento ?>">
                                 </td>
                                 <td><a onclick="removeOfCart(<?= $key ?>)" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a></td>
                             </tr>
@@ -64,7 +68,7 @@ if(!empty($_SESSION['cart'])){
                     <div class="row">
                         <div class="col-6">
                             <label for="inputTotal">TOTAL</label>
-                            <input type="text" style="width: 150px" class="form-control" id="inputTotal" value="0" readonly>
+                            <input type="text" name="total" style="width: 150px" class="form-control" id="inputTotal" value="0" readonly>
                         </div>
                     </div>
                 </div>
@@ -73,12 +77,31 @@ if(!empty($_SESSION['cart'])){
             <!--Footer-->
             <div class="modal-footer">
                 <button id="btnClearCart" type="button" class="btn btn-outline-secondary float-left btn-sm">VACIAR</button>
-                <button type="button" id="btnComprar" class="btn btn-primary float-right btn-md">COMPRAR</button>
+                <button type="button" onclick="verificarSesion()" id="btnComprar" class="btn btn-primary float-right btn-md">COMPRAR</button>
             </div>
         </form>
     </div>
 </div>
 <!-- Modal: modalCart -->
+
+<!-- MODAL LOGIN -->
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">LOGUEATE PARA COMPRAR</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <?php include URL_VISTA . 'login.php' ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FIN MODAL LOGIN -->
 <script type="text/javascript">
     function removeOfCart(id){
         let url = '/compra/removeOfCart/'+id;
@@ -89,7 +112,8 @@ if(!empty($_SESSION['cart'])){
     $(`#formCart :input[name="cantidad[]"]`).bind('keyup mouseup', function () {
         let quantity = $(this).val();
         let price = $(this).closest('td').prev().find('input').val();
-        let $subtotal = $(this).closest('td').next().find('input');
+        let idPlaza = $(this).closest('td').next().find('input[type="hidden"]').val();
+        let $subtotal = $(this).closest('td').next().find('input[type="text"]');
         $subtotal.val( (price * quantity) );
         total();
     });
@@ -101,13 +125,23 @@ if(!empty($_SESSION['cart'])){
             let precio = $(this).find('input[name="precio[]"]').val();
             let cantidad = $(this).find('input[name="cantidad[]"]').val();
             total +=  Number(precio * cantidad);
-            console.log(total);
             $inputTotal.val(total);
         });
         if(total === 0){
             $("#btnComprar").prop("disabled", "disabled");
             $("#btnClearCart").prop("disabled", "disabled");
         }
+    }
+
+    function verificarSesion(){
+        ajaxURL("/cuenta/verificarSesionCliente", data => {
+           let result = $.trim(data);
+           if(result === 'success'){
+               $('#formCart').submit();
+           }else{
+               $('#modalLoginForm').modal('toggle');
+           }
+        });
     }
     total();
 </script>

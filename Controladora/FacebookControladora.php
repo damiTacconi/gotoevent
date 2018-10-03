@@ -58,7 +58,7 @@ class FacebookControladora
 
             try {
                 // Returns a `Facebook\FacebookResponse` object
-                $response = $fb->get('/me?fields=id,name,email,first_name,location,picture{url},birthday', $_SESSION['fb_access_token']);
+                $response = $fb->get('/me?fields=id,name,email,first_name,location,picture{url},last_name', $_SESSION['fb_access_token']);
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
                 echo 'Graph returned an error: ' . $e->getMessage();
                 exit;
@@ -78,6 +78,7 @@ class FacebookControladora
             $_SESSION['name']           = $userData['name'];
             $_SESSION['email']          = $userData['email'];
             $_SESSION['first_name']     = $userData['first_name'];
+            $_SESSION['last_name']      = $userData['last_name'];
             $_SESSION['picture_url']    = $userData['picture']['data']['url'];
 
             // Si el Email corresponde a un admin, le otorgo rol admin.
