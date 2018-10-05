@@ -106,7 +106,12 @@ class CompraControladora extends PaginaControladora
                    $linea = new Linea($plaza,$subtotales[$key],$compra);
                    $id_linea = $this->lineaDao->save($linea);
                    $linea->setId($id_linea);
+                   $remanente = $plaza->getRemanente();
+                   $remanente--;
+                   $plaza->setRemanente($remanente);
+                   $this->eventPlaceDao->update($plaza);
                    $this->generateTicket($linea);
+
                 }
             }
         }

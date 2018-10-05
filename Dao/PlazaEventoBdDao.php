@@ -110,7 +110,31 @@ class PlazaEventoBdDao extends SingletonDao implements IDao
 
     public function update($data)
     {
-        // TODO: Implement update() method.
+        try {
+            $sql = ("UPDATE $this->tabla SET capacidad=:capacidad, remanente=:remanente, 
+                      id_tipo_plaza=:id_plaza, id_calendario=:id_calendario, id_sede=:id_sede 
+                      WHERE id_plaza_evento = :id_plaza_evento");
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $capacidad = $data->getCapacidad();
+            $remanente = $data->getRemanente();
+            $tipoPlaza = $data->getPlaza();
+            $calendario = $data->getCalendario();
+            $sede = $data->getSede();
+            $id_plaza = $tipoPlaza->getId();
+            $id_calendario = $calendario->getId();
+            $id_sede = $sede->getId();
+            $id_plaza_evento = $data->getId();
+            $sentencia->bindParam(":capacidad", $capacidad);
+            $sentencia->bindParam(":remanente", $remanente);
+            $sentencia->bindParam(":id_plaza", $id_plaza);
+            $sentencia->bindParam(":id_calendario", $id_calendario);
+            $sentencia->bindParam(":id_sede", $id_sede);
+            $sentencia->bindParam(":id_plaza_evento",$id_plaza_evento);
+            $sentencia->execute();
+        }catch (\PDOException $e){
+            die("OCURRIO UN ERROR EN BASE DE DATOS");
+        }
     }
 
     public function delete($data)
