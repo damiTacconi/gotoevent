@@ -43,16 +43,30 @@ class CuentaControladora extends PaginaControladora {
         try {
             if ($this->usuarioDao->verificarUsuario($email, $password)) {
                 $usuario = $this->usuarioDao->traerPorEmail($email);
-                $_SESSION['email'] = $usuario->getEmail();
                 $cliente = $this->clienteDao->traerPorIdUsuario($usuario->getId());
-                $_SESSION['name'] = $cliente->getNombre() . ' ' . $cliente->getApellido();
-                $_SESSION['first_name'] = $cliente->getNombre();
-                $_SESSION['last_name'] = $cliente->getApellido();
-                $_SESSION['picture_url'] = "";
-                if(in_array($_SESSION['email'], unserialize(ADMIN_EMAIL))) {
-                    $_SESSION['rol'] = 'admin';
-                }else $_SESSION['rol'] = 'cliente';
-                header('location: /');
+                if($cliente) {
+                    $_SESSION['email'] = $usuario->getEmail();
+                    $_SESSION['name'] = $cliente->getNombre() . ' ' . $cliente->getApellido();
+                    $_SESSION['first_name'] = $cliente->getNombre();
+                    $_SESSION['last_name'] = $cliente->getApellido();
+                    $_SESSION['picture_url'] = "";
+                    $_SESSION['rol'] = 'cliente';
+                    header('location: /');
+                }else {
+                    if (in_array($usuario->getEmail(), unserialize(ADMIN_EMAIL))) {
+                        $_SESSION['rol'] = 'admin';
+                        $_SESSION['first_name'] = "";
+                        $_SESSION['last_name'] = "";
+                        $_SESSION['name'] = '';
+                        $_SESSION['picture_url'] = "";
+                        $_SESSION['email'] = $usuario->getEmail();
+                        header('location: /');
+                    }else {
+                        $mensaje = new Mensaje("Hubo un error al procesar los datos de usuario","danger");
+                        $params['mensaje'] = $mensaje->getAlert();
+                        $this->page("inicio","GoToEvent",0,$params);
+                    }
+                }
             }else {
                 $mensaje = ("<span style='color:black;'>Email o contraseña incorrecto.</span>");
                 $params = ['mensaje' => $mensaje];

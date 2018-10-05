@@ -22,7 +22,21 @@ class UsuarioBdDao extends SingletonDao implements IDao
 
     public function retrieve($id)
     {
-        // TODO: Implement retrieve() method.
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE id_usuario= $id ";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado[0];
+            }
+            return false;
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
     }
 
 
@@ -141,27 +155,6 @@ class UsuarioBdDao extends SingletonDao implements IDao
 
         if (!empty($this->listado)) {
             return $this->listado;
-        }
-        return null;
-    }
-
-    public function traerPorId($id)
-    {
-        /** @noinspection SqlResolve */
-        $sql = "SELECT * FROM $this->tabla WHERE id_usuario =  \"$id\" LIMIT 1";
-
-        $conexion = Conexion::conectar();
-
-        $sentencia = $conexion->prepare($sql);
-
-        $sentencia->execute();
-
-        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
-
-        $this->mapear($dataSet);
-
-        if (!empty($this->listado[0])) {
-            return $this->listado[0];
         }
         return null;
     }

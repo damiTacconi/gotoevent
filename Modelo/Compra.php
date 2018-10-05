@@ -12,15 +12,35 @@ namespace Modelo;
 class Compra
 {
     private $id;
-   private $total;
-   private $cliente;
-   private $lineas = [];
+    private $fecha;
+    private $total;
+    private $cliente;
+    private $lineas = [];
 
 
-   function __construct($cliente, $total){
+   function __construct($cliente, $total, $fecha){
        $this->cliente = $cliente;
      $this->total = $total;
+     $this->fecha = $fecha;
    }
+
+    /**
+     * @return mixed
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * @param mixed $fecha
+     */
+    public function setFecha($fecha): void
+    {
+        $this->fecha = $fecha;
+    }
+
+
 
     /**
      * @return mixed

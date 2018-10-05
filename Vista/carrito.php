@@ -45,7 +45,7 @@ if(!empty($_SESSION['cart'])){
                                 <td><?= $plaza->plaza->descripcion ?></td>
                                 <td>
                                     <input type="number" name="precio[]" class="form-control"
-                                           value="<?= $plaza->precio ?>" readonly>
+                                           value="<?= $plaza->precio ?>" disabled>
                                 </td>
                                 <td>
                                     <input type="number" name="cantidad[]" style="width: 60px;"

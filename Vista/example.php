@@ -183,7 +183,7 @@
 </style>
 <?php ?>
     <div class="grid pt-4">
-        <?php foreach($param['eventos'] as $evento) {
+        <?php foreach($eventos as $evento) {
             $fecha = $evento->getFechaDesde();
             $fecha_hasta = $evento->getFechaHasta();
             $imagen = $evento->getEventoImagen()->getImagen();

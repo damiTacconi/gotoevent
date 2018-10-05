@@ -28,7 +28,7 @@ class ClienteBdDao extends SingletonDao implements IDao
     public function save($cliente)
     {
         $sql = <<<TAG
-INSERT INTO $this->tabla (nombre, apellido, dni, id_usuario) VALUES (:nombre, :apellido, :dni, :id_usuario)
+INSERT INTO $this->tabla (nombre, apellido, dni, id_usuario , id_fb) VALUES (:nombre, :apellido, :dni, :id_usuario, :id_fb)
 TAG;
 
         $conexion = Conexion::conectar();
@@ -42,11 +42,13 @@ TAG;
         if($usuario){
             $id_usuario = $usuario->getId();
         }else $id_usuario = null;
+        $id_fb = strval($cliente->getIdFb());
 
         $sentencia->bindParam(":nombre", $nombre);
         $sentencia->bindParam(":apellido", $apellido);
         $sentencia->bindParam(":dni", $dni);
         $sentencia->bindParam(":id_usuario", $id_usuario);
+        $sentencia->bindParam(":id_fb",$id_fb);
 
         $sentencia->execute();
 
@@ -97,25 +99,6 @@ TAG;
         return null;
     }
 
-    public function traerPorId($id)
-    {
-        $sql = "SELECT * FROM $this->tabla WHERE id_cliente =  \"$id\" LIMIT 1";
-
-        $conexion = Conexion::conectar();
-
-        $sentencia = $conexion->prepare($sql);
-
-        $sentencia->execute();
-
-        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
-
-        $this->mapear($dataSet);
-
-        if (!empty($this->listado)) {
-            return $this->listado[0];
-        }
-        return null;
-    }
     public function traerPorIdUsuario($id){
         try {
             $sql = "SELECT * FROM $this->tabla WHERE id_usuario=$id"; // getcliente es un STORED PROCEDURE
@@ -133,25 +116,26 @@ TAG;
             die();
         }
     }
-    public function traerPorMail($email)
+    public function traerPorEmail($email)
     {
-        /** @noinspection SqlResolve */
-        $sql = "CALL getcliente($email)";
-
-        $conexion = Conexion::conectar();
-
-        $sentencia = $conexion->prepare($sql);
-
-        $sentencia->execute();
-
-        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
-
-        $this->mapear($dataSet);
-
-        if (!empty($this->listado[0])) {
-            return $this->listado[0];
+        try {
+            $sql = ("SELECT cli.* FROM $this->tabla as cli INNER JOIN usuarios as us ON 
+                      cli.id_usuario=us.id_usuario WHERE us.email = \"$email\" ");
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+            if($dataSet[0]) {
+                $this->mapear($dataSet);
+            }
+            if (!empty($this->listado[0])) {
+                return $this->listado[0];
+            }
+            return null;
+        }catch (\PDOException $e){
+            echo "ERROR_BD_TREARPORUSUARIO: {$e->getMessage()}";
+            die();
         }
-        return null;
     }
 
     public function mapear($dataSet)
@@ -167,9 +151,11 @@ TAG;
                     $cliente->setDni($p['dni']);
                 }
                 if($p['id_usuario']){
-                    $usuario = UsuarioBdDao::getInstance()->traerPorId($p['id_usuario']);
+                    $usuario = UsuarioBdDao::getInstance()->retrieve($p['id_usuario']);
                     $cliente->setUsuario($usuario);
                 }
+                if($p['id_fb'])
+                    $cliente->setIdFb($p['id_fb']);
                 $cliente->setId($p['id_cliente']);
                 return $cliente;
             }, $dataSet);
@@ -186,8 +172,41 @@ TAG;
         // TODO: Implement delete() method.
     }
 
+    public function getForIdFacebook($id){
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE id_fb= $id ";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+            if($dataSet[0]) {
+                $this->mapear($dataSet);
+            }
+            if (!empty($this->listado)) {
+                return $this->listado[0];
+            }
+            return false;
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
+    }
     public function retrieve($id)
     {
-        // TODO: Implement retrieve() method.
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE id_cliente= $id ";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado[0];
+            }
+            return false;
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
     }
 }

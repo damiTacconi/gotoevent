@@ -20,7 +20,12 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <!-- <i class="fas fa-user-circle fa-fw"></i> -->
                 <img src="<?= $_SESSION['picture_url'] ?> "
-                     alt="" width="25px" class="rounded-circle"> <?= $_SESSION['first_name'] ?>
+                     alt="" width="25px" class="rounded-circle"> <?php if(isset($_SESSION['fb_access_token'])) {
+                            echo $_SESSION['first_name'];
+                         }else {
+                             echo $_SESSION['email'];
+                            }
+                     ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="userDropdown">
                 <a class="dropdown-item text-white" href="#">Settings</a>

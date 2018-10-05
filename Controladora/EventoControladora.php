@@ -55,27 +55,7 @@ class EventoControladora extends PaginaControladora
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin' ){
             $this->page('inicioAdmin', 'Administrar', 2);
         }else{
-            $eventos = $this->eventoDao->getAll();
-            $eventos = array_map(function ($ev){
-                $calendarios = $this->calendarioDao->traerPorIdEvento($ev->getId());
-                if($calendarios) {
-                    $calendarios = array_map(function ($cal) {
-                        $id = $cal->getId();
-                        $shows = $this->showDao->traerPorIdCalendario($id);
-                        $plazaEventos = $this->plazaEventoDao->traerPorIdCalendario($id);
-                        if ($shows)
-                            $cal->setShows($shows);
-                        if ($plazaEventos)
-                            $cal->setPlazaEventos($plazaEventos);
-                        return $cal;
-                    }, $calendarios);
-                    $ev->setCalendarios($calendarios);
-                }
-
-                return $ev;
-            }, $eventos);
-            $params['eventos'] = $eventos;
-            $this->page("inicio","GoToEvent",0,$params);
+            $this->page();
         }
     }
 

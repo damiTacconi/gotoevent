@@ -58,7 +58,7 @@ class FacebookControladora
 
             try {
                 // Returns a `Facebook\FacebookResponse` object
-                $response = $fb->get('/me?fields=id,name,email,first_name,location,picture{url},last_name', $_SESSION['fb_access_token']);
+                $response = $fb->get('/me?fields=id,name,email,first_name,picture{url},last_name', $_SESSION['fb_access_token']);
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
                 echo 'Graph returned an error: ' . $e->getMessage();
                 exit;
@@ -75,6 +75,7 @@ class FacebookControladora
             /*
              * Ingreso los datos en la sesion
              */
+            $_SESSION['id']             = $userData['id'];
             $_SESSION['name']           = $userData['name'];
             $_SESSION['email']          = $userData['email'];
             $_SESSION['first_name']     = $userData['first_name'];

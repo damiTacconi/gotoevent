@@ -12,10 +12,11 @@ namespace Modelo;
 
 class Cliente
 {
-    private $id;
+    protected $id;
     protected $nombre;
     protected $apellido;
     protected $dni;
+    protected $id_fb;
     protected $usuario = null;
 
     function __construct($nombre, $apellido)
@@ -25,23 +26,19 @@ class Cliente
     }
 
     /**
-     * @return null
+     * @return mixed
      */
-    public function getUsuario()
+    public function getId()
     {
-        return $this->usuario;
+        return $this->id;
     }
 
     /**
-     * @param null $usuario
+     * @param mixed $id
      */
-    public function setUsuario($usuario): void
+    public function setId($id): void
     {
-        $this->usuario = $usuario;
-    }
-
-    function setId($id){
-        $this->id=$id;
+        $this->id = $id;
     }
 
     /**
@@ -91,5 +88,39 @@ class Cliente
     {
         $this->dni = $dni;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdFb()
+    {
+        return $this->id_fb;
+    }
+
+    /**
+     * @param mixed $id_fb
+     */
+    public function setIdFb($id_fb): void
+    {
+        $this->id_fb = $id_fb;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * @param null $usuario
+     */
+    public function setUsuario($usuario): void
+    {
+        $this->usuario = $usuario;
+    }
+
+
 
 }
