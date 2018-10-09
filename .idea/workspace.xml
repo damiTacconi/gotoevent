@@ -2,42 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c648f63-f815-4177-89d2-2b100f6d0dcc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config/Request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controladora/CompraControladora.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controladora/CompraControladora.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controladora/EventoControladora.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controladora/EventoControladora.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controladora/SedeControladora.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controladora/SedeControladora.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dao/EventoBdDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/EventoBdDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dao/LineaBdDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/LineaBdDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dao/PlazaEventoBdDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/PlazaEventoBdDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dao/SedeBdDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/SedeBdDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modelo/Cliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Cliente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modelo/Compra.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Compra.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modelo/Evento.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Evento.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modelo/Linea.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Linea.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modelo/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modelo/PlazaEvento.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/PlazaEvento.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modelo/Sede.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Sede.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modelo/TipoPlaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/TipoPlaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modelo/Usuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Usuario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/admin/altas/agregarCalendario.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/altas/agregarCalendario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/admin/altas/agregarEvento.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/altas/agregarEvento.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/admin/altas/agregarPlaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/altas/agregarPlaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/admin/crearEvento.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/crearEvento.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/admin/crearSede.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/crearSede.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/admin/header-admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/header-admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/admin/listado/listadoCalendariosDeEventos.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/listado/listadoCalendariosDeEventos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/admin/listado/listadoEventos.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/listado/listadoEventos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/admin/listado/listadoSede.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/listado/listadoSede.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/admin/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/sidebar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/card-event.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/card-event.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/carrito.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/carrito.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/navbar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/css/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -180,7 +145,7 @@
     <session id="663460854">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.2" value="1" />
@@ -260,7 +225,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Controladora/CompraControladora.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-492">
+            <state relative-caret-position="2952">
               <caret line="233" selection-start-line="233" selection-end-line="233" />
               <folding>
                 <element signature="e#114#138#0#PHP" expanded="true" />
@@ -656,16 +621,15 @@
       <workItem from="1538849666633" duration="12972000" />
       <workItem from="1538883034662" duration="5079000" />
       <workItem from="1538926259622" duration="13652000" />
-      <workItem from="1539019314686" duration="14699000" />
+      <workItem from="1539019314686" duration="15347000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="486698000" />
+    <option name="totallyTimeSpent" value="487346000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15425532" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -680,7 +644,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49848023" visible="true" weight="0.12295082" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49848023" visible="true" weight="0.15409836" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50151974" side_tool="true" weight="0.021311475" />
       <window_info anchor="bottom" id="Database Console" order="12" weight="0.013114754" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -1069,7 +1033,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Controladora/CompraControladora.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-492">
+        <state relative-caret-position="2952">
           <caret line="233" selection-start-line="233" selection-end-line="233" />
           <folding>
             <element signature="e#114#138#0#PHP" expanded="true" />

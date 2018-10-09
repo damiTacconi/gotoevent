@@ -102,16 +102,16 @@ class CompraControladora extends PaginaControladora
     private function generateLine($compra , $subtotales , $cantidades , $plazaEventos ){
         if($plazaEventos){
             foreach ($plazaEventos as $key => $plaza){
+                $linea = new Linea($plaza,$cantidades[$key],$subtotales[$key],$compra);
+                $id_linea = $this->lineaDao->save($linea);
+                $linea->setId($id_linea);
+                $remanente = $plaza->getRemanente();
+                $remanente--;
+                $plaza->setRemanente($remanente);
+                $this->eventPlaceDao->update($plaza);
+                
                 for($i=0; $i<$cantidades[$key];$i++) {
-                   $linea = new Linea($plaza,$cantidades[$key],$subtotales[$key],$compra);
-                   $id_linea = $this->lineaDao->save($linea);
-                   $linea->setId($id_linea);
-                   $remanente = $plaza->getRemanente();
-                   $remanente--;
-                   $plaza->setRemanente($remanente);
-                   $this->eventPlaceDao->update($plaza);
                    $this->generateTicket($linea);
-
                 }
             }
         }
