@@ -18,7 +18,7 @@ class LineaBdDao extends SingletonDao implements IDao
     public function save($data)
     {
         try{
-            $sql = ("INSERT INTO  $this->tabla (subtotal,id_plaza_evento,id_compra,cantidad) 
+            $sql = ("INSERT INTO  $this->tabla (subtotal,id_plaza_evento,id_compra,cantidad)
                     VALUES (:subtotal,:id_plaza_evento,:id_compra,:cantidad)");
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
@@ -35,7 +35,7 @@ class LineaBdDao extends SingletonDao implements IDao
             $sentencia->execute();
             return $conexion->lastInsertId();
         }catch (\PDOException $e){
-            echo "EXCEPCION_COMPRA_SAVE: {$e->getMessage()}";
+            echo "EXCEPCION_LINEA_SAVE: {$e->getMessage()}";
             die();
         }
     }

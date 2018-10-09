@@ -74,7 +74,7 @@ class CompraControladora extends PaginaControladora
         $calendario = $plazaEvento->getCalendario();
         $evento = $calendario->getEvento();
         $imagenes = str_replace("\\" , "/" , $imagenes);
-        $html = ("<h1><img style='vertical-align: middle' src='cid:icon'><span>GoToEvent</span> </h1>    
+        $html = ("<h1><img style='vertical-align: middle' src='cid:icon'><span>GoToEvent</span> </h1>
                             <p>Gracias {$_SESSION['name']} , su ticket fue generado: </p>
                             <p>Ticket <strong>N°{$numberTicket}</strong></p>
                             <div style='text-align: center'><img src='cid:qr'></div>
@@ -106,13 +106,16 @@ class CompraControladora extends PaginaControladora
                 $id_linea = $this->lineaDao->save($linea);
                 $linea->setId($id_linea);
                 $remanente = $plaza->getRemanente();
-                $remanente--;
-                $plaza->setRemanente($remanente);
-                $this->eventPlaceDao->update($plaza);
-                
+
                 for($i=0; $i<$cantidades[$key];$i++) {
+                  $remanente--;
                    $this->generateTicket($linea);
                 }
+
+                $plaza->setRemanente($remanente);
+                $this->eventPlaceDao->update($plaza);
+
+
             }
         }
     }
@@ -214,16 +217,43 @@ class CompraControladora extends PaginaControladora
 
     /* FUNCIONES AJAX */
 
-    function consultarVentasPorCalendarioAjax($id_calendario){
-        if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['rol'] === 'admin'){
+    function consultarAjax($id_evento){
+      if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['rol'] === 'admin'){
+
+        $eventoDao = $this->eventDao;
+        $calendarioDao = $this->calendarDao;
+        $lineaDao = $this->lineaDao;
+        $plazaEventoDao = $this->eventPlaceDao;
+
+        $evento = $eventoDao->retrieve($id_evento);
+        $params = [];
+        if($evento){
+          $calendarios = $calendarioDao->traerPorIdEvento($id_evento);
+          foreach ($calendarios as $key => $value) {
+              $params[] = $this->consultarVentasPorCalendario($value->getId());
+          }
+        }
+        echo json_encode($params);
+
+      }else header("location: /");
+    }
+
+
+    private function consultarVentasPorCalendario($id_calendario){
             $plazaEventoDao = $this->eventPlaceDao;
             $plazaEventos = $plazaEventoDao->traerPorIdCalendario($id_calendario);
             $cantidadRemanentes = 0;
             $params = [];
             if($plazaEventos) {
+              $calendario = $this->calendarDao->retrieve($id_calendario);
+              $calendarioJSON = $calendario->jsonSerialize();
+              $params['calendario'] = $calendarioJSON;
+
                 foreach ($plazaEventos as $plaza) {
                     $cantidadRemanentes += $plaza->getRemanente();
                 }
+                $params['cantidad_remanentes_totales'] = $cantidadRemanentes;
+
                 $lineasMulti = array_map(function ($plaza) {
                     $lineaDao = $this->lineaDao;
                     $id_plaza = $plaza->getId();
@@ -240,16 +270,14 @@ class CompraControladora extends PaginaControladora
                     $lineasJSON = array_map(function ($linea) {
                         return $linea->jsonSerialize();
                     }, $lineasSingle);
-                    $calendario = $this->calendarDao->retrieve($id_calendario);
-                    $calendarioJSON = $calendario->jsonSerialize();
                     $params['lineas'] = $lineasJSON;
-                    $params['calendario'] = $calendarioJSON;
                     $params['cantidad_ventas_totales'] = $cantidadVentas;
-                    $params['cantidad_remanentes_totales'] = $cantidadRemanentes;
+                }else{
+                  $params['lineas'] = [];
+                  $params['cantidad_ventas_totales'] = 0;
                 }
             }
-            echo json_encode($params);
-        }else header("location: /");
+            return $params;
     }
 
     private function contarCantidadVentas($lineas){

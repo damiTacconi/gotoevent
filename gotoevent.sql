@@ -7,6 +7,8 @@
 -- Versión del servidor: 5.7.19-log
 -- Versión de PHP: 7.2.4
 
+CREATE DATABASE gotoevent;
+USE gotoevent;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -21,20 +23,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `gotoevent`
 --
-
-DELIMITER $$
---
--- Procedimientos
---
-DROP PROCEDURE IF EXISTS `getcliente`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getcliente` (IN `email` VARCHAR(50), IN `password` VARCHAR(20))  begin
-select cli.* from clientes cli inner join usuarios us on cli.id_usuario=us.id_usuario where
-us.email=email and us.password=password;
-end$$
-
-DELIMITER ;
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `artistas`

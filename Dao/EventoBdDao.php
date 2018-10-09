@@ -69,9 +69,9 @@ class EventoBdDao extends SingletonDao implements IDao
     public function save($data)
     {
         try{
-            $sql = ("INSERT INTO  $this->tabla 
-            (titulo,fecha_desde,fecha_hasta,id_categoria, id_imagen,id_sede,descripcion) 
-                    VALUES 
+            $sql = ("INSERT INTO  $this->tabla
+            (titulo,fecha_desde,fecha_hasta,id_categoria, id_imagen,id_sede,descripcion)
+                    VALUES
             (:titulo,:fecha_desde,:fecha_hasta,:id_categoria, :id_imagen, :id_sede, :descripcion)");
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
@@ -105,7 +105,7 @@ class EventoBdDao extends SingletonDao implements IDao
     public function update($data)
     {
         try {
-            $sql = ( "UPDATE $this->tabla 
+            $sql = ( "UPDATE $this->tabla
                 SET titulo = :titulo, fecha_desde = :fecha_desde, fecha_hasta = :fecha_hasta,
                  id_categoria = :id_categoria, id_imagen = :id_imagen, id_sede = :id_sede, descripcion=:descripcion
                   WHERE id_evento = :id" );

@@ -13,15 +13,15 @@
             <!-- FORMULARIOS -->
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="card border-dark mb-3">
+                    <div class="col-12 col-md-4">
+                        <div class="card border-grey mb-3">
                             <div class="card-header">Consultar cantidad de ventas </div>
                             <div class="card-body text-dark">
                                 <div class="form">
                                     <div class="form-row">
-                                        <div class="form-group col-6">
+                                        <div class="form-group col-12">
                                             <label for="selectEvento">Evento </label>
-                                            <select onchange="actualizarCalendario()" name="eventoSelect" id="selectEvento"
+                                            <select onchange="consultarEvento()" name="eventoSelect" id="selectEvento"
                                                 class="form-control" required>
                                                 <option value="" selected disabled>Elegir evento...</option>
                                                 <?php if(!empty($param['eventos'])) {?>
@@ -33,26 +33,52 @@
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-6">
-                                            <label>Calendarios</label>
-                                            <select name="artistaSelect" id="selectCalendario" class="form-control"
-                                                required>
-                                                <option value="" selected disabled>Elegir calendario...</option>
-                                            </select>
-                                        </div>
+
                                     </div>
-                                    <button onclick="consultarEvento();" class="btn btn-primary">Consultar</button>
-                                    <button onclick="consultarPorCalendario();" class="btn btn-secondary">Consultar Por
-                                        Calendario</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                      <div class="card mb-3">
+                          <div class="card-header">
+                              <i class="fas fa-table"></i>
+                              Cantidad de Ventas y Remanentes</div>
+                          <div class="card-body">
+                              <div class="table-responsive">
+                                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                      <thead>
+                                      <tr>
+                                          <th>Id</th>
+                                          <th>Fecha</th>
+                                          <th>N° Ventas</th>
+                                          <th>N° Remanentes</th>
+                                      </tr>
+                                      </thead>
+                                      <tfoot>
+                                      <tr>
+                                          <th>Id</th>
+                                          <th>Fecha</th>
+                                          <th>N° Ventas</th>
+                                          <th>N° Remanentes</th>
+                                      </tr>
+                                      </tfoot>
+                                      <tbody>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
                     </div>
                 </div>
             </div>
 
             <!-- FIN FORMULARIOS -->
             <hr>
+
+            <div class="container-fluid">
+
+            </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -73,28 +99,6 @@
 
 
 <script type="text/javascript">
-    function actualizarCalendario() {
-        let id = $('#selectEvento option:selected').val();
-        let obj = {
-            id: id
-        };
-        ajaxURL('/evento/getCalendariosAjax/', data => {
-            let result = JSON.parse(data);
-            let $selectCalendario = $('#selectCalendario');
-            $selectCalendario.find('option').not(':first').remove();
-            if (result != Array) {
-                if (result['evento']['calendarios'].length >= 1) {
-                    let calendarios = result['evento']['calendarios'];
-                    let option = '';
-                    for (let i = 0; i < calendarios.length; i++) {
-                        option += '<option value="' + calendarios[i].id_calendario + '">' + calendarios[i].fecha +
-                            '</option>';
-                    }
-                    $selectCalendario.append(option);
-                }
-            }
-        }, 'POST', obj);
-    }
 
     function consultarEvento() {
         let id_evento = $('#selectEvento option:selected').val();
@@ -103,41 +107,20 @@
                 alertify.success('Ok');
             });
         else {
-            ajaxURL( "/evento/consultar/"+id_evento, data => {
-                result = JSON.parse(data);
-                
-            });
-        }
-    }
 
-    function consultarPorCalendario() {
-        let id_calendario = $('#selectCalendario option:selected').val();
-        if (id_calendario === "")
-            alertify.alert('Ups', 'Debe seleccionar un calendario', function () {
-                alertify.success('Ok');
-            });
-        else {
-            let obj = {
-                id : id_calendario
-            }
-            ajaxURL( "/compra/consultarVentasPorCalendarioAjax/", data => {
-                alertify.alert(data);
-
+            obj = {id: id_evento};
+            ajaxURL( "/compra/consultarAjax/", data => {
                 let result = JSON.parse(data);
-                let sizeJSON = Object.keys(result).length;
-
-                if(sizeJSON > 0){
-                        alertify.alert("CANTIDAD VENTAS Y REMANENTES",`
-                            <div class="text-center">
-                            <h3>Evento: <strong> ${result['calendario']['evento']['titulo'] }</strong> </h3>
-                            <h4>Fecha: <strong> ${result['calendario']['fecha']} </strong> </h4>
-                            <hr>
-                            <p>Cantidad de Ventas: <strong> ${result['cantidad_ventas_totales']} </strong> </p>
-                            <p>Cantidad de Remanentes: <strong> ${result['cantidad_remanentes_totales']}</strong> </p>
-                            </div>
-                        `).set('resizable',true).resizeTo("50%",350);
-                }else{
-                    alertify.alert("UPS" , "NO HAY REGISTROS AUN");
+                let table = $('#dataTable').DataTable();
+                table.clear();
+                let cant = Object.keys(result).length;
+                for(let i=0;i<cant;i++){
+                  table.row.add([
+                    result[i]['calendario']['id_calendario'],
+                    result[i]['calendario']['fecha'],
+                    result[i]['cantidad_ventas_totales'],
+                    result[i]['cantidad_remanentes_totales']
+                  ]).draw();
                 }
             }, "POST" , obj);
         }
