@@ -7,9 +7,9 @@
  */
 
 namespace Modelo;
+use JsonSerializable;
 
-
-class Compra
+class Compra implements JsonSerializable
 {
     private $id;
     private $fecha;
@@ -23,6 +23,17 @@ class Compra
      $this->total = $total;
      $this->fecha = $fecha;
    }
+
+    public function jsonSerialize()
+    {
+        return [
+          "id_compra" => $this->id,
+          "fecha" => $this->fecha,
+            "total" => $this->total,
+          "cliente" => $this->cliente->jsonSerialize()
+        ];
+    }
+
 
     /**
      * @return mixed

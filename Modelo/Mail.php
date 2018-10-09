@@ -12,7 +12,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class Mail
 {
-    function enviarMail( $html , $email, $imagenes){
+    function enviarMail( $subjet, $html , $email, $imagenes){
         include_once '../lib/mail/src/PHPMailer.php';
         include_once '../lib/mail/src/SMTP.php';
 
@@ -35,7 +35,7 @@ class Mail
             }
         }else $mail->addAddress($email);
         $mail->isHTML(true);
-        $mail->Subject = "GoToEvent - TICKET";
+        $mail->Subject = $subjet;
         $mail->Body    = $html;
 
         if(isset($imagenes)){

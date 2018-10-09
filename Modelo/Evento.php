@@ -17,17 +17,62 @@ class Evento implements JsonSerializable
     private $fecha_desde;
     private $fecha_hasta;
     private $categoria;
+    private $sede;
+    private $descripcion;
     private $eventoImagen = null;
 
+
+    /*
+        $calendarios es un atributo que se le asignara un valor cuando se devuelva el evento
+        de la basde de datos, y se devuelvan los calendarios por su id. Estos calendarios se
+        almacenaran en el array.
+    */
     private $calendarios = [];
 
-    function __construct($titulo,$fecha_desde,$fecha_hasta,$categoria)
+
+    function __construct($titulo, $fecha_desde, $fecha_hasta, $categoria, $sede , $descripcion)
     {
         $this->categoria = $categoria;
         $this->fecha_desde = $fecha_desde;
+        $this->sede = $sede;
         $this->fecha_hasta = $fecha_hasta;
         $this->titulo = $titulo;
+        $this->descripcion = $descripcion;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * @param mixed $descripcion
+     */
+    public function setDescripcion($descripcion): void
+    {
+        $this->descripcion = $descripcion;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getSede()
+    {
+        return $this->sede;
+    }
+
+    /**
+     * @param mixed $sede
+     */
+    public function setSede($sede): void
+    {
+        $this->sede = $sede;
+    }
+
 
     /**
      * @return mixed
@@ -167,7 +212,9 @@ class Evento implements JsonSerializable
             'fecha_desde' => $this->fecha_desde,
             'fecha_hasta' => $this->fecha_hasta,
             'categoria' => $this->categoria->jsonSerialize(),
+            'sede' => $this->sede->jsonSerialize(),
             'evento_imagen' => $this->eventoImagen->jsonSerialize(),
+            'descripcion' => $this->descripcion,
             'calendarios' => $this->calendariosToArray()
         ];
     }

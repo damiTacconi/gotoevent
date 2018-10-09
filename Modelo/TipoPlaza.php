@@ -31,6 +31,7 @@ class TipoPlaza implements JsonSerializable
     {
         return[
             'id_tipo_plaza' => $this->id,
+            'sede' => $this->sede->jsonSerialize(),
             'descripcion' => $this->descripcion
         ];
     }

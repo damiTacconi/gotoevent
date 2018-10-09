@@ -43,6 +43,12 @@ body{ background-color: #F4F4F4; }
   transition: 0.5s;
 }
 
+.fixed-cart{
+    background-color: #1d2124;
+    position: fixed;
+    right: 2vw;
+    bottom: 50vh;
+}
 .overlay-content {
   position: relative;
   top: 25%;

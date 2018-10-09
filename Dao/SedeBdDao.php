@@ -51,11 +51,13 @@ class SedeBdDao extends SingletonDao implements IDao
     public function save($data)
     {
         try{
-            $sql = "INSERT INTO  $this->tabla (descripcion) VALUES (:descripcion)";
+            $sql = "INSERT INTO  $this->tabla (descripcion , capacidad) VALUES (:descripcion,:capacidad)";
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $nombre = $data->getNombre();
+            $capacidad = $data->getCapacidad();
             $sentencia->bindParam(":descripcion",$nombre);
+            $sentencia->bindParam(":capacidad",$capacidad);
             $sentencia->execute();
             return $conexion->lastInsertId();
         }catch (\PDOException $e){
@@ -67,11 +69,14 @@ class SedeBdDao extends SingletonDao implements IDao
     public function update($data)
     {
         try {
-            $sql = "UPDATE $this->tabla SET descripcion=:descripcion WHERE id_sede = :id_sede";
+            $sql = "UPDATE $this->tabla SET descripcion=:descripcion, capacidad=:capacidad
+            WHERE id_sede = :id_sede";
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
-            $descripcion = $data->getDescripcion();
-            $sentencia->bindParam(":descripcion", $descripcion);
+            $nombre = $data->getNombre();
+            $capacidad = $data->getCapacidad();
+            $sentencia->bindParam(":descripcion", $nombre);
+            $sentencia->bindParam(":capacidad",$capacidad);
             $sentencia->execute();
         }catch (\PDOException $e){
             die("OCURRIO UN ERROR EN BASE DE DATOS");
@@ -154,7 +159,7 @@ class SedeBdDao extends SingletonDao implements IDao
         $dataSet = is_array($dataSet) ? $dataSet : [];
         //if($dataSet[0]) {
         $this->listado = array_map(function ($p) {
-            $sede = new Sede($p['descripcion']);
+            $sede = new Sede($p['descripcion'],$p['capacidad']);
             $sede->setId($p['id_sede']);
             return $sede;
         }, $dataSet);

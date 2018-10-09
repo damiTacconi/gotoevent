@@ -69,8 +69,10 @@ class EventoBdDao extends SingletonDao implements IDao
     public function save($data)
     {
         try{
-            $sql = ("INSERT INTO  $this->tabla (titulo,fecha_desde,fecha_hasta,id_categoria, id_imagen) 
-                    VALUES (:titulo,:fecha_desde,:fecha_hasta,:id_categoria, :id_imagen)");
+            $sql = ("INSERT INTO  $this->tabla 
+            (titulo,fecha_desde,fecha_hasta,id_categoria, id_imagen,id_sede,descripcion) 
+                    VALUES 
+            (:titulo,:fecha_desde,:fecha_hasta,:id_categoria, :id_imagen, :id_sede, :descripcion)");
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $titulo = $data->getTitulo();
@@ -79,6 +81,9 @@ class EventoBdDao extends SingletonDao implements IDao
             $categoria = $data->getCategoria();
             $id_categoria = $categoria->getId();
             $imagen = $data->getEventoImagen();
+            $sede = $data->getSede();
+            $id_sede = $sede->getId();
+            $descripcion = $data->getDescripcion();
             if($imagen){
                 $id_imagen = $imagen->getId();
             }else $id_imagen = null;
@@ -87,6 +92,8 @@ class EventoBdDao extends SingletonDao implements IDao
             $sentencia->bindParam(":fecha_hasta",$fecha_hasta);
             $sentencia->bindParam(":id_categoria",$id_categoria);
             $sentencia->bindParam(":id_imagen", $id_imagen);
+            $sentencia->bindParam(":id_sede",$id_sede);
+            $sentencia->bindParam(":descripcion",$descripcion);
             $sentencia->execute();
             return $conexion->lastInsertId();
         }catch (\PDOException $e){
@@ -98,9 +105,10 @@ class EventoBdDao extends SingletonDao implements IDao
     public function update($data)
     {
         try {
-            $sql = "UPDATE $this->tabla 
+            $sql = ( "UPDATE $this->tabla 
                 SET titulo = :titulo, fecha_desde = :fecha_desde, fecha_hasta = :fecha_hasta,
-                 id_categoria = :id_categoria, id_imagen = :id_imagen WHERE id_evento = :id";
+                 id_categoria = :id_categoria, id_imagen = :id_imagen, id_sede = :id_sede, descripcion=:descripcion
+                  WHERE id_evento = :id" );
 
             $conexion = Conexion::conectar();
 
@@ -114,12 +122,17 @@ class EventoBdDao extends SingletonDao implements IDao
             $eventoImagen = $data->getEventoImagen();
             $id_imagen = $eventoImagen->getId();
             $id_evento = $data->getId();
+            $sede = $data->getSede();
+            $id_sede = $sede->getId();
+            $descripcion = $data->getDescripcion();
 
             $sentencia->bindParam(":titulo", $titulo);
             $sentencia->bindParam(":fecha_desde", $fecha_desde);
             $sentencia->bindParam(":fecha_hasta", $fecha_hasta);
             $sentencia->bindParam(":id_categoria", $id_categoria);
-            $sentencia->bindParam("id_imagen",$id_imagen);
+            $sentencia->bindParam(":id_imagen",$id_imagen);
+            $sentencia->bindParam(":id_sede",$id_sede);
+            $sentencia->bindParam(":descripcion",$descripcion);
             $sentencia->bindParam(":id",$id_evento);
 
             $sentencia->execute();
@@ -172,8 +185,10 @@ class EventoBdDao extends SingletonDao implements IDao
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
             $categoriaDao = CategoriaBdDao::getInstance();
+            $sedeDao = SedeBdDao::getInstance();
+            $sede = $sedeDao->retrieve($p['id_sede']);
             $categoria = $categoriaDao->retrieve($p['id_categoria']);
-            $evento = new Evento($p['titulo'],$p['fecha_desde'],$p['fecha_hasta'],$categoria);
+            $evento = new Evento($p['titulo'],$p['fecha_desde'],$p['fecha_hasta'],$categoria,$sede,$p['descripcion']);
             $evento->setId($p['id_evento']);
             if($p['id_imagen']){
                 $imagenDao = EventoImagenBdDao::getInstance();

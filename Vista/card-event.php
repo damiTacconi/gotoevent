@@ -10,7 +10,7 @@
     </div>
     <div class="description">
         <h1><?=  $evento->getTitulo() ?></h1>
-        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati.</p>
+        <p> <?= $evento->getDescripcion() ?></p>
         <p class="read-more">
             <?php  if(!empty($calendarios)){ ?>
                 <a href="/compra/evento/<?= $evento->getId() ?>" class="btn btn-success">COMPRAR</a>

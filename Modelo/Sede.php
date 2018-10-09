@@ -14,7 +14,21 @@ class Sede implements JsonSerializable
 {
     private $id;
     private $nombre;
+    private $capacidad;
+    /**/
     private $plazas = [];
+
+    /**
+     * Sede constructor.
+     * @param $nombre
+     * @param $capacidad
+     */
+    public function __construct($nombre , $capacidad)
+    {
+        $this->nombre = $nombre;
+        $this->capacidad = $capacidad;
+    }
+
 
     public function jsonSerialize()
     {
@@ -24,6 +38,23 @@ class Sede implements JsonSerializable
           'plazas' => $this->plazasToArray()
         ];
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCapacidad()
+    {
+        return $this->capacidad;
+    }
+
+    /**
+     * @param mixed $capacidad
+     */
+    public function setCapacidad($capacidad): void
+    {
+        $this->capacidad = $capacidad;
+    }
+
 
     private function plazasToArray(){
         $plazas = array_map(function($plaza){
@@ -45,17 +76,6 @@ class Sede implements JsonSerializable
     public function setPlazas(array $plazas): void
     {
         $this->plazas = $plazas;
-    }
-
-
-
-    /**
-     * Sede constructor.
-     * @param $nombre
-     */
-    public function __construct($nombre)
-    {
-        $this->nombre = $nombre;
     }
 
     /**

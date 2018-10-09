@@ -25,6 +25,7 @@
                                 <th>Id</th>
                                 <th>Imagen</th>
                                 <th>Titulo</th>
+                                <th>Sede</th>
                                 <th>Fecha Desde</th>
                                 <th>Fecha Hasta</th>
                                 <th>Categoria</th>
@@ -38,6 +39,7 @@
                                 <th>Id</th>
                                 <th>Imagen</th>
                                 <th>Titulo</th>
+                                <th>Sede</th>
                                 <th>Fecha Desde</th>
                                 <th>Fecha Hasta</th>
                                 <th>Categoria</th>
@@ -60,9 +62,14 @@
                                         <img src="<?= $url ?>" width="50px" alt="Imagen de Evento">
                                     </td>
                                     <td><?= $evento->getTitulo() ?></td>
+                                    <td><?= $evento->getSede()->getNombre() ?></td>
                                     <td><?= $evento->getFechaDesde() ?></td>
                                     <td><?= $evento->getFechaHasta() ?></td>
-                                    <td><?= $evento->getCategoria()->getDescripcion() ?> </td>
+                                    <td>
+                                        <div class="more">
+                                            <?= $evento->getCategoria()->getDescripcion() ?>
+                                        </div>
+                                    </td>
                                     <td><a href="/evento/calendarios/<?= $evento->getId()?>" class="btn btn-info"><i class="far fa-calendar-alt"></i></a></td>
                                     <td style="width:30px;"><button data-toggle="modal"
                                      onclick='actualizar(<?= json_encode($array_evento) ?>)'
@@ -155,12 +162,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="updateIdImagen">Id Evento</label>
-                        <input readonly type="number" name="id" class="form-control" id="updateId">
-                    </div>
-                    <input readonly type="hidden" name="id_imagen" class="form-control" id="updateIdImagen">
                 </div>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label for="updateDescripcion">Descripcion</label>
+                            <textarea class="form-control" maxlength="200" rows="2" name="descripcion" id="updateDescripcion"></textarea>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="updateIdImagen">Id Evento</label>
+                            <input readonly type="number" name="id" class="form-control" id="updateId">
+                        </div>
+                        <input readonly type="hidden" name="id_imagen" class="form-control" id="updateIdImagen">
+                    </div>
             </div>
             <div class="modal-footer text-white">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -214,12 +227,13 @@
         $('#updateTitulo').val(evento['titulo']);
         //console.log(evento);
         let id_categoria = evento['categoria']['id_categoria'];
-        console.log(id_categoria);
         $('#updateCategoria option[value='+id_categoria+']').prop('selected',true);
         $('#updateFechaDesde').val(evento['fecha_desde']);
         $('#updateFechaHasta').val(evento['fecha_hasta']);
         $('#updateId').val(evento['id_evento']);
         $('#updateIdImagen').val(evento['evento_imagen']['id_imagen']);
+        $('#updateDescripcion').val(evento['descripcion']);
         $('#updateModal').modal('toggle');
     }
+
 </script>

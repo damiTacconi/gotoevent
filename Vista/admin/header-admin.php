@@ -15,6 +15,7 @@
     <script src="/./js/ajax.js"></script>
 
     <!-- Core plugin JavaScript-->
+
     <script src="/./admin/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="/./js/moment.js"></script>
     <script src="/./js/es-do.js"></script>
@@ -23,8 +24,10 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
 
 
-
+    
     <title> <?= $title ?> </title>
+    
+
     <!-- Bootstrap core CSS-->
     <link href="/./admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -38,9 +41,18 @@
     <link href="/./admin/css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="/./css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
-    <link rel="stylesheet" href="/./css/style.css">
+   
+    
 
+<!-- JavaScript -->
+<script src="/./js/alertify.min.js"></script>
 
+<!-- CSS -->
+<link rel="stylesheet" href="/./css/css-alertify/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="/./css/css-alertify/themes/default.min.css"/>
+
+<link rel="stylesheet" href="/./css/style.css">
 </head>
 
 <body id="page-top">

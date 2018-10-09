@@ -85,7 +85,7 @@ class CompraControladora extends PaginaControladora
                             <p><i>Este codigo QR solo podra usarse una vez.</i></p>
                             <br>
                             <small>Equipo de GoToEvent - 2018</small>");
-        $mail->enviarMail($html,$_SESSION['email'] , $imagenes);
+        $mail->enviarMail("GoToEvent - TICKET", $html,$_SESSION['email'] , $imagenes);
     }
     private function generateTicket($line){
         $digits = 10;
@@ -103,7 +103,7 @@ class CompraControladora extends PaginaControladora
         if($plazaEventos){
             foreach ($plazaEventos as $key => $plaza){
                 for($i=0; $i<$cantidades[$key];$i++) {
-                   $linea = new Linea($plaza,$subtotales[$key],$compra);
+                   $linea = new Linea($plaza,$cantidades[$key],$subtotales[$key],$compra);
                    $id_linea = $this->lineaDao->save($linea);
                    $linea->setId($id_linea);
                    $remanente = $plaza->getRemanente();
@@ -141,7 +141,6 @@ class CompraControladora extends PaginaControladora
             $params['mensaje'] = $mensaje->getAlert();
             $params['TICKET_MODAL'] = "ON";
             $this->page("inicio" , "GoToEvent" , 0, $params);
-            //$compra = new Compra()
         }else header("location: /");
     }
     function clear(){
@@ -210,5 +209,54 @@ class CompraControladora extends PaginaControladora
             $params['calendarios'] = $calendarios;
             $this->page("comprarEvento", $evento->getTitulo(), 0, $params);
         }else header('location: /');
+    }
+
+
+    /* FUNCIONES AJAX */
+
+    function consultarVentasPorCalendarioAjax($id_calendario){
+        if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['rol'] === 'admin'){
+            $plazaEventoDao = $this->eventPlaceDao;
+            $plazaEventos = $plazaEventoDao->traerPorIdCalendario($id_calendario);
+            $cantidadRemanentes = 0;
+            $params = [];
+            if($plazaEventos) {
+                foreach ($plazaEventos as $plaza) {
+                    $cantidadRemanentes += $plaza->getRemanente();
+                }
+                $lineasMulti = array_map(function ($plaza) {
+                    $lineaDao = $this->lineaDao;
+                    $id_plaza = $plaza->getId();
+                    $lineas = $lineaDao->traerPorIdPlazaEvento($id_plaza);
+                    return $lineas;
+                }, $plazaEventos);
+                $lineasMulti = array_filter($lineasMulti);
+                if(!empty($lineasMulti)) {
+                    $lineasSingle = [];
+                    foreach ($lineasMulti as $arr) {
+                        $lineasSingle = array_merge($lineasSingle, $arr);
+                    }
+                    $cantidadVentas = $this->contarCantidadVentas($lineasSingle);
+                    $lineasJSON = array_map(function ($linea) {
+                        return $linea->jsonSerialize();
+                    }, $lineasSingle);
+                    $calendario = $this->calendarDao->retrieve($id_calendario);
+                    $calendarioJSON = $calendario->jsonSerialize();
+                    $params['lineas'] = $lineasJSON;
+                    $params['calendario'] = $calendarioJSON;
+                    $params['cantidad_ventas_totales'] = $cantidadVentas;
+                    $params['cantidad_remanentes_totales'] = $cantidadRemanentes;
+                }
+            }
+            echo json_encode($params);
+        }else header("location: /");
+    }
+
+    private function contarCantidadVentas($lineas){
+        $cantidad = 0;
+        foreach ($lineas as $linea){
+            $cantidad += $linea->getCantidad();
+        }
+        return $cantidad;
     }
 }

@@ -9,8 +9,8 @@
 namespace Modelo;
 
 
-
-class Cliente
+use JsonSerializable;
+class Cliente implements JsonSerializable
 {
     protected $id;
     protected $nombre;
@@ -24,6 +24,24 @@ class Cliente
         $this->apellido = $apellido;
         $this->nombre = $nombre;
     }
+
+    public function jsonSerialize()
+    {
+        $usuario = $this->usuario;
+        if($usuario){
+            $usuarioJson = $usuario->jsonSerialize();
+        }else $usuarioJson = null;
+
+        return [
+          "id_cliente" => $this->id,
+          "nombre" => $this->nombre,
+          "apellido" => $this->apellido,
+          "dni" => $this->dni,
+          "id_fb" => $this->id_fb,
+          "usuario" => $usuarioJson
+        ];
+    }
+
 
     /**
      * @return mixed

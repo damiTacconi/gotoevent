@@ -1,26 +1,28 @@
 <!-- HEADER -->
 <?php
         $eventos = \Dao\EventoBdDao::getInstance()->getAll();
-        $eventos = array_map(function ($ev){
-            $calendarioDao = \Dao\CalendarioBdDao::getInstance();
-            $calendarios = $calendarioDao->traerPorIdEvento($ev->getId());
-            if($calendarios) {
-                $calendarios = array_map(function ($cal) {
-                    $showDao = \Dao\ShowBdDao::getInstance();
-                    $plazaEventoDao = \Dao\PlazaEventoBdDao::getInstance();
-                    $id = $cal->getId();
-                    $shows = $showDao->traerPorIdCalendario($id);
-                    $plazaEventos = $plazaEventoDao->traerPorIdCalendario($id);
-                    if ($shows)
-                        $cal->setShows($shows);
-                    if ($plazaEventos)
-                        $cal->setPlazaEventos($plazaEventos);
-                    return $cal;
-                }, $calendarios);
-                $ev->setCalendarios($calendarios);
-            }
-            return $ev;
-        }, $eventos);
+        if($eventos) {
+            $eventos = array_map(function ($ev) {
+                $calendarioDao = \Dao\CalendarioBdDao::getInstance();
+                $calendarios = $calendarioDao->traerPorIdEvento($ev->getId());
+                if ($calendarios) {
+                    $calendarios = array_map(function ($cal) {
+                        $showDao = \Dao\ShowBdDao::getInstance();
+                        $plazaEventoDao = \Dao\PlazaEventoBdDao::getInstance();
+                        $id = $cal->getId();
+                        $shows = $showDao->traerPorIdCalendario($id);
+                        $plazaEventos = $plazaEventoDao->traerPorIdCalendario($id);
+                        if ($shows)
+                            $cal->setShows($shows);
+                        if ($plazaEventos)
+                            $cal->setPlazaEventos($plazaEventos);
+                        return $cal;
+                    }, $calendarios);
+                    $ev->setCalendarios($calendarios);
+                }
+                return $ev;
+            }, $eventos);
+        }
     if(isset($param['TICKET_MODAL'])){
         ?>
         <!-- Central Modal Medium Success -->
@@ -69,7 +71,12 @@
 
 <?php include "header-inicio.php" ?>
 <!-- FIN HEADER -->
-<?php include 'example.php' ?>
+
+<?php
+if($eventos) {
+    include 'example.php';
+}
+?>
 <?php include "modalRegister.php"; ?>
 <script type="text/javascript">
 

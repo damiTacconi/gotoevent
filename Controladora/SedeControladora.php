@@ -7,6 +7,7 @@
  */
 
 namespace Controladora;
+use Dao\EventoBdDao;
 use Dao\SedeBdDao;
 use Dao\TipoPlazaBdDao;
 use Modelo\Mensaje;
@@ -17,8 +18,11 @@ class SedeControladora extends PaginaControladora
 {
     private $sedeDao;
     private $tipoPlazaDao;
+    private $eventoDao;
+
     function __construct()
     {
+        $this->eventoDao = EventoBdDao::getInstance();
         $this->sedeDao = SedeBdDao::getInstance();
         $this->tipoPlazaDao = TipoPlazaBdDao::getInstance();
     }
@@ -49,12 +53,12 @@ class SedeControladora extends PaginaControladora
         }else header('location: /');
     }
 
-    function save($nombre){
+    function save($nombre , $capacidad){
         if(!empty($_SESSION) && $_SESSION['rol']=='admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
             $nombre = trim($nombre);
             if(!empty($nombre)) {
                 if (!$this->sedeDao->sedeExists($nombre)) {
-                    $sede = new Sede($nombre);
+                    $sede = new Sede($nombre , $capacidad);
                     $this->sedeDao->save($sede);
                     $mensaje = new Mensaje("La Sede se agrego con exito!", 'success');
                 } else {
@@ -106,8 +110,11 @@ class SedeControladora extends PaginaControladora
         }
         return  $flag;
     }
-    function getPlazasAjax($id_sede){
+    function getPlazasAjax($id_evento){
         if(!empty($_SESSION) && $_SESSION['rol']=='admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
+            $evento = $this->eventoDao->retrieve($id_evento);
+            $sede = $evento->getSede();
+            $id_sede = $sede->getId();
             $plazas = $this->tipoPlazaDao->traerPorIdSede($id_sede);
             $params =[];
             if($plazas){
@@ -134,6 +141,20 @@ class SedeControladora extends PaginaControladora
                'mensaje' => $mensaje->getAlert(),
                 'sedes' => $sedes
             ));
+        }else header('location: /');
+    }
+
+
+    function getSedeIdEventoAjax($id_evento){
+        if(!empty($_SESSION) && $_SESSION['rol']=='admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
+            $evento = $this->eventoDao->retrieve($id_evento);
+            $params = [];
+            $sede = $evento->getSede();
+            if($sede){
+                $sede = $sede->jsonSerialize();
+                $params['sede'] = $sede;
+            }
+            echo json_encode($params);
         }else header('location: /');
     }
 }

@@ -8,8 +8,8 @@
 
 namespace Modelo;
 
-
-class Usuario
+use JsonSerializable;
+class Usuario implements JsonSerializable
 {
     private $id;
     protected $email;
@@ -20,6 +20,16 @@ class Usuario
         $this->email = $email;
         $this->password = $password;
     }
+
+    public function jsonSerialize()
+    {
+        return [
+          "id_usuario" => $this->id,
+          "email" => $this->email,
+          "password" => $this->password
+        ];
+    }
+
 
     function setId($id){
         $this->id=$id;

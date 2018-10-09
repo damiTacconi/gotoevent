@@ -1070,7 +1070,7 @@
     </column>
     <column id="272" parent="239" name="id_fb">
       <Position>6</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>varchar(40)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="273" parent="239" name="unq_id_fb">
@@ -1170,191 +1170,190 @@
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="291" parent="241" name="unq_evento_titulo">
+    <column id="291" parent="241" name="id_sede">
+      <Position>7</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="292" parent="241" name="descripcion">
+      <Position>8</Position>
+      <DataType>varchar(200)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="293" parent="241" name="unq_evento_titulo">
       <ColNames>titulo</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="292" parent="241" name="fk_id_evento_x_id_categoria">
+    <index id="294" parent="241" name="fk_id_evento_x_id_categoria">
       <ColNames>id_categoria</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="293" parent="241" name="fk_id_eventos_x_id_imagen">
+    <index id="295" parent="241" name="fk_id_eventos_x_id_imagen">
       <ColNames>id_imagen</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="294" parent="241" name="PRIMARY">
+    <key id="296" parent="241" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_evento</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="295" parent="241" name="unq_evento_titulo">
+    <key id="297" parent="241" name="unq_evento_titulo">
       <ColNames>titulo</ColNames>
       <UnderlyingIndexName>unq_evento_titulo</UnderlyingIndexName>
     </key>
-    <foreign-key id="296" parent="241" name="fk_id_evento_x_id_categoria">
+    <foreign-key id="298" parent="241" name="fk_id_evento_x_id_categoria">
       <ColNames>id_categoria</ColNames>
       <RefSchemaName>gotoevent</RefSchemaName>
       <RefTableName>categorias</RefTableName>
       <RefColNames>id_categoria</RefColNames>
     </foreign-key>
-    <foreign-key id="297" parent="241" name="fk_id_eventos_x_id_imagen">
+    <foreign-key id="299" parent="241" name="fk_id_eventos_x_id_imagen">
       <ColNames>id_imagen</ColNames>
       <RefSchemaName>gotoevent</RefSchemaName>
       <RefTableName>imagenes</RefTableName>
       <RefColNames>id_imagen</RefColNames>
     </foreign-key>
-    <column id="298" parent="242" name="id_imagen">
+    <column id="300" parent="242" name="id_imagen">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="299" parent="242" name="nombre">
+    <column id="301" parent="242" name="nombre">
       <Position>2</Position>
       <DataType>varchar(70)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="300" parent="242" name="imagen">
+    <column id="302" parent="242" name="imagen">
       <Position>3</Position>
       <DataType>longblob|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="301" parent="242" name="PRIMARY">
+    <key id="303" parent="242" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_imagen</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="302" parent="243" name="id_linea">
+    <column id="304" parent="243" name="id_linea">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="303" parent="243" name="subtotal">
+    <column id="305" parent="243" name="subtotal">
       <Position>2</Position>
       <DataType>float|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="304" parent="243" name="id_plaza_evento">
+    <column id="306" parent="243" name="id_plaza_evento">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="305" parent="243" name="id_compra">
+    <column id="307" parent="243" name="id_compra">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="306" parent="243" name="fk_id_linea_x_id_plaza_evento">
+    <column id="308" parent="243" name="cantidad">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="309" parent="243" name="fk_id_linea_x_id_plaza_evento">
       <ColNames>id_plaza_evento</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="307" parent="243" name="fk_id_linea_x_id_compra">
+    <index id="310" parent="243" name="fk_id_linea_x_id_compra">
       <ColNames>id_compra</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="308" parent="243" name="PRIMARY">
+    <key id="311" parent="243" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_linea</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="309" parent="243" name="fk_id_linea_x_id_plaza_evento">
+    <foreign-key id="312" parent="243" name="fk_id_linea_x_id_plaza_evento">
       <ColNames>id_plaza_evento</ColNames>
       <RefSchemaName>gotoevent</RefSchemaName>
       <RefTableName>plaza_eventos</RefTableName>
       <RefColNames>id_plaza_evento</RefColNames>
     </foreign-key>
-    <foreign-key id="310" parent="243" name="fk_id_linea_x_id_compra">
+    <foreign-key id="313" parent="243" name="fk_id_linea_x_id_compra">
       <ColNames>id_compra</ColNames>
       <RefSchemaName>gotoevent</RefSchemaName>
       <RefTableName>compras</RefTableName>
       <RefColNames>id_compra</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="311" parent="244" name="id_plaza_evento">
+    <column id="314" parent="244" name="id_plaza_evento">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="312" parent="244" name="capacidad">
+    <column id="315" parent="244" name="capacidad">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="313" parent="244" name="remanente">
+    <column id="316" parent="244" name="remanente">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="314" parent="244" name="id_tipo_plaza">
+    <column id="317" parent="244" name="id_tipo_plaza">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="315" parent="244" name="id_calendario">
+    <column id="318" parent="244" name="id_calendario">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="316" parent="244" name="id_sede">
+    <column id="319" parent="244" name="precio">
       <Position>6</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="317" parent="244" name="precio">
-      <Position>7</Position>
       <DataType>float|0s</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="318" parent="244" name="fk_id_plaza_eventos_x_id_tipo_plaza">
+    <index id="320" parent="244" name="fk_id_plaza_eventos_x_id_tipo_plaza">
       <ColNames>id_tipo_plaza</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="319" parent="244" name="fk_id_plaza_eventos_x_id_calendario">
+    <index id="321" parent="244" name="fk_id_plaza_eventos_x_id_calendario">
       <ColNames>id_calendario</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="320" parent="244" name="fk_id_plaza_eventos_x_id_sede">
-      <ColNames>id_sede</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="321" parent="244" name="PRIMARY">
+    <key id="322" parent="244" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_plaza_evento</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="322" parent="244" name="fk_id_plaza_eventos_x_id_tipo_plaza">
+    <foreign-key id="323" parent="244" name="fk_id_plaza_eventos_x_id_tipo_plaza">
       <ColNames>id_tipo_plaza</ColNames>
       <RefSchemaName>gotoevent</RefSchemaName>
       <RefTableName>tipo_plazas</RefTableName>
       <RefColNames>id_tipo_plaza</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="323" parent="244" name="fk_id_plaza_eventos_x_id_calendario">
+    <foreign-key id="324" parent="244" name="fk_id_plaza_eventos_x_id_calendario">
       <ColNames>id_calendario</ColNames>
       <RefSchemaName>gotoevent</RefSchemaName>
       <RefTableName>calendarios</RefTableName>
       <RefColNames>id_calendario</RefColNames>
-      <OnDelete>cascade</OnDelete>
-    </foreign-key>
-    <foreign-key id="324" parent="244" name="fk_id_plaza_eventos_x_id_sede">
-      <ColNames>id_sede</ColNames>
-      <RefSchemaName>gotoevent</RefSchemaName>
-      <RefTableName>sedes</RefTableName>
-      <RefColNames>id_sede</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="325" parent="245" name="id_sede">
@@ -1406,7 +1405,7 @@
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="334" parent="246" name="fk_id_show_x_id_calendarios">
+    <index id="334" parent="246" name="fk_id_shows_x_id_calendarios">
       <ColNames>id_calendario</ColNames>
       <Type>btree</Type>
     </index>
@@ -1419,11 +1418,12 @@
       <ColNames>id_show</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="337" parent="246" name="fk_id_show_x_id_calendarios">
+    <foreign-key id="337" parent="246" name="fk_id_shows_x_id_calendarios">
       <ColNames>id_calendario</ColNames>
       <RefSchemaName>gotoevent</RefSchemaName>
       <RefTableName>calendarios</RefTableName>
       <RefColNames>id_calendario</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="338" parent="246" name="fk_id_show_x_id_artistas">
       <ColNames>id_artista</ColNames>
@@ -1483,6 +1483,7 @@
       <RefSchemaName>gotoevent</RefSchemaName>
       <RefTableName>lineas</RefTableName>
       <RefColNames>id_linea</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="349" parent="248" name="id_tipo_plaza">
       <Position>1</Position>

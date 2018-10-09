@@ -35,6 +35,7 @@ class EventoControladora extends PaginaControladora
     private $showDao;
     private $eventoImagenDao;
 
+
     function __construct()
     {
         $this->eventoImagenDao = EventoImagenBdDao::getInstance();
@@ -48,6 +49,66 @@ class EventoControladora extends PaginaControladora
         $this->tipoPlazaDao = TipoPlazaBdDao::getInstance();
     }
 
+    /* FUNCIONES PRIVADAS */
+    private function paginaListado($array = []){
+        $eventos = $this->eventoDao->getAll();
+        $categorias = $this->categoriaDao->getAll();
+        if ($eventos)
+            $array['eventos'] = $eventos;
+        if ($categorias)
+            $array['categorias'] = $categorias;
+        $this->page('listado/listadoEventos' , 'Eventos - Listado', 2, $array);
+    }
+
+    private function verificarCapacidadPermitida($id_calendario , $capacidad){
+        $infoCapacidad['info'] = "success";
+        $infoCapacidad['exceso'] = 0;
+        $calendarioDao = $this->calendarioDao;
+        $plazaEventoDao = $this->plazaEventoDao;
+        $calendario = $calendarioDao->retrieve($id_calendario);
+        $evento = $calendario->getEvento();
+        $sede = $evento->getSede();
+        $capacidadTotal = $sede->getCapacidad();
+
+        $plazaEventos = $plazaEventoDao->traerPorIdCalendario($id_calendario);
+        $suma = 0;
+        if($plazaEventos){
+            foreach ($plazaEventos as $pe){
+                $suma += $pe->getCapacidad();
+            }
+        }
+        $suma += $capacidad;
+        if($suma > $capacidadTotal) {
+            $exceso = $suma - $capacidadTotal;
+            $infoCapacidad['info'] = "error";
+            $infoCapacidad['exceso'] = $exceso;
+        }
+        return $infoCapacidad;
+    }
+
+    private function existe($titulo){
+        return $this->eventoDao->titleExists($titulo);
+    }
+
+    private function configurarCalendarios($fd,$fh,$id_evento)
+    {
+        $calendarios = $this->calendarioDao->traerPorIdEvento($id_evento);
+        $fecha_desde = strtotime($fd);
+        $fecha_hasta = strtotime($fh);
+
+        if($calendarios){
+            foreach ($calendarios as $calendario){
+                $fecha = $calendario->getFecha();
+                $fecha = strtotime($fecha);
+                if( ($fecha > $fecha_hasta) || ($fecha < $fecha_desde) ){
+                    $this->calendarioDao->delete($calendario);
+                }
+            }
+        }
+    }
+
+
+    /* FUNCIONES PUBLICAS */
     function index(){
         if(!empty($_GET)){
             header('location: /');
@@ -83,16 +144,29 @@ class EventoControladora extends PaginaControladora
         }else header('location: /');
     }
 
-    function savePlaza($id_calendario,$id_sede,$id_tipo_plaza,$capacidad,$precio)
+
+
+    function consulta(){
+        $eventoDao = $this->eventoDao;
+        $eventos = $eventoDao->getAll();
+        $params['eventos'] = $eventos;
+        $this->page("consultaEventos" , "Evento - Consulta" , 2 , $params);
+    }
+    function savePlazaEvento($id_calendario,$id_tipo_plaza,$capacidad,$precio)
     {
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
             $params = $this->traerTodos();
             $calendario = $this->calendarioDao->retrieve($id_calendario);
-            $sede = $this->sedeDao->retrieve($id_sede);
             $plaza = $this->tipoPlazaDao->retrieve($id_tipo_plaza);
-            $plazaEvento = new PlazaEvento($capacidad,$capacidad,$sede,$plaza,$calendario,$precio);
-            $this->plazaEventoDao->save($plazaEvento);
-            $mensaje = new Mensaje("La plaza se agrego correctamente al evento!","success");
+            $plazaEventoExistente = $this->plazaEventoDao->verificarPlazaExistente($id_calendario, $id_tipo_plaza);
+            if(!$plazaEventoExistente){
+                $informeCapacidad = $this->verificarCapacidadPermitida($id_calendario,$capacidad);
+                if($informeCapacidad['info'] === "success") {
+                    $plazaEvento = new PlazaEvento($capacidad, $capacidad, $plaza, $calendario, $precio);
+                    $this->plazaEventoDao->save($plazaEvento);
+                    $mensaje = new Mensaje("La plaza se agrego correctamente al evento!", "success");
+                }else $mensaje = new Mensaje("Error de exceso en {$informeCapacidad['exceso']} plazas", "danger");
+            }else $mensaje = new Mensaje("Ya existe este tipo de plaza en el evento", "danger");
             $params['mensaje'] = $mensaje->getAlert();
             $this->page('crearEvento','Evento - Crear',2,$params);
         }else header('location: /');
@@ -111,10 +185,8 @@ class EventoControladora extends PaginaControladora
         return $params;
     }
 
-    private function existe($titulo){
-        return $this->eventoDao->titleExists($titulo);
-    }
-    function update($titulo, $id_categoria, $fecha_desde , $fecha_hasta , $id_evento, $id_imagen){
+
+    function update($titulo, $id_categoria, $fecha_desde , $fecha_hasta ,$descripcion, $id_evento, $id_imagen){
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
             $titulo = trim($titulo);
             if(!empty($titulo)) {
@@ -128,7 +200,9 @@ class EventoControladora extends PaginaControladora
                     $evento->setTitulo($titulo);
                     $evento->setFechaDesde($fecha_desde);
                     $evento->setFechaHasta($fecha_hasta);
+                    $this->configurarCalendarios($fecha_desde,$fecha_hasta,$id_evento);
                     $evento->setCategoria($categoria);
+                    $evento->setDescripcion($descripcion);
                     if(!empty($_FILES['imagen']['tmp_name'])){
                         $imagen = addslashes($_FILES['imagen']['tmp_name']);
                         $nombre = addslashes($_FILES['imagen']['name']);
@@ -163,13 +237,15 @@ class EventoControladora extends PaginaControladora
             $this->paginaListado($params);
         }else header('location: /');
     }
-    function save($titulo, $id_categoria, $fecha_desde , $fecha_hasta){
+
+    function save($titulo, $id_categoria, $id_sede, $fecha_desde , $fecha_hasta, $descripcion){
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
             $titulo = trim($titulo);
             if(!empty($titulo)) {
-                if (!$this->eventoDao->titleExists($titulo)) {
+                if (!$this->eventoDao->titleExists($titulo)){
+                    $sede = $this->sedeDao->retrieve($id_sede);
                     $categoria = $this->categoriaDao->retrieve($id_categoria);
-                    $evento = new Evento($titulo,$fecha_desde,$fecha_hasta,$categoria);
+                    $evento = new Evento($titulo,$fecha_desde,$fecha_hasta,$categoria,$sede,$descripcion);
                     if(!empty($_FILES['imagen']['tmp_name'])){
                         $imagen = addslashes($_FILES['imagen']['tmp_name']);
                         $nombre = addslashes($_FILES['imagen']['name']);
@@ -179,6 +255,7 @@ class EventoControladora extends PaginaControladora
                         $id_imagen = $this->eventoImagenDao->save($eventoImagen);
                         $eventoImagen->setId($id_imagen);
                     }else{
+                        //el id 11 pertenece al logo por default
                         $eventoImagen = $this->eventoImagenDao->retrieve(11);
                     }
                     $evento->setEventoImagen($eventoImagen);
@@ -192,6 +269,27 @@ class EventoControladora extends PaginaControladora
             $this->page('crearEvento', 'Evento - Crear', 2, $params);
         }else header('location: /');
     }
+    function listado(){
+        if(!empty($_SESSION) && $_SESSION['rol'] === 'admin'){
+            $this->paginaListado();
+        }else header('location: /');
+    }
+
+
+    function calendarios($id_evento){
+        $evento = $this->eventoDao->retrieve($id_evento);
+
+        if($evento){
+          $calendarios= $this->calendarioDao->traerPorIdEvento($id_evento);
+          $params['calendarios'] = $calendarios;
+          $params['evento'] = $evento;
+          $this->page("listado/listadoCalendariosDeEventos" , "Calendarios de {$evento->getTitulo()}",2,$params);
+        }
+
+    }
+
+
+    /* FUNCIONES AJAX */
 
     function getCalendariosAjax($id_evento){
         if(!empty($_SESSION) && $_SESSION['rol']==='admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -205,34 +303,8 @@ class EventoControladora extends PaginaControladora
                 $params['evento'] = $evento->jsonSerialize();
 
             }
-           echo json_encode($params);
+            echo json_encode($params);
         }else header('location: /');
     }
 
-    function listado(){
-        if(!empty($_SESSION) && $_SESSION['rol'] === 'admin'){
-            $this->paginaListado();
-        }else header('location: /');
-    }
-    private function paginaListado($array = []){
-        $eventos = $this->eventoDao->getAll();
-        $categorias = $this->categoriaDao->getAll();
-        if ($eventos)
-            $array['eventos'] = $eventos;
-        if ($categorias)
-            $array['categorias'] = $categorias;
-        $this->page('listado/listadoEventos' , 'Eventos - Listado', 2, $array);
-    }
-
-    function calendarios($id_evento){
-        $evento = $this->eventoDao->retrieve($id_evento);
-
-        if($evento){
-          $calendarios= $this->calendarioDao->traerPorIdEvento($id_evento);
-          $params['calendarios'] = $calendarios;
-          $params['evento'] = $evento;
-          $this->page("listado/listadoCalendariosDeEventos" , "Calendarios de {$evento->getTitulo()}",2,$params);
-        }
-
-    }
 }

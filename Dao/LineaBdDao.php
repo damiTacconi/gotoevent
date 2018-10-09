@@ -18,17 +18,19 @@ class LineaBdDao extends SingletonDao implements IDao
     public function save($data)
     {
         try{
-            $sql = ("INSERT INTO  $this->tabla (subtotal,id_plaza_evento,id_compra) 
-                    VALUES (:subtotal,:id_plaza_evento,:id_compra)");
+            $sql = ("INSERT INTO  $this->tabla (subtotal,id_plaza_evento,id_compra,cantidad) 
+                    VALUES (:subtotal,:id_plaza_evento,:id_compra,:cantidad)");
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $subtotal = $data->getSubtotal();
             $plazaEvento = $data->getPlazaEvento();
             $id_plaza_evento = $plazaEvento->getId();
             $compra = $data->getCompra();
+            $cantidad = $data->getCantidad();
             $id_compra = $compra->getId();
             $sentencia->bindParam(":subtotal",$subtotal);
             $sentencia->bindParam(":id_plaza_evento",$id_plaza_evento);
+            $sentencia->bindParam(":cantidad",$cantidad);
             $sentencia->bindParam(":id_compra",$id_compra);
             $sentencia->execute();
             return $conexion->lastInsertId();
@@ -67,6 +69,24 @@ class LineaBdDao extends SingletonDao implements IDao
         }
     }
 
+    public function traerPorIdPlazaEvento($id_plaza){
+        try{
+            $sql = ("SELECT li.* FROM $this->tabla li INNER JOIN plaza_eventos pe
+                ON pe.id_plaza_evento=li.id_plaza_evento WHERE pe.id_plaza_evento=$id_plaza");
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return null;
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
+    }
     private function mapear($dataSet){
         $dataSet = is_array($dataSet) ? $dataSet : [];
         //if($dataSet[0]) {
@@ -75,7 +95,7 @@ class LineaBdDao extends SingletonDao implements IDao
             $compraDao = CompraBdDao::getInstance();
             $plazaEvento = $plazaEventoDao->retrieve($p['id_plaza_evento']);
             $compra = $compraDao->retrieve($p['id_compra']);
-            $linea = new Linea($plazaEvento,$p['subtotal'],$compra);
+            $linea = new Linea($plazaEvento,$p['cantidad'],$p['subtotal'],$compra);
             $linea->setId($p['id_linea']);
             return $linea;
         }, $dataSet);

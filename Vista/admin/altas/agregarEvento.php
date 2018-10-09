@@ -18,10 +18,16 @@
                         <?php } ?>
                     </select>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="inputImagen">Subir Imagen</label>
-                    <input type="file" name="imagen" class="form-control-file" id="inputImagen" aria-describedby="fileHelp">
-                    <small id="fileHelp" class="form-text text-muted">Suba una imagen del evento.</small>
+                <div class="form-group col-md-3">
+                    <label>Sede</label>
+                    <select name="sedeSelect" id="selectSede" class="form-control" required>
+                        <option value="" selected disabled>Elegir sede...</option>
+                        <?php if(!empty($param['sedes'])) { ?>
+                            <?php foreach ($param['sedes'] as $sede) { ?>
+                                <option value='<?= $sede->getId() ?>'><?= $sede->getNombre() ?> </option>
+                            <?php } ?>
+                        <?php } ?>
+                    </select>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputFechaHasta">Fecha Desde</label>
@@ -42,6 +48,17 @@
                             <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
                         </div>
                     </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputImagen">Subir Imagen</label>
+                    <input type="file" name="imagen" class="form-control-file" id="inputImagen" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Suba una imagen del evento.</small>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <label for="descripcion">Descripcion:</label>
+                    <textarea class="form-control" maxlength="200" rows="2" name="descripcion" id="descripcion"></textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Agregar</button>

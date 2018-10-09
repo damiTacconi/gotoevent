@@ -14,7 +14,6 @@ class PlazaEvento implements JsonSerializable
     private $id;
     private $capacidad;
     private $remanente;
-    private $sede;
     private $plaza;
     private $calendario;
     private $precio;
@@ -25,7 +24,6 @@ class PlazaEvento implements JsonSerializable
          "id_plazaEvento" => $this->id,
          "capacidad" => $this->capacidad,
          "remanente" => $this->remanente,
-         "sede" => $this->sede->jsonSerialize(),
          "plaza" => $this->plaza->jsonSerialize(),
          "calendario" => $this->calendario->jsonSerialize(),
          "precio" => $this->precio
@@ -36,16 +34,14 @@ class PlazaEvento implements JsonSerializable
      * PlazaEvento constructor.
      * @param $capacidad
      * @param $remanente
-     * @param $sede
      * @param $plaza
      * @param $calendario
      * @param $precio
      */
-    public function __construct($capacidad, $remanente, $sede, $plaza, $calendario,$precio)
+    public function __construct($capacidad, $remanente, $plaza, $calendario,$precio)
     {
         $this->capacidad = $capacidad;
         $this->remanente = $remanente;
-        $this->sede = $sede;
         $this->plaza = $plaza;
         $this->calendario = $calendario;
         $this->precio = $precio;
@@ -134,21 +130,6 @@ class PlazaEvento implements JsonSerializable
         $this->remanente = $remanente;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSede()
-    {
-        return $this->sede;
-    }
-
-    /**
-     * @param mixed $sede
-     */
-    public function setSede($sede): void
-    {
-        $this->sede = $sede;
-    }
 
     /**
      * @return mixed

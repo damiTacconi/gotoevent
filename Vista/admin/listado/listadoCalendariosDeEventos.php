@@ -170,7 +170,7 @@
     function actualizar(id){
         let id_calendario = id;
         $('#updateCalendario option[value='+id_calendario+']').prop('selected',true);
-        $('#updateId').val($id);
+        $('#updateId').val(id);
         $('#updateModal').modal('toggle');
     }
 

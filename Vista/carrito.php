@@ -41,7 +41,7 @@ if(!empty($_SESSION['cart'])){
                             <tr>
                                 <th scope="row"><?= $plaza->calendario->evento->titulo ?> </th>
                                 <td><?= $plaza->calendario->fecha ?></td>
-                                <td><?= $plaza->sede->nombre ?></td>
+                                <td><?= $plaza->plaza->sede->nombre ?></td>
                                 <td><?= $plaza->plaza->descripcion ?></td>
                                 <td>
                                     <input type="number" name="precio[]" class="form-control"

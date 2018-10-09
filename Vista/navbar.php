@@ -71,12 +71,11 @@
            <li class="nav-item <?php if(isset($page)){echo ($page === 'contacto') ? 'active':''; } ?> ">
                <a class="nav-link" href="/"><i class="fas fa-user-alt"></i> Contactanos <span class="sr-only">(current)</span></a>
            </li>
-
        </ul>
        <ul id="" class="navbar-nav ml-auto list-inline">
-           <li class="list-inline-item nav-sm-center">
-               <a data-toggle="modal" data-target="#modalCart" class="nav-link">
-                   <i class="fas fa-shopping-cart"></i>
+           <li id="icon-cart" class="list-inline-item nav-sm-center">
+               <a  class="nav-link">
+                   <i class="fas fa-shopping-cart wsmoke"></i>
                    <?php if(isset($_SESSION['cart'])){ ?>
                        <span class="badge indigo"><?= count($_SESSION['cart']) ?></span>
                    <?php } ?>
@@ -95,7 +94,7 @@
            </li>
 
            <li id="separator" class="list-inline-item"><span class="nav-link disabled"> |</span></li>
-           <li class="list-inline-item nav-sm-center">
+           <li class="list-inline nav-sm-center">
                    <a class="nav-link"
                        <?php if(isset($_SESSION['fb_access_token'])){ ?>
                            href="/Facebook/logout"
@@ -110,3 +109,15 @@
      </div>
 
  </nav>
+<script type="text/javascript">
+    $('#icon-cart').on('click',() => {
+        $("#modalCart").modal("toggle");
+    })
+    $(window).scroll(function () {
+        if($(window).scrollTop() > 100){
+            $('#icon-cart a').addClass("fixed-cart");
+        }else{
+            $('#icon-cart a').removeClass("fixed-cart");
+        }
+    });
+</script>

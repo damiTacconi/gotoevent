@@ -8,26 +8,58 @@
 
 namespace Modelo;
 
-
-class Linea
+use JsonSerializable;
+class Linea implements JsonSerializable
 {
      private $id;
      private $plazaEvento;
+     private $cantidad;
      private $subtotal;
      private $compra;
 
     /**
      * Linea constructor.
      * @param $plazaEvento
+     * @param $cantidad
      * @param $subtotal
      * @param $compra
      */
-    public function __construct($plazaEvento, $subtotal, $compra)
+    public function __construct($plazaEvento, $cantidad, $subtotal, $compra)
     {
+        $this->cantidad = $cantidad;
         $this->plazaEvento = $plazaEvento;
         $this->subtotal = $subtotal;
         $this->compra = $compra;
     }
+
+    public function jsonSerialize()
+    {
+        return [
+          "id_linea" => $this->id,
+          "plazaEvento" => $this->plazaEvento->jsonSerialize(),
+          "cantidad" => $this->cantidad,
+          "subtotal" => $this->subtotal,
+          "compra" => $this->compra->jsonSerialize()
+        ];
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getCantidad()
+    {
+        return $this->cantidad;
+    }
+
+    /**
+     * @param mixed $cantidad
+     */
+    public function setCantidad($cantidad): void
+    {
+        $this->cantidad = $cantidad;
+    }
+
 
     /**
      * @return mixed

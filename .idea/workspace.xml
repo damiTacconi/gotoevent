@@ -2,22 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c648f63-f815-4177-89d2-2b100f6d0dcc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config/Config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config/Request.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controladora/CompraControladora.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controladora/CompraControladora.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controladora/EventoControladora.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controladora/EventoControladora.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controladora/SedeControladora.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controladora/SedeControladora.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dao/EventoBdDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/EventoBdDao.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dao/LineaBdDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/LineaBdDao.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dao/PlazaEventoBdDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/PlazaEventoBdDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/1031856930.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/2378774687.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/2990624530.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/3409143355.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/3552328690.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/4696524338.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/4703091701.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/5451180400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/6141904900.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/7074574484.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/8298989132.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/8847733199.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/img/qr/9517252220.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dao/SedeBdDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/SedeBdDao.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelo/Cliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Cliente.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelo/Compra.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Compra.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelo/Evento.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Evento.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelo/Linea.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Linea.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelo/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Mail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelo/PlazaEvento.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/PlazaEvento.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelo/Sede.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Sede.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelo/TipoPlaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/TipoPlaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelo/Usuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modelo/Usuario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/admin/altas/agregarCalendario.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/altas/agregarCalendario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/admin/altas/agregarEvento.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/altas/agregarEvento.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/admin/altas/agregarPlaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/altas/agregarPlaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/admin/crearEvento.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/crearEvento.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/admin/crearSede.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/crearSede.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/admin/header-admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/header-admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/admin/listado/listadoCalendariosDeEventos.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/listado/listadoCalendariosDeEventos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/admin/listado/listadoEventos.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/listado/listadoEventos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/admin/listado/listadoSede.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/listado/listadoSede.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/admin/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/admin/sidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/card-event.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/card-event.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/carrito.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/carrito.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/inicio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/navbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/css/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,22 +78,6 @@
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="gotoevent: schema" type="c314c289:MysqlImplModel$Schema" />
         <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="gotoevent@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="gotoevent: schema" type="c314c289:MysqlImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="plaza_eventos: table" type="98d5ac3d:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="gotoevent@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="gotoevent: schema" type="c314c289:MysqlImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="tickets: table" type="98d5ac3d:MysqlImplModel$Table" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -176,40 +180,63 @@
     <session id="663460854">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="8" />
+          <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.23" value="1" />
+          <entry key="project.open.time.25" value="1" />
+          <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.28" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="3" />
-          <entry key="php" value="149" />
+          <entry key="calendarios" value="3" />
+          <entry key="compras" value="3" />
+          <entry key="css" value="1" />
+          <entry key="eventos" value="3" />
+          <entry key="imagenes" value="1" />
+          <entry key="js" value="4" />
+          <entry key="lineas" value="5" />
+          <entry key="php" value="224" />
+          <entry key="plaza_eventos" value="7" />
+          <entry key="sedes" value="2" />
+          <entry key="sql" value="11" />
+          <entry key="tickets" value="2" />
+          <entry key="tipo_plazas" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JavaScript" value="3" />
-          <entry key="PHP" value="149" />
+          <entry key="CSS" value="1" />
+          <entry key="Database Element" value="27" />
+          <entry key="JavaScript" value="4" />
+          <entry key="PHP" value="224" />
+          <entry key="SQL" value="2" />
+          <entry key="Scratch" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="23" />
-          <entry key="php" value="25796" />
+          <entry key="css" value="329" />
+          <entry key="js" value="31" />
+          <entry key="php" value="35391" />
+          <entry key="sql" value="607" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+          <entry key="CSS" value="329" />
           <entry key="HTML" value="57" />
-          <entry key="JavaScript" value="23" />
-          <entry key="PHP" value="25683" />
-          <entry key="SQL" value="56" />
+          <entry key="JavaScript" value="31" />
+          <entry key="PHP" value="35261" />
+          <entry key="SQL" value="73" />
+          <entry key="Scratch" value="607" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.php.new.class">
@@ -220,21 +247,21 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vista/inicio.php">
+        <entry file="file://$PROJECT_DIR$/Controladora/EventoControladora.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+            <state relative-caret-position="601">
+              <caret line="307" column="5" selection-start-line="307" selection-start-column="5" selection-end-line="307" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Controladora/CompraControladora.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="112" column="49" lean-forward="true" selection-start-line="112" selection-start-column="49" selection-end-line="112" selection-end-column="49" />
+            <state relative-caret-position="-492">
+              <caret line="233" selection-start-line="233" selection-end-line="233" />
               <folding>
                 <element signature="e#114#138#0#PHP" expanded="true" />
               </folding>
@@ -242,56 +269,54 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Modelo/Calendario.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-310" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/plaza_eventos">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Modelo/Cliente.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Modelo/Linea.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1064">
+              <caret line="39" column="40" lean-forward="true" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Dao/LineaBdDao.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="77" column="34" lean-forward="true" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Dao/PlazaEventoBdDao.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1476">
-              <caret line="132" column="71" selection-start-line="132" selection-start-column="71" selection-end-line="132" selection-end-column="71" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dao/SedeBdDao.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="77" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Modelo/TipoPlaza.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="57" column="34" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Modelo/PlazaEvento.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1907">
-              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Config/Config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Modelo/Mail.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="16" column="48" lean-forward="true" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+            <state relative-caret-position="184">
+              <caret line="59" column="12" lean-forward="true" selection-start-line="59" selection-start-column="12" selection-end-line="67" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -303,6 +328,8 @@
       <find>url</find>
       <find>hover</find>
       <find>sede</find>
+      <find>save</find>
+      <find>consulta</find>
     </findStrings>
     <dirStrings>
       <dir>C:\wamp\www\damiweb\Controladora</dir>
@@ -318,47 +345,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Vista/admin/listado/listadoEventos.php" />
-        <option value="$PROJECT_DIR$/Modelo/Artista.php" />
-        <option value="$PROJECT_DIR$/Vista/admin/listado/listadoShows.php" />
-        <option value="$PROJECT_DIR$/Modelo/Show.php" />
-        <option value="$PROJECT_DIR$/Vista/admin/listado/listadoCalendariosDeEventos.php" />
-        <option value="$PROJECT_DIR$/Controladora/CalendarioControladora.php" />
-        <option value="$PROJECT_DIR$/Dao/ShowBdDao.php" />
-        <option value="$PROJECT_DIR$/Vista/admin/listado/listadoShowsDeEventos.php" />
-        <option value="$PROJECT_DIR$/Vista/admin/sidebar.php" />
-        <option value="$PROJECT_DIR$/Controladora/ShowControladora.php" />
-        <option value="$PROJECT_DIR$/Vista/card-event.php" />
-        <option value="$PROJECT_DIR$/Vista/footer.php" />
-        <option value="$PROJECT_DIR$/Controladora/PaginaControladora.php" />
-        <option value="$PROJECT_DIR$/Vista/header-inicio.php" />
-        <option value="$PROJECT_DIR$/Modelo/Evento.php" />
-        <option value="$PROJECT_DIR$/Modelo/Calendario.php" />
-        <option value="$PROJECT_DIR$/public_html/index.php" />
-        <option value="$PROJECT_DIR$/Modelo/PlazaEvento.php" />
-        <option value="$PROJECT_DIR$/public_html/js/ajax.js" />
-        <option value="$PROJECT_DIR$/Config/Request.php" />
-        <option value="$PROJECT_DIR$/Vista/perfil.php" />
-        <option value="$PROJECT_DIR$/Vista/navbar.php" />
-        <option value="$PROJECT_DIR$/Vista/comprarEvento.php" />
-        <option value="$PROJECT_DIR$/Modelo/Cart.php" />
-        <option value="$PROJECT_DIR$/Vista/login.php" />
-        <option value="$PROJECT_DIR$/Controladora/FacebookControladora.php" />
-        <option value="$PROJECT_DIR$/lib/config.php" />
         <option value="$PROJECT_DIR$/Modelo/Ticket.php" />
-        <option value="$PROJECT_DIR$/Vista/carrito.php" />
-        <option value="$PROJECT_DIR$/Modelo/Compra.php" />
-        <option value="$PROJECT_DIR$/Modelo/Linea.php" />
         <option value="$PROJECT_DIR$/Dao/UsuarioBdDao.php" />
-        <option value="$PROJECT_DIR$/Modelo/Cliente.php" />
         <option value="$PROJECT_DIR$/Dao/CompraBdDao.php" />
-        <option value="$PROJECT_DIR$/Dao/LineaBdDao.php" />
         <option value="$PROJECT_DIR$/Modelo/QR.php" />
         <option value="$PROJECT_DIR$/lib/phpqrcode/qrconst.php" />
         <option value="$PROJECT_DIR$/Dao/TicketBdDao.php" />
         <option value="$PROJECT_DIR$/Dao/CalendarioBdDao.php" />
-        <option value="$PROJECT_DIR$/Dao/EventoBdDao.php" />
-        <option value="$PROJECT_DIR$/Controladora/EventoControladora.php" />
         <option value="$PROJECT_DIR$/Vista/example.php" />
         <option value="$PROJECT_DIR$/Dao/ClienteBdDao.php" />
         <option value="$PROJECT_DIR$/Controladora/CuentaControladora.php" />
@@ -367,8 +360,42 @@
         <option value="$PROJECT_DIR$/Config/sendemail.php" />
         <option value="$PROJECT_DIR$/Modelo/Mail.php" />
         <option value="$PROJECT_DIR$/Vista/inicio.php" />
-        <option value="$PROJECT_DIR$/Controladora/CompraControladora.php" />
+        <option value="$PROJECT_DIR$/Modelo/PlazaEvento.php" />
+        <option value="$PROJECT_DIR$/Dao/EventoBdDao.php" />
+        <option value="$PROJECT_DIR$/Vista/admin/altas/agregarEvento.php" />
+        <option value="$PROJECT_DIR$/Vista/card-event.php" />
+        <option value="$PROJECT_DIR$/Modelo/Evento.php" />
+        <option value="$PROJECT_DIR$/Vista/admin/listado/listadoEventos.php" />
+        <option value="$PROJECT_DIR$/Vista/carrito.php" />
+        <option value="$PROJECT_DIR$/Modelo/TipoPlaza.php" />
+        <option value="$PROJECT_DIR$/Vista/header.php" />
+        <option value="$PROJECT_DIR$/Vista/comprarEvento.php" />
+        <option value="$PROJECT_DIR$/public_html/index.php" />
+        <option value="$PROJECT_DIR$/Vista/navbar.php" />
+        <option value="$PROJECT_DIR$/public_html/css/style.css" />
+        <option value="$PROJECT_DIR$/Vista/admin/crearEvento.php" />
+        <option value="$PROJECT_DIR$/Vista/admin/altas/agregarPlaza.php" />
+        <option value="$PROJECT_DIR$/Vista/admin/crearSede.php" />
+        <option value="$PROJECT_DIR$/Vista/admin/altas/agregarSede.php" />
+        <option value="$PROJECT_DIR$/Modelo/Sede.php" />
+        <option value="$PROJECT_DIR$/Dao/SedeBdDao.php" />
+        <option value="$PROJECT_DIR$/Controladora/SedeControladora.php" />
+        <option value="$PROJECT_DIR$/Vista/admin/listado/listadoSede.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/console.sql" />
+        <option value="$PROJECT_DIR$/Vista/admin/altas/agregarCalendario.php" />
+        <option value="$PROJECT_DIR$/Vista/admin/sidebar.php" />
+        <option value="$PROJECT_DIR$/Vista/admin/listado/listadoCalendariosDeEventos.php" />
+        <option value="$PROJECT_DIR$/Vista/admin/consultaEventos.php" />
+        <option value="$PROJECT_DIR$/public_html/js/ajax.js" />
+        <option value="$PROJECT_DIR$/Config/Request.php" />
+        <option value="$PROJECT_DIR$/Controladora/EventoControladora.php" />
         <option value="$PROJECT_DIR$/Dao/PlazaEventoBdDao.php" />
+        <option value="$PROJECT_DIR$/Modelo/Linea.php" />
+        <option value="$PROJECT_DIR$/Modelo/Compra.php" />
+        <option value="$PROJECT_DIR$/Modelo/Usuario.php" />
+        <option value="$PROJECT_DIR$/Dao/LineaBdDao.php" />
+        <option value="$PROJECT_DIR$/Modelo/Cliente.php" />
+        <option value="$PROJECT_DIR$/Controladora/CompraControladora.php" />
       </list>
     </option>
   </component>
@@ -385,7 +412,7 @@
       <path value="$PROJECT_DIR$/public_html/js/jqueryValidation/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1340" />
@@ -504,6 +531,42 @@
               <item name="gotoevent" type="462c0819:PsiDirectoryNode" />
               <item name="Modelo" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="gotoevent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gotoevent" type="462c0819:PsiDirectoryNode" />
+              <item name="public_html" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gotoevent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gotoevent" type="462c0819:PsiDirectoryNode" />
+              <item name="public_html" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gotoevent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gotoevent" type="462c0819:PsiDirectoryNode" />
+              <item name="Vista" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gotoevent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gotoevent" type="462c0819:PsiDirectoryNode" />
+              <item name="Vista" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gotoevent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gotoevent" type="462c0819:PsiDirectoryNode" />
+              <item name="Vista" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="altas" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gotoevent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gotoevent" type="462c0819:PsiDirectoryNode" />
+              <item name="Vista" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="listado" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -513,7 +576,7 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="database.console.LAST_STATE" value="true" />
+    <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -589,18 +652,22 @@
       <workItem from="1538413143193" duration="23444000" />
       <workItem from="1538502335843" duration="16497000" />
       <workItem from="1538588931785" duration="27760000" />
-      <workItem from="1538683950333" duration="13850000" />
+      <workItem from="1538683950333" duration="14699000" />
+      <workItem from="1538849666633" duration="12972000" />
+      <workItem from="1538883034662" duration="5079000" />
+      <workItem from="1538926259622" duration="13652000" />
+      <workItem from="1539019314686" duration="14699000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="439447000" />
+    <option name="totallyTimeSpent" value="486698000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12689969" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15425532" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -613,13 +680,13 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49848023" visible="true" weight="0.016393442" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49848023" visible="true" weight="0.12295082" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50151974" side_tool="true" weight="0.021311475" />
-      <window_info anchor="bottom" id="Database Console" order="12" visible="true" weight="0.14262295" />
+      <window_info anchor="bottom" id="Database Console" order="12" weight="0.013114754" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Database" order="3" visible="true" weight="0.095744684" />
+      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.14969605" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24848025" />
@@ -651,351 +718,362 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Modelo/Sede.php">
+    <entry file="file://$PROJECT_DIR$/Vista/inicio.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-168" />
+        <state relative-caret-position="1988">
+          <caret line="74" column="5" lean-forward="true" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public_html/index.php">
+    <entry file="file://$PROJECT_DIR$/Dao/TipoPlazaBdDao.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="336">
+          <caret line="62" column="36" lean-forward="true" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dao/EventoBdDao.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="768">
+          <caret line="192" column="32" lean-forward="true" selection-start-line="192" selection-start-column="32" selection-end-line="192" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Vista/card-event.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+        <state relative-caret-position="252">
+          <caret line="12" column="48" lean-forward="true" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Config/Request.php">
+    <entry file="file://$PROJECT_DIR$/Vista/admin/listado/listadoEventos.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1593">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="345">
+          <caret line="174" column="112" selection-start-line="174" selection-start-column="112" selection-end-line="174" selection-end-column="112" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/SingletonDao.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/perfil.php">
+    <entry file="file://$PROJECT_DIR$/Modelo/Evento.php">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="214" column="51" selection-start-line="214" selection-start-column="51" selection-end-line="214" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modelo/TipoPlaza.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="34" column="47" lean-forward="true" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/tickets">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
-          <caret column="37" selection-start-column="37" selection-end-column="37" />
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/navbar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2380">
-          <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controladora/ShowControladora.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public_html/js/ajax.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-756">
-          <caret line="9" column="38" lean-forward="true" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modelo/Cart.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="64" column="41" lean-forward="true" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controladora/CategoriaControladora.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/comprarEvento.php">
-      <provider selected="true" editor-type-id="text-editor">
+    <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/compras">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public_html/js/fb-login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-420" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="34" column="61" selection-start-line="34" selection-start-column="61" selection-end-line="34" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modelo/Usuario.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/admin/listado/listadoArtistas.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controladora/FacebookControladora.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270">
-          <caret line="59" column="63" lean-forward="true" selection-start-line="59" selection-start-column="63" selection-end-line="59" selection-end-column="63" />
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Vista/carrito.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="45" column="36" lean-forward="true" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
+        <state relative-caret-position="232">
+          <caret line="43" column="34" lean-forward="true" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Modelo/Linea.php">
+    <entry file="file://$PROJECT_DIR$/Vista/comprarEvento.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-728">
-          <caret line="21" column="23" lean-forward="true" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
+        <state relative-caret-position="2072">
+          <caret line="74" column="58" selection-start-line="74" selection-start-column="58" selection-end-line="74" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/navbar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3304">
+          <caret line="118" column="14" selection-start-line="118" selection-start-column="14" selection-end-line="118" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public_html/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1120">
+          <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public_html/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="49" column="14" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/admin/altas/agregarEvento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="66" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/admin/crearSede.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="28" column="17" lean-forward="true" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/admin/altas/agregarSede.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="13" column="18" lean-forward="true" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controladora/SedeControladora.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="61" column="48" lean-forward="true" selection-start-line="61" selection-start-column="48" selection-end-line="61" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dao/SedeBdDao.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="163" column="25" lean-forward="true" selection-start-line="163" selection-start-column="25" selection-end-line="163" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modelo/Sede.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="954">
+          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dao/CalendarioBdDao.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2458">
+          <caret line="185" column="47" lean-forward="true" selection-start-line="185" selection-start-column="47" selection-end-line="185" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/plaza_eventos.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/tipo_plazas">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/calendarios">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/eventos">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/sedes">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="2" column="17" lean-forward="true" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/admin/listado/listadoSede.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-451">
+          <caret line="101" column="39" lean-forward="true" selection-start-line="101" selection-start-column="39" selection-end-line="101" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/admin/crearCalendario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-252" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/admin/altas/agregarCalendario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/admin/sidebar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="15" column="70" selection-start-line="15" selection-start-column="70" selection-end-line="15" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/admin/crearEvento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1008">
+          <caret line="36" column="18" selection-end-line="36" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/admin/altas/agregarPlaza.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/admin/consultaEventos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="118" column="14" selection-start-line="118" selection-start-column="14" selection-end-line="118" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Config/Request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2436">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/admin/altas/agregarPlazaEvento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="837">
+          <caret line="100" column="18" lean-forward="true" selection-start-line="100" selection-start-column="18" selection-end-line="100" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public_html/js/ajax.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/admin/listado/listadoCalendariosDeEventos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="171" column="31" selection-start-line="171" selection-start-column="31" selection-end-line="171" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Modelo/Compra.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <caret line="30" column="35" lean-forward="true" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Modelo/Ticket.php">
+    <entry file="file://$PROJECT_DIR$/Modelo/Usuario.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1260">
-          <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/UsuarioBdDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="9" column="77" selection-start-line="9" selection-start-column="77" selection-end-line="9" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/phpqrcode/qrlib.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modelo/Cliente.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3209">
-          <caret line="123" selection-start-line="123" selection-end-line="123" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/phpqrcode/phpqrcode.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="2136" selection-start-line="2136" selection-end-line="2136" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/phpqrcode/qrconst.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="47" column="32" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modelo/QR.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/TicketBdDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="33" column="45" lean-forward="true" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/LineaBdDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modelo/Evento.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controladora/PaginaControladora.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-591">
-          <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modelo/Calendario.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/example.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="185" column="30" selection-start-line="185" selection-start-column="30" selection-end-line="185" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/CalendarioBdDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="185" column="47" lean-forward="true" selection-start-line="185" selection-start-column="47" selection-end-line="185" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controladora/CalendarioControladora.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1285">
-          <caret line="146" column="89" selection-start-line="146" selection-start-column="89" selection-end-line="146" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controladora/EventoControladora.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-852">
-          <caret line="52" column="33" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/CompraBdDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/admin/adminNav.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controladora/CuentaControladora.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="59" column="47" lean-forward="true" selection-start-line="59" selection-start-column="47" selection-end-line="59" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/EventoBdDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="173" column="58" selection-start-line="173" selection-start-column="58" selection-end-line="173" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/ClienteBdDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="108" selection-start-line="108" selection-end-line="108" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Config/sendemail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
-          <folding>
-            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Config/Config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modelo/TipoPlaza.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="57" column="34" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modelo/Mail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="16" column="48" lean-forward="true" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/inicio.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+        <state relative-caret-position="310">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Modelo/PlazaEvento.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1907">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/SedeBdDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="77" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controladora/CompraControladora.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="112" column="49" lean-forward="true" selection-start-line="112" selection-start-column="49" selection-end-line="112" selection-end-column="49" />
-          <folding>
-            <element signature="e#114#138#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="287">
+          <caret line="26" column="50" lean-forward="true" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Dao/PlazaEventoBdDao.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1476">
-          <caret line="132" column="71" selection-start-line="132" selection-start-column="71" selection-end-line="132" selection-end-column="71" />
+        <state relative-caret-position="184">
+          <caret line="59" column="12" lean-forward="true" selection-start-line="59" selection-start-column="12" selection-end-line="67" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dao/LineaBdDao.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="77" column="34" lean-forward="true" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modelo/Cliente.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modelo/Linea.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1064">
+          <caret line="39" column="40" lean-forward="true" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controladora/EventoControladora.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="307" column="5" selection-start-line="307" selection-start-column="5" selection-end-line="307" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/lineas">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/plaza_eventos">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modelo/Calendario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-310" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controladora/CompraControladora.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-492">
+          <caret line="233" selection-start-line="233" selection-end-line="233" />
+          <folding>
+            <element signature="e#114#138#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

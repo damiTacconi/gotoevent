@@ -5,7 +5,7 @@
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputSede">Evento </label>
-                    <select onchange="actualizarFechas()" name="eventoSelect" id="selectEvento" class="form-control" required>
+                    <select name="eventoSelect" id="selectEvento" class="form-control" required>
                         <option value="" selected disabled>Elegir evento...</option>
                         <?php if(!empty($param['eventos'])) {?>
                             <?php foreach ($param['eventos'] as $evento) { ?>

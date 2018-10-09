@@ -17,7 +17,7 @@
             <!-- FORMULARIOS -->
             <?php include "altas/agregarEvento.php" ?>
             <hr>
-            <?php include "altas/agregarPlaza.php" ?>
+            <?php include "altas/agregarPlazaEvento.php" ?>
             <!-- FIN FORMULARIOS -->
         </div>
         <!-- /.container-fluid -->
