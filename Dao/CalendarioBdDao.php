@@ -67,14 +67,17 @@ class CalendarioBdDao extends SingletonDao implements IDao
     public function save($data)
     {
         try{
-            $sql = "INSERT INTO  $this->tabla (fecha , id_evento) VALUES (:fecha, :id_evento)";
+            $sql = "INSERT INTO  $this->tabla (fecha , id_evento, id_sede) VALUES (:fecha, :id_evento, :id_sede)";
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $fecha = $data->getFecha();
             $evento = $data->getEvento();
             $id_evento = $evento->getId();
+            $sede = $data->getSede();
+            $id_sede = $sede->getId();
             $sentencia->bindParam(":fecha",$fecha);
             $sentencia->bindParam(":id_evento",$id_evento);
+            $sentencia->bindParam(":id_sede",$id_sede);
             $sentencia->execute();
             return $conexion->lastInsertId();
         }catch (\PDOException $e){
@@ -86,15 +89,18 @@ class CalendarioBdDao extends SingletonDao implements IDao
     public function update($data)
     {
         try {
-            $sql = ("UPDATE $this->tabla SET fecha=:fecha , id_evento=:id_evento
+            $sql = ("UPDATE $this->tabla SET fecha=:fecha , id_evento=:id_evento, id_sede=:id_sede
                     WHERE id_calendario = :id_calendario");
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $id_calendario = $data->getId();
             $fecha = $data->getFecha();
             $id_evento = $data->getEvento()->getId();
+            $sede = $data->getSede();
+            $id_sede = $sede->getId();
             $sentencia->bindParam(":fecha", $fecha);
             $sentencia->bindParam(":id_evento", $id_evento);
+            $sentencia->bindParam(":id_sede",$id_sede);
             $sentencia->bindParam(":id_calendario", $id_calendario);
             $sentencia->execute();
         }catch (\PDOException $e){
@@ -186,8 +192,10 @@ class CalendarioBdDao extends SingletonDao implements IDao
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
             $eventoDao = EventoBdDao::getInstance();
+            $sedeDao = SedeBdDao::getInstance();
+            $sede = $sedeDao->retrieve($p['id_sede']);
             $evento = $eventoDao->retrieve($p['id_evento']);
-            $calendario = new Calendario($p['fecha'],$evento);
+            $calendario = new Calendario($p['fecha'],$evento,$sede);
 
             $calendario->setId($p['id_calendario']);
             return $calendario;

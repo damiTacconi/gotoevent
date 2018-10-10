@@ -134,8 +134,6 @@ class EventoControladora extends PaginaControladora
             $categorias = $this->categoriaDao->getAll();
             $eventos = $this->eventoDao->getAll();
             $artistas = $this->artistaDao->getAll();
-            $sedes = $this->sedeDao->getAll();
-            $param['sedes'] = $sedes;
             $param['categorias'] = $categorias;
             $param['eventos'] = $eventos;
             $param['artistas'] = $artistas;
@@ -238,14 +236,13 @@ class EventoControladora extends PaginaControladora
         }else header('location: /');
     }
 
-    function save($titulo, $id_categoria, $id_sede, $fecha_desde , $fecha_hasta, $descripcion){
+    function save($titulo, $id_categoria, $fecha_desde , $fecha_hasta, $descripcion){
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
             $titulo = trim($titulo);
             if(!empty($titulo)) {
                 if (!$this->eventoDao->titleExists($titulo)){
-                    $sede = $this->sedeDao->retrieve($id_sede);
                     $categoria = $this->categoriaDao->retrieve($id_categoria);
-                    $evento = new Evento($titulo,$fecha_desde,$fecha_hasta,$categoria,$sede,$descripcion);
+                    $evento = new Evento($titulo,$fecha_desde,$fecha_hasta,$categoria,$descripcion);
                     if(!empty($_FILES['imagen']['tmp_name'])){
                         $imagen = addslashes($_FILES['imagen']['tmp_name']);
                         $nombre = addslashes($_FILES['imagen']['name']);
@@ -281,6 +278,8 @@ class EventoControladora extends PaginaControladora
 
         if($evento){
           $calendarios= $this->calendarioDao->traerPorIdEvento($id_evento);
+          $sedes = $this->sedeDao->getAll();
+          $params['sedes'] = $sedes;
           $params['calendarios'] = $calendarios;
           $params['evento'] = $evento;
           $this->page("listado/listadoCalendariosDeEventos" , "Calendarios de {$evento->getTitulo()}",2,$params);

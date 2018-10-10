@@ -17,7 +17,6 @@ class Evento implements JsonSerializable
     private $fecha_desde;
     private $fecha_hasta;
     private $categoria;
-    private $sede;
     private $descripcion;
     private $eventoImagen = null;
 
@@ -30,11 +29,10 @@ class Evento implements JsonSerializable
     private $calendarios = [];
 
 
-    function __construct($titulo, $fecha_desde, $fecha_hasta, $categoria, $sede , $descripcion)
+    function __construct($titulo, $fecha_desde, $fecha_hasta, $categoria , $descripcion)
     {
         $this->categoria = $categoria;
         $this->fecha_desde = $fecha_desde;
-        $this->sede = $sede;
         $this->fecha_hasta = $fecha_hasta;
         $this->titulo = $titulo;
         $this->descripcion = $descripcion;
@@ -54,23 +52,6 @@ class Evento implements JsonSerializable
     public function setDescripcion($descripcion): void
     {
         $this->descripcion = $descripcion;
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getSede()
-    {
-        return $this->sede;
-    }
-
-    /**
-     * @param mixed $sede
-     */
-    public function setSede($sede): void
-    {
-        $this->sede = $sede;
     }
 
 
@@ -212,7 +193,6 @@ class Evento implements JsonSerializable
             'fecha_desde' => $this->fecha_desde,
             'fecha_hasta' => $this->fecha_hasta,
             'categoria' => $this->categoria->jsonSerialize(),
-            'sede' => $this->sede->jsonSerialize(),
             'evento_imagen' => $this->eventoImagen->jsonSerialize(),
             'descripcion' => $this->descripcion,
             'calendarios' => $this->calendariosToArray()

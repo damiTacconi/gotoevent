@@ -11,15 +11,20 @@ namespace Controladora;
 
 use Dao\CalendarioBdDao;
 use Dao\EventoBdDao;
+use Dao\SedeBdDao;
 use Modelo\Mensaje;
 use Modelo\Calendario;
+use Modelo\Sede;
 
 class CalendarioControladora extends PaginaControladora
 {
     private $calendarioDao;
     private $eventoDao;
+    private $sedeDao;
+
     function __construct()
     {
+        $this->sedeDao = SedeBdDao::getInstance();
         $this->eventoDao = EventoBdDao::getInstance();
         $this->calendarioDao = CalendarioBdDao::getInstance();
     }
@@ -64,7 +69,7 @@ class CalendarioControladora extends PaginaControladora
         return $calendario;
     }
 
-    function save($id_evento, $fecha){
+    function save($id_evento, $id_sede , $fecha){
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $evento = $this->eventoDao->retrieve($id_evento);
             $evento_desde = $evento->getFechaDesde();
@@ -84,28 +89,19 @@ class CalendarioControladora extends PaginaControladora
                 if($calendario){
                     $mensaje = new Mensaje("ESTE CALENDARIO YA EXISTE EN EL EVENTO" , "danger");
                 }else{
-                    $calendario = new Calendario($fecha, $evento);
-                    $this->calendarioDao->save($calendario);
-                    $mensaje = new Mensaje("EL CALENDARIO SE AGREGO CON EXITO ! " , "success");
+                    $sede = $this->sedeDao->retrieve($id_sede);
+                    if($sede){
+                        $calendario = new Calendario($fecha, $evento, $sede);
+                        $this->calendarioDao->save($calendario);
+                        $mensaje = new Mensaje("EL CALENDARIO SE AGREGO CON EXITO ! " , "success");
+                    }else $mensaje = new Mensaje("NO SE ENCONTRO LA SEDE", "danger");
                 }
             }
             $params['mensaje'] = $mensaje->getAlert();
             $this->crear($params);
         }else header("location: /");
     }
-    function saveAll($id_evento){
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $evento = $this->eventoDao->retrieve($id_evento);
-            if($evento){
-                $respuesta = $this->generarCalendarios($evento);
-                if($respuesta){
-                    $mensaje = new Mensaje("LOS CALENDARIOS SE AGREGARON CORRECTAMENTE!","success");
-                }else $mensaje = new Mensaje("NO SE AGREGO NINGUN CALENDARIO, PUEDE SER QUE YA EXISTAN TODOS EN EL EVENTO", "warning");
-            }else $mensaje = new Mensaje("NO SE ENCONTRO EL EVENTO","danger");
-            $params['mensaje'] = $mensaje->getAlert();
-            $this->crear($params);
-        }else header("location: /");
-    }
+    
 
     private function generarCalendarios($evento){
         $fecha_desde = $evento->getFechaDesde();
@@ -128,17 +124,22 @@ class CalendarioControladora extends PaginaControladora
     }
     function crear($params = []){
         $eventos = $this->eventoDao->getAll();
+        $sedes = $this->sedeDao->getAll();
+        $params['sedes'] = $sedes;
         $params['eventos'] = $eventos;
         $this->page('crearCalendario' , 'Calendario - Crear' , 2, $params);
     }
 
-    function update($id_calendario_elegido, $id_calendario_actual){
+    function update($id_calendario_elegido, $id_sede, $id_calendario_actual){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $sede = $this->sedeDao->retrieve($id_sede);
             $calendario_actual = $this->calendarioDao->retrieve($id_calendario_actual);
             $calendario_elegido = $this->calendarioDao->retrieve($id_calendario_elegido);
             $fecha_calendario_actual = $calendario_actual->getFecha();
             $fecha_calendario_elegido = $calendario_elegido->getFecha();
             $calendario_actual->setFecha($fecha_calendario_elegido);
+            var_dump($sede);
+            $calendario_actual->setSede($sede);
             $calendario_elegido->setFecha($fecha_calendario_actual);
             $this->calendarioDao->update($calendario_actual);
             $this->calendarioDao->update($calendario_elegido);
@@ -147,6 +148,7 @@ class CalendarioControladora extends PaginaControladora
             $mensaje = new Mensaje("ACTUALIZACION EJECUTADA CORRECTAMENTE!" , "success");
             $params['mensaje'] = $mensaje->getAlert();
             $params['evento'] = $evento;
+            $params['sedes'] = $this->sedeDao->getAll();
             $params['calendarios'] = $this->calendarioDao->traerPorIdEvento($id_evento);
             $this->page("listado/listadoCalendariosDeEventos" , "Calendarios de {$evento->getTitulo()}",2,$params);
         }else header("location: /");

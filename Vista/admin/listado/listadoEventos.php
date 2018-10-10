@@ -25,7 +25,6 @@
                                 <th>Id</th>
                                 <th>Imagen</th>
                                 <th>Titulo</th>
-                                <th>Sede</th>
                                 <th>Fecha Desde</th>
                                 <th>Fecha Hasta</th>
                                 <th>Categoria</th>
@@ -39,7 +38,6 @@
                                 <th>Id</th>
                                 <th>Imagen</th>
                                 <th>Titulo</th>
-                                <th>Sede</th>
                                 <th>Fecha Desde</th>
                                 <th>Fecha Hasta</th>
                                 <th>Categoria</th>
@@ -62,7 +60,6 @@
                                         <img src="<?= $url ?>" width="50px" alt="Imagen de Evento">
                                     </td>
                                     <td><?= $evento->getTitulo() ?></td>
-                                    <td><?= $evento->getSede()->getNombre() ?></td>
                                     <td><?= $evento->getFechaDesde() ?></td>
                                     <td><?= $evento->getFechaHasta() ?></td>
                                     <td>
@@ -85,7 +82,7 @@
                     </div>
                 </div>
                 <?php }else {
-                    $mensaje = new Modelo\Mensaje('No Hay categorias cargadas' , 'warning');
+                    $mensaje = new Modelo\Mensaje('No Hay eventos cargados' , 'warning');
                     echo $mensaje->getAlert();
                 } ?>
                 <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>

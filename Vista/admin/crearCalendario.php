@@ -16,8 +16,7 @@
             ?>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9"><?php include "altas/agregarCalendario.php" ?> </div>
-                    <div class="col-md-3"><?php include "altas/agregarCalendarioAutomatico.php" ?></div>
+                    <div class="col-md-12"><?php include "altas/agregarCalendario.php" ?> </div>
                 </div>
             </div>
 

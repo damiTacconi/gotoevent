@@ -15,6 +15,8 @@ class Calendario implements JsonSerializable
     private $id;
     private $fecha;
     private $evento;
+    private $sede;
+
 
     private $plazaEventos = [];
     private $shows = [];
@@ -24,15 +26,34 @@ class Calendario implements JsonSerializable
        return [
          'id_calendario' => $this->id,
          'fecha' => $this->fecha,
+         'sede' => $this->sede->jsonSerialize(),
          'evento' => $this->evento->jsonSerializeSesion()
        ];
     }
 
 
-    function __construct($fecha ,$evento)
+    function __construct($fecha ,$evento, $sede)
     {
         $this->fecha = $fecha;
         $this->evento = $evento;
+        $this->sede = $sede;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getSede()
+    {
+        return $this->sede;
+    }
+
+    /**
+     * @param mixed $sede
+     */
+    public function setSede($sede): void
+    {
+        $this->sede = $sede;
     }
 
     /**

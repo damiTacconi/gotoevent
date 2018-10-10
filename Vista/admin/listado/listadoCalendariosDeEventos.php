@@ -26,8 +26,8 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Sede</th>
                                 <th>Fecha</th>
-                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -35,8 +35,8 @@
                             <tfoot>
                             <tr>
                                 <th>Id</th>
+                                <th>Sede</th>
                                 <th>Fecha</th>
-                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -45,6 +45,7 @@
                             <?php foreach ($param['calendarios'] as $calendario){ ?>
                                 <tr id="<?= $calendario->getId() ?>">
                                     <td> <?= $calendario->getId() ?></td>
+                                    <td> <?= $calendario->getSede()->getNombre() ?></td>
                                     <td> <?= $calendario->getFecha() ?></td>
                                     <td style="width:30px;"><a href="/show/showsEvento/<?= $calendario->getId() ?>"
                                                                class="btn btn-secondary">Ver Shows</a></td>
@@ -110,6 +111,17 @@
                                 <option value="<?= $calendario->getId() ?>">
                                     <?= $calendario->getFecha() ?>
                                 </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Sede</label>
+                        <select name="sedeSelect" id="selectSede" class="form-control" required>
+                            <option value="" selected disabled>Elegir sede...</option>
+                            <?php if(!empty($param['sedes'])) { ?>
+                                <?php foreach ($param['sedes'] as $sede) { ?>
+                                    <option value='<?= $sede->getId() ?>'><?= $sede->getNombre() ?> </option>
+                                <?php } ?>
                             <?php } ?>
                         </select>
                     </div>
