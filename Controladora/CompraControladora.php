@@ -229,6 +229,7 @@ class CompraControladora extends PaginaControladora
         $params = [];
         if($evento){
           $calendarios = $calendarioDao->traerPorIdEvento($id_evento);
+          
           foreach ($calendarios as $key => $value) {
               $params[] = $this->consultarVentasPorCalendario($value->getId());
           }
@@ -244,10 +245,12 @@ class CompraControladora extends PaginaControladora
             $plazaEventos = $plazaEventoDao->traerPorIdCalendario($id_calendario);
             $cantidadRemanentes = 0;
             $params = [];
+            
+
             if($plazaEventos) {
-              $calendario = $this->calendarDao->retrieve($id_calendario);
-              $calendarioJSON = $calendario->jsonSerialize();
-              $params['calendario'] = $calendarioJSON;
+                $calendario = $this->calendarDao->retrieve($id_calendario);
+                $calendarioJSON = $calendario->jsonSerialize();
+                $params['calendario'] = $calendarioJSON;
 
                 foreach ($plazaEventos as $plaza) {
                     $cantidadRemanentes += $plaza->getRemanente();

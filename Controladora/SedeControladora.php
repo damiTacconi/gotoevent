@@ -10,18 +10,22 @@ namespace Controladora;
 use Dao\EventoBdDao;
 use Dao\SedeBdDao;
 use Dao\TipoPlazaBdDao;
+use Dao\CalendarioBdDao;
 use Modelo\Mensaje;
 use Modelo\Sede;
 use Modelo\TipoPlaza;
+use Modelo\Calendario;
 
 class SedeControladora extends PaginaControladora
 {
     private $sedeDao;
     private $tipoPlazaDao;
     private $eventoDao;
+    private $calendarioDao;
 
     function __construct()
     {
+        $this->calendarioDao = CalendarioBdDao::getInstance();
         $this->eventoDao = EventoBdDao::getInstance();
         $this->sedeDao = SedeBdDao::getInstance();
         $this->tipoPlazaDao = TipoPlazaBdDao::getInstance();
@@ -110,11 +114,8 @@ class SedeControladora extends PaginaControladora
         }
         return  $flag;
     }
-    function getPlazasAjax($id_evento){
+    function getPlazasAjax($id_sede){
         if(!empty($_SESSION) && $_SESSION['rol']=='admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
-            $evento = $this->eventoDao->retrieve($id_evento);
-            $sede = $evento->getSede();
-            $id_sede = $sede->getId();
             $plazas = $this->tipoPlazaDao->traerPorIdSede($id_sede);
             $params =[];
             if($plazas){
@@ -145,11 +146,11 @@ class SedeControladora extends PaginaControladora
     }
 
 
-    function getSedeIdEventoAjax($id_evento){
+    function getSedeIdCalendarioAjax($id_calendario){
         if(!empty($_SESSION) && $_SESSION['rol']=='admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
-            $evento = $this->eventoDao->retrieve($id_evento);
+            $calendario = $this->calendarioDao->retrieve($id_calendario);
             $params = [];
-            $sede = $evento->getSede();
+            $sede = $calendario->getSede();
             if($sede){
                 $sede = $sede->jsonSerialize();
                 $params['sede'] = $sede;

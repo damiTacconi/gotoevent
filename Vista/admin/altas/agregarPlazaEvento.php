@@ -5,7 +5,7 @@
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputSede">Evento</label>
-                    <select onchange="actualizarSede();actualizarCalendario();actualizarPlazas();" id="selectEvento"
+                    <select onchange="actualizarCalendario();" id="selectEvento"
                             class="form-control" required>
                         <option value="" selected disabled>Elegir evento...</option>
                         <?php if(!empty($param['eventos'])) { ?>
@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label>Calendarios</label>
-                    <select name="artistaSelect" id="selectCalendario" class="form-control" required>
+                    <select onchange="actualizarSede();" name="calendarioSelect" id="selectCalendario" class="form-control" required>
                         <option value="" selected disabled>Elegir calendario...</option>
                     </select>
                 </div>
@@ -72,17 +72,17 @@
     }
 
     function actualizarSede(){
-        let id = $('#selectEvento option:selected').val();
+        let id = $('#selectCalendario option:selected').val();
         let obj = {id: id};
-        ajaxURL('/sede/getSedeIdEventoAjax/', data => {
+        ajaxURL('/sede/getSedeIdCalendarioAjax/', data => {
             let result = JSON.parse(data);
             let $sede = $('#inputSede');
             $sede.val(result['sede']['nombre']);
+            actualizarPlazas(result['sede']['id_sede']);
         }, 'POST' , obj);
     }
-    function actualizarPlazas(){
-        let id = $('#selectEvento option:selected').val();
-        let obj = { id: id};
+    function actualizarPlazas(id_sede){
+        let obj = { id: id_sede};
         ajaxURL('/sede/getPlazasAjax/', data => {
             let result = JSON.parse(data);
             console.log(result);

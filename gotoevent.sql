@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 10-10-2018 a las 21:42:08
--- Versión del servidor: 5.7.16-log
--- Versión de PHP: 7.2.4
+-- Servidor: localhost
+-- Tiempo de generación: 12-10-2018 a las 17:04:00
+-- Versión del servidor: 10.1.36-MariaDB
+-- Versión de PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,13 +28,10 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `artistas`
 --
 
-DROP TABLE IF EXISTS `artistas`;
-CREATE TABLE IF NOT EXISTS `artistas` (
-  `id_artista` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(40) NOT NULL,
-  PRIMARY KEY (`id_artista`),
-  UNIQUE KEY `unq_nombre_artista` (`nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+CREATE TABLE `artistas` (
+  `id_artista` int(11) NOT NULL,
+  `nombre` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `artistas`
@@ -52,16 +49,12 @@ INSERT INTO `artistas` (`id_artista`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `calendarios`
 --
 
-DROP TABLE IF EXISTS `calendarios`;
-CREATE TABLE IF NOT EXISTS `calendarios` (
-  `id_calendario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `calendarios` (
+  `id_calendario` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `id_evento` int(11) NOT NULL,
-  `id_sede` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_calendario`),
-  KEY `fk_id_calendario_x_id_evento` (`id_evento`),
-  KEY `fk_id_calendario_x_id_sede` (`id_sede`)
-) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8;
+  `id_sede` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `calendarios`
@@ -76,13 +69,10 @@ INSERT INTO `calendarios` (`id_calendario`, `fecha`, `id_evento`, `id_sede`) VAL
 -- Estructura de tabla para la tabla `categorias`
 --
 
-DROP TABLE IF EXISTS `categorias`;
-CREATE TABLE IF NOT EXISTS `categorias` (
-  `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`id_categoria`),
-  UNIQUE KEY `unq_categoria_descripcion` (`descripcion`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+CREATE TABLE `categorias` (
+  `id_categoria` int(11) NOT NULL,
+  `descripcion` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `categorias`
@@ -100,18 +90,14 @@ INSERT INTO `categorias` (`id_categoria`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `clientes`
 --
 
-DROP TABLE IF EXISTS `clientes`;
-CREATE TABLE IF NOT EXISTS `clientes` (
-  `id_cliente` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `clientes` (
+  `id_cliente` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `apellido` varchar(40) NOT NULL,
   `dni` varchar(9) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
-  `id_fb` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`id_cliente`),
-  UNIQUE KEY `unq_id_fb` (`id_fb`),
-  KEY `fk_clientes_x_id_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+  `id_fb` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `clientes`
@@ -155,15 +141,12 @@ INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellido`, `dni`, `id_usuario`,
 -- Estructura de tabla para la tabla `compras`
 --
 
-DROP TABLE IF EXISTS `compras`;
-CREATE TABLE IF NOT EXISTS `compras` (
-  `id_compra` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `compras` (
+  `id_compra` int(11) NOT NULL,
   `fecha` datetime NOT NULL,
   `total` float NOT NULL,
-  `id_cliente` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_compra`),
-  KEY `fk_id_cliente` (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+  `id_cliente` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `compras`
@@ -179,20 +162,15 @@ INSERT INTO `compras` (`id_compra`, `fecha`, `total`, `id_cliente`) VALUES
 -- Estructura de tabla para la tabla `eventos`
 --
 
-DROP TABLE IF EXISTS `eventos`;
-CREATE TABLE IF NOT EXISTS `eventos` (
-  `id_evento` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `eventos` (
+  `id_evento` int(11) NOT NULL,
   `titulo` varchar(60) NOT NULL,
   `fecha_desde` date DEFAULT NULL,
   `fecha_hasta` date DEFAULT NULL,
   `id_categoria` int(11) NOT NULL,
   `id_imagen` int(11) DEFAULT NULL,
-  `descripcion` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id_evento`),
-  UNIQUE KEY `unq_evento_titulo` (`titulo`),
-  KEY `fk_id_evento_x_id_categoria` (`id_categoria`),
-  KEY `fk_id_eventos_x_id_imagen` (`id_imagen`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+  `descripcion` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `eventos`
@@ -207,13 +185,11 @@ INSERT INTO `eventos` (`id_evento`, `titulo`, `fecha_desde`, `fecha_hasta`, `id_
 -- Estructura de tabla para la tabla `imagenes`
 --
 
-DROP TABLE IF EXISTS `imagenes`;
-CREATE TABLE IF NOT EXISTS `imagenes` (
-  `id_imagen` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `imagenes` (
+  `id_imagen` int(11) NOT NULL,
   `nombre` varchar(70) NOT NULL,
-  `imagen` longblob NOT NULL,
-  PRIMARY KEY (`id_imagen`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+  `imagen` longblob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `imagenes`
@@ -244,17 +220,13 @@ INSERT INTO `imagenes` (`id_imagen`, `nombre`, `imagen`) VALUES
 -- Estructura de tabla para la tabla `lineas`
 --
 
-DROP TABLE IF EXISTS `lineas`;
-CREATE TABLE IF NOT EXISTS `lineas` (
-  `id_linea` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `lineas` (
+  `id_linea` int(11) NOT NULL,
   `subtotal` float NOT NULL,
   `id_plaza_evento` int(11) DEFAULT NULL,
   `id_compra` int(11) DEFAULT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_linea`),
-  KEY `fk_id_linea_x_id_plaza_evento` (`id_plaza_evento`),
-  KEY `fk_id_linea_x_id_compra` (`id_compra`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+  `cantidad` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -262,18 +234,21 @@ CREATE TABLE IF NOT EXISTS `lineas` (
 -- Estructura de tabla para la tabla `plaza_eventos`
 --
 
-DROP TABLE IF EXISTS `plaza_eventos`;
-CREATE TABLE IF NOT EXISTS `plaza_eventos` (
-  `id_plaza_evento` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `plaza_eventos` (
+  `id_plaza_evento` int(11) NOT NULL,
   `capacidad` int(11) NOT NULL,
   `remanente` int(11) NOT NULL,
   `id_tipo_plaza` int(11) NOT NULL,
   `id_calendario` int(11) NOT NULL,
-  `precio` float DEFAULT '0',
-  PRIMARY KEY (`id_plaza_evento`),
-  KEY `fk_id_plaza_eventos_x_id_calendario` (`id_calendario`),
-  KEY `fk_id_plaza_eventos_x_id_tipo_plaza` (`id_tipo_plaza`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+  `precio` float DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `plaza_eventos`
+--
+
+INSERT INTO `plaza_eventos` (`id_plaza_evento`, `capacidad`, `remanente`, `id_tipo_plaza`, `id_calendario`, `precio`) VALUES
+(1, 10000, 10000, 3, 156, 2500);
 
 -- --------------------------------------------------------
 
@@ -281,14 +256,11 @@ CREATE TABLE IF NOT EXISTS `plaza_eventos` (
 -- Estructura de tabla para la tabla `sedes`
 --
 
-DROP TABLE IF EXISTS `sedes`;
-CREATE TABLE IF NOT EXISTS `sedes` (
-  `id_sede` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sedes` (
+  `id_sede` int(11) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
-  `capacidad` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_sede`),
-  UNIQUE KEY `unq_descripcion` (`descripcion`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `capacidad` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `sedes`
@@ -305,14 +277,10 @@ INSERT INTO `sedes` (`id_sede`, `descripcion`, `capacidad`) VALUES
 -- Estructura de tabla para la tabla `shows`
 --
 
-DROP TABLE IF EXISTS `shows`;
-CREATE TABLE IF NOT EXISTS `shows` (
-  `id_show` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `shows` (
+  `id_show` int(11) NOT NULL,
   `id_calendario` int(11) DEFAULT NULL,
-  `id_artista` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_show`),
-  KEY `fk_id_show_x_id_calendarios` (`id_calendario`),
-  KEY `fk_id_show_x_id_artistas` (`id_artista`)
+  `id_artista` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -321,17 +289,13 @@ CREATE TABLE IF NOT EXISTS `shows` (
 -- Estructura de tabla para la tabla `tickets`
 --
 
-DROP TABLE IF EXISTS `tickets`;
-CREATE TABLE IF NOT EXISTS `tickets` (
-  `id_ticket` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tickets` (
+  `id_ticket` int(11) NOT NULL,
   `numero` varchar(10) NOT NULL,
   `fecha` datetime NOT NULL,
   `qr` varchar(100) DEFAULT NULL,
-  `id_linea` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_ticket`),
-  UNIQUE KEY `unq_numero_ticket` (`numero`),
-  KEY `fk_id_ticket_x_id_linea` (`id_linea`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+  `id_linea` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -339,14 +303,11 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 -- Estructura de tabla para la tabla `tipo_plazas`
 --
 
-DROP TABLE IF EXISTS `tipo_plazas`;
-CREATE TABLE IF NOT EXISTS `tipo_plazas` (
-  `id_tipo_plaza` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tipo_plazas` (
+  `id_tipo_plaza` int(11) NOT NULL,
   `descripcion` varchar(15) NOT NULL,
-  `id_sede` int(11) NOT NULL,
-  PRIMARY KEY (`id_tipo_plaza`),
-  KEY `fk_id_tipo_plazas_x_id_sedes` (`id_sede`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `id_sede` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `tipo_plazas`
@@ -365,14 +326,11 @@ INSERT INTO `tipo_plazas` (`id_tipo_plaza`, `descripcion`, `id_sede`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuarios` (
+  `id_usuario` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  PRIMARY KEY (`id_usuario`),
-  UNIQUE KEY `unq_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+  `password` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -409,6 +367,203 @@ INSERT INTO `usuarios` (`id_usuario`, `email`, `password`) VALUES
 (28, 'pedrin_pedron@gmail.com', 'asdhay2314'),
 (29, 'admin@admin.com', '1234'),
 (30, 'dasdfasdwe@asdda.com', 'asdasd');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `artistas`
+--
+ALTER TABLE `artistas`
+  ADD PRIMARY KEY (`id_artista`),
+  ADD UNIQUE KEY `unq_nombre_artista` (`nombre`);
+
+--
+-- Indices de la tabla `calendarios`
+--
+ALTER TABLE `calendarios`
+  ADD PRIMARY KEY (`id_calendario`),
+  ADD KEY `fk_id_calendario_x_id_evento` (`id_evento`),
+  ADD KEY `fk_id_calendario_x_id_sede` (`id_sede`);
+
+--
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id_categoria`),
+  ADD UNIQUE KEY `unq_categoria_descripcion` (`descripcion`);
+
+--
+-- Indices de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`id_cliente`),
+  ADD UNIQUE KEY `unq_id_fb` (`id_fb`),
+  ADD KEY `fk_clientes_x_id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `compras`
+--
+ALTER TABLE `compras`
+  ADD PRIMARY KEY (`id_compra`),
+  ADD KEY `fk_id_cliente` (`id_cliente`);
+
+--
+-- Indices de la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  ADD PRIMARY KEY (`id_evento`),
+  ADD UNIQUE KEY `unq_evento_titulo` (`titulo`),
+  ADD KEY `fk_id_evento_x_id_categoria` (`id_categoria`),
+  ADD KEY `fk_id_eventos_x_id_imagen` (`id_imagen`);
+
+--
+-- Indices de la tabla `imagenes`
+--
+ALTER TABLE `imagenes`
+  ADD PRIMARY KEY (`id_imagen`);
+
+--
+-- Indices de la tabla `lineas`
+--
+ALTER TABLE `lineas`
+  ADD PRIMARY KEY (`id_linea`),
+  ADD KEY `fk_id_linea_x_id_plaza_evento` (`id_plaza_evento`),
+  ADD KEY `fk_id_linea_x_id_compra` (`id_compra`);
+
+--
+-- Indices de la tabla `plaza_eventos`
+--
+ALTER TABLE `plaza_eventos`
+  ADD PRIMARY KEY (`id_plaza_evento`),
+  ADD KEY `fk_id_plaza_eventos_x_id_calendario` (`id_calendario`),
+  ADD KEY `fk_id_plaza_eventos_x_id_tipo_plaza` (`id_tipo_plaza`);
+
+--
+-- Indices de la tabla `sedes`
+--
+ALTER TABLE `sedes`
+  ADD PRIMARY KEY (`id_sede`),
+  ADD UNIQUE KEY `unq_descripcion` (`descripcion`);
+
+--
+-- Indices de la tabla `shows`
+--
+ALTER TABLE `shows`
+  ADD PRIMARY KEY (`id_show`),
+  ADD KEY `fk_id_show_x_id_calendarios` (`id_calendario`),
+  ADD KEY `fk_id_show_x_id_artistas` (`id_artista`);
+
+--
+-- Indices de la tabla `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`id_ticket`),
+  ADD UNIQUE KEY `unq_numero_ticket` (`numero`),
+  ADD KEY `fk_id_ticket_x_id_linea` (`id_linea`);
+
+--
+-- Indices de la tabla `tipo_plazas`
+--
+ALTER TABLE `tipo_plazas`
+  ADD PRIMARY KEY (`id_tipo_plaza`),
+  ADD KEY `fk_id_tipo_plazas_x_id_sedes` (`id_sede`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `unq_email` (`email`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `artistas`
+--
+ALTER TABLE `artistas`
+  MODIFY `id_artista` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `calendarios`
+--
+ALTER TABLE `calendarios`
+  MODIFY `id_calendario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+
+--
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT de la tabla `compras`
+--
+ALTER TABLE `compras`
+  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT de la tabla `imagenes`
+--
+ALTER TABLE `imagenes`
+  MODIFY `id_imagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de la tabla `lineas`
+--
+ALTER TABLE `lineas`
+  MODIFY `id_linea` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `plaza_eventos`
+--
+ALTER TABLE `plaza_eventos`
+  MODIFY `id_plaza_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `sedes`
+--
+ALTER TABLE `sedes`
+  MODIFY `id_sede` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `shows`
+--
+ALTER TABLE `shows`
+  MODIFY `id_show` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_plazas`
+--
+ALTER TABLE `tipo_plazas`
+  MODIFY `id_tipo_plaza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Restricciones para tablas volcadas

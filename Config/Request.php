@@ -29,9 +29,9 @@ class Request
             	 Si el arreglo tiene datos, tomo como controlador el primer elemento.
              */
             if(empty($ArregloUrl)) {
-                $this->controladora = 'evento';
+                $this->controladora = 'Evento';
             } else {
-                $this->controladora = array_shift($ArregloUrl);
+                $this->controladora = ucwords(array_shift($ArregloUrl));
             }
 
 

@@ -13,6 +13,13 @@
             <!-- FORMULARIOS -->
             <div class="container">
                 <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-info">
+                            <strong>INFO: </strong> Solo se mostraran aquellos calendarios que tengan registrado una plaza de evento.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-12 col-md-4">
                         <div class="card border-grey mb-3">
                             <div class="card-header">Consultar cantidad de ventas </div>
@@ -100,6 +107,14 @@
 
 <script type="text/javascript">
 
+    
+    function clean(obj){
+        for(var propName in obj){
+            if(obj[propName] === null || obj[propName] === ''){
+                delete obj[propName];
+            }
+        }
+    }
     function consultarEvento() {
         let id_evento = $('#selectEvento option:selected').val();
         if (id_evento === "")
@@ -110,17 +125,22 @@
 
             obj = {id: id_evento};
             ajaxURL( "/compra/consultarAjax/", data => {
+                clean(data);
                 let result = JSON.parse(data);
                 let table = $('#dataTable').DataTable();
-                table.clear();
                 let cant = Object.keys(result).length;
+                console.log(result[0]);
+                table.clear();
                 for(let i=0;i<cant;i++){
-                  table.row.add([
-                    result[i]['calendario']['id_calendario'],
-                    result[i]['calendario']['fecha'],
-                    result[i]['cantidad_ventas_totales'],
-                    result[i]['cantidad_remanentes_totales']
-                  ]).draw();
+                    tamObj = Object.keys(result[i]).length;
+                    if(tamObj > 0){
+                        table.row.add([
+                            result[i]['calendario']['id_calendario'],
+                            result[i]['calendario']['fecha'],
+                            result[i]['cantidad_ventas_totales'],
+                            result[i]['cantidad_remanentes_totales']
+                        ]).draw();
+                    }
                 }
             }, "POST" , obj);
         }
