@@ -203,11 +203,13 @@ class CompraControladora extends PaginaControladora
         if($evento) {
             $params['evento'] = $evento;
             $calendarios = $this->calendarDao->traerPorIdEvento($id_evento);
-            foreach($calendarios as $calendario){
-                $id_calendario = $calendario->getId();
-                $plazas = $this->eventPlaceDao->traerPorIdCalendario($id_calendario);
-                if($plazas)
-                    $calendario->setPlazaEventos($plazas);
+            if($calendarios) {
+                foreach ($calendarios as $calendario) {
+                    $id_calendario = $calendario->getId();
+                    $plazas = $this->eventPlaceDao->traerPorIdCalendario($id_calendario);
+                    if ($plazas)
+                        $calendario->setPlazaEventos($plazas);
+                }
             }
             $params['calendarios'] = $calendarios;
             $this->page("comprarEvento", $evento->getTitulo(), 0, $params);

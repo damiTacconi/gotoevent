@@ -71,31 +71,66 @@
 
 <?php include "header-inicio.php" ?>
 <!-- FIN HEADER -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
 
-<?php
-if($eventos) {
-    include 'example.php';
-}
-?>
-<?php include "modalRegister.php"; ?>
-<script type="text/javascript">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 bg-white">
+            <div id="containerSearch" class="border-bottom p-3 border-light">
+                <form  class="justify-content-center form-inline active-cyan-4">
+                    <input class="form-control form-control-sm mr-3 w-50" type="text" placeholder="ENCONTRA LO MEJOR DEL ENTRETENIMIENTO" aria-label="Search">
+                    <button id="btnSearch" class="btn btn-primary btn-sm" style="width: 10%"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-    function add(event){
-        ajaxURL('/cuenta/verificarSesion', data => {
-            let result = $.trim(data);
-            if(result === 'success') {
-                if ($(event).hasClass("btn-success")) {
-                    $(event).removeClass("btn-success");
-                    $(event).addClass("btn-danger");
-                    $(event).html('<i class=\"fas fa-shopping-cart\"></i> CANCELAR');
-                } else {
-                    $(event).removeClass("btn-danger");
-                    $(event).addClass("btn-success");
-                    $(event).html('<i class=\"fas fa-shopping-cart\"></i> AÑADIR');
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="p-5">
+                    <div class="primary-color">
+                        <h1 class="text-center font-weight-bold  text-white">
+                            <strong>Proximos Eventos</strong>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <?php
+                if($eventos) {
+                   //var_dump($eventos);
+                    include 'carousel.php';
                 }
-            }else{
-                $('#registrarse').click();
-            }
-        });
-    }
-</script>
+                ?>
+            </div>
+        </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="p-2 pt-5">
+                <div class="primary-color">
+                    <h1 class="text-center font-weight-bold  text-white">
+                        <strong>Eventos por categoria</strong>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+        </div>
+    </div>
+</div>
+
+<?php include "modalRegister.php"; ?>

@@ -123,16 +123,15 @@
             });
         else {
 
-            obj = {id: id_evento};
+            let obj = {id: id_evento};
             ajaxURL( "/compra/consultarAjax/", data => {
                 clean(data);
-                let result = JSON.parse(data);
                 let table = $('#dataTable').DataTable();
+                table.clear().draw();
+                let result = JSON.parse(data);
                 let cant = Object.keys(result).length;
-                console.log(result[0]);
-                table.clear();
                 for(let i=0;i<cant;i++){
-                    tamObj = Object.keys(result[i]).length;
+                    let tamObj = Object.keys(result[i]).length;
                     if(tamObj > 0){
                         table.row.add([
                             result[i]['calendario']['id_calendario'],

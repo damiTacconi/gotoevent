@@ -183,18 +183,18 @@
 </style>
 <?php ?>
     <div class="grid pt-4">
+        <div class="card-deck" style="justify-self: center">
         <?php foreach($eventos as $evento) {
             $fecha = $evento->getFechaDesde();
             $fecha_hasta = $evento->getFechaHasta();
             $imagen = $evento->getEventoImagen()->getImagen();
             $calendarios = $evento->getCalendarios();
             $categoria = $evento->getCategoria();
-            $url = "data:image;base64,{$imagen}";
+            $url = "data:image/jpg;base64,{$imagen}";
             ?>
-            <div style="justify-self: center">
-                <?php include "card-event.php" ?>
-            </div>
+            <?php include "card-event.php" ?>
         <?php } ?>
+        </div>
     </div>
 
 <!--

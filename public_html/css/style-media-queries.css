@@ -15,4 +15,15 @@
     header .xs-padding-top{
         padding-top: 60px;
     }
+
+    #containerSearch{
+        padding:0 !important;
+    }
+    #btnSearch{
+        width: 0 !important;
+    }
+    #inputSearch{
+        width:0 !important;
+    }
 }
+

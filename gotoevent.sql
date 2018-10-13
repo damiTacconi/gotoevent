@@ -6,7 +6,8 @@
 -- Tiempo de generación: 12-10-2018 a las 17:04:00
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.10
-
+create database gotoevent;
+use gotoevent;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;

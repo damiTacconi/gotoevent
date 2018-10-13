@@ -3,7 +3,7 @@
 <!-- ************************************************************************************
                                       NAV OVERLAY
 ***************************************************************************************-->
-<div id="myNav" class="overlay">
+<div id="myNav" class="n-overlay">
  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
  <div class="overlay-content">
    <ul class="navbar-nav list-inline">
@@ -110,6 +110,7 @@
 
  </nav>
 <script type="text/javascript">
+
     $('#icon-cart').on('click',() => {
         $("#modalCart").modal("toggle");
     })

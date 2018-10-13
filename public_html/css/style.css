@@ -30,7 +30,7 @@ body{ background-color: #F4F4F4; }
 
 
 /**********NAVBAR**********/
-.overlay {
+.n-overlay {
   height: 100%;
   width: 0;
   position: fixed;
@@ -46,10 +46,11 @@ body{ background-color: #F4F4F4; }
 .fixed-cart{
     background-color: #1d2124;
     position: fixed;
+    border: 1px solid white;
     right: 2vw;
-    bottom: 50vh;
+    bottom: 5vh;
 }
-.overlay-content {
+.n-overlay-content {
   position: relative;
   top: 25%;
   width: 100%;
@@ -57,7 +58,7 @@ body{ background-color: #F4F4F4; }
   margin-top: 30px;
 }
 
-.overlay a {
+.n-overlay a {
   padding: 8px;
   text-decoration: none;
   font-size: 36px;
@@ -66,11 +67,11 @@ body{ background-color: #F4F4F4; }
   transition: 0.3s;
 }
 
-.overlay a:hover, .overlay a:focus {
+.n-overlay a:hover, .overlay a:focus {
   color: #f1f1f1;
 }
 
-.overlay .closebtn {
+.n-overlay .closebtn {
   position: absolute;
   top: 20px;
   right: 45px;
