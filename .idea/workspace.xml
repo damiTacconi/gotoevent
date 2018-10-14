@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c648f63-f815-4177-89d2-2b100f6d0dcc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Config/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config/Config.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Vista/navCategorias.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Vista/comprarEvento.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/comprarEvento.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/inicio.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -170,7 +172,7 @@
           <entry key="imagenes" value="1" />
           <entry key="js" value="7" />
           <entry key="lineas" value="5" />
-          <entry key="php" value="248" />
+          <entry key="php" value="249" />
           <entry key="plaza_eventos" value="7" />
           <entry key="rnc" value="1" />
           <entry key="sedes" value="2" />
@@ -184,7 +186,7 @@
           <entry key="CSS" value="4" />
           <entry key="Database Element" value="27" />
           <entry key="JavaScript" value="7" />
-          <entry key="PHP" value="248" />
+          <entry key="PHP" value="249" />
           <entry key="RNG Compact" value="1" />
           <entry key="SQL" value="3" />
           <entry key="Scratch" value="9" />
@@ -194,7 +196,7 @@
         <counts>
           <entry key="css" value="487" />
           <entry key="js" value="102" />
-          <entry key="php" value="38063" />
+          <entry key="php" value="38506" />
           <entry key="sql" value="651" />
         </counts>
       </usages-collector>
@@ -203,7 +205,7 @@
           <entry key="CSS" value="487" />
           <entry key="HTML" value="58" />
           <entry key="JavaScript" value="102" />
-          <entry key="PHP" value="37932" />
+          <entry key="PHP" value="38375" />
           <entry key="SQL" value="117" />
           <entry key="Scratch" value="607" />
         </counts>
@@ -220,8 +222,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Vista/inicio.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="119" column="31" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
+            <state relative-caret-position="28">
+              <caret line="76" selection-start-line="76" selection-end-line="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Vista/navCategorias.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -229,17 +240,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Vista/navbar.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3304">
+            <state relative-caret-position="1036">
               <caret line="118" column="44" selection-start-line="118" selection-start-column="44" selection-end-line="118" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public_html/css/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="48" column="28" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -247,17 +249,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Vista/comprarEvento.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="97" column="33" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vista/header.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="980">
-              <caret line="35" selection-start-line="35" selection-end-line="35" />
+            <state relative-caret-position="391">
+              <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -313,7 +306,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Vista/admin/adminNav.php" />
         <option value="$PROJECT_DIR$/Config/sendemail.php" />
         <option value="$PROJECT_DIR$/Modelo/Mail.php" />
         <option value="$PROJECT_DIR$/Modelo/PlazaEvento.php" />
@@ -358,11 +350,12 @@
         <option value="$PROJECT_DIR$/Vista/header.php" />
         <option value="$PROJECT_DIR$/Vista/card-event.php" />
         <option value="$PROJECT_DIR$/Vista/navbar.php" />
-        <option value="$PROJECT_DIR$/Vista/inicio.php" />
         <option value="$PROJECT_DIR$/Vista/carousel.php" />
         <option value="$PROJECT_DIR$/Controladora/CompraControladora.php" />
         <option value="$PROJECT_DIR$/public_html/css/style.css" />
         <option value="$PROJECT_DIR$/Config/Config.php" />
+        <option value="$PROJECT_DIR$/Vista/inicio.php" />
+        <option value="$PROJECT_DIR$/Vista/navCategorias.php" />
         <option value="$PROJECT_DIR$/Vista/comprarEvento.php" />
       </list>
     </option>
@@ -596,15 +589,15 @@
       <workItem from="1538883034662" duration="5079000" />
       <workItem from="1538926259622" duration="13652000" />
       <workItem from="1539019314686" duration="15347000" />
-      <workItem from="1539477126648" duration="881000" />
+      <workItem from="1539477126648" duration="5954000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="514317000" />
+    <option name="totallyTimeSpent" value="519390000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24544074" />
@@ -658,13 +651,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Dao/CalendarioBdDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2458">
-          <caret line="185" column="47" lean-forward="true" selection-start-line="185" selection-start-column="47" selection-end-line="185" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/plaza_eventos.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -930,27 +916,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/inicio.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="119" column="31" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/navbar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3304">
-          <caret line="118" column="44" selection-start-line="118" selection-start-column="44" selection-end-line="118" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="980">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Vista/card-event.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="588">
@@ -993,10 +958,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/navbar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1036">
+          <caret line="118" column="44" selection-start-line="118" selection-start-column="44" selection-end-line="118" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/inicio.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/navCategorias.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Vista/comprarEvento.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="97" column="33" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
+        <state relative-caret-position="391">
+          <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
         </state>
       </provider>
     </entry>
