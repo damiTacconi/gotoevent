@@ -15,6 +15,27 @@ class SedeBdDao extends SingletonDao implements IDao
     private $tabla = "sedes";
     private $listado = [];
 
+
+    public function traerPorIdEvento($id_evento){
+        try{
+        $sql = ("select DISTINCT se.* from $this->tabla se inner join calendarios ca inner join 
+        eventos ev on ca.id_evento = ev.id_evento and ca.id_sede = se.id_sede 
+        WHERE ev.id_evento = \"$id_evento\" ");
+        $conexion = Conexion::conectar();
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->execute();
+        $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+        $this->mapear($dataSet);
+        if (!empty($this->listado)) {
+            return $this->listado;
+        }
+        return false;
+
+        }catch(\PDOException $e){
+            die("OCURRIO UN ERROR EN TAER_ID_EVENTO - SEDEBD || {$e->getMessage() }");
+        }
+
+    }
     public function sedeExists($nombre){
         try{
             $sql = "SELECT descripcion FROM $this->tabla WHERE descripcion= \"$nombre\" LIMIT 1 ";

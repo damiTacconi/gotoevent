@@ -19,7 +19,7 @@ class Conexion
          * fichero que contiene el string del DSN. El URI puede especificar un fichero
          * local o un URL remoto.
          */
-        $dsn = "mysql:host=$host;dbname=$db;";
+        $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
 
         /*
          * Creo el objeto PDO y le seteo que devuelva errores.

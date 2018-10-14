@@ -36,9 +36,11 @@ class CompraControladora extends PaginaControladora
     private $clienteDao;
     private $compraDao;
     private $lineaDao;
+    private $sedeDao;
     private $ticketDAo;
     function  __construct()
     {
+        $this->sedeDao  = SedeBdDao::getInstance();
         $this->ticketDAo = TicketBdDao::getInstance();
         $this->lineaDao = LineaBdDao::getInstance();
         $this->compraDao = CompraBdDao::getInstance();
@@ -202,6 +204,7 @@ class CompraControladora extends PaginaControladora
         $evento = $this->eventDao->retrieve($id_evento);
         if($evento) {
             $params['evento'] = $evento;
+            $params['evento_sedes'] = $this->sedeDao->traerPorIdEvento($id_evento); 
             $calendarios = $this->calendarDao->traerPorIdEvento($id_evento);
             if($calendarios) {
                 foreach ($calendarios as $calendario) {

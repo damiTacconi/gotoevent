@@ -36,6 +36,7 @@ class PaginaControladora
             $header = $ruta . $array[0] . '.php';
             $footer = $ruta . $array[1] . '.php';
         }
+        header('Content-type: text/html; charset=utf-8');
         require($header);
         require($ruta . $page . '.php');
         require($footer);
