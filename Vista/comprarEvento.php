@@ -52,63 +52,54 @@ $url = "data:image/jpg;base64,{$imagen}";
         </div>
         <div class="col-md-9">
             <?php
-                if($param['calendarios']) {
+                if($param['calendarios']) { ?>
+                    <div class="row"> <?php
                     foreach ($param['calendarios'] as $calendario) {
                         $plazas = $calendario->getPlazaEventos();
                          ?>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="p-5">
-                                        <div class="primary-color">
-                                            <h1 class="text-center font-weight-bold  text-white">
-                                                SEDE: <strong> <?= $calendario->getSede()->getNombre() ?></strong>
-                                            </h1>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                          <?php
                         if ($plazas) {
-                            foreach ($plazas as $plaza) {
-                                ?>
-                            <div class="row">
-                                <div class="col-md-4 col-12">
-                                    <div class="p-3">
-                                        <div class="card">
-                                            <h3 class="card-header primary-color white-text text-center"><?= $calendario->getFecha() ?> </h3>
-                                            <div class="card-body">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">PLAZA:
-                                                        <strong>
-                                                            <?= $plaza->getPlaza()->getDescripcion() ?>
-                                                        </strong>
-                                                    </li>
-                                                    <li class="list-group-item">PRECIO: <strong>
-                                                            $<?= $plaza->getPrecio() ?> </strong></li>
-                                                    <li class="list-group-item">
-                                                        <form class="form" method="post" action="/compra/addToCart/">
-                                                            <input type="hidden" name="idPlaza"
-                                                                   value="<?= $plaza->getId() ?>">
-                                                            <div class="form-group">
-                                                                <label for="inputCantidad">Cantidad</label>
-                                                                <input required value="1" type='number'
-                                                                       class="form-control" min='1' max='5'
-                                                                       id="inputCantidad" name='cantidad'>
-                                                            </div>
-                                                            <button type="submit" class="btn btn-primary">AGREGAR</button>
-                                                        </form>
-                                                    </li>
-                                                </ul>
+                                foreach ($plazas as $plaza) {
+                                    ?>
+                                    <div class="col-md-4 col-12">
+                                        <div class="p-3">
+                                            <div class="card">
+                                                <h3 class="card-header primary-color white-text text-center"><?= $calendario->getFecha() ?> </h3>
+                                                <div class="card-body">
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item">PLAZA:
+                                                            <strong>
+                                                                <?= $plaza->getPlaza()->getDescripcion() ?>
+                                                            </strong>
+                                                        </li>
+                                                        <li class="list-group-item">PRECIO: <strong>
+                                                                $<?= $plaza->getPrecio() ?> </strong></li>
+                                                        <li class="list-group-item">
+                                                            <form class="form" method="post" action="/compra/addToCart/">
+                                                                <input type="hidden" name="idPlaza"
+                                                                       value="<?= $plaza->getId() ?>">
+                                                                <div class="form-group">
+                                                                    <label for="inputCantidad">Cantidad</label>
+                                                                    <input required value="1" type='number'
+                                                                           class="form-control" min='1' max='5'
+                                                                           id="inputCantidad" name='cantidad'>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">AGREGAR
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                                <?php
-                            }
+                                    <?php
+                                }
                         } else echo " <br/> NO HAY PLAZAS DE MOMENTO ...<br/>";
                         echo " <br/> ";
-                    }
+                    } ?>
+                    </div> <?php
                 }else echo " <br/> <h1>NO HAY CALENDARIOS DE MOMENTO ...</h1> "?>
         </div>
 
