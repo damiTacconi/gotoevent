@@ -1,4 +1,6 @@
 <!-- HEADER -->
+
+
 <?php
         $eventos = \Dao\EventoBdDao::getInstance()->getAll();
         if($eventos) {
@@ -70,6 +72,28 @@
 ?>
 
 <?php include "header-inicio.php" ?>
+<nav class="navbar navbar-expand-lg navbar-dark blue scrolling-navbar">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">TEATROS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">CONCIERTOS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">FESTIVALES</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">MAS</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 <!-- FIN HEADER -->
 <div class="container-fluid">
     <div class="row">
@@ -132,5 +156,3 @@
         </div>
     </div>
 </div>
-
-<?php include "modalRegister.php"; ?>

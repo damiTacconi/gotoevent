@@ -1,5 +1,6 @@
 ﻿
 <?php include "carrito.php" ?>
+<?php include "modalRegister.php" ?>
 <footer class="pt-2">
     <div class="container-fluid">
         <div class="row">

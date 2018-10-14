@@ -1,8 +1,11 @@
 
-<header>
+<header> 
     <video loop muted autoplay playsinline poster="/./video/videoplayback.mp4">
+        <source src="video/videoplayback.ogv" type="video/ogg" />
+        <source src="video/videoplayback.webm" type="video/webm" />
         <source src="/video/videoplayback.mp4" type="video/mp4"  />
     </video>
+    
     <div class="banner">
         <?php $bgT=true; include "navbar.php" ?>
         <div class="header-content">
