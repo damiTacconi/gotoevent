@@ -272,33 +272,6 @@ class EventoControladora extends PaginaControladora
         }else header('location: /');
     }
 
-    private function resize_image($file, $w, $h, $crop=FALSE) {
-        list($width, $height) = getimagesize($file);
-        $r = $width / $height;
-        if ($crop) {
-            if ($width > $height) {
-                $width = ceil($width-($width*abs($r-$w/$h)));
-            } else {
-                $height = ceil($height-($height*abs($r-$w/$h)));
-            }
-            $newwidth = $w;
-            $newheight = $h;
-        } else {
-            if ($w/$h > $r) {
-                $newwidth = $h*$r;
-                $newheight = $h;
-            } else {
-                $newheight = $w/$r;
-                $newwidth = $w;
-            }
-        }
-        $src = imagecreatefromjpeg($file);
-        $dst = imagecreatetruecolor($newwidth, $newheight);
-        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-
-        return $dst;
-    }
-
     function calendarios($id_evento){
         $evento = $this->eventoDao->retrieve($id_evento);
 
@@ -313,6 +286,43 @@ class EventoControladora extends PaginaControladora
 
     }
 
+    function sede($id_evento,$id_sede)
+    {
+        $evento = $this->eventoDao->retrieve($id_evento);
+        if($evento) {
+            $params['evento'] = $evento;
+            $params['evento_sede'] = $this->sedeDao->retrieve($id_sede);
+            $calendarios = $this->calendarioDao->traerPorIdEvento($id_evento);
+            if($calendarios) {
+                foreach ($calendarios as $calendario) {
+                    $id_calendario = $calendario->getId();
+                    $plazas = $this->plazaEventoDao->traerPorIdCalendario($id_calendario);
+                    if ($plazas)
+                        $calendario->setPlazaEventos($plazas);
+                }
+            }
+            $params['calendarios'] = $calendarios;
+            $this->page("calendariosEvento", $evento->getTitulo(), 0, $params);
+        }else header('location: /');
+    }
+    function detalle($id_evento){
+        $evento = $this->eventoDao->retrieve($id_evento);
+        if($evento) {
+            $params['evento'] = $evento;
+            $params['evento_sedes'] = $this->sedeDao->traerPorIdEvento($id_evento);
+            $calendarios = $this->calendarioDao->traerPorIdEvento($id_evento);
+            if($calendarios) {
+                foreach ($calendarios as $calendario) {
+                    $id_calendario = $calendario->getId();
+                    $plazas = $this->plazaEventoDao->traerPorIdCalendario($id_calendario);
+                    if ($plazas)
+                        $calendario->setPlazaEventos($plazas);
+                }
+            }
+            $params['calendarios'] = $calendarios;
+            $this->page("detalleEvento", $evento->getTitulo(), 0, $params);
+        }else header('location: /');
+    }
 
     /* FUNCIONES AJAX */
 

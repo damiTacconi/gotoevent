@@ -21,7 +21,7 @@ $titulo = $evento->getTitulo();
 
             <!--Title-->
             <h4 class="card-title"><?= $titulo ?></h4>
-            <a href="/compra/evento/<?= $evento->getId() ?>" class="btn btn-blue btn-md btn-block">MAS INFORMACION</a>
+            <a href="/evento/detalle/<?= $evento->getId() ?>" class="btn btn-blue btn-md btn-block">MAS INFORMACION</a>
 
         </div>
 

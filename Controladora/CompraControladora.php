@@ -196,29 +196,11 @@ class CompraControladora extends PaginaControladora
                 $this->sumarCantidad($cantidad,$id);
             }
             $calendario = $plazaEvento->getCalendario();
+            $sede = $calendario->getSede();
             $evento = $calendario->getEvento();
-            header('location: /compra/evento/'. $evento->getId());
+            header('location: /evento/sede/'. $evento->getId() . '/' . $sede->getId() );
         }else header('location: /');
     }
-    function evento($id_evento){
-        $evento = $this->eventDao->retrieve($id_evento);
-        if($evento) {
-            $params['evento'] = $evento;
-            $params['evento_sedes'] = $this->sedeDao->traerPorIdEvento($id_evento); 
-            $calendarios = $this->calendarDao->traerPorIdEvento($id_evento);
-            if($calendarios) {
-                foreach ($calendarios as $calendario) {
-                    $id_calendario = $calendario->getId();
-                    $plazas = $this->eventPlaceDao->traerPorIdCalendario($id_calendario);
-                    if ($plazas)
-                        $calendario->setPlazaEventos($plazas);
-                }
-            }
-            $params['calendarios'] = $calendarios;
-            $this->page("comprarEvento", $evento->getTitulo(), 0, $params);
-        }else header('location: /');
-    }
-
 
     /* FUNCIONES AJAX */
 
