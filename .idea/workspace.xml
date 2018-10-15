@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c648f63-f815-4177-89d2-2b100f6d0dcc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Vista/calendarios.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Vista/calendariosEvento.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Vista/promo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controladora/CompraControladora.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controladora/CompraControladora.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controladora/EventoControladora.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controladora/EventoControladora.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/card-event.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/card-event.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vista/comprarEvento.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/detalleEvento.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/calendarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/calendarios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/calendariosEvento.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vista/calendariosEvento.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vista/example.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -177,7 +174,7 @@
           <entry key="imagenes" value="1" />
           <entry key="js" value="7" />
           <entry key="lineas" value="5" />
-          <entry key="php" value="255" />
+          <entry key="php" value="257" />
           <entry key="plaza_eventos" value="7" />
           <entry key="rnc" value="1" />
           <entry key="sedes" value="2" />
@@ -191,7 +188,7 @@
           <entry key="CSS" value="5" />
           <entry key="Database Element" value="27" />
           <entry key="JavaScript" value="7" />
-          <entry key="PHP" value="255" />
+          <entry key="PHP" value="257" />
           <entry key="RNG Compact" value="1" />
           <entry key="SQL" value="3" />
           <entry key="Scratch" value="9" />
@@ -201,7 +198,7 @@
         <counts>
           <entry key="css" value="492" />
           <entry key="js" value="102" />
-          <entry key="php" value="39696" />
+          <entry key="php" value="39865" />
           <entry key="sql" value="651" />
         </counts>
       </usages-collector>
@@ -210,7 +207,7 @@
           <entry key="CSS" value="492" />
           <entry key="HTML" value="58" />
           <entry key="JavaScript" value="102" />
-          <entry key="PHP" value="39565" />
+          <entry key="PHP" value="39734" />
           <entry key="SQL" value="117" />
           <entry key="Scratch" value="607" />
         </counts>
@@ -227,17 +224,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Vista/inicio.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2128">
+            <state relative-caret-position="28">
               <caret line="76" selection-start-line="76" selection-end-line="76" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vista/carousel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2156">
-              <caret line="77" column="8" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -254,11 +242,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Vista/calendariosEvento.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="55" column="94" selection-start-line="55" selection-start-column="94" selection-end-line="55" selection-end-column="94" />
+            <state relative-caret-position="-390">
+              <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -266,32 +254,20 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Vista/promo.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Vista/calendarios.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="968">
-              <caret line="46" column="2" lean-forward="true" selection-start-line="46" selection-start-column="2" selection-end-line="46" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vista/carrito.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="105" selection-start-line="105" selection-end-line="105" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controladora/CompraControladora.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="200" column="83" selection-start-line="200" selection-start-column="83" selection-end-line="200" selection-end-column="83" />
-              <folding>
-                <element signature="e#114#138#0#PHP" expanded="true" />
-              </folding>
+            <state>
+              <caret column="41" selection-start-column="41" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -299,8 +275,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Controladora/EventoControladora.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1">
-              <caret line="318" column="46" lean-forward="true" selection-start-line="318" selection-start-column="46" selection-end-line="318" selection-end-column="46" />
+            <state relative-caret-position="189">
+              <caret line="304" column="40" selection-start-line="304" selection-start-column="40" selection-end-line="304" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -324,12 +300,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Vista/login.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/Vista/example.php" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Dao/EventoBdDao.php" />
         <option value="$PROJECT_DIR$/Vista/admin/altas/agregarEvento.php" />
         <option value="$PROJECT_DIR$/Modelo/Evento.php" />
         <option value="$PROJECT_DIR$/Vista/admin/listado/listadoEventos.php" />
@@ -375,11 +349,12 @@
         <option value="$PROJECT_DIR$/Vista/comprarEvento.php" />
         <option value="$PROJECT_DIR$/Vista/card-event.php" />
         <option value="$PROJECT_DIR$/Vista/detalleEvento.php" />
-        <option value="$PROJECT_DIR$/Controladora/EventoControladora.php" />
         <option value="$PROJECT_DIR$/Controladora/CompraControladora.php" />
         <option value="$PROJECT_DIR$/Vista/carrito.php" />
         <option value="$PROJECT_DIR$/Vista/calendarios.php" />
+        <option value="$PROJECT_DIR$/Controladora/EventoControladora.php" />
         <option value="$PROJECT_DIR$/Vista/calendariosEvento.php" />
+        <option value="$PROJECT_DIR$/Vista/promo.php" />
       </list>
     </option>
   </component>
@@ -396,7 +371,7 @@
       <path value="$PROJECT_DIR$/public_html/js/jqueryValidation/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1340" />
@@ -608,15 +583,15 @@
       <workItem from="1539019314686" duration="15347000" />
       <workItem from="1539477126648" duration="7324000" />
       <workItem from="1539573275777" duration="3346000" />
-      <workItem from="1539617479504" duration="4929000" />
+      <workItem from="1539617479504" duration="6838000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="529035000" />
+    <option name="totallyTimeSpent" value="530944000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2530395" />
@@ -632,7 +607,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49848023" visible="true" weight="0.045901638" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49848023" visible="true" weight="0.19836065" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50151974" side_tool="true" weight="0.021311475" />
       <window_info anchor="bottom" id="Database Console" order="12" weight="0.013114754" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -670,13 +645,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/eventos">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://ec5a8df4-ce0a-4bc5-b5ef-5a66535b5726/schema/gotoevent/table/sedes">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -932,13 +900,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/example.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-113">
-          <caret line="185" column="60" selection-start-line="185" selection-start-column="8" selection-end-line="185" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Vista/navCategorias.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -950,37 +911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
           <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/inicio.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2128">
-          <caret line="76" selection-start-line="76" selection-end-line="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/carousel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2156">
-          <caret line="77" column="8" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vista/detalleEvento.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="1" column="13" lean-forward="true" selection-start-line="1" selection-end-line="2" />
-          <folding>
-            <element signature="e#3284#4551#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controladora/EventoControladora.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1">
-          <caret line="318" column="46" lean-forward="true" selection-start-line="318" selection-start-column="46" selection-end-line="318" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -1001,20 +931,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/example.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="185" column="60" selection-start-line="185" selection-start-column="8" selection-end-line="185" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/carousel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="385">
+          <caret line="77" column="8" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/inicio.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/detalleEvento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="1" column="13" lean-forward="true" selection-start-line="1" selection-end-line="2" />
+          <folding>
+            <element signature="e#3284#4551#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Vista/calendarios.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="968">
-          <caret line="46" column="2" lean-forward="true" selection-start-line="46" selection-start-column="2" selection-end-line="46" selection-end-column="2" />
+        <state>
+          <caret column="41" selection-start-column="41" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controladora/EventoControladora.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="304" column="40" selection-start-line="304" selection-start-column="40" selection-end-line="304" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Vista/calendariosEvento.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="55" column="94" selection-start-line="55" selection-start-column="94" selection-end-line="55" selection-end-column="94" />
+        <state relative-caret-position="-390">
+          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vista/promo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
         </state>
       </provider>
     </entry>

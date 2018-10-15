@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row justify-content-lg-center">
 <?php foreach ($param['calendarios'] as $calendario) {
     $plazas = $calendario->getPlazaEventos();
     $calendario_sede = $calendario->getSede();
@@ -6,8 +6,7 @@
     <?php if ($plazas) {
         if($calendario_sede->getId() === $sede->getId()){
             foreach ($plazas as $plaza) { ?>
-                <div class="col-md-auto col-12">
-                    <div class="p-1">
+                <div class="col-md-3 col-12">
                         <div class="card">
                             <h3 class="card-header primary-color white-text text-center">
                                 <i class="far fa-calendar-alt"></i> <strong><?= $calendario->getFecha() ?></strong>
@@ -30,14 +29,14 @@
                                                 <input required value="1" type='number' class="form-control" min='1'
                                                        max='5' id="inputCantidad" name='cantidad'>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">AGREGAR
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="fas fa-cart-plus"></i>
                                             </button>
                                         </form>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                    </div>
                 </div>
             <?php }
         }

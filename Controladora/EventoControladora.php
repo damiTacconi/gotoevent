@@ -302,6 +302,7 @@ class EventoControladora extends PaginaControladora
                 }
             }
             $params['calendarios'] = $calendarios;
+            $params['evento'] = $evento;
             $this->page("calendariosEvento", $evento->getTitulo(), 0, $params);
         }else header('location: /');
     }
