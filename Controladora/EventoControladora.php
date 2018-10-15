@@ -303,6 +303,7 @@ class EventoControladora extends PaginaControladora
             }
             $params['calendarios'] = $calendarios;
             $params['evento'] = $evento;
+            $params['calendarios_fechas'] = $this->calendarioDao->traerFechasDeEventoEnUnaSede($id_evento,$id_sede);
             $this->page("calendariosEvento", $evento->getTitulo(), 0, $params);
         }else header('location: /');
     }

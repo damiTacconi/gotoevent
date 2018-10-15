@@ -17,21 +17,8 @@ include "navCategorias.php";
                         </h1>
                     </div>
                     <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 p-3">
-                                    <div class="card">
-                                        <div class="card-header primary-color lighten-1 white-text">
-                                            <h3>
-                                                <i class="far fa-calendar-alt"></i> | FECHAS
-                                            </h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <?php include "calendarios.php" ?>
-                                            <?php include "promo.php" ?>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
+                        <?php include "calendarios.php" ?>
+                        <?php include "promo.php" ?>
                         <div class="row">
                             <div class="col-md-12 p-3">
                                 <div class="card">

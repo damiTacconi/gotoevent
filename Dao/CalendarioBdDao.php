@@ -17,7 +17,25 @@ class CalendarioBdDao extends SingletonDao implements IDao
     private $listado = [];
     private $tabla = "calendarios";
 
+    public function traerFechasDeEventoEnUnaSede($id_evento,$id_sede){
+        try {
+            $sql = ("select DISTINCT ca.* from $this->tabla ca INNER join eventos ev inner join sedes se on 
+                ca.id_evento=ev.id_evento and se.id_sede = ca.id_sede 
+                where ca.id_evento = \"$id_evento\" and se.id_sede= \"$id_sede\" ");
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return false;
+        }catch(\PDOException $e){
+            die("ERROR_DB_TRAER_FECHAS_DE_EVENTO_Y_SEDE || {$e->getMessage()}");
+        }
 
+    }
     public function getAll(){
         try{
             $sql = "SELECT * FROM $this->tabla";
