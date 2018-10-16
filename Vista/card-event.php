@@ -27,30 +27,3 @@ $titulo = $evento->getTitulo();
 
     </div>
     <!-- Card -->
-
-<!-- Card deck -->
-<!--
- <div class="blog-card">
-    <div class="meta">
-        <div class="photo" style='background-image: url(// $url );'></div>
-        <ul class="details">
-            <li class="">
-                <span><i>Fecha de inicio</i> <br></span>
-
-            </li>
-        </ul>
-    </div>
-     <!--
-    <div class="description">
-        <h1></h1>
-        <p>  //$evento->getDescripcion() </p>
-        <p class="read-more">
-            <?php  /*if(!empty($calendarios)){ ?>
-                <a href="/compra/evento/<?= $evento->getId() ?>" class="btn btn-success">COMPRAR</a>
-            <?php }else{ ?>
-                <button class="btn btn-amber" disabled>Proximamente</button>
-            <?php } */ ?>
-        </p>
-    </div>
-</div>
--->

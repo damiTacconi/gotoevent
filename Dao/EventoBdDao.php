@@ -17,6 +17,24 @@ class EventoBdDao extends SingletonDao implements IDao
     private $tabla = "eventos";
     private $listado = [];
 
+    public function traerPorIdCategoria($id_categoria){
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE id_categoria=\"$id_categoria\" ";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return false;
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
+
+    }
     public function getFechas($id){
         try{
             $sql = "SELECT fecha_desde, fecha_hasta FROM $this->tabla WHERE id_evento=$id";
@@ -175,8 +193,11 @@ class EventoBdDao extends SingletonDao implements IDao
         }
     }
 
+    
+
     private function mapear($dataSet){
         $dataSet = is_array($dataSet) ? $dataSet : [];
+
         $this->listado = array_map(function ($p) {
             $categoriaDao = CategoriaBdDao::getInstance();
             $categoria = $categoriaDao->retrieve($p['id_categoria']);

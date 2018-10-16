@@ -30,6 +30,25 @@ class CategoriaBdDao extends SingletonDao implements IDao
         }
     }
 
+    public function traerPorDescripcion($desc){
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE descripcion=\"$desc\" LIMIT 1";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+            if($dataSet[0]){
+                $this->mapear($dataSet);
+            }
+            if(!empty($this->listado)){
+                return $this->listado[0];
+            }
+            return false;
+        }catch(\PDOException $e){
+            die("ERROR: {$e->getMessage() }");
+        }
+    }
+
     public function descripcionExists($descripcion){
         try{
             $sql = "SELECT descripcion FROM $this->tabla WHERE descripcion= \"$descripcion\" LIMIT 1 ";

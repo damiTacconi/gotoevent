@@ -105,15 +105,54 @@
             <div class="p-2 pt-5">
                 <div class="primary-color">
                     <h1 class="text-center font-weight-bold  text-white">
-                        <strong>Eventos por categoria</strong>
+                        <strong>CATEGORIAS</strong>
                     </h1>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
+         <div class="col-12 col-md-4">
+                <!-- Card -->
+                <div onclick="window.location='/buscar/conciertos'" class="card card-image" style="cursor:pointer;background-image: url(/./img/conciertos.jpg);  background-size: cover;">
 
+                <!-- Content -->
+                <div class="text-white text-center align-items-center rgba-black-strong py-5 px-4">
+                <div>
+                    <h1 class="white-text"><i class="fa fa-pie-chart"></i> CONCIERTOS</h1>
+                    </div>
+                </div>
+
+                </div>
+                <!-- Card -->
+        </div>
+        <div class="col-12 col-md-4">
+                <!-- Card -->
+                <div onclick="window.location='/buscar/teatros'" class="card card-image" style="cursor:pointer;background-image: url(/./img/teatros.jpg);  background-size: cover;">
+
+                <!-- Content -->
+                <div class="text-white text-center align-items-center rgba-black-strong py-5 px-4">
+                <div>
+                    <h1 class="white-text"><i class="fa fa-pie-chart"></i>TEATROS</h1>
+                    </div>
+                </div>
+
+                </div>
+                <!-- Card -->
+        </div>
+        <div class="col-12 col-md-4">
+                <!-- Card -->
+                <div onclick="window.location='/buscar/festivales'" class="card card-image"  style="cursor:pointer;background-image: url(/./img/festivales.jpg);  background-size: cover;">
+
+                <!-- Content -->
+                <div class="text-white text-center align-items-center rgba-black-strong py-5 px-4">
+                <div>
+                    <h1 class="white-text"><i class="fa fa-pie-chart"></i>FESTIVALES</h1>
+                    </div>
+                </div>
+
+                </div>
+                <!-- Card -->
         </div>
     </div>
 </div>
