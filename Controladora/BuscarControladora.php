@@ -44,4 +44,8 @@ class BuscarControladora extends PaginaControladora{
         $params = $this->buscar("Concierto");
         $this->page("buscar","GoToEvent", 0 , $params);
     }
+
+    function filtrar($palabraClave){
+
+    }
 }

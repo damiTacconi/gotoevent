@@ -15,6 +15,8 @@
 
 
 
+    <link href="https://fonts.googleapis.com/css?family=Acme|Oswald" rel="stylesheet">
+
     <!-- ALERTIFY styles -->
     <link rel="stylesheet" href="/css/css-alertify/alertify.css" />
 			<!-- include a theme -->
@@ -38,6 +40,7 @@
 	<!-- MEDIA-QUERIES STYLE -->
     <link rel=stylesheet type="text/css" href="/css/main_video_background.css">
     <link rel=stylesheet type="text/css" href="/css/media_queries_video.css">
+    <link rel="stylesheet" href="/css/hover.css" media="all">
 	<link rel="stylesheet" href="/css/style-media-queries.css">
     <!-- STYLE SITE -->
     <link rel="stylesheet" href="/css/style.css">

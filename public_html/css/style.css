@@ -43,6 +43,13 @@ body{ background-color: #F4F4F4; }
   transition: 0.5s;
 }
 
+.nozindex{
+    z-index: 0;
+}
+.item-navcat{
+    font-family: Acme;
+    font-size: 25px;
+}
 .fixed-cart{
     background-color: #1d2124;
     position: fixed;
@@ -104,4 +111,8 @@ body{ background-color: #F4F4F4; }
 
 .dropdown-item:hover{
     background-color: #1a2129;
+}
+
+.card-categoria:hover{
+ border: 1px solid #0d47a1;
 }

@@ -16,9 +16,9 @@ include "navCategorias.php";
                             <i class="fas fa-map-marked"></i> <?= $sede->getNombre() ?>
                         </h1>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body mdb-color">
                         <?php include "calendarios.php" ?>
-                        <?php include "promo.php" ?>
+                        <?php //include "promo.php" ?>
                         <div class="row">
                             <div class="col-md-12 p-3">
                                 <div class="card">
