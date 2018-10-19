@@ -185,6 +185,13 @@ class CompraControladora extends PaginaControladora
             }
         }
     }
+
+    function addToCartPromo($id_promo){
+            $promo = $this->promoDao->retrieve($id_promo);
+            if($promo){
+                   
+            }
+    }
     function addToCart($id, $cantidad){
         $plazaEvento = $this->eventPlaceDao->retrieve($id);
         if($plazaEvento){

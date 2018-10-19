@@ -17,6 +17,7 @@ use Dao\PlazaEventoBdDao;
 use Dao\SedeBdDao;
 use Dao\ShowBdDao;
 use Dao\TipoPlazaBdDao;
+use Dao\PromoBdDao;
 use Modelo\Evento;
 use Modelo\EventoImagen;
 use Modelo\Mensaje;
@@ -34,10 +35,12 @@ class EventoControladora extends PaginaControladora
     private $plazaEventoDao;
     private $showDao;
     private $eventoImagenDao;
+    private $promoDao;
 
 
     function __construct()
     {
+        $this->promoDao = PromoBdDao::getInstance();
         $this->eventoImagenDao = EventoImagenBdDao::getInstance();
         $this->showDao = ShowBdDao::getInstance();
         $this->plazaEventoDao = PlazaEventoBdDao::getInstance();
@@ -293,6 +296,8 @@ class EventoControladora extends PaginaControladora
             $params['evento'] = $evento;
             $params['evento_sede'] = $this->sedeDao->retrieve($id_sede);
             $calendarios = $this->calendarioDao->traerPorIdEvento($id_evento);
+            $promo = $this->promoDao->traerPorIdEvento($id_evento);
+
             if($calendarios) {
                 foreach ($calendarios as $calendario) {
                     $id_calendario = $calendario->getId();
@@ -300,6 +305,9 @@ class EventoControladora extends PaginaControladora
                     if ($plazas)
                         $calendario->setPlazaEventos($plazas);
                 }
+            }
+            if($promo){
+                $params['promo'] = $promo;
             }
             $params['calendarios'] = $calendarios;
             $params['evento'] = $evento;

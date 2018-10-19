@@ -18,6 +18,8 @@
             <?php include "altas/agregarEvento.php" ?>
             <hr>
             <?php include "altas/agregarPlazaEvento.php" ?>
+            <hr>
+            <?php include "altas/agregarPromo.php" ?>
             <!-- FIN FORMULARIOS -->
         </div>
         <!-- /.container-fluid -->

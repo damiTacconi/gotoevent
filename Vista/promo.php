@@ -1,5 +1,8 @@
 <?php
 if($evento->getCategoria()->getDescripcion() === "Festival") {
+            $promo = $param['promo'];
+            $descuento = $promo->getDescuento();
+            $id = $promo->getId();
             $precioPromo = 0;
             foreach ($param['calendarios'] as $calendario){
             $plazas = $calendario->getPlazaEventos();
@@ -7,11 +10,10 @@ if($evento->getCategoria()->getDescripcion() === "Festival") {
             $precioPromo += $plaza->getPrecio();
             }
             }
-            $precioPromo -= 500;
+            $precioPromo -= $descuento;
             ?>
     <div class="row justify-content-center">
-        <div class="col-md-6 pt-4">
-            <hr>
+        <div class="col-md-6">
             <div class="card text-center">
                 <div class="card-header success-color white-text">
                     <h1>
@@ -23,7 +25,10 @@ if($evento->getCategoria()->getDescripcion() === "Festival") {
                         <?= $precioPromo ?>
                     </h2>
                     <p class="card-text">No te pierdas esta promo.</p>
-                    <button type="button" class="btn btn-success">COMPRAR</button>
+                    <form action="compra/addToCart">
+                        <input type="hidden" name="idpromo" value="<?= $id ?>" >
+                        <button type="button" class="btn btn-success">COMPRAR</button>
+                    </form>
                 </div>
                 <div class="card-footer text-muted success-color white-text">
                     <p class="mb-0">Compra los
