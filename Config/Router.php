@@ -2,7 +2,7 @@
 
 namespace Config;
 
-class Router{
+class Router{ 
 
 	public static function direccionar(Request $request){
 		$controlador = $request->getControladora();

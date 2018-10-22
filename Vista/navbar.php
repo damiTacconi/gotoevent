@@ -77,7 +77,7 @@
                <a  class="nav-link">
                    <i class="fas fa-shopping-cart wsmoke"></i>
                    <?php if(isset($_SESSION['cart'])){ ?>
-                       <span class="badge indigo"><?= count($_SESSION['cart']) ?></span>
+                       <span class="badge indigo"><?= (count($_SESSION['cart']) + count($_SESSION['cartPromo'])) ?></span>
                    <?php } ?>
                </a>
            </li>

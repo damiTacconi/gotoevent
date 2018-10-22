@@ -18,6 +18,7 @@ use Dao\SedeBdDao;
 use Dao\TicketBdDao;
 use Dao\TipoPlazaBdDao;
 use Dao\CompraBdDao;
+use Dao\PromoBdDao;
 use Modelo\Cart;
 use Modelo\Compra;
 use Modelo\Linea;
@@ -38,8 +39,11 @@ class CompraControladora extends PaginaControladora
     private $lineaDao;
     private $sedeDao;
     private $ticketDAo;
+    private $promoDao;
+
     function  __construct()
     {
+        $this->promoDao = PromoBdDao::getInstance();
         $this->sedeDao  = SedeBdDao::getInstance();
         $this->ticketDAo = TicketBdDao::getInstance();
         $this->lineaDao = LineaBdDao::getInstance();
@@ -101,10 +105,16 @@ class CompraControladora extends PaginaControladora
         $qr->generateQR($qrContent, $numberTicket);
         $this->enviarEmail($numberTicket,$line);
     }
-    private function generateLine($compra , $subtotales , $cantidades , $plazaEventos ){
+
+    private function generateLine($compra , $subtotales , $cantidades , $plazaEventos, $promos=[] ){
         if($plazaEventos){
             foreach ($plazaEventos as $key => $plaza){
                 $linea = new Linea($plaza,$cantidades[$key],$subtotales[$key],$compra);
+                if(!empty($promos)){
+                  $id_promo = array_shift($promos);
+                  $promo = $this->promoDao->retrieve($id_promo);
+                  $linea->setPromo($promo);
+                }
                 $id_linea = $this->lineaDao->save($linea);
                 $linea->setId($id_linea);
                 $remanente = $plaza->getRemanente();
@@ -122,9 +132,48 @@ class CompraControladora extends PaginaControladora
         }
     }
 
-    function terminar($cantidades, $subtotales, $id_plazaEventos , $total ){
+    function terminarConPromoYPlazas($cantidadesPlazas, $subtotalesPlazas, $id_plazaEventos, $id_promos, $cantidadPromos, $total)
+    {
+      $this->terminarConPromo($id_promos,$cantidadPromos,$total,$cantidadesPlazas,$subtotalesPlazas,$id_plazaEventos);
+    }
+
+    function terminarConPromo($id_promos, $cantidadPromos, $total, $cantidadesPlazas = [], $subtotalesPlazas = [], $id_plazaEventos = []){
+
+        foreach ($id_promos as $key => $value) {
+          $promo = $this->promoDao->retrieve($value);
+          $evento = $this->eventDao->retrieve($promo->getEvento()->getId());
+          $eventos[] = $evento;
+        }
+
+          foreach ($eventos as $key => $value){
+
+              $calendarios = $this->calendarDao->traerPorIdEvento($value->getId());
+              $cantidad = array_shift($cantidadPromos);
+              $id_promo = array_shift($id_promos);
+
+                foreach($calendarios as $key => $value){
+                    $plazaEventos = $this->eventPlaceDao->traerPorIdCalendario($value->getId());
+                    if(count($plazaEventos) === 1){
+
+                        $plazaEvento = $plazaEventos[0];
+                        $id_plazaEventos[] = $plazaEvento->getId();
+                        $cantidadesPlazas[] = (int) $cantidad;
+                        $subtotalesPlazas[] = $plazaEvento->getPrecio();
+                        $idPromos[] = $id_promo;
+                    }
+              }
+          }
+
+
+
+        $this->terminar($cantidadesPlazas,$subtotalesPlazas,$id_plazaEventos,$total, $idPromos);
+
+    }
+
+
+    function terminar($cantidades, $subtotales, $id_plazaEventos , $total , $id_promos = []){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $plazaEventos = $this->traerPlazaEventos($id_plazaEventos);
+
             if(isset($_SESSION['fb_access_token'])) {
                 $cliente = $this->clienteDao->getForIdFacebook($_SESSION['id']);
                 if(!$cliente){
@@ -136,13 +185,24 @@ class CompraControladora extends PaginaControladora
             }else{
                 $cliente = $this->clienteDao->traerPorEmail($_SESSION['email']);
             }
+
             $compra = new Compra($cliente,$total,date("Y-m-d H:i:s"));
             $id_compra = $this->compraDao->save($compra);
             $compra->setId($id_compra);
-            $this->generateLine($compra, $subtotales , $cantidades, $plazaEventos);
-            $mensaje = new Mensaje("EL TICKET SE GENERO CON EXITO" , "success");
+
+            $plazaEventos = $this->traerPlazaEventos($id_plazaEventos);
+
+            if($plazaEventos){
+              if(!empty($id_promos)){
+                $this->generateLine($compra, $subtotales , $cantidades, $plazaEventos, $id_promos);
+              }else $this->generateLine($compra, $subtotales , $cantidades, $plazaEventos);
+
+              $mensaje = new Mensaje("EL TICKET SE GENERO CON EXITO" , "success");
+            }
 
             $_SESSION['cart'] = array();
+            $_SESSION['cartPromo'] = array();
+
             $params['mensaje'] = $mensaje->getAlert();
             $params['TICKET_MODAL'] = "ON";
             $this->page("inicio" , "GoToEvent" , 0, $params);
@@ -158,8 +218,29 @@ class CompraControladora extends PaginaControladora
         }
     }
 
+    function removeOfCartPromo($id){
+      if(isset($_SESSION['cartPromo'][$id])){
+        unset($_SESSION['cartPromo'][$id]);
+      }
+    }
+
+    private function verificarIdPromoExistente($id){
+      $flag = FALSE;
+
+      if(isset($_SESSION['cartPromo'])){
+          $cart = $_SESSION['cartPromo'];
+          foreach ($cart as $key => $item){
+              if($item['id_promo'] === $id){
+                  $flag = TRUE;
+                  break;
+              }
+          }
+      }
+      return $flag;
+    }
     private function verificarIdExistente($id){
         $flag = FALSE;
+
         if(isset($_SESSION['cart'])){
             $cart = $_SESSION['cart'];
             foreach ($cart as $key => $item){
@@ -170,6 +251,21 @@ class CompraControladora extends PaginaControladora
             }
         }
         return $flag;
+    }
+
+
+    private function sumarCantidadPromo($cantidad , $id){
+        $cart = $_SESSION['cartPromo'];
+        foreach ($cart as $key => $item){
+            if($item['id_promo'] === $id){
+                $cantidad += (int) $item['cantidad'];
+                if($cantidad > 5)
+                    $cantidad = 5;
+                $item['cantidad'] = (String) $cantidad;
+                $_SESSION['cartPromo'][$key]['cantidad'] = $item['cantidad'];
+                break;
+            }
+        }
     }
 
     private function sumarCantidad($cantidad , $id){
@@ -186,12 +282,44 @@ class CompraControladora extends PaginaControladora
         }
     }
 
-    function addToCartPromo($id_promo){
-            $promo = $this->promoDao->retrieve($id_promo);
-            if($promo){
-                   
-            }
+
+    private function traerTotalPrecioPlazas($calendarios){
+      $total = array_map( function($cal){
+          $id_calendario = $cal->getId();
+          $plazas = $this->eventPlaceDao->traerPorIdCalendario($id_calendario);
+          $cantidad = 0;
+          foreach ($plazas as $key => $value) {
+              $cantidad += $value->getPrecio();
+          }
+          return $cantidad;
+      }, $calendarios);
+      $total = array_sum($total);
+      return $total;
     }
+
+    function addToCartPromo($id_promo, $cantidad , $id_sede){
+            $promo = $this->promoDao->retrieve($id_promo);
+            $sede = $this->sedeDao->retrieve($id_sede);
+
+            if($promo && $sede){
+                $evento = $promo->getEvento();
+                $id_evento = $evento->getId();
+                $calendarios = $this->calendarDao->traerPorIdEvento($id_evento);
+                $total = $this->traerTotalPrecioPlazas($calendarios);
+                $jsonPromo = $promo->jsonSerialize();
+                $jsonPromo['cantidad'] = $cantidad;
+                $jsonPromo['precio'] = $total;
+                $respuesta = $this->verificarIdPromoExistente($id_promo);
+                if(!$respuesta)
+                  $_SESSION['cartPromo'][] = $jsonPromo;
+                else {
+                  $this->sumarCantidadPromo($cantidad, $id_promo);
+                }
+
+                header('location: /evento/sede/'. $evento->getId() . '/' . $sede->getId() );
+            }else header('location: /');
+    }
+
     function addToCart($id, $cantidad){
         $plazaEvento = $this->eventPlaceDao->retrieve($id);
         if($plazaEvento){
@@ -211,6 +339,17 @@ class CompraControladora extends PaginaControladora
 
     /* FUNCIONES AJAX */
 
+    function actualizarCantidad($cantidad , $id){
+      if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        foreach ($_SESSION['cart'] as $key => $value) {
+          if($value['plazaEvento']['id_plazaEvento'] === $id){
+            $_SESSION['cart'][$key]['cantidad'] = $cantidad;
+          }
+        }
+      }else header("location: /");
+    }
+
+
     function consultarAjax($id_evento){
       if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['rol'] === 'admin'){
 
@@ -223,7 +362,7 @@ class CompraControladora extends PaginaControladora
         $params = [];
         if($evento){
           $calendarios = $calendarioDao->traerPorIdEvento($id_evento);
-          
+
           foreach ($calendarios as $key => $value) {
               $params[] = $this->consultarVentasPorCalendario($value->getId());
           }
@@ -239,7 +378,7 @@ class CompraControladora extends PaginaControladora
             $plazaEventos = $plazaEventoDao->traerPorIdCalendario($id_calendario);
             $cantidadRemanentes = 0;
             $params = [];
-            
+
 
             if($plazaEventos) {
                 $calendario = $this->calendarDao->retrieve($id_calendario);

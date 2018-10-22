@@ -17,17 +17,26 @@ if($evento->getCategoria()->getDescripcion() === "Festival") {
             <div class="card text-center">
                 <div class="card-header success-color white-text">
                     <h1>
-                        <?= $evento->getTitulo() ?>
+                        PACK PROMO
                     </h1>
                 </div>
                 <div class="card-body">
-                    <h2 class="card-title">PACK PROMO $
-                        <?= $precioPromo ?>
+                    <h2 class="card-title">
+                      <?= $evento->getTitulo() ?>
+                      <hr>
+                      <p>
+                        $<?= $precioPromo ?>
+                      </p>
                     </h2>
                     <p class="card-text">No te pierdas esta promo.</p>
-                    <form action="compra/addToCart">
+                    <hr>
+                    <form action="/compra/addToCartPromo" method="post">
                         <input type="hidden" name="idpromo" value="<?= $id ?>" >
-                        <button type="button" class="btn btn-success">COMPRAR</button>
+                        <div class="form-group">
+                          <input type="number" min="1" name="cantidad" value="1">
+                        </div>
+                        <input type="hidden" name="id_sede" value="<?= $sede->getId() ?>">
+                        <button type="submit" class="btn btn-success">COMPRAR</button>
                     </form>
                 </div>
                 <div class="card-footer text-muted success-color white-text">

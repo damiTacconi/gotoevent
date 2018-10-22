@@ -4,6 +4,12 @@ if(!empty($_SESSION['cart'])){
     $carrito = $_SESSION['cart'];
     $items = json_decode(json_encode($carrito, FALSE));
 }
+
+if(!empty($_SESSION['cartPromo'])){
+  $carritoPromo = $_SESSION['cartPromo'];
+  $packs = json_decode(json_encode($carritoPromo, FALSE));
+}
+
 ?>
 <!-- Modal: modalCart -->
 <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -18,7 +24,7 @@ if(!empty($_SESSION['cart'])){
             </div>
             <!--Body-->
             <div class="modal-body table-responsive">
-
+              <?php if(isset($items)) { ?>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -33,7 +39,7 @@ if(!empty($_SESSION['cart'])){
                         </tr>
                     </thead>
                     <tbody id="bodyCart">
-                    <?php if(isset($items)) {
+                    <?php
                         foreach($items as $key => $item) {
                             $plaza = $item->plazaEvento;
 
@@ -60,10 +66,59 @@ if(!empty($_SESSION['cart'])){
                                 <td><a onclick="removeOfCart(<?= $key ?>)" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a></td>
                             </tr>
                         <?php } ?>
-
-                    <?php } ?>
                     </tbody>
                 </table>
+                <?php } ?>
+                <?php if(isset($packs)) { ?>
+                  <hr>
+                  <h4>PROMOS</h4>
+                  <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Evento</th>
+                          <th>Cantidad</th>
+                          <th>Precio</th>
+                          <th>Descuento</th>
+                          <th>Descuento total</th>
+                          <th>Subtotal</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbodyCartPromo">
+                        <?php foreach ($packs as $key => $value) {
+                              $descuentoTotal = $value->descuento * $value->cantidad;
+                              $subtotal = ($value->precio * $value->cantidad) - $descuentoTotal;
+                          ?>
+                            <tr>
+                              <td><?= $value->evento->titulo ?>
+                                  <input type="hidden" name="idPromo[]" value="<?= $value->id_promo ?>">
+                              </td>
+                              <td><input type="number" name="cantidadPromo[]" style="width: 60px;"
+                                     class="form-control" min="1" max="5" onkeydown="return false"
+                                     value="<?= $value->cantidad ?>">
+                                   </td>
+                              <td>
+                                <input type="number"  class="form-control"
+                                       value="<?= $value->precio ?>" disabled>
+                              </td>
+                              <td>
+                                <input type="number"  class="form-control"
+                                       value="<?= $value->descuento ?>" disabled>
+                              </td>
+                              <td>
+                                <input type="number"  class="form-control"
+                                       value="<?= $descuentoTotal ?>" disabled>
+                              </td>
+                              <td>
+                                <input type="number"  class="form-control" name="subtotalPromo[]"
+                                       value="<?= $subtotal ?>" disabled>
+                              </td>
+                              <td><a onclick="removeOfCart(<?= $key ?>,'promo')" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a></td>
+                            </tr>
+                        <?php } ?>
+                      </tbody>
+                  </table>
+                <?php } ?>
                 <div class="container">
                     <div class="row">
                         <div class="col-6">
@@ -102,46 +157,5 @@ if(!empty($_SESSION['cart'])){
 </div>
 
 <!-- FIN MODAL LOGIN -->
-<script type="text/javascript">
-    function removeOfCart(id){
-        let url = '/compra/removeOfCart/'+id;
-        ajaxURL(url, () => location.reload(),"GET");
-    }
-    ajax('btnClearCart',"/compra/clear", () => location.reload());
 
-    $(`#formCart :input[name="cantidad[]"]`).bind('keyup mouseup', function () {
-        let quantity = $(this).val();
-        let price = $(this).closest('td').prev().find('input').val();
-        let idPlaza = $(this).closest('td').next().find('input[type="hidden"]').val();
-        let $subtotal = $(this).closest('td').next().find('input[type="text"]');
-        $subtotal.val( (price * quantity) );
-        total();
-    });
-
-    function total(){
-        let $inputTotal = $('#inputTotal');
-        let total = 0;
-        $('#bodyCart > tr').each(function () {
-            let precio = $(this).find('input[name="precio[]"]').val();
-            let cantidad = $(this).find('input[name="cantidad[]"]').val();
-            total +=  Number(precio * cantidad);
-            $inputTotal.val(total);
-        });
-        if(total === 0){
-            $("#btnComprar").prop("disabled", "disabled");
-            $("#btnClearCart").prop("disabled", "disabled");
-        }
-    }
-
-    function verificarSesion(){
-        ajaxURL("/cuenta/verificarSesionCliente", data => {
-           let result = $.trim(data);
-           if(result === 'success'){
-               $('#formCart').submit();
-           }else{
-               $('#modalLoginForm').modal('toggle');
-           }
-        });
-    }
-    total();
-</script>
+<script src="/./js/carrito.js"></script>

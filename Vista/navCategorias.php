@@ -6,13 +6,13 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link hvr-float item-navcat"  href="/buscar/teatros">TEATROS</a>
+                <a class="nav-link hvr-float item-navcat"  href="/buscar/categoria/Obra-de-Teatro">TEATROS</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link hvr-float item-navcat" href="/buscar/conciertos">CONCIERTOS</a>
+                <a class="nav-link hvr-float item-navcat" href="/buscar/categoria/concierto">CONCIERTOS</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link hvr-float item-navcat" href="/buscar/festivales">FESTIVALES</a>
+                <a class="nav-link hvr-float item-navcat" href="/buscar/categoria/festival">FESTIVALES</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link hvr-float item-navcat" href="#">MAS</a>

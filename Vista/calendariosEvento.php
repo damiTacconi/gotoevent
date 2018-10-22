@@ -18,7 +18,6 @@ include "navCategorias.php";
                     </div>
                     <div class="card-body mdb-color">
                         <?php include "calendarios.php" ?>
-                        <?php //include "promo.php" ?>
                         <div class="row">
                             <div class="col-md-12 p-3">
                                 <div class="card">

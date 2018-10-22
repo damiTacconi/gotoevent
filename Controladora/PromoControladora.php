@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Controladora;
 
@@ -9,6 +9,8 @@ use Dao\CategoriaBdDao;
 use Dao\ArtistaBdDao;
 use Dao\EventoBdDao;
 use Dao\PromoBdDao;
+
+
 
 class PromoControladora extends PaginaControladora{
 
@@ -35,7 +37,7 @@ class PromoControladora extends PaginaControladora{
             }else $mensaje = new Mensaje("NO SE ENCONTRO EL EVENTO" , "danger");
 
             $params['mensaje'] = $mensaje->getAlert();
-            
+
 
             $categorias = $this->categoriaDao->getAll();
             $eventos = $this->eventoDao->getAll();

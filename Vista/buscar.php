@@ -6,6 +6,7 @@
                 <h3 class="card-header primary-color white-text"> RESULTADOS DE LA BUSQUEDA</h3>
                 <div class="card-body">
                     <div class="row">
+                      <?php if(isset($param['eventos'])) { ?>
                         <?php foreach($param['eventos'] as $evento) { ?>
                         <div class="col-md-auto col-12">
                             <?php
@@ -19,6 +20,11 @@
                             <?php include "card-event.php"; ?>
                         </div>
                         <?php } ?>
+                      <?php }else{ ?>
+                          <div class="col-12">
+                              <h1>NO SE ENCONTRARON RESULTADOS</h1>
+                          </div>
+                      <?php } ?>
                     </div>
                 </div>
             </div>

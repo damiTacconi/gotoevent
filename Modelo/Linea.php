@@ -16,7 +16,7 @@ class Linea implements JsonSerializable
      private $cantidad;
      private $subtotal;
      private $compra;
-
+     private $promo;
     /**
      * Linea constructor.
      * @param $plazaEvento
@@ -43,6 +43,13 @@ class Linea implements JsonSerializable
         ];
     }
 
+    public function setPromo($promo){
+        $this->promo = $promo;
+    }
+
+    public function getPromo(){
+      return $this->promo;
+    }
 
     /**
      * @return mixed

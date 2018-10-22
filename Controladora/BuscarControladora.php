@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Controladora;
 
@@ -23,26 +23,18 @@ class BuscarControladora extends PaginaControladora{
         $categoriaDao = $this->categoriaDao;
 
         $categoria = $categoriaDao->traerPorDescripcion($desc);
-        $id_categoria = $categoria->getId();
-
-        $eventos = $eventoDao->traerPorIdCategoria($id_categoria);
-        $params['eventos'] = $eventos;
+        if($categoria){
+          $id_categoria = $categoria->getId();
+          $eventos = $eventoDao->traerPorIdCategoria($id_categoria);
+          $params['eventos'] = $eventos;
+        }
         return $params;
     }
 
-    function teatros(){
-        $params = $this->buscar("Obra de Teatro");
-        $this->page("buscar","GoToEvent",0,$params);
-    }
-
-    function festivales(){
-        $params = $this->buscar("Festival");
-        $this->page("buscar","GoToEvento",0,$params);
-    }
-
-    function conciertos(){
-        $params = $this->buscar("Concierto");
-        $this->page("buscar","GoToEvent", 0 , $params);
+    function categoria($cat){
+      $cat = str_replace('-',' ', $cat);
+      $params = $this->buscar($cat);
+      $this->page("buscar","GoToEvent",0,$params);
     }
 
     function filtrar($palabraClave){

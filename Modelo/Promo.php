@@ -1,7 +1,10 @@
-<?php 
+<?php
 
 namespace Modelo;
-class Promo {
+
+use \JsonSerializable;
+
+class Promo implements JsonSerializable {
 
     protected $id;
     protected $descuento;
@@ -10,6 +13,14 @@ class Promo {
     public function __construct($descuento, $evento){
         $this->descuento = $descuento;
         $this->evento = $evento;
+    }
+
+    public function jsonSerialize(){
+      return [
+          "id_promo" => $this->id,
+          "descuento" => $this->descuento,
+          "evento" => $this->evento->jsonSerializeSesion()
+      ];
     }
 
     public function setDescuento($descuento){
@@ -27,7 +38,7 @@ class Promo {
     public function getEvento(){
         return $this->evento;
     }
-    
+
     public function setId($id){
         $this->id = $id;
     }
@@ -36,7 +47,7 @@ class Promo {
         return $this->id;
     }
 
-    
+
 
 
 }

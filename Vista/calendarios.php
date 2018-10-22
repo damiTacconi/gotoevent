@@ -13,11 +13,10 @@
                 <?= $fecha ?>
             </a>
             <?php } ?>
-            
-            <?php if($param['promo']) { ?>
-                <a class="list-group-item list-group-item-action bg-warning text-white hvr-fade" id="list-promo-list"
+
+            <?php if(isset($param['promo'])) { ?>
+                <a class="list-group-item list-group-item-action bg-success text-white hvr-fade" id="list-promo-list"
                 data-toggle="list" href="#list-promo" role="tab" aria-controls="home">
-                <i class="far fa-calendar-alt"></i>
                     PACK PROMO
                 </a>
             <?php } ?>
@@ -87,7 +86,7 @@
             </div>
             <?php } ?>
 
-            <?php if($param['promo']) { ?>
+            <?php if(isset($param['promo'])) { ?>
                 <div class="tab-pane fade <?= $key===0? 'show active':'' ?>" id="list-promo" role="tabpanel"
                 aria-labelledby="list-promo-list">
                     <?php include "promo.php" ?>
