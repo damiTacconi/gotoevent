@@ -16,6 +16,7 @@
                         </div>
                     </div>
             </div>
+
             <div class="col-md-6 col-12">
                 <?php include "contactanos.php" ?>
             </div>

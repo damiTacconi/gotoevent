@@ -149,6 +149,7 @@ class CompraControladora extends PaginaControladora
     function terminar($cantidades, $subtotales, $id_plazaEventos , $total , $id_promos = []){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if(isset($_SESSION['fb_access_token'])) {
+
                 $cliente = $this->clienteDao->getForIdFacebook($_SESSION['id']);
                 if(!$cliente){
                     $cliente = new Cliente($_SESSION['first_name'], $_SESSION['last_name']);

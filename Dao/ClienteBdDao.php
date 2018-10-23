@@ -174,7 +174,7 @@ TAG;
 
     public function getForIdFacebook($id){
         try{
-            $sql = "SELECT * FROM $this->tabla WHERE id_fb= $id ";
+            $sql = "SELECT * FROM $this->tabla WHERE id_fb=\"$id\"  ";
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $sentencia->execute();

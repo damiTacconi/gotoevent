@@ -19,6 +19,9 @@ class Cliente implements JsonSerializable
     protected $id_fb;
     protected $usuario = null;
 
+    //atributo que no se almacena en BD
+    private $compras = [];
+
     function __construct($nombre, $apellido)
     {
         $this->apellido = $apellido;
@@ -41,6 +44,23 @@ class Cliente implements JsonSerializable
           "usuario" => $usuarioJson
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function getCompras(): array
+    {
+        return $this->compras;
+    }
+
+    /**
+     * @param array $compras
+     */
+    public function setCompras(array $compras): void
+    {
+        $this->compras = $compras;
+    }
+
 
 
     /**

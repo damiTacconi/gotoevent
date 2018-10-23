@@ -17,6 +17,9 @@ class Linea implements JsonSerializable
      private $subtotal;
      private $compra;
      private $promo;
+
+     // atributo que no se almacena en BD
+    private $tickets = [];
     /**
      * Linea constructor.
      * @param $plazaEvento
@@ -42,6 +45,24 @@ class Linea implements JsonSerializable
           "compra" => $this->compra->jsonSerialize()
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function getTickets(): array
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * @param array $tickets
+     */
+    public function setTickets(array $tickets): void
+    {
+        $this->tickets = $tickets;
+    }
+
+
 
     public function setPromo($promo){
         $this->promo = $promo;

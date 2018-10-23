@@ -64,18 +64,20 @@ class PromoBdDao extends SingletonDao implements IDao
     public function retrieve($id)
     {
         try{
-            $sql = "SELECT * FROM $this->tabla WHERE id_promo= $id ";
+            $sql = "SELECT * FROM $this->tabla WHERE id_promo=\"$id\" ";
             $conexion = Conexion::conectar();
             $sentencia = $conexion->prepare($sql);
             $sentencia->execute();
             $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
-            $this->mapear($dataSet);
+            if($dataSet[0]) {
+                $this->mapear($dataSet);
+            }
             if (!empty($this->listado)) {
                 return $this->listado[0];
             }
             return false;
         }catch (\PDOException $e){
-            echo "Hubo un error: {$e->getMessage()}";
+            echo "Hubo un error en promo: {$e->getMessage()}";
             die();
         }
     }

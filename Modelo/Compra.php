@@ -15,6 +15,8 @@ class Compra implements JsonSerializable
     private $fecha;
     private $total;
     private $cliente;
+
+    //atributo que no se almacena en BD
     private $lineas = [];
 
 

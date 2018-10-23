@@ -65,13 +65,15 @@ class LineaBdDao extends SingletonDao implements IDao
             $sentencia = $conexion->prepare($sql);
             $sentencia->execute();
             $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
-            $this->mapear($dataSet);
+            if($dataSet[0]){
+                $this->mapear($dataSet);
+            }
             if (!empty($this->listado)) {
                 return $this->listado[0];
             }
             return false;
         }catch (\PDOException $e){
-            echo "Hubo un error: {$e->getMessage()}";
+            echo "Hubo un error en Linea: {$e->getMessage()}";
             die();
         }
     }
@@ -91,6 +93,24 @@ class LineaBdDao extends SingletonDao implements IDao
             return null;
         }catch (\PDOException $e){
             echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
+    }
+
+    function traerPorIdCompra($id){
+        try{
+            $sql = ("SELECT * FROM $this->tabla WHERE id_compra = \"$id\" ");
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return null;
+        }catch (\PDOException $e){
+            echo "Hubo un error en Linea: {$e->getMessage()}";
             die();
         }
     }

@@ -66,6 +66,24 @@ class CompraBdDao extends SingletonDao implements IDao
         }
     }
 
+    public function traerPorIdCliente($id){
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE id_cliente=\"$id\" ";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return false;
+        }catch (\PDOException $e){
+            echo "Hubo un error en compra: {$e->getMessage()}";
+            die();
+        }
+    }
+
     private function mapear($dataSet){
         $dataSet = is_array($dataSet) ? $dataSet : [];
         //if($dataSet[0]) {

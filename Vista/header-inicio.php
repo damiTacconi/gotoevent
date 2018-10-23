@@ -39,8 +39,7 @@
                                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                     </div>
                                     <div class="card-footer text-muted    white-text">
-                                        <button class="btn btn-blue"> Mis Tickets </button>
-                                        <button class="btn btn-blue"> Mis Eventos </button>
+                                        <a href="/cuenta/tickets" class="btn btn-blue"> Mis Tickets </a>
                                     </div>
                                 </div>
                             </div>

@@ -15,6 +15,8 @@ class TicketBdDao extends SingletonDao implements IDao
 {
     private $listado = [];
     private $tabla = "tickets";
+
+
     public function save($data)
     {
         try{
@@ -62,11 +64,28 @@ class TicketBdDao extends SingletonDao implements IDao
             }
             return false;
         }catch (\PDOException $e){
-            echo "Hubo un error: {$e->getMessage()}";
+            echo "Hubo un error en retrieve de Ticket: {$e->getMessage()}";
             die();
         }
     }
 
+    public function traerPorIdLinea($id){
+        try{
+            $sql = ("SELECT * FROM $this->tabla WHERE id_linea = \"$id\" ");
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return null;
+        }catch (\PDOException $e){
+            echo "Hubo un error en Ticket: {$e->getMessage()}";
+            die();
+        }
+    }
     private function mapear($dataSet){
         $dataSet = is_array($dataSet) ? $dataSet : [];
         //if($dataSet[0]) {

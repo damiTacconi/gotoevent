@@ -2,6 +2,9 @@
 namespace Controladora;
 
 use Dao\ClienteBdDao;
+use Dao\CompraBdDao;
+use Dao\LineaBdDao;
+use Dao\TicketBdDao;
 use Dao\UsuarioBdDao;
 use Modelo\Cliente;
 use Modelo\Mensaje;
@@ -11,9 +14,15 @@ class CuentaControladora extends PaginaControladora {
 
     private $clienteDao;
     private $usuarioDao;
+    private $ticketDao;
+    private $compraDao;
+    private $lineaDao;
 
     function __construct()
     {
+        $this->lineaDao = LineaBdDao::getInstance();
+        $this->compraDao = CompraBdDao::getInstance();
+        $this->ticketDao = TicketBdDao::getInstance();
         $this->usuarioDao = UsuarioBdDao::getInstance();
         $this->clienteDao = ClienteBdDao::getInstance();
     }
@@ -107,5 +116,44 @@ class CuentaControladora extends PaginaControladora {
                 echo 'success';
             } else echo null;
         }else header('location: /');
+    }
+
+    function tickets(){
+        $clienteDao = $this->clienteDao;
+        $compraDao = $this->compraDao;
+        $lineaDao = $this->lineaDao;
+        $ticketDao = $this->ticketDao;
+
+        if(isset($_SESSION['email'])){
+            if(isset($_SESSION['fb_access_token'])){
+                $id_fb = $_SESSION['id'];
+                $cliente = $clienteDao->getForIdFacebook($id_fb);
+
+            }else{
+                $email = $_SESSION['email'];
+                $cliente = $clienteDao->traerPorEmail($email);
+            }
+            $id_cliente = $cliente->getId();
+            $compras = $compraDao->traerPorIdCliente($id_cliente);
+            if($compras) {
+                foreach ($compras as $compra) {
+                    $id_compra = $compra->getId();
+                    $lineas = $lineaDao->traerPorIdCompra($id_compra);
+                    foreach ($lineas as $linea) {
+                        $id_linea = $linea->getId();
+                        $tickets = $ticketDao->traerPorIdLinea($id_linea);
+                        $linea->setTickets($tickets);
+
+                    }
+                    $compra->setLineas($lineas);
+                }
+
+                $cliente->setCompras($compras);
+            }
+            $params['cliente'] = $cliente;
+            $this->page("tickets","Tickets",1,$params);
+
+        }else header("location: /");
+
     }
 }
