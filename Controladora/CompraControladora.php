@@ -179,6 +179,7 @@ class CompraControladora extends PaginaControladora
     }
     function clear(){
         $_SESSION['cart'] = array();
+        $_SESSION['cartPromo'] = array();
     }
     function removeOfCart($id){
         if(isset($_SESSION['cart'][$id])) {

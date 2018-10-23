@@ -76,9 +76,8 @@
            <li id="icon-cart" class="list-inline-item nav-sm-center">
                <a  class="nav-link">
                    <i class="fas fa-shopping-cart wsmoke"></i>
-                   <?php if(isset($_SESSION['cart'])){ ?>
-                       <span class="badge indigo"><?= (count($_SESSION['cart']) + count($_SESSION['cartPromo'])) ?></span>
-                   <?php } ?>
+                   <span class="badge indigo">
+                       <?= (count($_SESSION['cart']) + count($_SESSION['cartPromo'] )) ?>
                </a>
            </li>
            <?php if($_SESSION['rol'] === 'cliente'){?>
