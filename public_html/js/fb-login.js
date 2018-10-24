@@ -25,6 +25,9 @@ function statusChangeCallback(response){
             let result = $.trim(data);
             if(result === 'success'){
                 window.location.href = "/";
+            }else if(result === 'noRegister'){
+                $('#mensajeFb').show();
+                $('#modalRegister').modal('toggle');
             }else{
                 alertify.alert(data);
             }

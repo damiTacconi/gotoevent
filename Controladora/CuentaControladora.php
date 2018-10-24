@@ -125,14 +125,7 @@ class CuentaControladora extends PaginaControladora {
         $ticketDao = $this->ticketDao;
 
         if(isset($_SESSION['email'])){
-            if(isset($_SESSION['fb_access_token'])){
-                $id_fb = $_SESSION['id'];
-                $cliente = $clienteDao->getForIdFacebook($id_fb);
-
-            }else{
-                $email = $_SESSION['email'];
-                $cliente = $clienteDao->traerPorEmail($email);
-            }
+            $cliente = $clienteDao->traerPorEmail($_SESSION['email']);
             $id_cliente = $cliente->getId();
             $compras = $compraDao->traerPorIdCliente($id_cliente);
             if($compras) {

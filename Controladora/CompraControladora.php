@@ -148,18 +148,7 @@ class CompraControladora extends PaginaControladora
     }
     function terminar($cantidades, $subtotales, $id_plazaEventos , $total , $id_promos = []){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if(isset($_SESSION['fb_access_token'])) {
-
-                $cliente = $this->clienteDao->getForIdFacebook($_SESSION['id']);
-                if(!$cliente){
-                    $cliente = new Cliente($_SESSION['first_name'], $_SESSION['last_name']);
-                    $cliente->setIdFb($_SESSION['id']);
-                    $id_cliente = $this->clienteDao->save($cliente);
-                    $cliente->setId($id_cliente);
-                }
-            }else{
-                $cliente = $this->clienteDao->traerPorEmail($_SESSION['email']);
-            }
+            $cliente = $this->clienteDao->traerPorEmail($_SESSION['email']);
             $compra = new Compra($cliente,$total,date("Y-m-d H:i:s"));
             $id_compra = $this->compraDao->save($compra);
             $compra->setId($id_compra);

@@ -11,6 +11,12 @@ if(empty($_SESSION)){
     if(!isset($_SESSION['rol'])){
         $_SESSION['rol'] = 'invitado';
     }
+    if(!isset($_SESSION['cart'])){
+        $_SESSION['cart'] = array();
+    }
+    if(!isset($_SESSION['cartPromo'])){
+        $_SESSION['cartPromo'] = array();
+    }
 }
 
 require_once("../Config/Config.php");

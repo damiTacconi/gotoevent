@@ -14,7 +14,7 @@
                 echo $param['mensaje'];
             }?>
 
-            <?php include "altas/agregarShow.php "?>
+            <?php include "altas/agregarShow.php"?>
         </div>
         <!-- /.container-fluid -->
 

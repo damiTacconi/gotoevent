@@ -7,11 +7,19 @@
  */
 
 namespace Controladora;
+use Dao\ClienteBdDao;
 use Facebook;
 
 
 class FacebookControladora
 {
+    private $clienteDao;
+
+    function __construct()
+    {
+        $this->clienteDao = ClienteBdDao::getInstance();
+    }
+
     function index(){
         header('location: /');
     }
@@ -81,6 +89,18 @@ class FacebookControladora
             $_SESSION['first_name']     = $userData['first_name'];
             $_SESSION['last_name']      = $userData['last_name'];
             $_SESSION['picture_url']    = $userData['picture']['data']['url'];
+
+            //Verifico si la cuenta existe en la base de datos
+
+            $cliente = $this->clienteDao->traerPorEmail($_SESSION['email']);
+
+            if(!$cliente){
+                session_destroy();
+                echo "noRegister";
+                exit;
+            }
+
+            // fin verificar
 
             // Si el Email corresponde a un admin, le otorgo rol admin.
             // ADMIN_EMAIL = CONSTANTE EN CONFIG.PHP DONDE ESTABLECE LOS EMAILS DE ADMINS.

@@ -10,6 +10,13 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div id="mensajeFb" role="alert" style="display:none;" class="alert alert-warning text-center">
+                    <strong>
+                        <span>
+                            Es necesario que se registre para poder acceder
+                        </span>
+                    </strong>
+                </div>
                 <div id="modalAlert" style="display: none" class="alert alert-danger" role="alert">
                     <span id="mensajeAjax"></span>
                 </div>
@@ -58,6 +65,8 @@
     function send() {
         ajaxForm("formRegister", "Cuenta/registrarAjax", (data) =>{
             let result = $.trim(data);
+            $('#mensajeFb').hide();
+
             if(result === 'success') {
                 $('#btnClose').click();
                 alertify.success('El registro se completo con exito!!');
