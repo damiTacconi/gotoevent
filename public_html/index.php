@@ -8,15 +8,12 @@ setlocale(LC_TIME, 'spanish'); // ---Windows
 //si la session esta vacia, la inicio
 if(empty($_SESSION)){
     session_start();
-    if(!isset($_SESSION['rol'])){
+    if(!isset($_SESSION['rol']))
         $_SESSION['rol'] = 'invitado';
-    }
-    if(!isset($_SESSION['cart'])){
+    if(!isset($_SESSION['cart']))
         $_SESSION['cart'] = array();
-    }
-    if(!isset($_SESSION['cartPromo'])){
+    if(!isset($_SESSION['cartPromo']))
         $_SESSION['cartPromo'] = array();
-    }
 }
 
 require_once("../Config/Config.php");

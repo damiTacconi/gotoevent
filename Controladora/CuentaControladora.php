@@ -60,6 +60,8 @@ class CuentaControladora extends PaginaControladora {
                     $_SESSION['last_name'] = $cliente->getApellido();
                     $_SESSION['picture_url'] = "";
                     $_SESSION['rol'] = 'cliente';
+                    $_SESSION['cart'] = array();
+                    $_SESSION['cartPromo'] = array();
                     header('location: /');
                 }else {
                     if (in_array($usuario->getEmail(), unserialize(ADMIN_EMAIL))) {
