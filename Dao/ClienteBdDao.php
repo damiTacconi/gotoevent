@@ -77,7 +77,7 @@ TAG;
         $sentencia->execute();
     }
 
-    public function traerTodo()
+    public function getAll()
     {
         $sql = "SELECT * FROM $this->tabla";
 

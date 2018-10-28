@@ -17,7 +17,21 @@ class UsuarioBdDao extends SingletonDao implements IDao
 
     public function delete($data)
     {
-        // TODO: Implement delete() method.
+        try{
+            $id = $data->getId();
+
+            $sql = "DELETE FROM $this->tabla WHERE id_usuario=\"$id\" ";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
+        }
     }
 
     public function retrieve($id)
@@ -139,24 +153,22 @@ class UsuarioBdDao extends SingletonDao implements IDao
         $sentencia->execute();
     }
 
-    public function traerTodo()
-    {
-        $sql = "SELECT * FROM $this->tabla";
-
-        $conexion = Conexion::conectar();
-
-        $sentencia = $conexion->prepare($sql);
-
-        $sentencia->execute();
-
-        $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
-
-        $this->mapear($dataSet);
-
-        if (!empty($this->listado)) {
-            return $this->listado;
+    public  function getAll(){
+        try{
+            $sql = "SELECT * FROM $this->tabla";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return false;
+        }catch (\PDOException $e){
+            echo "Hubo un error: {$e->getMessage()}";
+            die();
         }
-        return null;
     }
 
     public function traerPorEmail($mail)

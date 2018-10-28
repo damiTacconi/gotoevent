@@ -151,4 +151,29 @@ class CuentaControladora extends PaginaControladora {
         }else header("location: /");
 
     }
+
+    function usuarios(){
+        $this->listado();
+    }
+    private function listado($params = []){
+        $clienteDao = $this->clienteDao;
+        $clientes = $clienteDao->getAll();
+        $params['clientes'] = $clientes;
+        $this->page("listado/listadoUsuarios" , "Usuarios" , 2 , $params);
+    }
+    function eliminarUsuario($id){
+        $usuarioDao =  $this->usuarioDao;
+        $usuario = $usuarioDao->retrieve($id);
+
+        if($usuario):
+            $usuarioDao->delete($usuario);
+            $mensaje = new Mensaje("EL USUARIO SE ELIMINO CORRECTAMENTE" , "success");
+            $params['mensaje'] = $mensaje->getAlert();
+        else:
+            $mensaje = new Mensaje("NO SE ENCONTRO EL USUARIO" , "danger");
+            $params['mensaje'] = $mensaje->getAlert();
+        endif;
+        $this->listado($params);
+
+    }
 }

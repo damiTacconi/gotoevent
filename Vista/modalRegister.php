@@ -63,7 +63,7 @@
 <script type="text/javascript">
 
     function send() {
-        ajaxForm("formRegister", "Cuenta/registrarAjax", (data) =>{
+        ajaxForm("formRegister", "/cuenta/registrarAjax", (data) =>{
             let result = $.trim(data);
             $('#mensajeFb').hide();
 

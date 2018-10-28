@@ -28,10 +28,7 @@
                      ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="userDropdown">
-                <a class="dropdown-item text-white" href="#">Settings</a>
-                <a class="dropdown-item text-white" href="#">Activity Log</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-white" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                <a class="dropdown-item text-white" href="#" data-toggle="modal" data-target="#logoutModal">Salir</a>
             </div>
         </li>
     </ul>
@@ -43,21 +40,23 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Seguro que quieres salir?</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-body">
+                Click en "Salir" en el boton de abajo si estas listo para terminar tu sesion actual
+            </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                 <a class="btn btn-primary"
                     <?php if(isset($_SESSION['fb_access_token'])){ ?>
                         href="/Facebook/logout"
                     <?php }else { ?>
                         href="/cuenta/logout"
                     <?php } ?>
-                >Logout</a>
+                >Salir</a>
             </div>
         </div>
     </div>

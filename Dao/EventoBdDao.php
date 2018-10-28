@@ -157,7 +157,6 @@ class EventoBdDao extends SingletonDao implements IDao
     {
         try{
             $id = $data->getId();
-
             $sql = "DELETE FROM $this->tabla WHERE id_evento=\"$id\" ";
 
             $conexion = Conexion::conectar();
