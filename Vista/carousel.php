@@ -18,6 +18,10 @@
         padding-left: 0;
         padding-right: 0;
     }
+
+    .dot .active{
+        color:green;
+    }
 </style>
 
 <?php
@@ -29,24 +33,14 @@
         $count -= $size;
     }while($count > 0);
 
- /*foreach($eventos as $evento) {
-            $fecha = $evento->getFechaDesde();
-            $fecha_hasta = $evento->getFechaHasta();
-            $imagen = $evento->getEventoImagen()->getImagen();
-            $calendarios = $evento->getCalendarios();
-            $categoria = $evento->getCategoria();
-            $url = "data:image/jpg;base64,{$imagen}";
-            ?>
-            <?php include "card-event.php" ?>
-        <?php }*/
-?>
+    ?>
 <div id="demo" class="carousel slide" data-ride="carousel">
 
     <!-- Indicators -->
     <ul class="carousel-indicators">
-        <li data-target="#demo" data-slide-to="0" class="active"></li>
-        <li data-target="#demo" data-slide-to="1"></li>
-        <li data-target="#demo" data-slide-to="2"></li>
+        <?php for($i=0;$i<count($arr);$i++) { ?>
+            <li data-target="#demo" data-slide-to="<?= $i ?>" class="dot <?= $i === 0 ? 'active':'' ?>" ></li>
+        <?php } ?>
     </ul>
 
 

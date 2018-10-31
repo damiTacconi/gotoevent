@@ -53,6 +53,9 @@
 <script type="text/javascript">
     function actualizarCalendario(){
         let id = $('#selectEvento option:selected').val();
+        $('#selectCalendario').val([]);
+        $('#inputSede').val('');
+        $('#selectPlaza').val([]);
         let obj = { id: id};
         ajaxURL('/evento/getCalendariosAjax/', data => {
             let result = JSON.parse(data);
@@ -67,6 +70,7 @@
                     }
                     $selectCalendario.append(option);
                 }
+                actualizarSede();
             }
         }, 'POST' , obj);
     }
@@ -74,6 +78,8 @@
     function actualizarSede(){
         let id = $('#selectCalendario option:selected').val();
         let obj = {id: id};
+        $('#selectPlaza').val([]);
+
         ajaxURL('/sede/getSedeIdCalendarioAjax/', data => {
             let result = JSON.parse(data);
             let $sede = $('#inputSede');

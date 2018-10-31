@@ -30,6 +30,7 @@
                                 <th>Fecha</th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -37,6 +38,7 @@
                                 <th>Id</th>
                                 <th>Sede</th>
                                 <th>Fecha</th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
