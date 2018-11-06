@@ -116,3 +116,11 @@ body{ background-color: #F4F4F4; }
 .card-categoria:hover{
  border: 1px solid #0d47a1;
 }
+
+.owl-next span{
+    font-size: 2em;
+}
+
+.owl-prev span{
+    font-size: 2em;
+}

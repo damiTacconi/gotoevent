@@ -36,8 +36,11 @@
 	<!-- END MATERIAL DESIGN -->
 
 
-
-	<!-- MEDIA-QUERIES STYLE -->
+    <!-- OWL CAROUSEL -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <!-- MEDIA-QUERIES STYLE -->
     <link rel=stylesheet type="text/css" href="/css/main_video_background.css">
     <link rel=stylesheet type="text/css" href="/css/media_queries_video.css">
     <link rel="stylesheet" href="/css/hover.css" media="all">

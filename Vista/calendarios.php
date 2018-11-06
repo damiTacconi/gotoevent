@@ -49,8 +49,7 @@
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">PRECIO: <strong>
-                                            $
-                                            <?= $plaza->getPrecio() ?> </strong></li>
+                                            $ <?= $plaza->getPrecio() ?> </strong></li>
                                     <li class="list-group-item">
                                         <form class="form" method="post" action="/compra/addToCart/">
                                             <input type="hidden" name="idPlaza" value="<?= $plaza->getId() ?>">
