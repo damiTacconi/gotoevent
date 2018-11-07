@@ -1,9 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 .navbar {
   box-shadow: none;
 }
 
 .navbar{z-index: 2;}
-body{ background-color: #F4F4F4; }
+body{
+    background-color: #fffde7;
+    font-family: 'Montserrat';
+}
 .navegation{display: none;}
 .division{display: none;}
 .footer, .prefooter{ color: white; }

@@ -40,4 +40,3 @@ include "navCategorias.php";
     </div>
 </div>
 <?php } ?>
-</script>

@@ -110,7 +110,8 @@ class ArtistaBdDao extends SingletonDao implements IDao
             $sentencia = $conexion->prepare($sql);
             $sentencia->execute();
             $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
-            $this->mapear($dataSet);
+            if($dataSet[0])
+                 $this->mapear($dataSet);
             if (!empty($this->listado)) {
                 return $this->listado[0];
             }
@@ -118,6 +119,25 @@ class ArtistaBdDao extends SingletonDao implements IDao
         }catch (\PDOException $e){
             echo "Hubo un error: {$e->getMessage()}";
             die();
+        }
+    }
+
+    public function traerPorNombre($nombre){
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE LOWER(nombre) LIKE LOWER(\"$nombre\") LIMIT 1";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+            if($dataSet[0]) {
+                $this->mapear($dataSet);
+            }
+            if (!empty($this->listado)) {
+                return $this->listado[0];
+            }
+            return false;
+        }catch (\PDOException $e){
+            throw $e;
         }
     }
 

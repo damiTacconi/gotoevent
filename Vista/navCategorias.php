@@ -24,9 +24,9 @@
     <div class="row">
         <div class="col-md-12 bg-white">
             <div id="containerSearch" class="border-bottom p-3 border-light">
-                <form  class="justify-content-center form-inline active-cyan-4">
-                    <input class="form-control form-control-sm mr-3 w-50" type="text" placeholder="ENCONTRA LO MEJOR DEL ENTRETENIMIENTO" aria-label="Search">
-                    <button id="btnSearch" class="btn btn-primary btn-sm" style="width: 10%"><i class="fa fa-search" aria-hidden="true"></i></button>
+                <form  action="/buscar/filtrar/" method="POST" class="justify-content-center form-inline active-cyan-4">
+                    <input name="nombre" class="form-control form-control-sm mr-3 w-50" type="text" placeholder="ENCONTRA LO MEJOR DEL ENTRETENIMIENTO" aria-label="Search">
+                    <button type="submit" id="btnSearch" class="btn btn-primary btn-sm" style="width: 10%"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
             </div>
         </div>

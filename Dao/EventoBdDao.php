@@ -51,6 +51,25 @@ class EventoBdDao extends SingletonDao implements IDao
             die();
         }
     }
+
+    public function  traerPorIdArtista($id){
+        try {
+            $sql = ("SELECT DISTINCT ev.* FROM $this->tabla ev inner join calendarios ca inner join shows sh INNER join artistas ar on ev.id_evento=ca.id_evento AND
+                  ca.id_calendario=sh.id_calendario AND
+                  ar.id_artista=sh.id_artista WHERE ar.id_artista=$id");
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if(!empty($this->listado)){
+                return $this->listado;
+            }
+            return false;
+        }catch (\PDOException $e){
+            throw $e;
+        }
+    }
     public function getAll(){
         try{
             $sql = "SELECT * FROM $this->tabla";
