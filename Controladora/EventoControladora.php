@@ -140,7 +140,14 @@ class EventoControladora extends PaginaControladora
             $param['categorias'] = $categorias;
             $param['eventos'] = $eventos;
             $param['artistas'] = $artistas;
+            $param['promos'] = [];
 
+            foreach($eventos as $evento){
+                $categoria = $evento->getCategoria();
+                if($categoria->getDescripcion() === 'Festival'){
+                    array_push($param['promos'], $evento);
+                }
+            }
             $this->page('crearEvento', 'Crear Evento', 2,$param);
         }else header('location: /');
     }

@@ -8,9 +8,9 @@
                     <select id="selectEvento"
                             class="form-control" name="evento" required>
                         <option value="" selected disabled>Elegir evento...</option>
-                        <?php if(!empty($param['eventos'])) { ?>
-                            <?php foreach ($param['eventos'] as $evento) { ?>
-                                <option value='<?= $evento->getId() ?>'><?= $evento->getTitulo() ?> </option>
+                        <?php if(!empty($param['promos'])) { ?>
+                            <?php foreach ($param['promos'] as $evento) { ?>
+                                    <option value='<?= $evento->getId() ?>'><?= $evento->getTitulo() ?> </option>
                             <?php } ?>
                         <?php } ?>
                     </select>

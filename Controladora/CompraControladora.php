@@ -58,13 +58,14 @@ class CompraControladora extends PaginaControladora
     }
     private function enviarEmail($numberTicket,$line){
         $mail = new Mail();
+        $root = ROOT . 'public_html' . URL_IMG;
         $imagenes = array(
             [
-                'path' => ROOT . 'public_html' . URL_IMG . "qr/{$numberTicket}.png",
+                'path' => $root . "qr/{$numberTicket}.png",
                 'cid' => "qr"
             ],
             [
-                'path' => ROOT . 'public_html' . URL_IMG . 'icono.png',
+                'path' => $root . 'icono.png',
                 'cid' => "icon"
             ]
         );
@@ -72,12 +73,14 @@ class CompraControladora extends PaginaControladora
         $plaza = $plazaEvento->getPlaza();
         $calendario = $plazaEvento->getCalendario();
         $evento = $calendario->getEvento();
+        $sede = $calendario->getSede();
         $imagenes = str_replace("\\" , "/" , $imagenes);
         $html = ("<h1><img style='vertical-align: middle' src='cid:icon'><span>GoToEvent</span> </h1>
                             <p>Gracias {$_SESSION['name']} , su ticket fue generado: </p>
                             <p>Ticket <strong>N°{$numberTicket}</strong></p>
                             <div style='text-align: center'><img src='cid:qr'></div>
                             <p><strong>Evento</strong>: {$evento->getTitulo()} </p>
+                            <p><strong>Sede</strong>: {$sede->getNombre()} </p>
                             <p><strong>Plaza</strong>: {$plaza->getDescripcion()}</p>
                             <p><strong>Fecha</strong>: {$calendario->getFecha()}</p>
                             <hr>
@@ -88,8 +91,17 @@ class CompraControladora extends PaginaControladora
     }
     private function generateTicket($line){
         $digits = 10;
+        $plazaEvento = $line->getPlazaEvento();
+        $plaza = $plazaEvento->getPlaza();
+        $calendario = $plazaEvento->getCalendario();
+        $evento = $calendario->getEvento();
+        $sede = $calendario->getSede();
         $numberTicket = strval(rand(pow(10, $digits-1), pow(10, $digits)-1));
         $qrContent = ("Nombre Cliente: " . $_SESSION['name'] . "\n"
+                    . "Evento: " . $evento->getTitulo() . "\n"
+                    . "Sede: " . $sede->getNombre() . "\n"
+                    . "Plaza: " . $plaza->getDescripcion() . "\n"
+                    . "Fecha: " . $calendario->getFecha() . "\n"
                     . "Numero Ticket: " . $numberTicket);
         $ticket = new Ticket(date("Y-m-d H:i:s"), $numberTicket ,$line, $qrContent);
         $id_ticket = $this->ticketDAo->save($ticket);

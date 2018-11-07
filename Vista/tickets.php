@@ -42,15 +42,18 @@ $compras = $cliente->getCompras();
                             </tr>
                             </tfoot>
                             <tbody>
-                                <?php foreach ($compras as  $compra) {
+                                <?php
+                                $i = 0;
+                                foreach ($compras as  $compra) {
                                     $lineas = $compra->getLineas();
                                     foreach ($lineas as  $linea) {
                                         $tickets = $linea->getTickets();
                                         foreach ($tickets as $key => $ticket) {
                                             $url = URL_IMG . 'qr/' . $ticket->getNumero() . '.png';
+                                            $i++;
                                             ?>
                                             <tr>
-                                                <th scope="row" width="30"><?= $key ?></th>
+                                                <th scope="row" width="30"><?= $i ?></th>
                                                 <td width="30"><?= $ticket->getFecha() ?></td>
                                                 <td width="30"><?= $ticket->getNumero() ?></td>
                                                 <td class="text-center" width="30" height="15">

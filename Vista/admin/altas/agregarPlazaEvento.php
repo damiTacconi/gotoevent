@@ -51,11 +51,18 @@
 </div>
 
 <script type="text/javascript">
-    function actualizarCalendario(){
-        let id = $('#selectEvento option:selected').val();
+
+    function clearAll(){
         $('#selectCalendario').val([]);
         $('#inputSede').val('');
-        $('#selectPlaza').val([]);
+        $('#selectPlaza').find('option').remove()
+            .end()
+            .append('<option value="" disabled>Elegir Plaza</option>')
+            .val('Elegir Plaza');
+    }
+    function actualizarCalendario(){
+        let id = $('#selectEvento option:selected').val();
+        clearAll();
         let obj = { id: id};
         ajaxURL('/evento/getCalendariosAjax/', data => {
             let result = JSON.parse(data);
