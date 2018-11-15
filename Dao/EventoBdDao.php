@@ -83,8 +83,8 @@ class EventoBdDao extends SingletonDao implements IDao
             }
             return false;
         }catch (\PDOException $e){
-            echo "Hubo un error: {$e->getMessage()}";
-            die();
+                echo "Hubo un error: {$e->getMessage()}";
+                die();
         }
     }
 

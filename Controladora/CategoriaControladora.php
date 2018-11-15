@@ -25,11 +25,15 @@ class CategoriaControladora extends PaginaControladora
     function eliminar($id){
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin'){
             $categoria = $this->categoriaDao->retrieve($id);
-            if($categoria->getId() !== null){
-                $this->categoriaDao->delete($categoria);
-                $mensaje = new Mensaje('La categoria fue eliminada' , 'success');
-            }else{
-                $mensaje = new Mensaje('No se encontro la categoria en la Base de Datos', 'danger');
+            try {
+                if ($categoria->getId() !== null) {
+                    $this->categoriaDao->delete($categoria);
+                    $mensaje = new Mensaje('La categoria fue eliminada', 'success');
+                } else {
+                    $mensaje = new Mensaje('No se encontro la categoria en la Base de Datos', 'danger');
+                }
+            }catch (\PDOException $e){
+                $mensaje = new Mensaje("No se pudo eliminar, tal vez haya un evento que utiliza esta categoria","danger");
             }
             $params = array('mensaje' => $mensaje->getAlert());
             $this->paginaListado($params);

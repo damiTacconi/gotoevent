@@ -2,6 +2,7 @@
 
 
 <?php
+
         $eventos = \Dao\EventoBdDao::getInstance()->getAll();
         if($eventos) {
             $eventos = array_map(function ($ev) {

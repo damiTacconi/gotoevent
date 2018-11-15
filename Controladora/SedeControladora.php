@@ -34,11 +34,15 @@ class SedeControladora extends PaginaControladora
     function eliminar($id){
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin'){
             $sede = $this->sedeDao->retrieve($id);
-            if($sede->getId() !== null){
-                $this->sedeDao->delete($sede);
-                $mensaje = new Mensaje('La Sede fue eliminada' , 'success');
-            }else{
-                $mensaje = new Mensaje('No se encontro la sede en la Base de Datos', 'danger');
+            try {
+                if ($sede->getId() !== null) {
+                    $this->sedeDao->delete($sede);
+                    $mensaje = new Mensaje('La Sede fue eliminada', 'success');
+                } else {
+                    $mensaje = new Mensaje('No se encontro la sede en la Base de Datos', 'danger');
+                }
+            }catch (\PDOException $e){
+                $mensaje = new Mensaje("No se pudo eliminar, tal vez haya una plaza de evento cargada con esta sede", "danger");
             }
             $params = array('mensaje' => $mensaje->getAlert());
             $this->paginaListado($params);

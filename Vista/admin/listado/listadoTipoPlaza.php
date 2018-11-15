@@ -45,7 +45,7 @@
                                     <td> <?= $plaza->getDescripcion() ?></td>
                                     <td style="width:30px;"><button class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="No implementado"><i class="fas fa-edit"></i></button></td>
                                     <td style="width:30px;">
-                                        <a data-toggle="modal" onclick="eliminar(<?= $plaza->getId() ?>,'<?= $plaza->getDescripcion() ?>')"
+                                        <a data-toggle="tooltip" data-placement="bottom" title="No implementado"
                                            class="btn btn-danger"><i class="fas fa-trash-alt wsmoke"></i></a>
                                     </td>
                                 </tr>

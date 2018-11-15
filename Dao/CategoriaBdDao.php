@@ -115,8 +115,7 @@ class CategoriaBdDao extends SingletonDao implements IDao
             $sentencia->execute();
 
         }catch (\PDOException $e){
-            echo "Hubo un error: {$e->getMessage()}";
-            die();
+            throw $e;
         }
     }
 
