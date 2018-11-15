@@ -3,9 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 15-11-2018 a las 22:00:33
+-- Tiempo de generación: 15-11-2018 a las 22:47:34
 -- Versión del servidor: 5.7.19-log
 -- Versión de PHP: 7.2.4
+
 CREATE DATABASE gotoevent;
 USE gotoevent;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -129,7 +130,6 @@ INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellido`, `dni`, `id_usuario`)
 (2, 'David', 'Navarro', '38831211', 2),
 (3, 'Martin', 'Diaz', '37213241', 3),
 (4, 'Ignacio', 'Chiaradia', '41321421', 4),
-(5, 'Sebastian', 'Campos', '38213442', 5),
 (7, 'Christian', 'Constancio', '38214251', 7),
 (8, 'Franco', 'Rosales', '38231452', 8),
 (9, 'Juan', 'Place', '37541425', 9),
@@ -342,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `shows` (
   PRIMARY KEY (`id_show`),
   KEY `fk_id_show_x_id_calendarios` (`id_calendario`),
   KEY `fk_id_show_x_id_artistas` (`id_artista`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `shows`
@@ -357,7 +357,8 @@ INSERT INTO `shows` (`id_show`, `id_calendario`, `id_artista`) VALUES
 (6, 159, 11),
 (7, 160, 11),
 (8, 159, 10),
-(9, 161, 13);
+(9, 161, 13),
+(10, 159, 12);
 
 -- --------------------------------------------------------
 
@@ -429,7 +430,6 @@ INSERT INTO `usuarios` (`id_usuario`, `email`, `password`) VALUES
 (2, 'david@hotmail.com', 'asd'),
 (3, 'martink9@hotmail.com', 'gameofthrones'),
 (4, 'nachitoChiara@gmail.com', 'soynachin'),
-(5, 'sebacampos@hotmail.com', 'asdasdasd'),
 (6, 'juanperez@gmail.com', 'soyjuan'),
 (7, 'ioopepi@hotmail.com', 'pepoporno'),
 (8, 'franquito_cool@hotmail.com', 'damenafta'),
@@ -471,7 +471,7 @@ ALTER TABLE `calendarios`
 -- Filtros para la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  ADD CONSTRAINT `fk_clientes_x_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+  ADD CONSTRAINT `fk_clientes_x_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `compras`
