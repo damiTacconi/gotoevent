@@ -24,7 +24,7 @@ class Ticket
      * @param $linea
      * @param $qr
      */
-    public function __construct($fecha,$numero,$linea, $qr)
+    public function __construct($fecha,$numero,Linea $linea, $qr)
     {
         $this->numero = $numero;
         $this->linea = $linea;

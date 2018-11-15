@@ -12,8 +12,8 @@ use JsonSerializable;
 
 class Categoria implements JsonSerializable
 {
-    protected $id;
-    protected $descripcion;
+    private $id;
+    private $descripcion;
 
     public function jsonSerialize()
     {

@@ -69,7 +69,6 @@ class EventoControladora extends PaginaControladora
         $calendarioDao = $this->calendarioDao;
         $plazaEventoDao = $this->plazaEventoDao;
         $calendario = $calendarioDao->retrieve($id_calendario);
-        $evento = $calendario->getEvento();
         $sede = $calendario->getSede();
         $capacidadTotal = $sede->getCapacidad();
 

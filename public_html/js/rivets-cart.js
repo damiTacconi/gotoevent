@@ -1,4 +1,4 @@
-// Cart.js
+// Carrito.js
 // version: 0.4.1
 // author: Gavin Ballard
 // license: MIT

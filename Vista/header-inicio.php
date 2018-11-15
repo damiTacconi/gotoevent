@@ -18,7 +18,7 @@
                                     <h1> Organizamos eventos para vos</h1>
                                     <p>No te pierdas los mejores eventos de tu region. Con GoToEvent
                                         podras comprar tus entradas de manera comoda, rapida, segura y sencilla</p>
-                                    <a href="#" class="btn btn-primary"> Read More</a>
+                                    <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="No implementado"> Leer Mas</a>
                                 </div>
                             </div>
                         </div>

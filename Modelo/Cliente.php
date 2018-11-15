@@ -10,6 +10,7 @@ namespace Modelo;
 
 
 use JsonSerializable;
+
 class Cliente implements JsonSerializable
 {
     protected $id;
@@ -56,7 +57,7 @@ class Cliente implements JsonSerializable
     /**
      * @param array $compras
      */
-    public function setCompras(array $compras): void
+    public function setCompras($compras): void
     {
         $this->compras = $compras;
     }
@@ -158,7 +159,6 @@ class Cliente implements JsonSerializable
     {
         $this->usuario = $usuario;
     }
-
 
 
 }

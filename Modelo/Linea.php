@@ -27,7 +27,7 @@ class Linea implements JsonSerializable
      * @param $subtotal
      * @param $compra
      */
-    public function __construct($plazaEvento, $cantidad, $subtotal, $compra)
+    public function __construct(PlazaEvento $plazaEvento, $cantidad, $subtotal, Compra $compra)
     {
         $this->cantidad = $cantidad;
         $this->plazaEvento = $plazaEvento;
@@ -57,7 +57,7 @@ class Linea implements JsonSerializable
     /**
      * @param array $tickets
      */
-    public function setTickets(array $tickets): void
+    public function setTickets($tickets): void
     {
         $this->tickets = $tickets;
     }

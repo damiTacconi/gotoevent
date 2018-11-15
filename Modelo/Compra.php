@@ -20,7 +20,7 @@ class Compra implements JsonSerializable
     private $lineas = [];
 
 
-   function __construct($cliente, $total, $fecha){
+   function __construct(Cliente $cliente, $total, $fecha){
        $this->cliente = $cliente;
      $this->total = $total;
      $this->fecha = $fecha;
@@ -115,7 +115,7 @@ class Compra implements JsonSerializable
     /**
      * @param array $lineas
      */
-    public function setLineas(array $lineas): void
+    public function setLineas($lineas): void
     {
         $this->lineas = $lineas;
     }

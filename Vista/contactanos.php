@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <!-- Send button -->
-                        <button class="btn btn-info btn-block" type="submit">Send</button>
+                        <button class="btn btn-info btn-block" type="submit" data-toggle="tooltip" data-placement="bottom" title="No implementado">Send</button>
                     </div>
                 </form>
                 <!-- Default form contact -->

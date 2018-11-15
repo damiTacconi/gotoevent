@@ -24,7 +24,7 @@
                            aria-label="Recipient's username" aria-describedby="basic-addon2" required>
                     <label for="inputPassword">Contraseña</label>
                 </div>
-                <small class="float-right small-forgot-password"><a href="/"> Olvide mi contraseña </a></small>
+                <small class="float-right small-forgot-password" ><a href="/" data-toggle="tooltip" data-placement="bottom" title="No implementado"> Olvide mi contraseña </a></small>
                 <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i> Acceder</button>
             </form>
             <button id="registrarse" type="submit" class="btn btn-mdb-color btn-block mt-1" data-toggle="modal"

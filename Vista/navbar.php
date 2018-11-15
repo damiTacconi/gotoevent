@@ -12,7 +12,7 @@
        </li>
        <li class="nav-item <?php if(isset($page)){echo ($page === 'contacto') ? 'active':''; } ?> ">
          <div class="dropdown-divider"></div>
-           <a class="nav-link text-center" href="/"><i class="fas fa-user-alt"></i> Contactanos <span class="sr-only">(current)</span></a>
+           <a class="nav-link text-center" href="/" data-toggle="tooltip" data-placement="bottom" title="No implementado"><i class="fas fa-user-alt"></i> Contactanos <span class="sr-only">(current)</span></a>
        </li>
    </ul>
    <?php if($_SESSION['rol'] === 'cliente'){?>
@@ -69,7 +69,7 @@
              <a class="nav-link" href="/"><i class="fas fa-home"></i> Inicio <span class="sr-only">(current)</span></a>
          </li>
            <li class="nav-item <?php if(isset($page)){echo ($page === 'contacto') ? 'active':''; } ?> ">
-               <a class="nav-link" href="/"><i class="fas fa-user-alt"></i> Contactanos <span class="sr-only">(current)</span></a>
+               <a class="nav-link" href="/" data-toggle="tooltip" data-placement="bottom" title="No implementado"><i class="fas fa-user-alt"></i> Contactanos <span class="sr-only">(current)</span></a>
            </li>
        </ul>
        <ul id="" class="navbar-nav ml-auto list-inline">

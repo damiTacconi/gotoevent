@@ -48,7 +48,7 @@
                                     <td> <?= $sede->getNombre() ?></td>
                                     <td> <?= $sede->getCapacidad() ?></td>
                                     <td style="width:30px;"><a href="/sede/plazas/<?= $sede->getId() ?>" class="btn btn-secondary"><i class="fas fa-eye"></i> Ver Plazas</a></td>
-                                    <td style="width:30px;"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></td>
+                                    <td style="width:30px;"><button data-toggle="tooltip" data-placement="bottom" title="No implementado" class="btn btn-primary"><i class="fas fa-edit"></i></button></td>
                                     <td style="width:30px;">
                                         <a data-toggle="modal" onclick="eliminar(<?= $sede->getId() ?>,'<?= $sede->getNombre() ?>')"
                                            class="btn btn-danger"><i class="fas fa-trash-alt wsmoke"></i></a>

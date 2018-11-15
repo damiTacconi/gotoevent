@@ -7,9 +7,7 @@ $titulo = $evento->getTitulo();
         <!--Card image-->
         <div class="view overlay">
             <img class="card-img-top" width="200" height="300"  src="<?=$url ?>" alt="Card image cap">
-            <a href="#">
-                <div class="mask rgba-white-slight"></div>
-            </a>
+            <div class="mask rgba-white-slight"></div>
         </div>
         <!--Card content-->
         <div class="card-body">

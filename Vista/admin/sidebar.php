@@ -13,7 +13,7 @@
         </a>
         <div class="dropdown-menu bg-dark " aria-labelledby="pagesDropdown">
             <a class="dropdown-item text-white" href="/evento/listado"><i class="fas fa-list-ul"></i> Listado</a>
-            <a class="dropdown-item text-white" href="/evento/consulta"><i class="fas fa-list-ul"></i> Consultas</a>
+            <a class="dropdown-item text-white" href="/evento/consulta"><i class="far fa-question-circle"></i> Consultas</a>
             <a class="dropdown-item text-white" href="/evento/crear"><i class="fas fa-plus-square"></i> Agregar</a>
         </div>
     </li>
@@ -24,7 +24,7 @@
         </a>
         <div class="dropdown-menu bg-dark" aria-labelledby="pagesDropdown">
             <a class="dropdown-item text-white" href="/cuenta/usuarios"><i class="fas fa-list-ul"></i> Listado</a>
-            <a class="dropdown-item text-white" href="admin/register.html"><i class="fas fa-plus-square"></i> Agregar</a>
+            <a class="dropdown-item text-white" href="" data-toggle="tooltip" title="No implementado" data-placement="bottom"><i class="fas fa-plus-square"></i> Agregar</a>
         </div>
     </li>
     <li class="nav-item dropdown">

@@ -29,7 +29,7 @@ class Evento implements JsonSerializable
     private $calendarios = [];
 
 
-    function __construct($titulo, $fecha_desde, $fecha_hasta, $categoria , $descripcion)
+    function __construct($titulo, $fecha_desde, $fecha_hasta, Categoria $categoria , $descripcion)
     {
         $this->categoria = $categoria;
         $this->fecha_desde = $fecha_desde;
@@ -83,7 +83,7 @@ class Evento implements JsonSerializable
     /**
      * @param array $calendarios
      */
-    public function setCalendarios(array $calendarios): void
+    public function setCalendarios($calendarios): void
     {
         $this->calendarios = $calendarios;
     }

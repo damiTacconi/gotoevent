@@ -38,7 +38,7 @@ class PlazaEvento implements JsonSerializable
      * @param $calendario
      * @param $precio
      */
-    public function __construct($capacidad, $remanente, $plaza, $calendario,$precio)
+    public function __construct($capacidad, $remanente,TipoPlaza $plaza, Calendario $calendario,$precio)
     {
         $this->capacidad = $capacidad;
         $this->remanente = $remanente;

@@ -9,7 +9,6 @@
 namespace Modelo;
 
 use JsonSerializable;
-
 class Calendario implements JsonSerializable
 {
     private $id;
@@ -32,7 +31,7 @@ class Calendario implements JsonSerializable
     }
 
 
-    function __construct($fecha ,$evento, $sede)
+    function __construct($fecha , Evento $evento, $sede)
     {
         $this->fecha = $fecha;
         $this->evento = $evento;
@@ -67,7 +66,7 @@ class Calendario implements JsonSerializable
     /**
      * @param array $plazaEventos
      */
-    public function setPlazaEventos(array $plazaEventos): void
+    public function setPlazaEventos($plazaEventos): void
     {
         $this->plazaEventos = $plazaEventos;
     }
@@ -83,7 +82,7 @@ class Calendario implements JsonSerializable
     /**
      * @param array $shows
      */
-    public function setShows(array $shows): void
+    public function setShows($shows): void
     {
         $this->shows = $shows;
     }

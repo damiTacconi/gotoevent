@@ -10,7 +10,7 @@ class Promo implements JsonSerializable {
     protected $descuento;
     protected $evento;
 
-    public function __construct($descuento, $evento){
+    public function __construct($descuento, Evento $evento){
         $this->descuento = $descuento;
         $this->evento = $evento;
     }

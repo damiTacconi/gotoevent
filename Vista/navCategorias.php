@@ -15,7 +15,7 @@
                 <a class="nav-link hvr-float item-navcat" href="/buscar/categoria/festival">FESTIVALES</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link hvr-float item-navcat" href="#">MAS</a>
+                <a class="nav-link hvr-float item-navcat" href="#" data-toggle="tooltip" data-placement="bottom" title="No implementado">MAS</a>
             </li>
         </ul>
     </div>

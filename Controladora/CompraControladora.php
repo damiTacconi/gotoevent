@@ -16,7 +16,7 @@ use Dao\TicketBdDao;
 use Dao\TipoPlazaBdDao;
 use Dao\CompraBdDao;
 use Dao\PromoBdDao;
-use Modelo\Cart;
+use Modelo\Carrito;
 use Modelo\Compra;
 use Modelo\Linea;
 use Modelo\Cliente;
@@ -136,6 +136,7 @@ class CompraControladora extends PaginaControladora
       $this->terminarConPromo($id_promos,$cantidadPromos,$total,$cantidadesPlazas,$subtotalesPlazas,$id_plazaEventos);
     }
     function terminarConPromo($id_promos, $cantidadPromos, $total, $cantidadesPlazas = [], $subtotalesPlazas = [], $id_plazaEventos = []){
+        $eventos = [];
         foreach ($id_promos as $key => $value) {
           $promo = $this->promoDao->retrieve($value);
           $evento = $this->eventDao->retrieve($promo->getEvento()->getId());
@@ -170,6 +171,8 @@ class CompraControladora extends PaginaControladora
                 $this->generateLine($compra, $subtotales , $cantidades, $plazaEventos, $id_promos);
               }else $this->generateLine($compra, $subtotales , $cantidades, $plazaEventos);
               $mensaje = new Mensaje("EL TICKET SE GENERO CON EXITO" , "success");
+            }else{
+                $mensaje = new Mensaje("NO SE PUDO COMPLETAR LA OPERACION" , "danger");
             }
             $_SESSION['cart'] = array();
             $_SESSION['cartPromo'] = array();
@@ -282,7 +285,7 @@ class CompraControladora extends PaginaControladora
         if($plazaEvento){
             $respuesta = $this->verificarIdExistente($id,$cantidad);
             if(!$respuesta) {
-                $cart = new Cart($plazaEvento, $cantidad);
+                $cart = new Carrito($plazaEvento, $cantidad);
                 $_SESSION['cart'][] = $cart->jsonSerialize();
             }else{
                 $this->sumarCantidad($cantidad,$id);
@@ -307,8 +310,6 @@ class CompraControladora extends PaginaControladora
       if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['rol'] === 'admin'){
         $eventoDao = $this->eventDao;
         $calendarioDao = $this->calendarDao;
-        $lineaDao = $this->lineaDao;
-        $plazaEventoDao = $this->eventPlaceDao;
         $evento = $eventoDao->retrieve($id_evento);
         $params = [];
         if($evento){

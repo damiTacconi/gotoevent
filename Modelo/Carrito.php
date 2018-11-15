@@ -9,13 +9,13 @@
 namespace Modelo;
 
 use JsonSerializable;
-class Cart implements JsonSerializable
+class Carrito implements JsonSerializable
 {
     private $plazaEvento;
     private $cantidad;
 
     /**
-     * Cart constructor.
+     * Carrito constructor.
      * @param $plazaEvento
      * @param $cantidad
      */

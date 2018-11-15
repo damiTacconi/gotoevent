@@ -29,7 +29,7 @@ class Show implements JsonSerializable
      * @param $artista
      * @param $calendario
      */
-    public function __construct($artista, $calendario)
+    public function __construct(Artista $artista, Calendario $calendario)
     {
         $this->artista = $artista;
         $this->calendario = $calendario;

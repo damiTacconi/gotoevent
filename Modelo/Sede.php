@@ -73,7 +73,7 @@ class Sede implements JsonSerializable
     /**
      * @param array $plazas
      */
-    public function setPlazas(array $plazas): void
+    public function setPlazas($plazas): void
     {
         $this->plazas = $plazas;
     }

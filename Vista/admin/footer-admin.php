@@ -4,7 +4,11 @@
 </a>
 
 
-
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 <!-- Page level plugin JavaScript-->
 <script src="/./admin/vendor/datatables/jquery.dataTables.js"></script>
 <script src="/./admin/vendor/datatables/dataTables.bootstrap4.js"></script>
