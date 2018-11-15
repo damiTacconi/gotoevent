@@ -6,7 +6,8 @@
 -- Tiempo de generación: 15-11-2018 a las 22:00:33
 -- Versión del servidor: 5.7.19-log
 -- Versión de PHP: 7.2.4
-
+CREATE DATABASE gotoevent;
+USE gotoevent;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
