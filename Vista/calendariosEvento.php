@@ -10,6 +10,7 @@ include "navCategorias.php";
 <div class="container-fluid">
     <div class="row justify-content-center">
             <div class="col-md-12 p-4">
+                <?php if(!empty($param['calendarios_fechas'])) { ?>
                 <div class="card">
                     <div class="card-header primary-color lighten-1 white-text">
                         <h1>
@@ -36,7 +37,12 @@ include "navCategorias.php";
                         </div>
                     </div>
                 </div>
+                <?php }else { ?>
+                    <h1 style="text-align: center">NO SE ENCONTRARON RESULTADOS</h1>
+                <?php } ?>
             </div>
     </div>
 </div>
+<?php }else{ ?>
+    <h1 style="padding: 20px;text-align: center"> NO SE ENCONTRO LA SEDE </h1>
 <?php } ?>

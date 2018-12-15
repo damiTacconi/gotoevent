@@ -8,16 +8,33 @@
 
 namespace Controladora;
 
-use Dao\ArtistaBdDao;
-use Dao\CalendarioBdDao;
-use Dao\CategoriaBdDao;
-use Dao\EventoBdDao;
-use Dao\EventoImagenBdDao;
-use Dao\PlazaEventoBdDao;
-use Dao\SedeBdDao;
-use Dao\ShowBdDao;
-use Dao\TipoPlazaBdDao;
-use Dao\PromoBdDao;
+# LISTAS
+/*
+use Dao\ArtistaListaDao as ArtistaDao;
+use Dao\CategoriaListaDao as CategoriaDao;
+use Dao\EventoListaDao as EventoDao;
+use Dao\EventoImagenListaDao as EventoImagenDao;
+use Dao\SedeListaDao as SedeDao;
+use Dao\CalendarioListaDao as CalendarioDao;
+use Dao\PlazaEventoListaDao as PlazaEventoDao;
+use Dao\ShowListaDao as ShowDao;
+use Dao\TipoPlazaListaDao as TipoPlazaDao;
+use Dao\PromoListaDao as PromoDao;
+*/
+# BASE DE DATOS
+
+use Dao\ArtistaBdDao as ArtistaDao;
+use Dao\CalendarioBdDao as CalendarioDao;
+use Dao\CategoriaBdDao as CategoriaDao;
+use Dao\EventoBdDao as EventoDao;
+use Dao\EventoImagenBdDao as EventoImagenDao;
+use Dao\PlazaEventoBdDao as PlazaEventoDao;
+use Dao\SedeBdDao as SedeDao;
+use Dao\ShowBdDao as ShowDao;
+use Dao\TipoPlazaBdDao as TipoPlazaDao;
+use Dao\PromoBdDao as PromoDao;
+
+# MODELOS
 use Modelo\Evento;
 use Modelo\EventoImagen;
 use Modelo\Mensaje;
@@ -40,16 +57,16 @@ class EventoControladora extends PaginaControladora
 
     function __construct()
     {
-        $this->promoDao = PromoBdDao::getInstance();
-        $this->eventoImagenDao = EventoImagenBdDao::getInstance();
-        $this->showDao = ShowBdDao::getInstance();
-        $this->plazaEventoDao = PlazaEventoBdDao::getInstance();
-        $this->sedeDao = SedeBdDao::getInstance();
-        $this->eventoDao = EventoBdDao::getInstance();
-        $this->categoriaDao = CategoriaBdDao::getInstance();
-        $this->artistaDao = ArtistaBdDao::getInstance();
-        $this->calendarioDao = CalendarioBdDao::getInstance();
-        $this->tipoPlazaDao = TipoPlazaBdDao::getInstance();
+        $this->promoDao = PromoDao::getInstance();
+        $this->eventoImagenDao = EventoImagenDao::getInstance();
+        $this->showDao = ShowDao::getInstance();
+        $this->plazaEventoDao = PlazaEventoDao::getInstance();
+        $this->sedeDao = SedeDao::getInstance();
+        $this->eventoDao = EventoDao::getInstance();
+        $this->categoriaDao = CategoriaDao::getInstance();
+        $this->artistaDao = ArtistaDao::getInstance();
+        $this->calendarioDao = CalendarioDao::getInstance();
+        $this->tipoPlazaDao = TipoPlazaDao::getInstance();
     }
 
     /* FUNCIONES PRIVADAS */
@@ -262,7 +279,14 @@ class EventoControladora extends PaginaControladora
                         $eventoImagen->setId($id_imagen);
                     }else{
                         //el id 11 pertenece al logo por default
-                        $eventoImagen = $this->eventoImagenDao->retrieve(11);
+                        //$eventoImagen = $this->eventoImagenDao->retrieve(11);
+                        $imagen = ROOT . 'public_html' . URL_IMG . 'tickets.png';
+                        $nombre = "tickets.png";
+                        $imagen = file_get_contents($imagen);
+                        $imagen = base64_encode($imagen);
+                        $eventoImagen = new EventoImagen($nombre,$imagen);
+                        $id_imagen = $this->eventoImagenDao->save($eventoImagen);
+                        $eventoImagen->setId($id_imagen);
                     }
                     $evento->setEventoImagen($eventoImagen);
                     $this->eventoDao->save($evento);
@@ -291,6 +315,10 @@ class EventoControladora extends PaginaControladora
           $params['calendarios'] = $calendarios;
           $params['evento'] = $evento;
           $this->page("listado/listadoCalendariosDeEventos" , "Calendarios de {$evento->getTitulo()}",2,$params);
+        }else{
+            $mensaje = new Mensaje("No se encontraron resultados" , "danger");
+            $params['mensaje'] = $mensaje->getAlert();
+            $this->paginaListado($params);
         }
 
     }
@@ -326,6 +354,7 @@ class EventoControladora extends PaginaControladora
         if($evento) {
             $params['evento'] = $evento;
             $params['evento_sedes'] = $this->sedeDao->traerPorIdEvento($id_evento);
+            /*
             $calendarios = $this->calendarioDao->traerPorIdEvento($id_evento);
             if($calendarios) {
                 foreach ($calendarios as $calendario) {
@@ -335,7 +364,7 @@ class EventoControladora extends PaginaControladora
                         $calendario->setPlazaEventos($plazas);
                 }
             }
-            $params['calendarios'] = $calendarios;
+            $params['calendarios'] = $calendarios;*/
             $this->page("detalleEvento", $evento->getTitulo(), 0, $params);
         }else header('location: /');
     }

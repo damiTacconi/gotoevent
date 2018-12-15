@@ -43,6 +43,7 @@
         let id= $('#selectEvento option:selected').val();
         let obj= {id: id};
         ajaxURL('/evento/getFechasAjax/', data => {
+            console.log(data);
             let result = JSON.parse(data);
             $('#fecha_desde').val(result['fecha_desde']);
             $('#fecha_hasta').val(result['fecha_hasta']);

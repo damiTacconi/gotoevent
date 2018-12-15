@@ -5,10 +5,20 @@ namespace Controladora;
 use Modelo\Promo;
 use Modelo\Evento;
 use Modelo\Mensaje;
-use Dao\CategoriaBdDao;
-use Dao\ArtistaBdDao;
-use Dao\EventoBdDao;
-use Dao\PromoBdDao;
+
+# LISTAS
+/*
+use Dao\CategoriaListaDao as CategoriaDao;
+use Dao\ArtistaListaDao as ArtistaDao;
+use Dao\EventoListaDao as EventoDao;
+use Dao\PromoListaDao as PromoDao;
+*/
+# BASE DE DATOS
+
+use Dao\CategoriaBdDao as CategoriaDao;
+use Dao\ArtistaBdDao as ArtistaDao;
+use Dao\EventoBdDao as EventoDao;
+use Dao\PromoBdDao as PromoDao;
 
 
 
@@ -17,13 +27,13 @@ class PromoControladora extends PaginaControladora{
     private $promoDao;
     private $eventoDao;
     private $categoriaDao;
-
+    private $artistaDao;
 
     function __construct(){
-        $this->artistaDao = ArtistaBdDao::getInstance();
-        $this->categoriaDao = CategoriaBdDao::getInstance();
-        $this->eventoDao = EventoBdDao::getInstance();
-        $this->promoDao = PromoBdDao::getInstance();
+        $this->artistaDao = ArtistaDao::getInstance();
+        $this->categoriaDao = CategoriaDao::getInstance();
+        $this->eventoDao = EventoDao::getInstance();
+        $this->promoDao = PromoDao::getInstance();
     }
 
     function save($id_evento, $descuento){

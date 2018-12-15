@@ -7,7 +7,8 @@
  */
 
 namespace Controladora;
-use Dao\CategoriaBdDao;
+use Dao\CategoriaBdDao as CategoriaDao;
+#use Dao\CategoriaListaDao as CategoriaDao;
 use Modelo\Categoria;
 use Modelo\Mensaje;
 
@@ -16,7 +17,7 @@ class CategoriaControladora extends PaginaControladora
     private $categoriaDao;
     function __construct()
     {
-        $this->categoriaDao = CategoriaBdDao::getInstance();
+        $this->categoriaDao = CategoriaDao::getInstance();
     }
 
     function crear(){

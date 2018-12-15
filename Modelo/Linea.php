@@ -42,8 +42,16 @@ class Linea implements JsonSerializable
           "plazaEvento" => $this->plazaEvento->jsonSerialize(),
           "cantidad" => $this->cantidad,
           "subtotal" => $this->subtotal,
-          "compra" => $this->compra->jsonSerialize()
+          "compra" => $this->compra->jsonSerialize(),
+            "promo" => $this->verificarPromo()
         ];
+    }
+
+    private function verificarPromo(){
+        if($this->promo){
+            return $this->promo->jsonSerialize();
+        }
+        return null;
     }
 
     /**

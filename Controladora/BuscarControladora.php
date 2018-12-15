@@ -2,10 +2,18 @@
 
 namespace Controladora;
 
-use Dao\ArtistaBdDao;
-use Dao\EventoBdDao;
-use Dao\CategoriaBdDao;
-use Dao\CalendarioBdDao;
+# LISTAS
+/*
+use Dao\ArtistaListaDao as ArtistaDao;
+use Dao\EventoListaDao as EventoDao;
+use Dao\CategoriaListaDao as CategoriaDao;
+use Dao\CalendarioListaDao as CalendarioDao;
+*/
+# BASE DE DATOS
+use Dao\ArtistaBdDao as ArtistaDao;
+use Dao\EventoBdDao as EventoDao;
+use Dao\CategoriaBdDao as CategoriaDao;
+use Dao\CalendarioBdDao as CalendarioDao;
 
 class BuscarControladora extends PaginaControladora{
     private $eventoDao;
@@ -14,10 +22,10 @@ class BuscarControladora extends PaginaControladora{
     private $artistaDao;
 
     function __construct(){
-        $this->artistaDao = ArtistaBdDao::getInstance();
-        $this->eventoDao = EventoBdDao::getInstance();
-        $this->categoriaDao = CategoriaBdDao::getInstance();
-        $this->calendarioDao = CalendarioBdDao::getInstance();
+        $this->artistaDao = ArtistaDao::getInstance();
+        $this->eventoDao = EventoDao::getInstance();
+        $this->categoriaDao = CategoriaDao::getInstance();
+        $this->calendarioDao = CalendarioDao::getInstance();
     }
 
     private function buscarArtista($nombre){

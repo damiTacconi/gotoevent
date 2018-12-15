@@ -7,7 +7,8 @@
  */
 
 namespace Controladora;
-use Dao\ClienteBdDao;
+use Dao\ClienteBdDao as ClienteDao;
+#use Dao\ClienteListaDao as ClienteDao;
 use Facebook;
 
 
@@ -17,7 +18,7 @@ class FacebookControladora
 
     function __construct()
     {
-        $this->clienteDao = ClienteBdDao::getInstance();
+        $this->clienteDao = ClienteDao::getInstance();
     }
 
     function index(){
@@ -119,20 +120,14 @@ class FacebookControladora
                 '&access_token=' . $_SESSION['fb_access_token'];*/
 
             if(isset($_SESSION['fb_access_token'])) {
-                if (ini_get("session.use_cookies") == true) {
-                    $parametros = session_get_cookie_params();
-                    setcookie(
-                        session_name(),
-                        '',
-                        time() - 99999,
-                        $parametros["path"],
-                        $parametros["domain"],
-                        $parametros["secure"],
-                        $parametros["httponly"]
-                    );
-                }
-
-                session_destroy();
+                unset($_SESSION['rol']);
+                unset($_SESSION['email']);
+                unset($_SESSION['name']);
+                unset($_SESSION['first_name']);
+                unset($_SESSION['last_name']);
+                unset($_SESSION['picture_url']);
+                unset($_SESSION['fb_access_token']);
+                unset($_SESSION['id']);
             }
         }
         header('location: /');

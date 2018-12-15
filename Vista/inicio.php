@@ -2,16 +2,23 @@
 
 
 <?php
-
-        $eventos = \Dao\EventoBdDao::getInstance()->getAll();
+        use Dao\EventoBdDao as EventoDao;
+        #use Dao\EventoListaDao as EventoDao;
+        use Dao\CalendarioBdDao as CalendarioDao;
+        #use Dao\CalendarioListaDao as CalendarioDao;
+        use Dao\ShowBdDao as ShowDao;
+        #use Dao\ShowListaDao as ShowDao;
+        use Dao\PlazaEventoBdDao as PlazaEventoDao;
+        #use Dao\PlazaEventoListaDao as PlazaEventoDao;
+        $eventos = EventoDao::getInstance()->getAll();
         if($eventos) {
             $eventos = array_map(function ($ev) {
-                $calendarioDao = \Dao\CalendarioBdDao::getInstance();
+                $calendarioDao = CalendarioDao::getInstance();
                 $calendarios = $calendarioDao->traerPorIdEvento($ev->getId());
                 if ($calendarios) {
                     $calendarios = array_map(function ($cal) {
-                        $showDao = \Dao\ShowBdDao::getInstance();
-                        $plazaEventoDao = \Dao\PlazaEventoBdDao::getInstance();
+                        $showDao = ShowDao::getInstance();
+                        $plazaEventoDao = PlazaEventoDao::getInstance();
                         $id = $cal->getId();
                         $shows = $showDao->traerPorIdCalendario($id);
                         $plazaEventos = $plazaEventoDao->traerPorIdCalendario($id);
@@ -27,6 +34,7 @@
             }, $eventos);
         }
     if(isset($param['TICKET_MODAL'])){
+            if($param['TICKET_MODAL'] === "SUCCESS") {
         ?>
         <!-- Central Modal Medium Success -->
         <div class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -68,10 +76,51 @@
                 $('#centralModalSuccess').modal('show');
             });
         </script>
+            <?php }else{ ?>
+                <!-- Central Modal Medium Danger -->
+                <div class="modal fade" id="centralModalDanger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-notify modal-danger" role="document">
+                        <!--Content-->
+                        <div class="modal-content">
+                            <!--Header-->
+                            <div class="modal-header">
+                                <p class="heading lead">HUBO UN PROBLEMA</p>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" class="white-text">&times;</span>
+                                </button>
+                            </div>
+
+                            <!--Body-->
+                            <div class="modal-body">
+                                <div class="text-center">
+                                    <i class="fa fa-check fa-4x mb-3 animated rotateOut"></i>
+                                    <p><strong><?= $param['mensaje'] ?></strong></p>
+                                </div>
+                            </div>
+
+                            <!--Footer-->
+                            <div class="modal-footer justify-content-center">
+                                <a type="button" class="btn btn-danger">Get it now <i class="fa fa-diamond ml-1 text-white"></i></a>
+                                <a type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">No, thanks</a>
+                            </div>
+                        </div>
+                        <!--/.Content-->
+                    </div>
+                </div>
+                <!-- Central Modal Medium Danger-->
+
+                <script>
+                    $("#centralModalDanger").on('show.bs.modal', function(){});
+                    $(window).on('load',function(){
+                        $('#centralModalDanger').modal('show');
+                    });
+                </script>
+            <?php }?>
         <?php
     }
 ?>
-
 <?php include "header-inicio.php" ?>
 <?php include "navCategorias.php" ?>
 <!-- FIN HEADER -->
@@ -94,6 +143,8 @@
                 if($eventos) {
                    //var_dump($eventos);
                     include 'carousel.php';
+                }else{
+                    echo "<h1 style='text-align: center'> NO HAY EVENTOS PARA MOSTRAR </h1>";
                 }
                 ?>
             </div>

@@ -7,10 +7,19 @@
  */
 
 namespace Controladora;
-use Dao\EventoBdDao;
-use Dao\SedeBdDao;
-use Dao\TipoPlazaBdDao;
-use Dao\CalendarioBdDao;
+# LISTAS
+/*
+use Dao\EventoListaDao as EventoDao;
+use Dao\SedeListaDao as SedeDao;
+use Dao\TipoPlazaListaDao as TipoPlazaDao;
+use Dao\CalendarioListaDao as CalendarioDao;
+*/
+# BASE DE DATOS
+use Dao\EventoBdDao as EventoDao;
+use Dao\SedeBdDao as SedeDao;
+use Dao\TipoPlazaBdDao as TipoPlazaDao;
+use Dao\CalendarioBdDao as CalendarioDao;
+
 use Modelo\Mensaje;
 use Modelo\Sede;
 use Modelo\TipoPlaza;
@@ -25,10 +34,10 @@ class SedeControladora extends PaginaControladora
 
     function __construct()
     {
-        $this->calendarioDao = CalendarioBdDao::getInstance();
-        $this->eventoDao = EventoBdDao::getInstance();
-        $this->sedeDao = SedeBdDao::getInstance();
-        $this->tipoPlazaDao = TipoPlazaBdDao::getInstance();
+        $this->calendarioDao = CalendarioDao::getInstance();
+        $this->eventoDao = EventoDao::getInstance();
+        $this->sedeDao = SedeDao::getInstance();
+        $this->tipoPlazaDao = TipoPlazaDao::getInstance();
     }
 
     function eliminar($id){
@@ -99,11 +108,12 @@ class SedeControladora extends PaginaControladora
                 $tipoPlazas = $this->tipoPlazaDao->traerPorIdSede($id);
                 $params['sede'] = $sede;
                 $params['tipo_plazas'] = $tipoPlazas;
+                $this->page('listado/listadoTipoPlaza',  $sede->getNombre(),2,$params);
             }else {
                 $mensaje = new Mensaje('No se encontro la sede', 'danger');
                 $params['mensaje'] = $mensaje->getAlert();
+                $this->paginaListado($params);
             }
-            $this->page('listado/listadoTipoPlaza',  $sede->getNombre(),2,$params);
         }
     }
     function verificarDescripcionExistente($desc , $plazas){

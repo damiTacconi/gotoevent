@@ -8,8 +8,8 @@
 
 namespace Modelo;
 
-
-class Ticket
+use JsonSerializable;
+class Ticket implements JsonSerializable
 {
     private $id;
     private $numero;
@@ -31,6 +31,18 @@ class Ticket
         $this->qr = $qr;
         $this->fecha = $fecha;
     }
+
+    public function jsonSerialize()
+    {
+        return [
+          "id_ticket" => $this->id,
+          "numero" => $this->numero,
+          "linea" => $this->linea->jsonSerialize(),
+          "fecha" => $this->fecha,
+          "qr" => $this->qr
+        ];
+    }
+
 
     /**
      * @return mixed

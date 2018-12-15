@@ -8,10 +8,19 @@
 
 namespace Controladora;
 
+# LISTAS
+/*
+use Dao\CalendarioListaDao as CalendarioDao;
+use Dao\EventoListaDao as EventoDao;
+use Dao\SedeListaDao as SedeDao;
+*/
 
-use Dao\CalendarioBdDao;
-use Dao\EventoBdDao;
-use Dao\SedeBdDao;
+# BASE DE DATOS
+use Dao\CalendarioBdDao as CalendarioDao;
+use Dao\EventoBdDao as EventoDao;
+use Dao\SedeBdDao as SedeDao;
+
+
 use Modelo\Mensaje;
 use Modelo\Calendario;
 use Modelo\Sede;
@@ -24,9 +33,9 @@ class CalendarioControladora extends PaginaControladora
 
     function __construct()
     {
-        $this->sedeDao = SedeBdDao::getInstance();
-        $this->eventoDao = EventoBdDao::getInstance();
-        $this->calendarioDao = CalendarioBdDao::getInstance();
+        $this->sedeDao = SedeDao::getInstance();
+        $this->eventoDao = EventoDao::getInstance();
+        $this->calendarioDao = CalendarioDao::getInstance();
     }
 
     function eliminarAjax($id){

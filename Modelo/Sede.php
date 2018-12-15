@@ -35,6 +35,7 @@ class Sede implements JsonSerializable
         return [
           'id_sede' => $this->id,
           'nombre' => $this->nombre,
+            'capacidad' => $this->capacidad,
           'plazas' => $this->plazasToArray()
         ];
     }

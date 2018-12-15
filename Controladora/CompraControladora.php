@@ -6,16 +6,31 @@
  * Time: 23:16
  */
 namespace Controladora;
-use Dao\CalendarioBdDao;
-use Dao\ClienteBdDao;
-use Dao\EventoBdDao;
-use Dao\LineaBdDao;
-use Dao\PlazaEventoBdDao;
-use Dao\SedeBdDao;
-use Dao\TicketBdDao;
-use Dao\TipoPlazaBdDao;
-use Dao\CompraBdDao;
-use Dao\PromoBdDao;
+# LISTAS
+
+/*use Dao\CalendarioListaDao as CalendarioDao;
+use Dao\ClienteListaDao as ClienteDao;
+use Dao\EventoListaDao as EventoDao;
+use Dao\LineaListaDao as LineaDao;
+use Dao\PlazaEventoListaDao as PlazaEventoDao;
+use Dao\SedeListaDao as SedeDao;
+use Dao\TicketListaDao as TicketDao;
+use Dao\TipoPlazaListaDao as TipoPlazaDao;
+use Dao\CompraListaDao as CompraDao;
+use Dao\PromoListaDao as PromoDao;
+*/
+# BASE DE DATOS
+use Dao\CalendarioBdDao as CalendarioDao;
+use Dao\ClienteBdDao as ClienteDao;
+use Dao\EventoBdDao as EventoDao;
+use Dao\LineaBdDao as LineaDao;
+use Dao\PlazaEventoBdDao as PlazaEventoDao;
+use Dao\SedeBdDao as SedeDao;
+use Dao\TicketBdDao as TicketDao;
+use Dao\TipoPlazaBdDao as TipoPlazaDao;
+use Dao\CompraBdDao as CompraDao;
+use Dao\PromoBdDao as PromoDao;
+
 use Modelo\Carrito;
 use Modelo\Compra;
 use Modelo\Linea;
@@ -24,6 +39,8 @@ use Modelo\QR;
 use Modelo\Ticket;
 use Modelo\Mensaje;
 use Modelo\Mail;
+use PHPMailer\PHPMailer\Exception;
+
 class CompraControladora extends PaginaControladora
 {
     private $eventDao;
@@ -38,16 +55,16 @@ class CompraControladora extends PaginaControladora
     private $promoDao;
     function  __construct()
     {
-        $this->promoDao = PromoBdDao::getInstance();
-        $this->sedeDao  = SedeBdDao::getInstance();
-        $this->ticketDAo = TicketBdDao::getInstance();
-        $this->lineaDao = LineaBdDao::getInstance();
-        $this->compraDao = CompraBdDao::getInstance();
-        $this->clienteDao = ClienteBdDao::getInstance();
-        $this->calendarDao = CalendarioBdDao::getInstance();
-        $this->eventDao = EventoBdDao::getInstance();
-        $this->eventPlaceDao = PlazaEventoBdDao::getInstance();
-        $this->tipoPlazaDao = TipoPlazaBdDao::getInstance();
+        $this->promoDao = PromoDao::getInstance();
+        $this->sedeDao  = SedeDao::getInstance();
+        $this->ticketDAo = TicketDao::getInstance();
+        $this->lineaDao = LineaDao::getInstance();
+        $this->compraDao = CompraDao::getInstance();
+        $this->clienteDao = ClienteDao::getInstance();
+        $this->calendarDao = CalendarioDao::getInstance();
+        $this->eventDao = EventoDao::getInstance();
+        $this->eventPlaceDao = PlazaEventoDao::getInstance();
+        $this->tipoPlazaDao = TipoPlazaDao::getInstance();
     }
     private function traerPlazaEventos($id_plazaEventos){
         $plazaEventos = array_map(function ($id){
@@ -57,6 +74,7 @@ class CompraControladora extends PaginaControladora
         return $plazaEventos;
     }
     private function enviarEmail($numberTicket,$line){
+
         $mail = new Mail();
         $root = ROOT . 'public_html' . URL_IMG;
         $imagenes = array(
@@ -87,7 +105,13 @@ class CompraControladora extends PaginaControladora
                             <p><i>Este codigo QR solo podra usarse una vez.</i></p>
                             <br>
                             <small>Equipo de GoToEvent - 2018</small>");
-        $mail->enviarMail("GoToEvent - TICKET", $html,$_SESSION['email'] , $imagenes);
+        try{
+            $mail->enviarMail("GoToEvent - TICKET", $html,$_SESSION['email'] , $imagenes);
+        }catch(\Exception $e){
+            $compra = $line->getCompra();
+            $this->compraDao->delete($compra);
+            throw $e;
+        }
     }
     private function generateTicket($line){
         $digits = 10;
@@ -108,7 +132,11 @@ class CompraControladora extends PaginaControladora
         $ticket->setId($id_ticket);
         $qr = new QR();
         $qr->generateQR($qrContent, $numberTicket);
-        $this->enviarEmail($numberTicket,$line);
+        try {
+            $this->enviarEmail($numberTicket, $line);
+        }catch (\Exception $e){
+            throw $e;
+        }
     }
     private function generateLine($compra , $subtotales , $cantidades , $plazaEventos, $promos=[] ){
         if($plazaEventos){
@@ -124,7 +152,11 @@ class CompraControladora extends PaginaControladora
                 $remanente = $plaza->getRemanente();
                 for($i=0; $i<$cantidades[$key];$i++) {
                   $remanente--;
-                   $this->generateTicket($linea);
+                  try {
+                      $this->generateTicket($linea);
+                  }catch (\Exception $e){
+                      throw $e;
+                  }
                 }
                 $plaza->setRemanente($remanente);
                 $this->eventPlaceDao->update($plaza);
@@ -137,6 +169,7 @@ class CompraControladora extends PaginaControladora
     }
     function terminarConPromo($id_promos, $cantidadPromos, $total, $cantidadesPlazas = [], $subtotalesPlazas = [], $id_plazaEventos = []){
         $eventos = [];
+        $idPromos = [];
         foreach ($id_promos as $key => $value) {
           $promo = $this->promoDao->retrieve($value);
           $evento = $this->eventDao->retrieve($promo->getEvento()->getId());
@@ -148,12 +181,14 @@ class CompraControladora extends PaginaControladora
               $id_promo = array_shift($id_promos);
                 foreach($calendarios as $key => $value){
                     $plazaEventos = $this->eventPlaceDao->traerPorIdCalendario($value->getId());
-                    if(count($plazaEventos) === 1){
-                        $plazaEvento = $plazaEventos[0];
-                        $id_plazaEventos[] = $plazaEvento->getId();
-                        $cantidadesPlazas[] = (int) $cantidad;
-                        $subtotalesPlazas[] = $plazaEvento->getPrecio();
-                        $idPromos[] = $id_promo;
+                    if($plazaEventos != null) { //debe verificar que haya plazaEvento cargada
+                        if (count($plazaEventos) === 1) { //solo debe llegar 1 solo plazaEvento, si hay mas, se omite
+                            $plazaEvento = $plazaEventos[0];
+                            $id_plazaEventos[] = $plazaEvento->getId();
+                            $cantidadesPlazas[] = (int)$cantidad;
+                            $subtotalesPlazas[] = $plazaEvento->getPrecio();
+                            $idPromos[] = $id_promo;
+                        }
                     }
               }
           }
@@ -167,17 +202,23 @@ class CompraControladora extends PaginaControladora
             $compra->setId($id_compra);
             $plazaEventos = $this->traerPlazaEventos($id_plazaEventos);
             if($plazaEventos){
-              if(!empty($id_promos)){
-                $this->generateLine($compra, $subtotales , $cantidades, $plazaEventos, $id_promos);
-              }else $this->generateLine($compra, $subtotales , $cantidades, $plazaEventos);
-              $mensaje = new Mensaje("EL TICKET SE GENERO CON EXITO" , "success");
+                try {
+                    if (!empty($id_promos)) {
+                        $this->generateLine($compra, $subtotales, $cantidades, $plazaEventos, $id_promos);
+                    } else $this->generateLine($compra, $subtotales, $cantidades, $plazaEventos);
+                    $mensaje = new Mensaje("EL TICKET SE GENERO CON EXITO", "success");
+                    $params['TICKET_MODAL'] = "SUCCESS";
+                }catch(\Exception $e){
+                    $mensaje = new Mensaje("NO SE PUDO COMPLETAR LA OPERACION, INTENTE MAS TARDE", "danger");
+                    $params['TICKET_MODAL'] = "ERROR";
+                }
             }else{
                 $mensaje = new Mensaje("NO SE PUDO COMPLETAR LA OPERACION" , "danger");
+                $params['TICKET_MODAL'] = "ERROR";
             }
             $_SESSION['cart'] = array();
             $_SESSION['cartPromo'] = array();
             $params['mensaje'] = $mensaje->getAlert();
-            $params['TICKET_MODAL'] = "ON";
             $this->page("inicio" , "GoToEvent" , 0, $params);
         }else header("location: /");
     }

@@ -8,11 +8,19 @@
 
 namespace Controladora;
 
+# LISTA
+/*
+use Dao\ArtistaListaDao as ArtistaDao;
+use Dao\CalendarioListaDao as CalendarioDao;
+use Dao\EventoListaDao as EventoDao;
+use Dao\ShowListaDao as ShowDao;
+*/
+# BASE DE DATOS
+use Dao\ArtistaBdDao as ArtistaDao;
+use Dao\CalendarioBdDao as CalendarioDao;
+use Dao\EventoBdDao as EventoDao;
+use Dao\ShowBdDao as ShowDao;
 
-use Dao\ArtistaBdDao;
-use Dao\CalendarioBdDao;
-use Dao\EventoBdDao;
-use Dao\ShowBdDao;
 use Modelo\Mensaje;
 use Modelo\Show;
 
@@ -25,10 +33,10 @@ class ShowControladora extends PaginaControladora
 
     function __construct()
     {
-        $this->calendarioDao = CalendarioBdDao::getInstance();
-        $this->showDao    = ShowBdDao::getInstance();
-        $this->artistaDao = ArtistaBdDao::getInstance();
-        $this->eventoDao  = EventoBdDao::getInstance();
+        $this->calendarioDao = CalendarioDao::getInstance();
+        $this->showDao    = ShowDao::getInstance();
+        $this->artistaDao = ArtistaDao::getInstance();
+        $this->eventoDao  = EventoDao::getInstance();
     }
 
     function delete($id_show){

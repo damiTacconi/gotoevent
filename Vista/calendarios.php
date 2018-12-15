@@ -6,14 +6,20 @@
             </h1>
         </div>
         <div class="list-group" id="list-tab" role="tablist">
-            <?php foreach ($param['calendarios_fechas'] as $key => $cal) { $fecha = $cal->getFecha(); ?>
-            <a class="list-group-item list-group-item-action <?= $key===0? 'active':'' ?> " id="list-<?= $fecha ?>-list"
-                data-toggle="list" href="#list-<?= $fecha ?>" role="tab" aria-controls="home">
-                <i class="far fa-calendar-alt"></i>
-                <?= $fecha ?>
-            </a>
+            <?php if(!empty($param['calendarios_fechas'])) { ?>
+                <?php foreach ($param['calendarios_fechas'] as $key => $cal) { $fecha = $cal->getFecha(); ?>
+                <a class="list-group-item list-group-item-action <?= $key===0? 'active':'' ?> " id="list-<?= $fecha ?>-list"
+                    data-toggle="list" href="#list-<?= $fecha ?>" role="tab" aria-controls="home">
+                    <i class="far fa-calendar-alt"></i>
+                    <?= $fecha ?>
+                </a>
+                <?php } ?>
+            <?php }else{ ?>
+                <a class="list-group-item">
+                    <i class="far fa-calendar-alt"></i>
+                    <small>SIN FECHAS</small>
+                </a>
             <?php } ?>
-
             <?php if(isset($param['promo'])) { ?>
                 <a class="list-group-item list-group-item-action bg-success text-white hvr-fade" id="list-promo-list"
                 data-toggle="list" href="#list-promo" role="tab" aria-controls="home">
@@ -29,6 +35,7 @@
             </h1>
         </div>
         <div class="tab-content" id="nav-tabContent">
+            <?php if(!empty($param['calendarios_fechas'])) { ?>
             <?php foreach ($param['calendarios_fechas'] as $key => $cal) { $fecha = $cal->getFecha(); ?>
             <div class="tab-pane fade <?= $key===0? 'show active':'' ?>" id="list-<?= $fecha ?>" role="tabpanel"
                 aria-labelledby="list-<?= $fecha ?>-list">
@@ -84,7 +91,9 @@
                 </div>
             </div>
             <?php } ?>
-
+            <?php } else {?>
+                <h1 style="background-color: whitesmoke;padding:15px;text-align: center">NO HAY PLAZAS</h1>
+            <?php } ?>
             <?php if(isset($param['promo'])) { ?>
                 <div class="tab-pane fade <?= $key===0? 'show active':'' ?>" id="list-promo" role="tabpanel"
                 aria-labelledby="list-promo-list">

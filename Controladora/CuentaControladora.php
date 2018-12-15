@@ -1,11 +1,20 @@
 <?php
 namespace Controladora;
+# LISTAS
+/*
+use Dao\ClienteListaDao as ClienteDao;
+use Dao\CompraListaDao as CompraDao;
+use Dao\LineaListaDao as LineaDao;
+use Dao\TicketListaDao as TicketDao;
+use Dao\UsuarioListaDao as UsuarioDao;
+*/
+# BASE DE DATOS
+use Dao\ClienteBdDao as ClienteDao;
+use Dao\CompraBdDao as CompraDao;
+use Dao\LineaBdDao as LineaDao;
+use Dao\TicketBdDao as TicketDao;
+use Dao\UsuarioBdDao as UsuarioDao;
 
-use Dao\ClienteBdDao;
-use Dao\CompraBdDao;
-use Dao\LineaBdDao;
-use Dao\TicketBdDao;
-use Dao\UsuarioBdDao;
 use Modelo\Cliente;
 use Modelo\Mensaje;
 use Modelo\Usuario;
@@ -20,11 +29,11 @@ class CuentaControladora extends PaginaControladora {
 
     function __construct()
     {
-        $this->lineaDao = LineaBdDao::getInstance();
-        $this->compraDao = CompraBdDao::getInstance();
-        $this->ticketDao = TicketBdDao::getInstance();
-        $this->usuarioDao = UsuarioBdDao::getInstance();
-        $this->clienteDao = ClienteBdDao::getInstance();
+        $this->lineaDao = LineaDao::getInstance();
+        $this->compraDao = CompraDao::getInstance();
+        $this->ticketDao = TicketDao::getInstance();
+        $this->usuarioDao = UsuarioDao::getInstance();
+        $this->clienteDao = ClienteDao::getInstance();
     }
 
     function index(){
@@ -32,19 +41,13 @@ class CuentaControladora extends PaginaControladora {
     }
     function logout(){
         if(!empty($_SESSION)){
-            if (ini_get("session.use_cookies") == true) {
-                $parametros = session_get_cookie_params();
-                setcookie(
-                    session_name(),
-                    '',
-                    time() - 99999,
-                    $parametros["path"],
-                    $parametros["domain"],
-                    $parametros["secure"],
-                    $parametros["httponly"]
-                );
-            }
-            session_destroy();
+
+            unset($_SESSION['rol']);
+            unset($_SESSION['email']);
+            unset($_SESSION['name']);
+            unset($_SESSION['first_name']);
+            unset($_SESSION['last_name']);
+            unset($_SESSION['picture_url']);
         }
         header('location: /');
     }
@@ -52,30 +55,30 @@ class CuentaControladora extends PaginaControladora {
         try {
             if ($this->usuarioDao->verificarUsuario($email, $password)) {
                 $usuario = $this->usuarioDao->traerPorEmail($email);
-                $cliente = $this->clienteDao->traerPorIdUsuario($usuario->getId());
-                if($cliente) {
-                    $_SESSION['email'] = $usuario->getEmail();
-                    $_SESSION['name'] = $cliente->getNombre() . ' ' . $cliente->getApellido();
-                    $_SESSION['first_name'] = $cliente->getNombre();
-                    $_SESSION['last_name'] = $cliente->getApellido();
+                if (in_array($usuario->getEmail(), unserialize(ADMIN_EMAIL))) {
+                    $_SESSION['rol'] = 'admin';
+                    $_SESSION['first_name'] = "";
+                    $_SESSION['last_name'] = "";
+                    $_SESSION['name'] = '';
                     $_SESSION['picture_url'] = "";
-                    $_SESSION['rol'] = 'cliente';
-                    $_SESSION['cart'] = array();
-                    $_SESSION['cartPromo'] = array();
+                    $_SESSION['email'] = $usuario->getEmail();
                     header('location: /');
                 }else {
-                    if (in_array($usuario->getEmail(), unserialize(ADMIN_EMAIL))) {
-                        $_SESSION['rol'] = 'admin';
-                        $_SESSION['first_name'] = "";
-                        $_SESSION['last_name'] = "";
-                        $_SESSION['name'] = '';
-                        $_SESSION['picture_url'] = "";
+                    $cliente = $this->clienteDao->traerPorIdUsuario($usuario->getId());
+                    if($cliente) {
                         $_SESSION['email'] = $usuario->getEmail();
+                        $_SESSION['name'] = $cliente->getNombre() . ' ' . $cliente->getApellido();
+                        $_SESSION['first_name'] = $cliente->getNombre();
+                        $_SESSION['last_name'] = $cliente->getApellido();
+                        $_SESSION['picture_url'] = "";
+                        $_SESSION['rol'] = 'cliente';
+                        $_SESSION['cart'] = array();
+                        $_SESSION['cartPromo'] = array();
                         header('location: /');
                     }else {
-                        $mensaje = new Mensaje("Hubo un error al procesar los datos de usuario","danger");
+                        $mensaje = new Mensaje("Hubo un error al procesar los datos de usuario", "danger");
                         $params['mensaje'] = $mensaje->getAlert();
-                        $this->page("inicio","GoToEvent",0,$params);
+                        $this->page("inicio", "GoToEvent", 0, $params);
                     }
                 }
             }else {

@@ -21,3 +21,4 @@ define("URL_JSON", ROOT . 'Dao/json/');
 define("URL_IMG" , '/img/');
 define("HEADER", URL_VISTA . 'header.php');
 define("FOOTER", URL_VISTA . 'footer.php');
+define("DAO" , 1); // 1 - Base de Datos | 2 - Listas

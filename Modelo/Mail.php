@@ -8,12 +8,14 @@
 
 namespace Modelo;
 
+use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class Mail
 {
     function enviarMail( $subjet, $html , $email, $imagenes){
         include_once '../lib/mail/src/PHPMailer.php';
+        include_once '../lib/mail/src/Exception.php';
         include_once '../lib/mail/src/SMTP.php';
 
         $mail = new PHPMailer();
@@ -46,7 +48,11 @@ class Mail
             }
         }
         if (!$mail->send()) {
-            echo "Error sending message";
+            try {
+                throw new \Exception("ERROR");
+            }catch (\Exception $e){
+                throw $e;
+            }
         }
     }
 }

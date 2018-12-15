@@ -86,7 +86,8 @@ class EventoImagen implements JsonSerializable
     {
         return [
           'id_imagen' => $this->id,
-          'nombre' => $this->nombre
+          'nombre' => $this->nombre,
+            'imagen' => $this->imagen
         ];
     }
 }

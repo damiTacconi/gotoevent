@@ -10,7 +10,8 @@ namespace Controladora;
 
 use Modelo\Artista;
 use Modelo\Mensaje;
-use Dao\ArtistaBdDao;
+use Dao\ArtistaBdDao as ArtistaDao;
+#use Dao\ArtistaListaDao as ArtistaDao;
 
 class ArtistaControladora extends PaginaControladora
 {
@@ -18,13 +19,13 @@ class ArtistaControladora extends PaginaControladora
 
     function __construct()
     {
-        $this->artistaDao = ArtistaBdDao::getInstance();
+        $this->artistaDao = ArtistaDao::getInstance();
     }
 
     function eliminar($id){
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin'){
             $artista = $this->artistaDao->retrieve($id);
-            if($artista->getId() !== null){
+            if($artista){
                 $this->artistaDao->delete($artista);
                 $mensaje = new Mensaje('El artista fue eliminado' , 'success');
             }else{

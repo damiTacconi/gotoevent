@@ -105,54 +105,6 @@ class UsuarioBdDao extends SingletonDao implements IDao
         return $conexion->lastInsertId();
     }
 
-    public function eliminarPorId($id)
-    {
-        /** @noinspection SqlResolve */
-        $sql = "DELETE FROM $this->tabla WHERE idUsuario = \"$id\"";
-
-        $conexion = Conexion::conectar();
-
-        $sentencia = $conexion->prepare($sql);
-
-        $sentencia->execute();
-    }
-
-    public function eliminarPorMail($mail)
-    {
-        /** @noinspection SqlResolve */
-        $sql = "DELETE FROM $this->tabla WHERE correo = \"$mail\"";
-
-        $conexion = Conexion::conectar();
-
-        $sentencia = $conexion->prepare($sql);
-
-        $sentencia->execute();
-    }
-
-    public function actualizar(Usuario $usuario)
-    {
-        /** @noinspection SqlResolve */
-        $sql = "UPDATE $this->tabla SET correo = :mail, pwd = :pwd, idRol = :idRoles WHERE idUsuario = :idUsuarios";
-
-        $conexion = Conexion::conectar();
-
-        $sentencia = $conexion->prepare($sql);
-
-        $mail = $usuario->getEmail();
-        $idUsuarios = $usuario->getId();
-        $pwd = $usuario->getPassword();
-
-        $r = $usuario->getRol();
-        $idRoles = $r->getId();
-
-        $sentencia->bindParam(":mail", $mail);
-        $sentencia->bindParam(":pwd", $pwd);
-        $sentencia->bindParam(":idRoles", $idRoles);
-        $sentencia->bindParam(":idUsuarios", $idUsuarios);
-
-        $sentencia->execute();
-    }
-
     public  function getAll(){
         try{
             $sql = "SELECT * FROM $this->tabla";
