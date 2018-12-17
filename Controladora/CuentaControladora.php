@@ -72,8 +72,6 @@ class CuentaControladora extends PaginaControladora {
                         $_SESSION['last_name'] = $cliente->getApellido();
                         $_SESSION['picture_url'] = "";
                         $_SESSION['rol'] = 'cliente';
-                        $_SESSION['cart'] = array();
-                        $_SESSION['cartPromo'] = array();
                         header('location: /');
                     }else {
                         $mensaje = new Mensaje("Hubo un error al procesar los datos de usuario", "danger");
@@ -94,7 +92,9 @@ class CuentaControladora extends PaginaControladora {
 	 }
 
     function perfil(){
-  	    $this->page('perfil' , $_SESSION['name'] , 1);
+        if(isset($_SESSION['name'])){
+  	     $this->page('perfil' , $_SESSION['name'] , 1);
+        }else header("Location: /");
     }
 
     function registrarAjax($nombre,$apellido,$dni,$email,$pass){

@@ -102,19 +102,21 @@ class SedeControladora extends PaginaControladora
     }
     function plazas($id){
         if(!empty($_SESSION) && $_SESSION['rol']=='admin') {
-            $sede = $this->sedeDao->traerPorId($id);
-            $params = [];
-            if($sede){
-                $tipoPlazas = $this->tipoPlazaDao->traerPorIdSede($id);
-                $params['sede'] = $sede;
-                $params['tipo_plazas'] = $tipoPlazas;
-                $this->page('listado/listadoTipoPlaza',  $sede->getNombre(),2,$params);
-            }else {
-                $mensaje = new Mensaje('No se encontro la sede', 'danger');
-                $params['mensaje'] = $mensaje->getAlert();
-                $this->paginaListado($params);
-            }
-        }
+            if(is_numeric($id)){
+                $sede = $this->sedeDao->traerPorId($id);
+                $params = [];
+                if($sede){
+                    $tipoPlazas = $this->tipoPlazaDao->traerPorIdSede($id);
+                    $params['sede'] = $sede;
+                    $params['tipo_plazas'] = $tipoPlazas;
+                    $this->page('listado/listadoTipoPlaza',  $sede->getNombre(),2,$params);
+                }else {
+                    $mensaje = new Mensaje('No se encontro la sede', 'danger');
+                    $params['mensaje'] = $mensaje->getAlert();
+                    $this->paginaListado($params);
+                }
+            }else header("location: /");
+        }else header("location: /");
     }
     function verificarDescripcionExistente($desc , $plazas){
         $flag = false;

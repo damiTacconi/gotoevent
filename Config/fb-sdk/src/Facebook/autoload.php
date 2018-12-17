@@ -63,6 +63,8 @@ spl_autoload_register(function ($class) {
         }
     }else{
         $classPath = ROOT . str_replace('\\', '/' ,$class) . '.php';
-        include_once $classPath;
+        if(file_exists($classPath))
+            include_once $classPath;
+        else header("Location: /");
     }
 });

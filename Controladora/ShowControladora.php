@@ -69,21 +69,23 @@ class ShowControladora extends PaginaControladora
     }
 
     function showsEvento($id_calendario){
-        $calendario = $this->calendarioDao->retrieve($id_calendario);
-        $params = [];
-        if($calendario){
-            $evento = $calendario->getEvento();
-            $params['evento'] = $evento;
-            $calendarios = $this->calendarioDao->traerPorIdEvento($evento->getId());
-            $params['calendarios'] = $calendarios;
-            $shows = $this->showDao->traerPorIdCalendario($id_calendario);
-            $params['shows'] = $shows;
-        }else {
-            $mensaje = new Mensaje("NO SE ENCONTRO EL CALENDARIO" , "danger");
-            $params['mensaje'] = $mensaje->getAlert();
-        }
-        $params['artistas'] = $this->artistaDao->getAll();
-        $this->page("listado/listadoShowsDeEventos","Shows - Listado",2,$params);
+        if(is_numeric($id_calendario)){
+            $calendario = $this->calendarioDao->retrieve($id_calendario);
+            $params = [];
+            if($calendario){
+                $evento = $calendario->getEvento();
+                $params['evento'] = $evento;
+                $calendarios = $this->calendarioDao->traerPorIdEvento($evento->getId());
+                $params['calendarios'] = $calendarios;
+                $shows = $this->showDao->traerPorIdCalendario($id_calendario);
+                $params['shows'] = $shows;
+            }else {
+                $mensaje = new Mensaje("NO SE ENCONTRO EL CALENDARIO" , "danger");
+                $params['mensaje'] = $mensaje->getAlert();
+            }
+            $params['artistas'] = $this->artistaDao->getAll();
+            $this->page("listado/listadoShowsDeEventos","Shows - Listado",2,$params);
+        }else header("location: /");
     }
     function crear($params = []){
         $artistas = $this->artistaDao->getAll();

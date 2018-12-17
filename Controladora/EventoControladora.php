@@ -306,19 +306,23 @@ class EventoControladora extends PaginaControladora
     }
 
     function calendarios($id_evento){
-        $evento = $this->eventoDao->retrieve($id_evento);
+        if(is_numeric($id_evento)){
+            $evento = $this->eventoDao->retrieve($id_evento);
 
-        if($evento){
-          $calendarios= $this->calendarioDao->traerPorIdEvento($id_evento);
-          $sedes = $this->sedeDao->getAll();
-          $params['sedes'] = $sedes;
-          $params['calendarios'] = $calendarios;
-          $params['evento'] = $evento;
-          $this->page("listado/listadoCalendariosDeEventos" , "Calendarios de {$evento->getTitulo()}",2,$params);
+            if($evento){
+              $calendarios= $this->calendarioDao->traerPorIdEvento($id_evento);
+              $sedes = $this->sedeDao->getAll();
+              $params['sedes'] = $sedes;
+              $params['calendarios'] = $calendarios;
+              $params['evento'] = $evento;
+              $this->page("listado/listadoCalendariosDeEventos" , "Calendarios de {$evento->getTitulo()}",2,$params);
+            }else{
+                $mensaje = new Mensaje("No se encontraron resultados" , "danger");
+                $params['mensaje'] = $mensaje->getAlert();
+                $this->paginaListado($params);
+            }
         }else{
-            $mensaje = new Mensaje("No se encontraron resultados" , "danger");
-            $params['mensaje'] = $mensaje->getAlert();
-            $this->paginaListado($params);
+            header('location: /');
         }
 
     }
@@ -350,22 +354,24 @@ class EventoControladora extends PaginaControladora
         }else header('location: /');
     }
     function detalle($id_evento){
-        $evento = $this->eventoDao->retrieve($id_evento);
-        if($evento) {
-            $params['evento'] = $evento;
-            $params['evento_sedes'] = $this->sedeDao->traerPorIdEvento($id_evento);
-            /*
-            $calendarios = $this->calendarioDao->traerPorIdEvento($id_evento);
-            if($calendarios) {
-                foreach ($calendarios as $calendario) {
-                    $id_calendario = $calendario->getId();
-                    $plazas = $this->plazaEventoDao->traerPorIdCalendario($id_calendario);
-                    if ($plazas)
-                        $calendario->setPlazaEventos($plazas);
+        if(is_numeric($id_evento)){
+            $evento = $this->eventoDao->retrieve($id_evento);
+            if($evento) {
+                $params['evento'] = $evento;
+                $params['evento_sedes'] = $this->sedeDao->traerPorIdEvento($id_evento);
+                /*
+                $calendarios = $this->calendarioDao->traerPorIdEvento($id_evento);
+                if($calendarios) {
+                    foreach ($calendarios as $calendario) {
+                        $id_calendario = $calendario->getId();
+                        $plazas = $this->plazaEventoDao->traerPorIdCalendario($id_calendario);
+                        if ($plazas)
+                            $calendario->setPlazaEventos($plazas);
+                    }
                 }
-            }
-            $params['calendarios'] = $calendarios;*/
-            $this->page("detalleEvento", $evento->getTitulo(), 0, $params);
+                $params['calendarios'] = $calendarios;*/
+                $this->page("detalleEvento", $evento->getTitulo(), 0, $params);
+            }else header('location: /');
         }else header('location: /');
     }
 

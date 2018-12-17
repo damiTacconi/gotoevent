@@ -8,7 +8,7 @@
                     <div class="row">
                       <?php if(isset($param['eventos'])) { ?>
                         <?php foreach($param['eventos'] as $evento) { ?>
-                        <div class="col-md-auto col-12">
+                        <div class="col-md-auto col-12 col-md-4">
                             <?php
                                     $fecha = $evento->getFechaDesde();
                                     $fecha_hasta = $evento->getFechaHasta();
