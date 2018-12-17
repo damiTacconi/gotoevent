@@ -25,8 +25,8 @@ class Mail
         $mail->SMTPDebug = 0;
         $mail->Debugoutput = 'html';
         $mail->Host = "smtp.gmail.com";
-        $mail->Port = 465;
-        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465; //465;
+        $mail->SMTPSecure = 'ssl';//'ssl';
         $mail->SMTPAuth = true;
         $mail->Username = "damian.tacconi.95@gmail.com";
         $mail->Password = "dt19951905dt";

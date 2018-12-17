@@ -15,6 +15,24 @@ class LineaBdDao extends SingletonDao implements IDao
 {
     private $listado = [];
     private $tabla = "lineas";
+
+    public function contarLineas($id_evento){
+        try{
+        $sql = "SELECT COUNT(*) FROM $this->tabla INNER JOIN plaza_eventos INNER JOIN calendarios INNER JOIN eventos ON eventos.id_evento = calendarios.id_evento AND calendarios.id_calendario = plaza_eventos.id_calendario AND plaza_eventos.id_plaza_evento = lineas.id_plaza_evento AND eventos.id_evento = $id_evento";
+        $conexion = Conexion::conectar();
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->execute();
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC); 
+        if(!empty($dataSet[0])){
+            if($dataSet[0]['COUNT(*)'] > 0)
+                return true;
+        }
+        return false;
+        }catch(\PDOException $e){
+            echo '<a href="/">volver</a>';
+            die("ERROR LINEAS");
+        }
+    }
     public function save($data)
     {
         try{

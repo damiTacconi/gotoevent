@@ -33,6 +33,7 @@ use Dao\SedeBdDao as SedeDao;
 use Dao\ShowBdDao as ShowDao;
 use Dao\TipoPlazaBdDao as TipoPlazaDao;
 use Dao\PromoBdDao as PromoDao;
+use Dao\LineaBdDao as LineaDao;
 
 # MODELOS
 use Modelo\Evento;
@@ -53,10 +54,11 @@ class EventoControladora extends PaginaControladora
     private $showDao;
     private $eventoImagenDao;
     private $promoDao;
-
+    private $lineaDao;
 
     function __construct()
     {
+        $this->lineaDao = LineaDao::getInstance();
         $this->promoDao = PromoDao::getInstance();
         $this->eventoImagenDao = EventoImagenDao::getInstance();
         $this->showDao = ShowDao::getInstance();
@@ -250,15 +252,25 @@ class EventoControladora extends PaginaControladora
     }
     function eliminar($id){
         if(!empty($_SESSION) && $_SESSION['rol'] === 'admin'){
-            $evento = $this->eventoDao->retrieve($id);
-            if($evento){
-                $this->eventoDao->delete($evento);
-                $mensaje = new Mensaje('El evento fue eliminado' , 'success');
-            }else{
-                $mensaje = new Mensaje('No se encontro el evento en la Base de Datos', 'danger');
-            }
-            $params = array('mensaje' => $mensaje->getAlert());
-            $this->paginaListado($params);
+            if(is_numeric($id)){
+                if(!isset($_SESSION['ListaEventos'])){
+                    $evento = $this->eventoDao->retrieve($id);
+                    if($evento){
+                        if(!$this->lineaDao->contarLineas($id)){
+                            $this->eventoDao->delete($evento);
+                            $mensaje = new Mensaje('El evento fue eliminado' , 'success');
+                        }else{
+                        $mensaje = new Mensaje('El evento no pudo ser eliminado, tal vez haya compras asociadas' , 'danger');
+                    }
+                    }else{
+                        $mensaje = new Mensaje('No se encontro el evento en la Base de Datos', 'danger');
+                    }
+                }else 
+                    $mensaje = new Mensaje("NO SE PUEDE ELIMINAR USANDO LISTAS POR FALTA DE DESARROLLO EN EL SISTEMA");
+                $params = array('mensaje' => $mensaje->getAlert());
+
+                $this->paginaListado($params);
+            }else header("location: /");
         }else header('location: /');
     }
 
